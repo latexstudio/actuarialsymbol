@@ -1,0 +1,102 @@
+\documentclass[11pt]{article}
+  \usepackage{amsmath,actuarialangle}
+
+\makeatletter
+%  \begin{macro}{\prescript}
+%  This command is taken from a posting to comp.text.tex on
+%  December~20th 2000 by Michael J.~Downes. The comments are his. I
+%  have added some formatting options to the arguments so that a user
+%  can emulate the \pkg{isotope} package.
+%    \begin{macrocode}
+\DeclareRobustCommand{\prescript}[3]{
+  \@mathmeasure\z@\scriptstyle{#1}
+  \@mathmeasure\tw@\scriptstyle{#2}
+  \ifdim \wd\tw@>\wd\z@
+    \setbox\z@\hbox to\wd\tw@{\hfil\unhbox\z@}
+  \else
+    \setbox\tw@\hbox to\wd\z@{\hfil\unhbox\tw@}
+  \fi
+  \mathop{}
+  \mathopen{\vphantom{#3}}^{\box\z@}\sb{\box\tw@}
+  #3
+}
+%    \end{macrocode}
+%  \end{macro}
+%  Then the named arguments. Can you see I'm preparing for templates?
+%    \begin{macrocode}
+%    \end{macrocode}
+
+\def\vartopprecedence#1#2{\mathpalette{\preced@ t{2.4}{#1}}{#2}}
+
+\def\@actsymbol[#1][#2]#3#4[#5]{
+  \@mathmeasure\z@\scriptstyle{#1}
+  \@mathmeasure\@ne\scriptstyle{#2}
+  \@mathmeasure\tw@\scriptstyle{#4}
+  \@mathmeasure\thr@@\scriptstyle{#5}
+  \mathop{}
+  \ifnum\ifdim \wd\@ne>\z@ 1\else\ifdim \wd\thr@@>\z@ 1\else 0\fi\fi
+    =1%
+    \ifdim \wd\@ne>\wd\z@
+      \setbox\z@\hbox to\wd\@ne{\hfil\unhbox\z@}
+    \else
+      \setbox\@ne\hbox to\wd\z@{\hfil\unhbox\@ne}
+    \fi
+    \mathopen{\vphantom{#3}}^{\box\@ne}\sb{\box\z@}#3^{\box\thr@@}\sb{\box\tw@}
+  \else
+    \vphantom{#3}\sb{\box\z@}#3\sb{\box\tw@}
+  \fi
+}
+
+\DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
+\newcommand\ACTS@actsymb{\@ifnextchar[{\ACTS@@actsymb}{\ACTS@@actsymb[]}}
+\newcommand\ACTS@@actsymb{}
+\def\ACTS@@actsymb[#1]{\@ifnextchar[{\ACTS@@@actsymb[#1]}{\ACTS@@@actsymb[#1][]}}
+\newcommand\ACTS@@@actsymb{}
+\def\ACTS@@@actsymb[#1][#2]#3#4{\@ifnextchar[{\@actsymbol[#1][#2]{#3}{#4}}{\@actsymbol[#1][#2]{#3}{#4}[]}}
+
+\makeatother
+
+\newcommand{\firsttop}[2]{\ensuremath\smash{\lineskip#2pt
+\lineskiplimit\lineskip \overset{1}{#1}}}
+\newcommand{\secondtop}[1]{\ensuremath\smash{\overset{2}{#1}}}
+\newcommand{\thirdtop}[1]{\ensuremath\smash{\overset{3}{#1}}}
+\newcommand{\nthtop}[2]{\ensuremath\smash{\overset{#1}{#2}}}
+\newcommand{\firstbottom}[1]{\ensuremath\smash{\underset{1}{#1}}}
+\newcommand{\secondbottom}[1]{\ensuremath\smash{\underset{2}{#1}}}
+\newcommand{\thirdbottom}[1]{\ensuremath\smash{\underset{3}{#1}}}
+\newcommand{\nthbottom}[2]{\ensuremath\smash{\underset{#1}{#2}}}
+
+
+
+\begin{document}
+
+
+
+\begin{displaymath}
+  \prescript{}{3}{A}_{\vartopprecedence{1}{x}:\topprecedence{2}{\angln}}^{\{m\}}
+\end{displaymath}
+
+\begin{displaymath}
+  \actsymb{IA}{x:\angln} \quad
+  \actsymb[][2]{I\mkern-2mu A}{x:\angln}[\{m\}] \quad
+  \actsymb[t \mathclose|]{A}{\firsttop{x}{5}:\angln} \quad
+  \actsymb[t|]{A}{x:\angln}[\{m\}] \quad
+  \actsymb[3]{A}{x:\angln}[] \quad
+  p_t \, {}_tp_x \quad
+  \actsymb[t]{p}{x}[]^2
+\end{displaymath}
+
+\begin{displaymath}
+  x_1^2 x_2 x_3^4
+\end{displaymath}
+\begin{displaymath}
+  \prescript{}{3}{A}_{xy} {}_3A_{xy}
+\end{displaymath}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

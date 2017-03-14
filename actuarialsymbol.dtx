@@ -1,0 +1,212 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2017 Vincent Goulet, David Beauchemin
+%
+% This file may be distributed and/or modified under the conditions
+% of the LaTeX Project Public License, either version 1.3c of this
+% license or (at your option) any later version. The latest version
+% of this license is in:
+%
+%   http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2006/05/20 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Vincent Goulet
+% <vincent.goulet@act.ulaval.ca>.
+%
+% This work consists of the files actuarialsymbol.dtx and
+% actuarialsymbol.ins and the derived files listed in the README file.
+%
+% \fi
+%
+% \iffalse
+%<*dtx>
+\ProvidesFile{actuarialsymbol.dtx}
+%</dtx>
+%<package>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
+%<package>\ProvidesPackage{actuarialsymbol}[2017/03/15 v0.1 Actuarial symbol]
+%
+%<*driver>
+\documentclass[11pt,english]{ltxdoc}
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{natbib}
+  \usepackage{babel}
+  \usepackage{microtype}
+  \usepackage[scaled=0.92]{helvet}
+  \usepackage[scaled=1.02]{inconsolata}
+  \usepackage[sc]{mathpazo}
+  \usepackage{actuarialsymbol}
+  \usepackage{fontawesome}
+  \usepackage{graphicx,color,metalogo}
+  \usepackage{enumitem,tabularx,booktabs,amsthm}
+  \DisableCrossrefs
+  \CodelineNumbered
+  \RecordChanges
+  \GlossaryPrologue{\section*{Historique des versions}%
+    \addcontentsline{toc}{section}{Historique des versions}}
+
+  \definecolor{link}{rgb}{0,0.4,0.6}   % ~RoyalBlue de dvips
+  \definecolor{url}{rgb}{0.6,0,0}      % rouge foncé
+  \definecolor{citation}{rgb}{0,0.5,0} % vert foncé
+
+  %% Liste description alignée à gauche
+  \setlist[description]{leftmargin=*,align=left}
+
+  \usepackage{hyperref}
+  \hypersetup{colorlinks, linktocpage,
+    urlcolor=url, linkcolor=link, citecolor=citation,
+    bookmarksopen, bookmarksnumbered, bookmarksdepth=subsubsection,
+    pdftitle={Manuel de référence de la classe ulthese},
+    pdfauthor={Faculté des études supérieures et postdoctorales}}
+  \addto\extrasfrench{%
+    \def\appendixautorefname{annexe}%
+    \def\tableautorefname{tableau}%
+    \def\subsectionautorefname{section}%
+  }
+
+  \theoremstyle{definition}
+  \newtheorem*{rem}{Remarque}
+
+  \newcommand{\class}[1]{\textsf{#1}}
+  \newcommand{\pkg}[1]{\textbf{#1}}
+
+  \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
+  \newcommand{\doc}[3][documentation]{%
+    \link{#3}{#1}\marginpar{\hfill\faBookmark~\texttt{#2}}}
+
+\begin{document}
+  \DocInput{actuarialsymbol.dtx}
+\end{document}
+%</driver>
+% \fi
+% \CheckSum{0}
+%
+% \GetFileInfo{actuarialsymbol.dtx}
+% \title{Composition of actuarial symbols}
+% \author{Vincent Goulet \\ École d'actuariat, Université
+%   Laval \and David Beauchemin}
+% \date{}
+% \maketitle
+%
+% \begin{abstract}
+%
+% \end{abstract}
+%
+% \section{Introduction}
+% \label{sec:introduction}
+%
+% Actuaries denote various quantities of life contingencies like
+% present values of life insurances and life annuities, annual
+% premiums or reserves using a whole array of symbols. The resulting
+% highly descriptive yet compact notation was standardized in as far
+% back as 1898 \citep{Wolthuis:notation:2004}. \autoref{fig:mosaic}
+% shows an creative use of the notation by the graduating class
+% of 1972 in actuarial science at Université Laval.
+%
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[width=\linewidth]{mosaic}
+%   \caption{``Actuariat'' (French for Actuarial Science) written
+%     using actuarial symbols on the 1972 graduating class mosaic at
+%     Université Laval}
+%   \label{fig:mosaic}
+% \end{figure}
+%
+% \citet[Appendix~4]{Bowers:2e:2002} offer an excellent overview of
+% the composition rules for symbols of actuarial functions. In a
+% nutshell, a core symbol, say $S$, is combined with auxiliary symbols
+% positioned in subscript or in superscript, to the left or to the
+% right. Schematically, we thus have:
+% \begin{displaymath}
+%   \actsymb[\fbox{\small I}\!\;][\fbox{\small II}\!\;]%
+%      {\framebox[5ex]{\Large S}}{\,\fbox{\small III}}%
+%      [\,\fbox{\small IV}]
+% \end{displaymath}
+%
+% The core symbol is in general a single letter. The letter may be
+% ``accented'' with a bar ($\bar{A}$), double dots ($\ddot{a}$) or a
+% circle ($\mathring{e}$). When the core symbol consists of two letters,
+% they are grouped between parenthesis, as in $\IA$ or $\Da$.
+%
+% Symbols usu
+%
+% Perhaps the most commonly used auxiliary symbol not readily
+% available in {\LaTeX} is the ``angle'' denoting a duration $n$, as
+% in $\angln$. Package \pkg{actuarialangle} \citep{actuarialangle}
+% provides commands to create this angle symbol. This package is
+% imported at load time by \pkg{actuarialsymbol}.
+%
+% As we shall see in the next section, many actuarial symbols require
+% subscripts or superscripts not only to the right of a principal
+% symbol, but also to the left. Package \pkg{actuarialsymbol} provides
+% commands to position all subscripts and superscripts easily and
+% consistently.
+%
+% \section{Actuarial notation in a nutshell}
+% \label{sec:notation}
+%
+% As mentioned above, the
+%
+
+
+%    \begin{macrocode}
+%<*package>
+\RequirePackage{amsmath}
+
+\def\@actsymbol[#1][#2]#3#4[#5]{
+  \@mathmeasure\z@\scriptstyle{#1}
+  \@mathmeasure\@ne\scriptstyle{#2}
+  \@mathmeasure\tw@\scriptstyle{#4}
+  \@mathmeasure\thr@@\scriptstyle{#5}
+  \mathop{}
+  \ifnum\ifdim \wd\@ne>\z@ 1\else\ifdim \wd\thr@@>\z@ 1\else 0\fi\fi
+    =1%
+    \ifdim \wd\@ne>\wd\z@
+      \setbox\z@\hbox to\wd\@ne{\hfil\unhbox\z@}
+    \else
+      \setbox\@ne\hbox to\wd\z@{\hfil\unhbox\@ne}
+    \fi
+    \mathopen{\vphantom{#3}}^{\box\@ne}\sb{\box\z@}#3^{\box\thr@@}\sb{\box\tw@}
+  \else
+    \vphantom{#3}\sb{\box\z@}#3\sb{\box\tw@}
+  \fi
+}
+
+\DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
+\newcommand\ACTS@actsymb{\@ifnextchar[{\ACTS@@actsymb}{\ACTS@@actsymb[]}}
+\newcommand\ACTS@@actsymb{}
+\def\ACTS@@actsymb[#1]{\@ifnextchar[{\ACTS@@@actsymb[#1]}{\ACTS@@@actsymb[#1][]}}
+\newcommand\ACTS@@@actsymb{}
+\def\ACTS@@@actsymb[#1][#2]#3#4{\@ifnextchar[{\@actsymbol[#1][#2]{#3}{#4}}{\@actsymbol[#1][#2]{#3}{#4}[]}}
+
+\newcommand{\firsttop}[1]{\ensuremath\smash{\overset{1}{#1}}}
+\newcommand{\secondtop}[1]{\ensuremath\smash{\overset{2}{#1}}}
+\newcommand{\thirdtop}[1]{\ensuremath\smash{\overset{3}{#1}}}
+\newcommand{\nthtop}[2]{\ensuremath\smash{\overset{#1}{#2}}}
+\newcommand{\firstbottom}[1]{\ensuremath\smash{\underset{1}{#1}}}
+\newcommand{\secondbottom}[1]{\ensuremath\smash{\underset{2}{#1}}}
+\newcommand{\thirdbottom}[1]{\ensuremath\smash{\underset{3}{#1}}}
+\newcommand{\nthbottom}[2]{\ensuremath\smash{\underset{#1}{#2}}}
+
+\newcommand{\IA}{\ensuremath(I\mkern-2mu A)}
+\newcommand{\IAbar}{\ensuremath(I\mkern-2mu\bar{A})}
+\newcommand{\IbarAbar}{\ensuremath(\bar{I}\mkern-2mu\bar{A})}
+\newcommand{\DA}{\ensuremath(D\mkern-2mu A)}
+\newcommand{\DAbar}{\ensuremath(D\mkern-2mu\bar{A})}
+\newcommand{\DbarAbar}{\ensuremath(\bar{D}\mkern-2mu\bar{A})}
+\newcommand{\Ia}{\ensuremath(I\mkern-2mu a)}
+\newcommand{\Ibarabar}{\ensuremath(\bar{I}\mkern-2mu\bar{a})}
+\newcommand{\Da}{\ensuremath(D\mkern-2mu a)}
+\newcommand{\Dbarabar}{\ensuremath(\bar{D}\mkern-2mu\bar{a})}
+
+%</package>
+%    \end{macrocode}
+%
+% Local Variables:
+% mode: doctex
+% TeX-master: t
+% End:
