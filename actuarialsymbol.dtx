@@ -154,22 +154,39 @@
 %
 % Package \pkg{actuarialsymbol} provides a generic command to position
 % all subscripts and superscripts easily and consistently around an
-% actuarial symbol. The package also makes available a number of
-% commands to create the most common actuarial functions of financial
+% actuarial symbol, and a few other commands to achieve some
+% specialized typesetting. The package also defines a number of
+% shortcuts to create the most common actuarial functions of financial
 % mathematics and life contingencies.
 %
 % \section{Package features}
 % \label{sec:notation}
 %
-% \begin{DescribeMacro}{\actsymb}
+% We first describe the generic commands provided by
+% \pkg{actuarialsymbol} to compose actuarial symbols.
 %
+% \begin{DescribeMacro}{\actsymb}
+%   The generic command \cmd{\actsymb} typesets a core symbol with
+%   surrounding subscripts and superscripts. Accordingly, the command
+%   accepts five arguments, but only two are required. The syntax is
+%   somewhat unusual for {\LaTeX}, but serves well the natural order
+%   of the building blocks of a symbol and their relative prevalence:
+%   \begin{quote}
+%     |\actsymb|\oarg{ll}\oarg{ul}\marg{core}\marg{lr}\oarg{ur}
+%   \end{quote}
+%   Above, \meta{ll} identifies the lower left subscript \fbox{I}
+%   (following the notation in the schematic representation of the
+%   Introduction); \meta{ul} is the upper right superscript \fbox{II};
+%   \meta{core} is the core symbol $S$; \meta{lr} is the lower right
+%   subscript \fbox{III}; \meta{ur} is the upper right superscript
+%   $\fbox{IV}$.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\twoletsymb}
 %
 % \end{DescribeMacro}
 %
-% \begin{DescribeMacro}{\firstup}
+% \begin{DescribeMacro}{\nthttop}
 %
 % \end{DescribeMacro}
 
