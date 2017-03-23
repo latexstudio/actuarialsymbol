@@ -69,7 +69,7 @@
   }
 
   \theoremstyle{definition}
-  \newtheorem*{rem}{Remarque}
+  \newtheorem*{rem}{Remark}
 
   \newcommand{\class}[1]{\textsf{#1}}
   \newcommand{\pkg}[1]{\textbf{#1}}
@@ -160,7 +160,7 @@
 % mathematics and life contingencies.
 %
 % \section{Package features}
-% \label{sec:notation}
+% \label{sec:features}
 %
 % We first describe the generic commands provided by
 % \pkg{actuarialsymbol} to compose actuarial symbols.
@@ -172,7 +172,7 @@
 %   somewhat unusual for {\LaTeX}, but serves well the natural order
 %   of the building blocks of a symbol and their relative prevalence:
 %   \begin{quote}
-%     |\actsymb|\oarg{ll}\oarg{ul}\marg{core}\marg{lr}\oarg{ur}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{core}\marg{lr}\oarg{ur}
 %   \end{quote}
 %   Above, \meta{ll} identifies the lower left subscript \fbox{I}
 %   (following the notation in the schematic representation of the
@@ -181,19 +181,50 @@
 %   subscript \fbox{III}; \meta{ur} is the upper right superscript
 %   $\fbox{IV}$. The core symbol and the right subscript are
 %   required, the other arguments are optional.
+%
+%   \begin{rem}
+%     {\TeX} adjusts the position of a subscript downward when a
+%     superscript is present:
+%     \begin{displaymath}
+%       A_x \quad A_x^2.
+%     \end{displaymath}
+%     This package maintains this behaviour, but ensures that the left
+%     and right subscripts, when both present, are at the same height:
+%     \begin{displaymath}
+%       \actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2].
+%     \end{displaymath}
+%     (This is something you will not get with ad~hoc constructions
+%     like |{}_{t}A_x^2|.) If you would prefer a uniform subscript
+%     position, simply load package \pkg{subdepth} \citep{subdepth} in
+%     your document.
+%   \end{rem}
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\twoletsymb}
-%
+%   Writing two-letter core symbols like $\IA$ as |$(DA)$| results in
+%   too distant letters: $(DA)$. To unify presentation, the package
+%   provides the command |\twoletsymb| to create a two-letter symbol
+%   surrounded by parentheses:
+%   \begin{quote}
+%     \cmd{\twoletsymb}\marg{symbol}
+%   \end{quote}
+%   The \meta{symbol} will be typeset using \cmd{\mathit} to ensure
+%   proper spacing between the letters. The package defines control
+%   structures for all the main two-letter actuarial symbols; see
+%   \autoref{sec:shortcuts}
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthttop}
+%   \begin{DescribeMacro}{\nthbottom}
 %
+%   \end{DescribeMacro}
 % \end{DescribeMacro}
 
 
 %    \begin{macrocode}
+%\iffalse
 %<*package>
+%\fi
 \RequirePackage{amsmath}
 \RequirePackage{actuarialangle}
 
@@ -216,6 +247,57 @@
   \fi
 }
 
+%
+% \topprecedence puts a precedence number above an item, smashed so
+% that the apparent height of the item is its normal height.
+%
+\def\nthtop#1#2{\mathpalette{\preced@ t{}{#1}}{#2}}
+%
+% Put a multiplier in the empty set of braces to increase
+% the spacing between the precedence number and the
+% symbol to which it applies, e.g.
+%
+% \def\topprecedence#1#2{\mathpalette{\preced@ t{2.5}{#1}}{#2}}
+%
+% This also applies for \botprecedence and \vartopprecedence.
+% If it is desired that all precedence numbers fall at the
+% same height, regardless of whether there is an hrule between
+% them and the symbol to which they apply, then make
+% \topprecedence the same as \vartopprecedence.
+%
+\def\botprecedence#1#2{\mathpalette{\preced@ b{}{#1}}{#2}}
+%
+% \vartopprecedence provides extra space below the top
+% symbol, to accommodate an intervening hrule.
+%
+\def\vartopprecedence#1#2{\mathpalette{\preced@ t3{#1}}{#2}}
+%
+% In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
+% multiplier for the space between the top and bottom symbols (may
+% be empty), #3 is the first argument from the user, #4 is
+% \displaystyle or \textstyle or \scriptstyle or
+% \scriptscriptstyle, from \mathpalette, and #5 is the second
+% argument given by the user. This peculiar ordering of the
+% arguments is done to work around the restriction of \mathpalette
+% that it only reads 2 arguments.
+%
+\def\preced@#1#2#3#4#5{%
+% Measure the arguments:
+\setbox\tw@\hbox{$\m@th#4#3$}%
+\setbox\z@\hbox{$\m@th#4#5$}\dimen@\wd\z@
+\vbox{% to\ht\z@{%
+\baselineskip\z@skip
+% \lineskip is set using AMSTeX's \ex@, if available, for a slight
+% refinement in the spacing if this macro is used in eightpoint
+% text. If \ex@ is not available, \p@ is used.
+\lineskip#2\ifx\UNDEFINED\ex@\p@\else\ex@\fi\relax
+\lineskiplimit\lineskip
+\if b#1\relax\box\z@\else\vss\fi
+\hbox to\dimen@{\hss\unhbox\tw@\hss}%
+\if t#1\relax\box\z@\else\vss\fi
+}% end \vbox
+}% end \preced@
+
 \DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
 \newcommand\ACTS@actsymb{\@ifnextchar[{\ACTS@@actsymb}{\ACTS@@actsymb[]}}
 \newcommand\ACTS@@actsymb{}
@@ -231,6 +313,8 @@
 \newcommand{\secondbottom}[1]{\ensuremath\smash{\underset{2}{#1}}}
 \newcommand{\thirdbottom}[1]{\ensuremath\smash{\underset{3}{#1}}}
 \newcommand{\nthbottom}[2]{\ensuremath\smash{\underset{#1}{#2}}}
+
+\newcommand{\pureend}[2]{\ensuremath\actsymb{A}{#1:\firsttop{\angl{#2}}}}
 
 \DeclareRobustCommand{\twoletsymb}[1]{(\mathit{#1})}
 
@@ -252,7 +336,9 @@
 \newcommand{\Ds}{\ensuremath\twoletsymb{Ds}}
 \newcommand{\Dsdd}{\ensuremath\twoletsymb{D\ddot{s}}}
 
+%\iffalse
 %</package>
+%\fi
 %    \end{macrocode}
 %
 % Local Variables:
