@@ -72,9 +72,9 @@
   \newenvironment{demo}{%
     \begin{trivlist}\item}{%
     \end{trivlist}}
-  \newenvironment{texample}[1][0.5\linewidth]{%
-    \noindent\begin{minipage}{#1}\begin{snugshade*}%
-      \def\producing{\end{snugshade*}\end{minipage}\hfill\begin{minipage}{\dimexpr0.97\linewidth-#1}%
+  \newenvironment{texample}[1][0.5]{%
+    \noindent\begin{minipage}{#1\linewidth}\begin{snugshade*}%
+      \def\producing{\end{snugshade*}\end{minipage}\hfill\begin{minipage}{\dimexpr0.97\linewidth-#1\linewidth}%
         \hbox\bgroup\kern-.2pt%
         \vbox\bgroup\parindent0pt\relax
         % The 3pt is to cancel the -\lineskip from \displ@y
@@ -237,7 +237,7 @@
 %   \autoref{sec:shortcuts}.
 % \end{DescribeMacro}
 %
-% \begin{DescribeMacro}{\nthttop}
+% \begin{DescribeMacro}{\nthtop}
 %   \begin{DescribeMacro}{\varnthtop}
 %     Commands
 %     \begin{quote}
@@ -250,16 +250,24 @@
 %     With \cmd{\nthtop}, the spacing between the precedence number
 %     and the item is constant. This can result in precedence numbers
 %     placed at different heights if one item contains an horizontal
-%     rule, as in
-%     \begin{displaymath}
-%       \actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}.
-%     \end{displaymath}
+%     rule:
+%     \begin{demo}
+%       \begin{texample}[0.85]
+%         |\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}|
+%         \producing
+%         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}$
+%       \end{texample}
+%     \end{demo}
 %     Conversely, \cmd{\varnthtop} always leaves enough space for an
 %     intervening horizontal rules, such that all precedence numbers
 %     lie at the same height:
-%     \begin{displaymath}
-%       \actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}.
-%     \end{displaymath}
+%     \begin{demo}
+%       \begin{texample}[0.85]
+%         |\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}|
+%         \producing
+%         \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}$
+%       \end{texample}
+%     \end{demo}
 %     The optional argument \meta{mult} of both commands is a
 %     multiplier governing the spacing between the number and the
 %     symbol. (Default values are $2$ for \cmd{\nthtop} and $7$ for
@@ -270,37 +278,39 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthbottom}
-%   Command
+%   Similar to the above two commands,
 %   \begin{quote}
 %     \cmd{\nthbottom}\marg{number}\marg{item}
 %   \end{quote}
-%   put a precedence \marg{number} below an \marg{item}, smashed so
-%   that the apparent height of the item is its normal height. The
-%   package also defines shortcuts for first and second precedence;
-%   see \autoref{sec:shortcuts}.
+%   puts a precedence \marg{number} below an \marg{item}. The package
+%   also defines shortcuts for first and second precedence; see
+%   \autoref{sec:shortcuts}.
 % \end{DescribeMacro}
 %
 % \begin{rem}
-%   It may be needed to use \cmd{\strut}.
+%   The fact that top precedence numbers have zero height means they
+%   will clash with a right superscript \fbox{IV}:
 %   \begin{demo}
-%     \begin{texample}[0.7\linewidth]
-% \begin{verbatim}
-% \actsymb{A}{\nthtop{1}{x}:\angln}[(m)]
-% \end{verbatim}
+%     \begin{texample}[0.7]
+%       |\actsymb{A}{\nthtop{1}{x}:\angln}[(m)]|
 %       \producing
 %       $\actsymb{A}{\nthtop{1}{x}:\angln}[(m)]$
 %     \end{texample}
-%     \begin{texample}[0.7\linewidth]
-% \begin{verbatim}
-% \actsymb{A}{\strut\nthtop{1}{x}:\angln}[(m)]
-% \end{verbatim}
+%   \end{demo}
+%   In such rare circumstances, one needs to insert a \emph{strut} (an
+%   invisible vertical rule) in the subscript to move it down as
+%   needed:
+%   \begin{demo}
+%     \begin{texample}[0.7]
+%       |\newcommand{\str}{\rule{0pt}{2.3ex}}| \\
+%       |\actsymb{A}{\str\nthtop{1}{x}:\angln}[(m)]|
 %       \producing
-%       $\actsymb{A}{\mathstrut\nthtop{1}{x}:\angln}[(m)]$
+%       $\actsymb{A}{\rule{0pt}{2.3ex}\nthtop{1}{x}:\angln}[(m)]$
 %     \end{texample}
 %   \end{demo}
+%   This also applies to bottom precedence numbers in inline formulas.
 % \end{rem}
-
-
+%
 %    \begin{macrocode}
 %\iffalse
 %<*package>
