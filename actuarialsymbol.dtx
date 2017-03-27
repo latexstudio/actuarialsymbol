@@ -212,15 +212,14 @@
 %   \begin{displaymath}
 %     A_x \quad A_x^2.
 %   \end{displaymath}
-%   This package maintains this behaviour, but ensures that the left
+%   The package maintains this behaviour, but ensures that the left
 %   and right subscripts, when both present, are at the same height:
 %   \begin{displaymath}
 %     \actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2].
 %   \end{displaymath}
-%   (This is something you will not get with ad~hoc constructions like
-%   |{}_{t}A_x^2|.) If you would prefer a uniform subscript position,
-%   simply load package \pkg{subdepth} \citep{subdepth} in your
-%   document.
+%   (This is something ad~hoc constructions like |{}_{t}A_x^2| do not
+%   provide.) If you would prefer a uniform subscript position, simply
+%   load package \pkg{subdepth} \citep{subdepth} in your document.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\twoletsymb}
@@ -230,7 +229,7 @@
 %   \begin{quote}
 %     \cmd{\twoletsymb}\marg{symbol}
 %   \end{quote}
-%   to create a two-letter \marg{symbol} surrounded by parentheses:
+%   to create a two-letter \meta{symbol} surrounded by parentheses.
 %   The symbol is typeset using \cmd{\mathit} to ensure proper spacing
 %   between the letters. The package defines control structures for
 %   all the main two-letter actuarial symbols; see
