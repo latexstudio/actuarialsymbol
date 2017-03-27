@@ -30,7 +30,7 @@
 %<package>\ProvidesPackage{actuarialsymbol}[2017/03/15 v0.1 Actuarial symbol]
 %
 %<*driver>
-\documentclass[11pt,english]{ltxdoc}
+\documentclass[11pt,x11names,english]{ltxdoc}
   \usepackage[utf8]{inputenc}
   \usepackage[T1]{fontenc}
   \usepackage{natbib}
@@ -39,9 +39,9 @@
   \usepackage[scaled=0.92]{helvet}
   \usepackage[scaled=1.02]{inconsolata}
   \usepackage[sc]{mathpazo}
-  \usepackage{actuarialsymbol}
   \usepackage{fontawesome}
-  \usepackage{graphicx,color,metalogo}
+  \usepackage{actuarialsymbol}
+  \usepackage{graphicx,xcolor,framed}
   \usepackage{enumitem,tabularx,booktabs,amsthm}
   \DisableCrossrefs
   \CodelineNumbered
@@ -52,6 +52,7 @@
   \definecolor{link}{rgb}{0,0.4,0.6}   % ~RoyalBlue de dvips
   \definecolor{url}{rgb}{0.6,0,0}      % rouge foncé
   \definecolor{citation}{rgb}{0,0.5,0} % vert foncé
+  \colorlet{shadecolor}{LightYellow1} % vert foncé
 
   %% Liste description alignée à gauche
   \setlist[description]{leftmargin=*,align=left}
@@ -66,6 +67,28 @@
     \def\appendixautorefname{annexe}%
     \def\tableautorefname{tableau}%
     \def\subsectionautorefname{section}%
+  }
+
+  \newenvironment{demo}{%
+    \begin{trivlist}\item}{%
+    \end{trivlist}}
+  \newenvironment{texample}[1][0.5\linewidth]{%
+    \noindent\begin{minipage}{#1}\begin{snugshade*}%
+      \def\producing{\end{snugshade*}\end{minipage}\hfill\begin{minipage}{\dimexpr0.97\linewidth-#1}%
+        \hbox\bgroup\kern-.2pt%
+        \vbox\bgroup\parindent0pt\relax
+        % The 3pt is to cancel the -\lineskip from \displ@y
+        \abovedisplayskip3pt \abovedisplayshortskip\abovedisplayskip
+        \belowdisplayskip0pt \belowdisplayshortskip\belowdisplayskip
+        \noindent}
+    }{%
+      \par
+      % Ensure that a lonely \[\] structure doesn't take up width less than
+      % \hsize.
+      \hrule height0pt width\hsize
+      \egroup\kern-.2pt\egroup
+    \end{minipage}%
+    \par
   }
 
   \theoremstyle{definition}
@@ -181,44 +204,101 @@
 %   subscript \fbox{III}; \meta{ur} is the upper right superscript
 %   $\fbox{IV}$. The core symbol and the right subscript are
 %   required, the other arguments are optional.
-%
-%   \begin{rem}
-%     {\TeX} adjusts the position of a subscript downward when a
-%     superscript is present:
-%     \begin{displaymath}
-%       A_x \quad A_x^2.
-%     \end{displaymath}
-%     This package maintains this behaviour, but ensures that the left
-%     and right subscripts, when both present, are at the same height:
-%     \begin{displaymath}
-%       \actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2].
-%     \end{displaymath}
-%     (This is something you will not get with ad~hoc constructions
-%     like |{}_{t}A_x^2|.) If you would prefer a uniform subscript
-%     position, simply load package \pkg{subdepth} \citep{subdepth} in
-%     your document.
-%   \end{rem}
 % \end{DescribeMacro}
 %
+% \begin{rem}
+%   {\TeX} adjusts the position of a subscript downward when a
+%   superscript is present:
+%   \begin{displaymath}
+%     A_x \quad A_x^2.
+%   \end{displaymath}
+%   This package maintains this behaviour, but ensures that the left
+%   and right subscripts, when both present, are at the same height:
+%   \begin{displaymath}
+%     \actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2].
+%   \end{displaymath}
+%   (This is something you will not get with ad~hoc constructions like
+%   |{}_{t}A_x^2|.) If you would prefer a uniform subscript position,
+%   simply load package \pkg{subdepth} \citep{subdepth} in your
+%   document.
+% \end{rem}
+%
 % \begin{DescribeMacro}{\twoletsymb}
-%   Writing two-letter core symbols like $\IA$ as |$(DA)$| results in
-%   too distant letters: $(DA)$. To unify presentation, the package
-%   provides the command |\twoletsymb| to create a two-letter symbol
-%   surrounded by parentheses:
+%   Writing two-letter core symbols like $\DA$ as |$(DA)$| results in
+%   letters that are too distant from one another: $(DA)$. To unify
+%   presentation, the package provides the command
 %   \begin{quote}
 %     \cmd{\twoletsymb}\marg{symbol}
 %   \end{quote}
-%   The \meta{symbol} will be typeset using \cmd{\mathit} to ensure
-%   proper spacing between the letters. The package defines control
-%   structures for all the main two-letter actuarial symbols; see
-%   \autoref{sec:shortcuts}
+%   to create a two-letter \marg{symbol} surrounded by parentheses:
+%   The symbol is typeset using \cmd{\mathit} to ensure proper spacing
+%   between the letters. The package defines control structures for
+%   all the main two-letter actuarial symbols; see
+%   \autoref{sec:shortcuts}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthttop}
-%   \begin{DescribeMacro}{\nthbottom}
-%
+%   \begin{DescribeMacro}{\varnthtop}
+%     Commands
+%     \begin{quote}
+%       \cmd{\nthtop}\oarg{mult}\marg{number}\marg{item} \\
+%       \cmd{\varnthtop}\oarg{mult}\marg{number}\marg{item}
+%     \end{quote}
+%     put a precedence \meta{number} above an \meta{item}, smashed so
+%     that the apparent height of the item is its normal height. This
+%     is normally used in the right subscript \fbox{III} of a symbol.
+%     With \cmd{\nthtop}, the spacing between the precedence number
+%     and the item is constant. This can result in precedence numbers
+%     placed at different heights if one item contains an horizontal
+%     rule, as in
+%     \begin{displaymath}
+%       \actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}.
+%     \end{displaymath}
+%     Conversely, \cmd{\varnthtop} always leaves enough space for an
+%     intervening horizontal rules, such that all precedence numbers
+%     lie at the same height:
+%     \begin{displaymath}
+%       \actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}.
+%     \end{displaymath}
+%     The optional argument \meta{mult} of both commands is a
+%     multiplier governing the spacing between the number and the
+%     symbol. (Default values are $2$ for \cmd{\nthtop} and $7$ for
+%     \cmd{\varnthtop}; see \autoref{sec:implementation} for details.)
+%     The package also defines shortcuts for first and second
+%     precedence; see \autoref{sec:shortcuts}.
 %   \end{DescribeMacro}
 % \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\nthbottom}
+%   Command
+%   \begin{quote}
+%     \cmd{\nthbottom}\marg{number}\marg{item}
+%   \end{quote}
+%   put a precedence \marg{number} below an \marg{item}, smashed so
+%   that the apparent height of the item is its normal height. The
+%   package also defines shortcuts for first and second precedence;
+%   see \autoref{sec:shortcuts}.
+% \end{DescribeMacro}
+%
+% \begin{rem}
+%   It may be needed to use \cmd{\strut}.
+%   \begin{demo}
+%     \begin{texample}[0.7\linewidth]
+% \begin{verbatim}
+% \actsymb{A}{\nthtop{1}{x}:\angln}[(m)]
+% \end{verbatim}
+%       \producing
+%       $\actsymb{A}{\nthtop{1}{x}:\angln}[(m)]$
+%     \end{texample}
+%     \begin{texample}[0.7\linewidth]
+% \begin{verbatim}
+% \actsymb{A}{\strut\nthtop{1}{x}:\angln}[(m)]
+% \end{verbatim}
+%       \producing
+%       $\actsymb{A}{\mathstrut\nthtop{1}{x}:\angln}[(m)]$
+%     \end{texample}
+%   \end{demo}
+% \end{rem}
 
 
 %    \begin{macrocode}
@@ -227,6 +307,13 @@
 %\fi
 \RequirePackage{amsmath}
 \RequirePackage{actuarialangle}
+
+\DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
+\newcommand\ACTS@actsymb{\@ifnextchar[{\ACTS@@actsymb}{\ACTS@@actsymb[]}}
+\newcommand\ACTS@@actsymb{}
+\def\ACTS@@actsymb[#1]{\@ifnextchar[{\ACTS@@@actsymb[#1]}{\ACTS@@@actsymb[#1][]}}
+\newcommand\ACTS@@@actsymb{}
+\def\ACTS@@@actsymb[#1][#2]#3#4{\@ifnextchar[{\@actsymbol[#1][#2]{#3}{#4}}{\@actsymbol[#1][#2]{#3}{#4}[]}}
 
 \def\@actsymbol[#1][#2]#3#4[#5]{
   \@mathmeasure\z@\scriptstyle{#1}
@@ -247,72 +334,45 @@
   \fi
 }
 
-%
-% \topprecedence puts a precedence number above an item, smashed so
-% that the apparent height of the item is its normal height.
-%
-\def\nthtop#1#2{\mathpalette{\preced@ t{}{#1}}{#2}}
-%
-% Put a multiplier in the empty set of braces to increase
-% the spacing between the precedence number and the
-% symbol to which it applies, e.g.
-%
-% \def\topprecedence#1#2{\mathpalette{\preced@ t{2.5}{#1}}{#2}}
-%
-% This also applies for \botprecedence and \vartopprecedence.
-% If it is desired that all precedence numbers fall at the
-% same height, regardless of whether there is an hrule between
-% them and the symbol to which they apply, then make
-% \topprecedence the same as \vartopprecedence.
-%
-\def\botprecedence#1#2{\mathpalette{\preced@ b{}{#1}}{#2}}
-%
-% \vartopprecedence provides extra space below the top
-% symbol, to accommodate an intervening hrule.
-%
-\def\vartopprecedence#1#2{\mathpalette{\preced@ t3{#1}}{#2}}
-%
+\DeclareRobustCommand{\nthtop}[3][2]{\mathpalette{\preced@ t0{#1}{#2}}{#3}}
+\DeclareRobustCommand{\varnthtop}[3][7]{\mathpalette{\preced@ t{#1}{0}{#2}}{#3}}
+\DeclareRobustCommand{\nthbottom}[2]{\mathpalette{\preced@ t02{#1}}{#2}}
+
 % In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
-% multiplier for the space between the top and bottom symbols (may
-% be empty), #3 is the first argument from the user, #4 is
-% \displaystyle or \textstyle or \scriptstyle or
-% \scriptscriptstyle, from \mathpalette, and #5 is the second
-% argument given by the user. This peculiar ordering of the
-% arguments is done to work around the restriction of \mathpalette
-% that it only reads 2 arguments.
-%
-\def\preced@#1#2#3#4#5{%
-% Measure the arguments:
-\setbox\tw@\hbox{$\m@th#4#3$}%
-\setbox\z@\hbox{$\m@th#4#5$}\dimen@\wd\z@
-\vbox{% to\ht\z@{%
-\baselineskip\z@skip
-% \lineskip is set using AMSTeX's \ex@, if available, for a slight
-% refinement in the spacing if this macro is used in eightpoint
-% text. If \ex@ is not available, \p@ is used.
-\lineskip#2\ifx\UNDEFINED\ex@\p@\else\ex@\fi\relax
-\lineskiplimit\lineskip
-\if b#1\relax\box\z@\else\vss\fi
-\hbox to\dimen@{\hss\unhbox\tw@\hss}%
-\if t#1\relax\box\z@\else\vss\fi
-}% end \vbox
+% multiplier for the baseline skip between the top and bottom symbols, #3 is a
+% multiplier for the line skip between the top and bottom symbols, #4
+% is the first argument from the user, #5 is \displaystyle or
+% \textstyle or \scriptstyle or \scriptscriptstyle, from \mathpalette,
+% and #6 is the second argument given by the user. This peculiar
+% ordering of the arguments is done to work around the restriction of
+% \mathpalette that it only reads two arguments.
+
+\def\preced@#1#2#3#4#5#6{%
+  % Measure the arguments:
+  \setbox\tw@\hbox{$\m@th#5#4$}%
+  \setbox\z@\hbox{$\m@th#5#6$}
+  \dimen@\wd\z@
+  \vbox to\ht\z@{%
+    % \lineskip is set using AMSTeX's \ex@, if available, for a slight
+    % refinement in the spacing if this macro is used in eightpoint
+    % text. If \ex@ is not available, \p@ is used.
+    \baselineskip#2\p@
+    \lineskip#3\ifx\UNDEFINED\ex@\p@\else\ex@\fi\relax
+    \lineskiplimit\lineskip
+    \if b#1\relax\box\z@\else\vss\fi
+    \hbox to\dimen@{\hss\unhbox\tw@\hss}%
+    \if t#1\relax\box\z@\else\vss\fi
+  }% end \vbox
 }% end \preced@
 
-\DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
-\newcommand\ACTS@actsymb{\@ifnextchar[{\ACTS@@actsymb}{\ACTS@@actsymb[]}}
-\newcommand\ACTS@@actsymb{}
-\def\ACTS@@actsymb[#1]{\@ifnextchar[{\ACTS@@@actsymb[#1]}{\ACTS@@@actsymb[#1][]}}
-\newcommand\ACTS@@@actsymb{}
-\def\ACTS@@@actsymb[#1][#2]#3#4{\@ifnextchar[{\@actsymbol[#1][#2]{#3}{#4}}{\@actsymbol[#1][#2]{#3}{#4}[]}}
+
 
 \newcommand{\firsttop}[1]{\ensuremath\smash{\overset{1}{#1}}}
 \newcommand{\secondtop}[1]{\ensuremath\smash{\overset{2}{#1}}}
 \newcommand{\thirdtop}[1]{\ensuremath\smash{\overset{3}{#1}}}
-\newcommand{\nthtop}[2]{\ensuremath\smash{\overset{#1}{#2}}}
 \newcommand{\firstbottom}[1]{\ensuremath\smash{\underset{1}{#1}}}
 \newcommand{\secondbottom}[1]{\ensuremath\smash{\underset{2}{#1}}}
 \newcommand{\thirdbottom}[1]{\ensuremath\smash{\underset{3}{#1}}}
-\newcommand{\nthbottom}[2]{\ensuremath\smash{\underset{#1}{#2}}}
 
 \newcommand{\pureend}[2]{\ensuremath\actsymb{A}{#1:\firsttop{\angl{#2}}}}
 
