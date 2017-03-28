@@ -271,7 +271,7 @@
 %     multiplier governing the spacing between the number and the
 %     symbol. (Default values are $2$ for \cmd{\nthtop} and $7$ for
 %     \cmd{\varnthtop}; see \autoref{sec:implementation} for details.)
-%     The package also defines shortcuts for first and second
+%     The package also defines shortcuts for first, second and third
 %     precedence; see \autoref{sec:shortcuts}.
 %   \end{DescribeMacro}
 % \end{DescribeMacro}
@@ -343,6 +343,8 @@
   \fi
 }
 
+\DeclareRobustCommand{\twoletsymb}[1]{(\mathit{#1})}
+
 \DeclareRobustCommand{\nthtop}[3][2]{\mathpalette{\preced@ t0{#1}{#2}}{#3}}
 \DeclareRobustCommand{\varnthtop}[3][7]{\mathpalette{\preced@ t{#1}{0}{#2}}{#3}}
 \DeclareRobustCommand{\nthbottom}[2]{\mathpalette{\preced@ t02{#1}}{#2}}
@@ -374,18 +376,19 @@
   }% end \vbox
 }% end \preced@
 
-
-
-\newcommand{\firsttop}[1]{\ensuremath\smash{\overset{1}{#1}}}
-\newcommand{\secondtop}[1]{\ensuremath\smash{\overset{2}{#1}}}
-\newcommand{\thirdtop}[1]{\ensuremath\smash{\overset{3}{#1}}}
-\newcommand{\firstbottom}[1]{\ensuremath\smash{\underset{1}{#1}}}
-\newcommand{\secondbottom}[1]{\ensuremath\smash{\underset{2}{#1}}}
-\newcommand{\thirdbottom}[1]{\ensuremath\smash{\underset{3}{#1}}}
+\newcommand{\tpx}[2]{\@actsymbol[#1][]p{#2}[]}
+\newcommand{\tqx}[2]{\@actsymbol[#1][]q{#2}[]}
+\newcommand{\ndx}[2]{\@actsymbol[#1][]d{#2}[]}
+\newcommand{\lx}[1]{\@actsymbol[][]{\ell}{#1}[]}
 
 \newcommand{\pureend}[2]{\ensuremath\actsymb{A}{#1:\firsttop{\angl{#2}}}}
 
-\DeclareRobustCommand{\twoletsymb}[1]{(\mathit{#1})}
+\newcommand{\firsttop}[1]{\ensuremath\nthtop{1}{#1}}
+\newcommand{\secondtop}[1]{\ensuremath\nthtop{2}{#1}}
+\newcommand{\thirdtop}[1]{\ensuremath\nthtop{3}{#1}}
+\newcommand{\firstbottom}[1]{\ensuremath\nthbottom{1}{#1}}
+\newcommand{\secondbottom}[1]{\ensuremath\nthbottom{2}{#1}}
+\newcommand{\thirdbottom}[1]{\ensuremath\nthbottom{3}{#1}}
 
 \newcommand{\IA}{\ensuremath\twoletsymb{IA}}
 \newcommand{\IAbar}{\ensuremath\twoletsymb{I\bar{A}}}
