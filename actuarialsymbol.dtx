@@ -322,24 +322,29 @@
 \newcommand\ACTS@@actsymb{}
 \def\ACTS@@actsymb[#1]{\@ifnextchar[{\ACTS@@@actsymb[#1]}{\ACTS@@@actsymb[#1][]}}
 \newcommand\ACTS@@@actsymb{}
-\def\ACTS@@@actsymb[#1][#2]#3#4{\@ifnextchar[{\@actsymbol[#1][#2]{#3}{#4}}{\@actsymbol[#1][#2]{#3}{#4}[]}}
+\def\ACTS@@@actsymb[#1][#2]{\@ifnextchar[{\ACTS@@@@actsymb[#1][#2]}{\ACTS@@@@actsymb[#1][#2][]}}
+\newcommand\ACTS@@@@actsymb{}
+\def\ACTS@@@@actsymb[#1][#2][#3]#4#5{\@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}{\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
 
-\def\@actsymbol[#1][#2]#3#4[#5]{
-  \@mathmeasure\z@\scriptstyle{#1}
-  \@mathmeasure\@ne\scriptstyle{#2}
-  \@mathmeasure\tw@\scriptstyle{#4}
+\def\@actsymbol[#1][#2][#3]#4#5[#6]{
+  \sbox\z@{#3}
+  \@mathmeasure\@ne\scriptstyle{#1}
+  \@mathmeasure\tw@\scriptstyle{#2}
   \@mathmeasure\thr@@\scriptstyle{#5}
+  \@mathmeasure4\scriptstyle{#6}
   \mathop{}
-  \ifnum\ifdim \wd\@ne>\z@ 1\else\ifdim \wd\thr@@>\z@ 1\else 0\fi\fi
+  \ifnum\ifdim \wd\tw@>\z@ 1\else\ifdim \wd4>\z@ 1\else 0\fi\fi
     =1%
-    \ifdim \wd\@ne>\wd\z@
-      \setbox\z@\hbox to\wd\@ne{\hfil\unhbox\z@}
+    \ifdim \wd\tw@>\wd\@ne
+      \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
     \else
-      \setbox\@ne\hbox to\wd\z@{\hfil\unhbox\@ne}
+      \setbox\tw@\hbox to\wd\@ne{\hfil\unhbox\tw@}
     \fi
-    \mathopen{\vphantom{#3}}^{\box\@ne}\sb{\box\z@}#3^{\box\thr@@}\sb{\box\tw@}
+    \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
+    \ifdim\wd\z@=\z@ #4^{\box4}\sb{\box\thr@@}\else #3^{\box4}(#4\sb{\box\thr@@})\fi
   \else
-    \vphantom{#3}\sb{\box\z@}#3\sb{\box\tw@}
+    \vphantom{#4}\sb{\box\@ne}%
+    \ifdim\wd\z@=\z@ #4\sb{\box\thr@@}\else #3(#4\sb{\box\thr@@})\fi
   \fi
 }
 
