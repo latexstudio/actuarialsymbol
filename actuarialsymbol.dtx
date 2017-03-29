@@ -144,11 +144,12 @@
 % nutshell, a core symbol, say $S$, is combined with auxiliary symbols
 % positioned in subscript or in superscript, to the left or to the
 % right. Schematically, we thus have:
-% \begin{displaymath}
+% \begin{equation}
+%   \label{schema1}
 %   \actsymb[\fbox{\small I}\!\;][\fbox{\small II}\!\;]%
 %      {\framebox[5ex]{\large $S$}}{\,\fbox{\small III}}%
 %      [\,\fbox{\small IV}]
-% \end{displaymath}
+% \end{equation}
 %
 % The core symbol is in general a single letter. The letter may be
 % ``accented'' with a bar ($\bar{A}$), double dots ($\ddot{a}$) or a
@@ -164,11 +165,12 @@
 % benefit symbols unless the benefit is a level unit insurance payable
 % at the end of the year of death. In such cases, we have the
 % following symbol structure (replace $P$ by $V$ or $W$ as needed):
-% \begin{displaymath}
+% \begin{equation}
+%   \label{schema2}
 %   \actsymb[\fbox{\small I}\!\;][\fbox{\small II}\!\;]%
 %      {\framebox[5ex]{\large $P$}}{}[\,\fbox{\small IV}]%
 %   \bigl(\actsymb{\framebox[5ex]{\large $S$}}{\,\fbox{\small III}}\bigr)%
-% \end{displaymath}
+% \end{equation}
 %
 % Perhaps the most commonly used auxiliary symbol not readily
 % available in {\LaTeX} is the ``angle'' denoting a duration $n$, as
@@ -198,12 +200,12 @@
 %     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{core}\marg{lr}\oarg{ur}
 %   \end{quote}
 %   Above, \meta{ll} identifies the lower left subscript \fbox{I}
-%   (following the notation in the schematic representation of the
-%   Introduction); \meta{ul} is the upper left superscript \fbox{II};
-%   \meta{core} is the core symbol $S$; \meta{lr} is the lower right
-%   subscript \fbox{III}; \meta{ur} is the upper right superscript
-%   $\fbox{IV}$.  The core symbol and the right subscript are
-%   required, the other arguments are optional.
+%   (following the notation in the schematic representation
+%   \eqref{schema1}); \meta{ul} is the upper left superscript
+%   \fbox{II}; \meta{core} is the core symbol $S$; \meta{lr} is the
+%   lower right subscript \fbox{III}; \meta{ur} is the upper right
+%   superscript $\fbox{IV}$. The core symbol and the right subscript
+%   are required, the other arguments are optional.
 %   \begin{demo}
 %     \begin{texample}
 %       |\actsymb{A}{x}|
@@ -227,6 +229,31 @@
 %     \end{texample}
 %   \end{demo}
 %
+%   The command actually admits another optional argument to compose
+%   symbols for premiums, reserves and paid-up insurance. The extended
+%   command
+%   \begin{quote}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\oarg{P}\marg{core}\marg{lr}\oarg{ur}
+%   \end{quote}
+%   puts symbol \meta{P} outside the parentheses in the schematic
+%   representation \eqref{schema2}.
+%   \begin{demo}
+%     \begin{texample}[0.7]
+%       |\actsymb[][][P]{\bar{A}}{x:\angln}|
+%       \producing
+%       $\actsymb[][][P]{\bar{A}}{x:\angln}$
+%     \end{texample}
+%     \begin{texample}[0.7]
+%       |\actsymb[k][][V]{\bar{A}}{x}[\{1\}]|
+%       \producing
+%       $\actsymb[k][][V]{\bar{A}}{x}[\{1\}]$
+%     \end{texample}
+%     \begin{texample}[0.7]
+%       |\actsymb[k][][\bar{W}]{\bar{A}}{x}|
+%       \producing
+%       $\actsymb[k][][\bar{W}]{\bar{A}}{x}$
+%     \end{texample}
+%   \end{demo}
 % \end{DescribeMacro}
 %
 % \begin{rem}
@@ -236,7 +263,7 @@
 %     A_x \quad A_x^2.
 %   \end{displaymath}
 %   The package maintains this behaviour, but ensures that the left
-%   and right subscripts, when both present, are at the same height:
+%   and right subscripts, when both present, are at the same level:
 %   \begin{displaymath}
 %     \actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2].
 %   \end{displaymath}
@@ -351,7 +378,7 @@
 \def\ACTS@@@@actsymb[#1][#2][#3]#4#5{\@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}{\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
 
 \def\@actsymbol[#1][#2][#3]#4#5[#6]{
-  \setbox\z@\hbox{#3}
+  \@mathmeasure\z@\displaystyle{#3}
   \@mathmeasure\@ne\scriptstyle{#1}
   \@mathmeasure\tw@\scriptstyle{#2}
   \@mathmeasure\thr@@\scriptstyle{#5}
