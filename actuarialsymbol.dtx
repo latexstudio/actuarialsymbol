@@ -357,12 +357,6 @@
   \@mathmeasure\thr@@\scriptstyle{#5}
   \@mathmeasure4\scriptstyle{#6}
   \mathop{}
-  %% adjust depth of left and right *supercripts*
-  \ifdim \dp\tw@>\dp4
-    \setbox4\hbox to\wd4{\raisebox{\z@}[\ht4][\dp\tw@]{\unhbox4}}
-  \else
-    \setbox\tw@\hbox to\wd\tw@{\raisebox{\z@}[\ht\tw@][\dp4]{\unhbox\tw@}}
-  \fi
   %% adjust width of *left* subscript and superscript
   \ifdim \wd\tw@>\wd\@ne
     \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
@@ -375,8 +369,18 @@
   \else
     \setbox\@ne\vbox to \ht\thr@@{\vfil\hbox to\wd\@ne{\unhbox\@ne}}
   \fi
+  %% symbol construction
   \ifnum\ifdim \wd\tw@>\z@ 1\else\ifdim \wd4>\z@ 1\else 0\fi\fi
-    =1%  expression with superscripts either left or right
+    =1%  with superscripts either left or right
+    %% adjust depths of left and right *supercripts* (if either is > 0)
+    \ifnum\ifdim \dp\tw@>\z@ 1\else\ifdim \dp4>\z@ 1\else 0\fi\fi
+      =1%
+      \ifdim \dp\tw@>\dp4
+        \setbox4\hbox to\wd4{\raisebox{\z@}[\ht4][\dp\tw@]{\unhbox4}}
+      \else
+        \setbox\tw@\hbox to\wd\tw@{\hfil\raisebox{\z@}[\ht\tw@][\dp4]{\unhbox\tw@}}
+      \fi
+    \fi
     \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
     \ifdim\wd\z@=\z@ #4^{\box4}\sb{\box\thr@@}\else #3^{\box4}(#4^{}\sb{\box\thr@@})\fi
   \else% expression without superscripts
