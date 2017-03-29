@@ -364,7 +364,15 @@
 %   \begin{quote}
 %     \cmd{\nthbottom}\marg{number}\marg{item}
 %   \end{quote}
-%   puts a precedence \marg{number} below an \marg{item}. The package
+%   puts a precedence \marg{number} below an \marg{item}.
+%   \begin{demo}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{\nthtop{1}{x}y:\nthbottom{2}{\angln}}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}y:\nthbottom{2}{\angln}}$
+%     \end{texample}
+%   \end{demo}
+%   The package
 %   also defines shortcuts for first and second precedence; see
 %   \autoref{sec:shortcuts}.
 % \end{DescribeMacro}
@@ -452,7 +460,7 @@
 
 \DeclareRobustCommand{\nthtop}[3][2]{\mathpalette{\preced@ t0{#1}{#2}}{#3}}
 \DeclareRobustCommand{\varnthtop}[3][7]{\mathpalette{\preced@ t{#1}{0}{#2}}{#3}}
-\DeclareRobustCommand{\nthbottom}[2]{\mathpalette{\preced@ t02{#1}}{#2}}
+\DeclareRobustCommand{\nthbottom}[2]{\mathpalette{\preced@ b02{#1}}{#2}}
 
 % In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
 % multiplier for the baseline skip between the top and bottom symbols, #3 is a
