@@ -191,12 +191,11 @@
 %
 % \begin{DescribeMacro}{\actsymb}
 %   The generic command \cmd{\actsymb} typesets a core symbol with
-%   surrounding subscripts and superscripts. Accordingly, the command
-%   accepts six arguments, but only two are required. The syntax is
-%   somewhat unusual for {\LaTeX}, but serves well the natural order
-%   of the building blocks of a symbol and their relative prevalence:
+%   surrounding subscripts and superscripts. Its syntax is somewhat
+%   unusual for {\LaTeX}, but it serves well the natural order of the
+%   building blocks of a symbol and their relative prevalence:
 %   \begin{quote}
-%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\oarg[PV]\marg{core}\marg{lr}\oarg{ur}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{core}\marg{lr}\oarg{ur}
 %   \end{quote}
 %   Above, \meta{ll} identifies the lower left subscript \fbox{I}
 %   (following the notation in the schematic representation of the
@@ -205,6 +204,29 @@
 %   subscript \fbox{III}; \meta{ur} is the upper right superscript
 %   $\fbox{IV}$.  The core symbol and the right subscript are
 %   required, the other arguments are optional.
+%   \begin{demo}
+%     \begin{texample}
+%       |\actsymb{A}{x}|
+%       \producing
+%       $\actsymb{A}{x}$
+%     \end{texample}
+%     \begin{texample}
+%       |\actsymb[n]{A}{x}|
+%       \producing
+%       $\actsymb[n]{A}{x}$
+%     \end{texample}
+%     \begin{texample}
+%       |\actsymb[n][2]{A}{x}|
+%       \producing
+%       $\actsymb[n][2]{A}{x}$
+%     \end{texample}
+%     \begin{texample}
+%       |\actsymb[n][2]{A}{x}[(m)]|
+%       \producing
+%       $\actsymb[n][2]{A}{x}[(m)]$
+%     \end{texample}
+%   \end{demo}
+%
 % \end{DescribeMacro}
 %
 % \begin{rem}
@@ -219,8 +241,9 @@
 %     \actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2].
 %   \end{displaymath}
 %   (This is something ad~hoc constructions like |{}_{t}A_x^2| do not
-%   provide.) If you would prefer a uniform subscript position, simply
-%   load package \pkg{subdepth} \citep{subdepth} in your document.
+%   provide.) If you would prefer a uniform subscript position
+%   \emph{throughout your document}, load package \pkg{subdepth}
+%   \citep{subdepth}.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\twoletsymb}
@@ -328,22 +351,35 @@
 \def\ACTS@@@@actsymb[#1][#2][#3]#4#5{\@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}{\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
 
 \def\@actsymbol[#1][#2][#3]#4#5[#6]{
-  \sbox\z@{#3}
+  \setbox\z@\hbox{#3}
   \@mathmeasure\@ne\scriptstyle{#1}
   \@mathmeasure\tw@\scriptstyle{#2}
   \@mathmeasure\thr@@\scriptstyle{#5}
   \@mathmeasure4\scriptstyle{#6}
   \mathop{}
-  \ifnum\ifdim \wd\tw@>\z@ 1\else\ifdim \wd4>\z@ 1\else 0\fi\fi
-    =1%
-    \ifdim \wd\tw@>\wd\@ne
-      \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
-    \else
-      \setbox\tw@\hbox to\wd\@ne{\hfil\unhbox\tw@}
-    \fi
-    \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
-    \ifdim\wd\z@=\z@ #4^{\box4}\sb{\box\thr@@}\else #3^{\box4}(#4\sb{\box\thr@@})\fi
+  %% adjust depth of left and right *supercripts*
+  \ifdim \dp\tw@>\dp4
+    \setbox4\hbox to\wd4{\raisebox{\z@}[\ht4][\dp\tw@]{\unhbox4}}
   \else
+    \setbox\tw@\hbox to\wd\tw@{\raisebox{\z@}[\ht\tw@][\dp4]{\unhbox\tw@}}
+  \fi
+  %% adjust width of *left* subscript and superscript
+  \ifdim \wd\tw@>\wd\@ne
+    \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
+  \else
+    \setbox\tw@\hbox to\wd\@ne{\hfil\unhbox\tw@}
+  \fi
+  %% adjust height of left and right *subscripts*
+  \ifdim \ht\@ne>\ht\thr@@
+    \setbox\thr@@\vbox to \ht\@ne{\vfil\hbox to\wd\thr@@{\unhbox\thr@@}}
+  \else
+    \setbox\@ne\vbox to \ht\thr@@{\vfil\hbox to\wd\@ne{\unhbox\@ne}}
+  \fi
+  \ifnum\ifdim \wd\tw@>\z@ 1\else\ifdim \wd4>\z@ 1\else 0\fi\fi
+    =1%  expression with superscripts either left or right
+    \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
+    \ifdim\wd\z@=\z@ #4^{\box4}\sb{\box\thr@@}\else #3^{\box4}(#4^{}\sb{\box\thr@@})\fi
+  \else% expression without superscripts
     \vphantom{#4}\sb{\box\@ne}%
     \ifdim\wd\z@=\z@ #4\sb{\box\thr@@}\else #3(#4\sb{\box\thr@@})\fi
   \fi
