@@ -262,7 +262,7 @@
 %   \begin{displaymath}
 %     A_x \quad A_x^2.
 %   \end{displaymath}
-%   The package maintains this behaviour, but ensures that the left
+%   The package maintains this behaviour while also ensuring that the left
 %   and right subscripts, when both present, are at the same level:
 %   \begin{displaymath}
 %     \actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2].
@@ -384,12 +384,12 @@
   \@mathmeasure\thr@@\scriptstyle{#5}
   \@mathmeasure4\scriptstyle{#6}
   \mathop{}
-  %% adjust width of *left* subscript and superscript
-  \ifdim \wd\tw@>\wd\@ne
+  %% adjust width of *left* subscript and superscript (if there is a superscript)
+  \ifdim \wd\tw@>\z@ \ifdim \wd\tw@>\wd\@ne
     \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
   \else
     \setbox\tw@\hbox to\wd\@ne{\hfil\unhbox\tw@}
-  \fi
+  \fi\fi
   %% adjust height of left and right *subscripts*
   \ifdim \ht\@ne>\ht\thr@@
     \setbox\thr@@\vbox to \ht\@ne{\vfil\hbox to\wd\thr@@{\unhbox\thr@@}}
