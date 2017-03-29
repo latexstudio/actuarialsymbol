@@ -312,8 +312,18 @@
 %     With \cmd{\nthtop}, the spacing between the precedence number
 %     and the item is constant. This can result in precedence numbers
 %     placed at different heights if one item contains an horizontal
-%     rule:
+%     rule.
 %     \begin{demo}
+%       \begin{texample}[0.85]
+%         |\actsymb{A}{\nthtop{1}{x}:\angln}|
+%         \producing
+%         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}:\angln}$
+%       \end{texample}
+%       \begin{texample}[0.85]
+%         |\actsymb{A}{x:\nthtop{1}{\angln}}|
+%         \producing
+%         \rule{0pt}{12pt}$\actsymb{A}{x:\nthtop{1}{\angln}}$
+%       \end{texample}
 %       \begin{texample}[0.85]
 %         |\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}|
 %         \producing
@@ -322,8 +332,18 @@
 %     \end{demo}
 %     Conversely, \cmd{\varnthtop} always leaves enough space for
 %     intervening horizontal rules, resulting in vertically aligned
-%     precedence numbers:
+%     precedence numbers.
 %     \begin{demo}
+%       \begin{texample}[0.85]
+%         |\actsymb{A}{\varnthtop{1}{x}:\angln}|
+%         \producing
+%         \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}:\angln}$
+%       \end{texample}
+%       \begin{texample}[0.85]
+%         |\actsymb{A}{x:\varnthtop{1}{\angln}}|
+%         \producing
+%         \rule{0pt}{12pt}$\actsymb{A}{x:\varnthtop{1}{\angln}}$
+%       \end{texample}
 %       \begin{texample}[0.85]
 %         |\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}|
 %         \producing
