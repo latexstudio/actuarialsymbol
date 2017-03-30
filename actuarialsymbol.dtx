@@ -352,10 +352,10 @@
 %     \end{demo}
 %     The optional argument \meta{mult} of both commands is a
 %     multiplier governing the spacing between the number and the
-%     symbol. (Default values are $2$ for \cmd{\nthtop} and $7$ for
-%     \cmd{\varnthtop}; see \autoref{sec:implementation} for details.)
+%     symbol, with default values are $2$ for \cmd{\nthtop} and $7$ for
+%     \cmd{\varnthtop}; see \autoref{sec:implementation} for details.
 %     The package also defines shortcuts for first, second and third
-%     precedence; see \autoref{sec:shortcuts}.
+%     top precedence; see \autoref{sec:shortcuts}.
 %   \end{DescribeMacro}
 % \end{DescribeMacro}
 %
@@ -364,7 +364,7 @@
 %   \begin{quote}
 %     \cmd{\nthbottom}\marg{number}\marg{item}
 %   \end{quote}
-%   puts a precedence \marg{number} below an \marg{item}.
+%   puts a precedence \meta{number} below an \meta{item}.
 %   \begin{demo}
 %     \begin{texample}[0.85]
 %       |\actsymb{A}{\nthtop{1}{x}y:\nthbottom{2}{\angln}}|
@@ -372,9 +372,8 @@
 %       \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}y:\nthbottom{2}{\angln}}$
 %     \end{texample}
 %   \end{demo}
-%   The package
-%   also defines shortcuts for first and second precedence; see
-%   \autoref{sec:shortcuts}.
+%   The package also defines shortcuts for first, second and third bottom
+%   precedence; see \autoref{sec:shortcuts}.
 % \end{DescribeMacro}
 %
 % \begin{rem}
@@ -398,9 +397,50 @@
 %       $\actsymb{A}{\rule{0pt}{2.3ex}\nthtop{1}{x}:\angln}[(m)]$
 %     \end{texample}
 %   \end{demo}
-%   This also applies to bottom precedence numbers in inline formulas.
+%   This remark also applies to bottom precedence numbers in inline
+%   formulas.
 % \end{rem}
 %
+% \section{Shortcuts}
+% \label{sec:shortcuts}
+%
+% Composing actuarial symbols from scratch using \cmd{\actsymb} can
+% require get quite involved. For this reason, the package defines a
+% large number of shorcuts to ease entry of the most common symbols.
+% We encourage authors to define their own shortcuts for symbols we
+% did not consider.
+%
+% \begin{table}
+%   \centering
+%   \begin{tabular*}{1.0\linewidth}{lll}
+%       \toprule
+%       Definition & Example & Output \\
+%       \midrule
+%       \cmd{\lx}\marg{age} & |\lx{x}|    & $\lx{x}$ \\
+%       \cmd{\dx}\marg{age} & |\dx[n]{x}| & $\dx[n]{x}$ \\
+%       \cmd{\px}\marg{age} & |\px[t]{x}| & $\px[t]{x}$ \\
+%       \cmd{\qx}\marg{age} & |\qx[t]{x}| & $\qx[t]{x}$ \\
+%       \addlinespace[6pt]
+%       \cmd{\Ax}\marg{descr} & |\Ax{x:\angln}| & $\Ax{x:\angln}$ \\
+%       \cmd{\Ax*}\marg{descr} & |\Ax*{x:\angln}| & $\Ax*{x:\angln}$ \\
+%       \cmd{\ax}\marg{descr} & |\ax{x:\angln}| & $\ax{x:\angln}$ \\
+%       \cmd{\ax*}\marg{descr} & |\ax*{x:\angln}| & $\ax*{x:\angln}$ \\
+%       \cmd{\ax**}\marg{descr} & |\ax**{x:\angln}| & $\ax**{x:\angln}$ \\
+%       \addlinespace[6pt]
+%       \cmd{\premium}\marg{core}\marg{descr} & |\premium[t]{\bar{A}}{x}|  & $\premium[t]{\bar{A}}{x}$ \\
+%       \cmd{\premium*}\marg{core}\marg{descr} & |\premium*[t]{\bar{A}}{x}|  & $\premium*[t]{\bar{A}}{x}$ \\
+%       \cmd{\reserve}\marg{core}\marg{descr} & |\reserve[t]{\ddot{a}}{x}| & $\reserve[t]{\ddot{a}}{x}$ \\
+%       \cmd{\reserve*}\marg{core}\marg{descr} & |\reserve*[t]{\ddot{a}}{x}| & $\reserve*[t]{\ddot{a}}{x}$ \\
+%       \cmd{\paidup}\marg{core}\marg{descr}  & |\paidup[t]{\ddot{a}}{x}|  & $\paidup[t]{\ddot{a}}{x}$ \\
+%       \cmd{\paidup*}\marg{core}\marg{descr}  & |\paidup*[t]{\ddot{a}}{x}|  & $\paidup*[t]{A}{x}$ \\
+%       \bottomrule
+%     \end{tabular*}
+%   \caption{Shortcuts for principal life table, insurance and annuity
+%   symbols}
+%   \label{tab:principal}
+% \end{table}
+
+
 %    \begin{macrocode}
 %\iffalse
 %<*package>
@@ -409,13 +449,35 @@
 \RequirePackage{actuarialangle}
 
 \DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
-\newcommand\ACTS@actsymb{\@ifnextchar[{\ACTS@@actsymb}{\ACTS@@actsymb[]}}
+\newcommand\ACTS@actsymb{%
+  \@ifnextchar[{\ACTS@@actsymb}{\ACTS@@actsymb[]}}
 \newcommand\ACTS@@actsymb{}
-\def\ACTS@@actsymb[#1]{\@ifnextchar[{\ACTS@@@actsymb[#1]}{\ACTS@@@actsymb[#1][]}}
+\def\ACTS@@actsymb[#1]{%
+  \@ifnextchar[{\ACTS@@@actsymb[#1]}{\ACTS@@@actsymb[#1][]}}
 \newcommand\ACTS@@@actsymb{}
-\def\ACTS@@@actsymb[#1][#2]{\@ifnextchar[{\ACTS@@@@actsymb[#1][#2]}{\ACTS@@@@actsymb[#1][#2][]}}
+\def\ACTS@@@actsymb[#1][#2]{%
+  \@ifnextchar[{\ACTS@@@@actsymb[#1][#2]}{\ACTS@@@@actsymb[#1][#2][]}}
 \newcommand\ACTS@@@@actsymb{}
-\def\ACTS@@@@actsymb[#1][#2][#3]#4#5{\@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}{\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
+\def\ACTS@@@@actsymb[#1][#2][#3]#4#5{%
+  \@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}{\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
+
+\newcommand\ACTS@actsc[1]{%
+  \@ifnextchar[{\ACTS@@actsc{#1}}{\ACTS@@actsc{#1}[]}}
+\newcommand\ACTS@@actsc{}
+\def\ACTS@@actsc#1[#2]{%
+  \@ifnextchar[{\ACTS@@@actsc{#1}[#2]}{\ACTS@@@actsc{#1}[#2][]}}
+\newcommand\ACTS@@@actsc{}
+\def\ACTS@@@actsc#1[#2][#3]#4{%
+  \@ifnextchar[{\@actsymbol[#2][#3][]{#1}{#4}}{\@actsymbol[#2][#3][]{#1}{#4}[]}}
+
+\newcommand\ACTS@actprem[1]{%
+  \@ifnextchar[{\ACTS@@actprem{#1}}{\ACTS@@actprem{#1}[]}}
+\newcommand\ACTS@@actprem{}
+\def\ACTS@@actprem#1[#2]{%
+  \@ifnextchar[{\ACTS@@@actprem{#1}[#2]}{\ACTS@@@actprem{#1}[#2][]}}
+\newcommand\ACTS@@@actprem{}
+\def\ACTS@@@actprem#1[#2][#3]#4#5{%
+  \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}{\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
 
 \def\@actsymbol[#1][#2][#3]#4#5[#6]{
   \@mathmeasure\z@\displaystyle{#3}
@@ -424,7 +486,8 @@
   \@mathmeasure\thr@@\scriptstyle{#5}
   \@mathmeasure4\scriptstyle{#6}
   \mathop{}
-  %% adjust width of *left* subscript and superscript (if there is a superscript)
+  %% adjust width of *left* subscript and superscript (if there is a
+  %% superscript)
   \ifdim \wd\tw@>\z@ \ifdim \wd\tw@>\wd\@ne
     \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
   \else
@@ -456,7 +519,44 @@
   \fi
 }
 
+\DeclareRobustCommand{\lx}[1]{\ell\sb{#1}}
+\DeclareRobustCommand{\px}{\ACTS@actsc{p}}
+\DeclareRobustCommand{\qx}{\ACTS@actsc{q}}
+\DeclareRobustCommand{\dx}{\ACTS@actsc{d}}
+
+\DeclareRobustCommand{\Ax}{%
+  \@ifstar{\ACTS@actsc{\bar{A}}}{\ACTS@actsc{A}}}
+\DeclareRobustCommand{\ax}{%
+  \@ifstar{%
+    \@ifstar{\ACTS@actsc{\ddot{a}}}{\ACTS@actsc{\bar{a}}}}{\ACTS@actsc{a}}}
+
+\DeclareRobustCommand{\premium}{%
+  \@ifstar{\ACTS@actprem{\bar{P}}}{\ACTS@actprem{P}}}
+\DeclareRobustCommand{\reserve}{%
+  \@ifstar{\ACTS@actprem{\bar{V}}}{\ACTS@actprem{V}}}
+\DeclareRobustCommand{\paidup}{%
+  \@ifstar{\ACTS@actprem{\bar{W}}}{\ACTS@actprem{W}}}
+
+
 \DeclareRobustCommand{\twoletsymb}[1]{(\mathit{#1})}
+
+\newcommand{\IA}{\ensuremath\twoletsymb{IA}}
+\newcommand{\IAbar}{\ensuremath\twoletsymb{I\bar{A}}}
+\newcommand{\IbarAbar}{\ensuremath\twoletsymb{\bar{I}\bar{A}}}
+\newcommand{\DA}{\ensuremath\twoletsymb{DA}}
+\newcommand{\DAbar}{\ensuremath\twoletsymb{D\bar{A}}}
+\newcommand{\DbarAbar}{\ensuremath\twoletsymb{\bar{D}\bar{A}}}
+
+\newcommand{\Ia}{\ensuremath\twoletsymb{Ia}}
+\newcommand{\Ibarabar}{\ensuremath\twoletsymb{\bar{I}\bar{a}}}
+\newcommand{\Iadd}{\ensuremath\twoletsymb{I\ddot{a}}}
+\newcommand{\Is}{\ensuremath\twoletsymb{Is}}
+\newcommand{\Isdd}{\ensuremath\twoletsymb{I\ddot{s}}}
+\newcommand{\Da}{\ensuremath\twoletsymb{Da}}
+\newcommand{\Dbarabar}{\ensuremath\twoletsymb{\bar{D}\bar{a}}}
+\newcommand{\Dadd}{\ensuremath\twoletsymb{D\ddot{a}}}
+\newcommand{\Ds}{\ensuremath\twoletsymb{Ds}}
+\newcommand{\Dsdd}{\ensuremath\twoletsymb{D\ddot{s}}}
 
 \DeclareRobustCommand{\nthtop}[3][2]{\mathpalette{\preced@ t0{#1}{#2}}{#3}}
 \DeclareRobustCommand{\varnthtop}[3][7]{\mathpalette{\preced@ t{#1}{0}{#2}}{#3}}
@@ -489,37 +589,18 @@
   }% end \vbox
 }% end \preced@
 
-\newcommand{\tpx}[2]{\@actsymbol[#1][]p{#2}[]}
-\newcommand{\tqx}[2]{\@actsymbol[#1][]q{#2}[]}
-\newcommand{\ndx}[2]{\@actsymbol[#1][]d{#2}[]}
-\newcommand{\lx}[1]{\@actsymbol[][]{\ell}{#1}[]}
+\DeclareRobustCommand{\firsttop}[1]{\nthtop{1}{#1}}
+\DeclareRobustCommand{\varfirsttop}[1]{\varnthtop{1}{#1}}
+\DeclareRobustCommand{\secondtop}[1]{\nthtop{2}{#1}}
+\DeclareRobustCommand{\varsecondtop}[1]{\varnthtop{2}{#1}}
+\DeclareRobustCommand{\thirdtop}[1]{\nthtop{3}{#1}}
+\DeclareRobustCommand{\varthirdtop}[1]{\varnthtop{3}{#1}}
+\DeclareRobustCommand{\firstbottom}[1]{\nthbottom{1}{#1}}
+\DeclareRobustCommand{\secondbottom}[1]{\nthbottom{2}{#1}}
+\DeclareRobustCommand{\thirdbottom}[1]{\nthbottom{3}{#1}}
+
 
 \newcommand{\pureend}[2]{\ensuremath\actsymb{A}{#1:\firsttop{\angl{#2}}}}
-
-\newcommand{\firsttop}[1]{\ensuremath\nthtop{1}{#1}}
-\newcommand{\secondtop}[1]{\ensuremath\nthtop{2}{#1}}
-\newcommand{\thirdtop}[1]{\ensuremath\nthtop{3}{#1}}
-\newcommand{\firstbottom}[1]{\ensuremath\nthbottom{1}{#1}}
-\newcommand{\secondbottom}[1]{\ensuremath\nthbottom{2}{#1}}
-\newcommand{\thirdbottom}[1]{\ensuremath\nthbottom{3}{#1}}
-
-\newcommand{\IA}{\ensuremath\twoletsymb{IA}}
-\newcommand{\IAbar}{\ensuremath\twoletsymb{I\bar{A}}}
-\newcommand{\IbarAbar}{\ensuremath\twoletsymb{\bar{I}\bar{A}}}
-\newcommand{\DA}{\ensuremath\twoletsymb{DA}}
-\newcommand{\DAbar}{\ensuremath\twoletsymb{D\bar{A}}}
-\newcommand{\DbarAbar}{\ensuremath\twoletsymb{\bar{D}\bar{A}}}
-
-\newcommand{\Ia}{\ensuremath\twoletsymb{Ia}}
-\newcommand{\Ibarabar}{\ensuremath\twoletsymb{\bar{I}\bar{a}}}
-\newcommand{\Iadd}{\ensuremath\twoletsymb{I\ddot{a}}}
-\newcommand{\Is}{\ensuremath\twoletsymb{Is}}
-\newcommand{\Isdd}{\ensuremath\twoletsymb{I\ddot{s}}}
-\newcommand{\Da}{\ensuremath\twoletsymb{Da}}
-\newcommand{\Dbarabar}{\ensuremath\twoletsymb{\bar{D}\bar{a}}}
-\newcommand{\Dadd}{\ensuremath\twoletsymb{D\ddot{a}}}
-\newcommand{\Ds}{\ensuremath\twoletsymb{Ds}}
-\newcommand{\Dsdd}{\ensuremath\twoletsymb{D\ddot{s}}}
 
 %\iffalse
 %</package>
