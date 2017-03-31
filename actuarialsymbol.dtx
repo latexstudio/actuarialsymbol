@@ -199,13 +199,13 @@
 %   \begin{quote}
 %     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{core}\marg{lr}\oarg{ur}
 %   \end{quote}
-%   Above, \meta{ll} identifies the lower left subscript \fbox{I}
-%   (following the notation in the schematic representation
-%   \eqref{schema1}); \meta{ul} is the upper left superscript
-%   \fbox{II}; \meta{core} is the core symbol $S$; \meta{lr} is the
-%   lower right subscript \fbox{III}; \meta{ur} is the upper right
-%   superscript $\fbox{IV}$. The core symbol and the right subscript
-%   are required, the other arguments are optional.
+%   Above, \meta{ll} identifies the auxiliary symbol in the lower
+%   left subscript position \fbox{I} (following the notation in the
+%   schematic representation \eqref{schema1}); \meta{ul} is the upper
+%   left superscript \fbox{II}; \meta{core} is the core symbol $S$;
+%   \meta{lr} is the lower right subscript \fbox{III}; \meta{ur} is
+%   the upper right superscript $\fbox{IV}$. The core symbol and the
+%   right subscript are required, the other arguments are optional.
 %   \begin{demo}
 %     \begin{texample}
 %       |\actsymb{A}{x}|
@@ -410,6 +410,12 @@
 % We encourage authors to define their own shortcuts for symbols we
 % did not consider.
 %
+% \autoref{tab:principal} lists shortcuts to compose complete
+% principal symbols of life tables, insurance and annuities. Only the
+% mandatory arguments are given, but it should be noted that all
+% commands of \autoref*{tab:principal} accept the same optional
+% arguments as \cmd{\actsymb}.
+%
 % \begin{table}
 %   \centering
 %   \begin{tabular*}{1.0\linewidth}{lll}
@@ -421,26 +427,44 @@
 %       \cmd{\px}\marg{age} & |\px[t]{x}| & $\px[t]{x}$ \\
 %       \cmd{\qx}\marg{age} & |\qx[t]{x}| & $\qx[t]{x}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\Ax}\marg{descr} & |\Ax{x:\angln}| & $\Ax{x:\angln}$ \\
-%       \cmd{\Ax*}\marg{descr} & |\Ax*{x:\angln}| & $\Ax*{x:\angln}$ \\
-%       \cmd{\ax}\marg{descr} & |\ax{x:\angln}| & $\ax{x:\angln}$ \\
-%       \cmd{\ax*}\marg{descr} & |\ax*{x:\angln}| & $\ax*{x:\angln}$ \\
-%       \cmd{\ax**}\marg{descr} & |\ax**{x:\angln}| & $\ax**{x:\angln}$ \\
+%       \cmd{\Ax}\marg{lr}   & |\Ax{x:\angln}|   & $\Ax{x:\angln}$ \\
+%       \cmd{\Ax*}\marg{lr}  & |\Ax*{x:\angln}|  & $\Ax*{x:\angln}$ \\
+%       \cmd{\ax}\marg{lr}   & |\ax{x:\angln}|   & $\ax{x:\angln}$ \\
+%       \cmd{\ax*}\marg{lr}  & |\ax*{x:\angln}|  & $\ax*{x:\angln}$ \\
+%       \cmd{\ax**}\marg{lr} & |\ax**{x:\angln}| & $\ax**{x:\angln}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\premium}\marg{core}\marg{descr} & |\premium[t]{\bar{A}}{x}|  & $\premium[t]{\bar{A}}{x}$ \\
-%       \cmd{\premium*}\marg{core}\marg{descr} & |\premium*[t]{\bar{A}}{x}|  & $\premium*[t]{\bar{A}}{x}$ \\
-%       \cmd{\reserve}\marg{core}\marg{descr} & |\reserve[t]{\ddot{a}}{x}| & $\reserve[t]{\ddot{a}}{x}$ \\
-%       \cmd{\reserve*}\marg{core}\marg{descr} & |\reserve*[t]{\ddot{a}}{x}| & $\reserve*[t]{\ddot{a}}{x}$ \\
-%       \cmd{\paidup}\marg{core}\marg{descr}  & |\paidup[t]{\ddot{a}}{x}|  & $\paidup[t]{\ddot{a}}{x}$ \\
-%       \cmd{\paidup*}\marg{core}\marg{descr}  & |\paidup*[t]{\ddot{a}}{x}|  & $\paidup*[t]{A}{x}$ \\
+%       \cmd{\premium}\marg{core}\marg{lr}  & |\premium[t]{\bar{A}}{x}|   & $\premium[t]{\bar{A}}{x}$ \\
+%       \cmd{\premium*}\marg{core}\marg{lr} & |\premium*[t]{\bar{A}}{x}|  & $\premium*[t]{\bar{A}}{x}$ \\
+%       \cmd{\reserve}\marg{core}\marg{lr}  & |\reserve[t]{\ddot{a}}{x}|  & $\reserve[t]{\ddot{a}}{x}$ \\
+%       \cmd{\reserve*}\marg{core}\marg{lr} & |\reserve*[t]{\ddot{a}}{x}| & $\reserve*[t]{\ddot{a}}{x}$ \\
+%       \cmd{\paidup}\marg{core}\marg{lr}   & |\paidup[k]{\bar{A}}{x}|    & $\paidup[k]{\bar{A}}{x}$ \\
+%       \cmd{\paidup*}\marg{core}\marg{lr}  & |\paidup*[k][h]{\bar{A}}{x}|  & $\paidup*[k][h]{\bar{A}}{x}$ \\
 %       \bottomrule
 %     \end{tabular*}
-%   \caption{Shortcuts for principal life table, insurance and annuity
-%   symbols}
+%   \caption{Shortcuts for life table, insurance and annuity
+%     principal symbols}
 %   \label{tab:principal}
 % \end{table}
-
-
+%
+% \autoref{tab:twoletsymb} lists shortcuts for common two letter
+% symbols. These shortcuts can be used as core symbol in
+% \cmd{\actsymb} or the commands of \autoref*{tab:principal}.
+%
+% \begin{table}
+%   \centering
+%   \begin{tabular*}{1.0\linewidth}{ll}
+%       \toprule
+%       Definition & Output \\
+%       \midrule
+%       \cmd{\IA}   & $\IA$ \\
+%       \cmd{\IA*}  & $\IA*$ \\
+%       \cmd{\IA**}  & $\IA**$ \\
+%       \bottomrule
+%     \end{tabular*}
+%   \caption{Shortcuts for two letter symbols}
+%   \label{tab:twoletsymb}
+% \end{table}
+%
 %    \begin{macrocode}
 %\iffalse
 %<*package>
@@ -540,7 +564,10 @@
 
 \DeclareRobustCommand{\twoletsymb}[1]{(\mathit{#1})}
 
-\newcommand{\IA}{\ensuremath\twoletsymb{IA}}
+\newcommand{\IA}{\ensuremath
+  \@ifstar{%
+    \@ifstar{\twoletsymb{\bar{I}\bar{A}}}{%
+      \twoletsymb{I\bar{A}}}}{\twoletsymb{IA}}}
 \newcommand{\IAbar}{\ensuremath\twoletsymb{I\bar{A}}}
 \newcommand{\IbarAbar}{\ensuremath\twoletsymb{\bar{I}\bar{A}}}
 \newcommand{\DA}{\ensuremath\twoletsymb{DA}}
