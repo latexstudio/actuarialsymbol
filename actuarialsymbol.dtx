@@ -373,20 +373,34 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthbottom}
-%   Similar to the above two commands,
-%   \begin{quote}
-%     \cmd{\nthbottom}\marg{number}\marg{item}
-%   \end{quote}
-%   puts a precedence \meta{number} below an \meta{item}.
-%   \begin{demo}
-%     \begin{texample}[0.85]
-%       |\actsymb{A}{\nthtop{1}{x}y:\nthbottom{2}{\angln}}|
-%       \producing
-%       \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}y:\nthbottom{2}{\angln}}$
-%     \end{texample}
-%   \end{demo}
-%   The package also defines shortcuts for first, second and third bottom
-%   precedence; see \autoref{sec:shortcuts}.
+%   \begin{DescribeMacro}{\varnthbottom}
+%     Similar to the above two commands,
+%     \begin{quote}
+%       \cmd{\nthbottom}\marg{number}\marg{item}
+%       \cmd{\varnthbottom}\marg{number}\marg{item}
+%     \end{quote}
+%     put a precedence \meta{number} below an \meta{item}. With
+%     \cmd{\nthbottom} the spacing is constant, whereas with
+%     \cmd{\varnthbottom} precedence numbers are bottom aligned. The
+%     latter command is useful when more than one bottom precedence
+%     numbers are used and one of the items has a descender.
+%     \begin{demo}
+%       \begin{texample}[0.85]
+%         |\actsymb{A}{\nthtop{3}{x}%|\par
+%         |            \nthbottom{1}{y}\nthbottom{2}{z}}|
+%         \producing
+%         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{3}{x}\nthbottom{1}{y}\nthbottom{2}{z}}$
+%       \end{texample}
+%       \begin{texample}[0.85]
+%         |\actsymb{A}{\varnthtop{3}{x}%|\par
+%         |            \varnthbottom{1}{y}\varnthbottom{2}{z}}|
+%         \producing
+%         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{3}{x}\varnthbottom{1}{y}\varnthbottom{2}{z}}$
+%       \end{texample}
+%     \end{demo}
+%     The package also defines shortcuts for first, second and third bottom
+%     precedence; see \autoref{sec:shortcuts}.
+%   \end{DescribeMacro}
 % \end{DescribeMacro}
 %
 % \begin{rem}
@@ -415,18 +429,26 @@
 % \end{rem}
 %
 % \begin{DescribeMacro}{\nthtopskip}
-%   \begin{DescribeMacro}{\nthtopskip}
+%   \begin{DescribeMacro}{\varnthtopskip}
 %     \begin{DescribeMacro}{\nthbottomskip}
-%       The constant spacing between a top precedence number and the
-%       item underneath when using \cmd{\nthtop} is \cmd{\nthtopskip},
-%       by default \the\nthtopskip. The constant height of top
-%       precedence numbers when using \cmd{\varnthtop} is achieved by
-%       setting the baseline skip to \cmd{\varnthtopskip}, by default
-%       \the\varnthtopskip. The constant spacing between a bottom
-%       precedence number and the item above when using
-%       \cmd{\nthbottom} is \cmd{\nthbottomskip}, by default
-%       \the\nthbottomskip. These values can be changed as usual using
-%       \cmd{\setlength}.
+%       \begin{DescribeMacro}{\varnthbottomskip}
+%         The constant spacing between a top precedence number and the
+%         item underneath when using \cmd{\nthtop} is
+%         \cmd{\nthtopskip}, by default \the\nthtopskip. The constant
+%         height of top precedence numbers when using \cmd{\varnthtop}
+%         is achieved by setting the baseline skip to
+%         \cmd{\varnthtopskip}, by default \the\varnthtopskip.
+%
+%         Similarly, the constant spacing between a bottom precedence
+%         number and the item above when using \cmd{\nthbottom} is
+%         \cmd{\nthbottomskip}, by default \the\nthbottomskip, and the
+%         constant height of bottom precedence numbers when using
+%         \cmd{\varnthbottom} is achieved by setting the baseline skip
+%         to \cmd{\varnthbottomskip}, by default
+%         \the\varnthbottomskip.
+%
+%         These values can be changed as usual using \cmd{\setlength}.
+%       \end{DescribeMacro}
 %     \end{DescribeMacro}
 %   \end{DescribeMacro}
 % \end{DescribeMacro}
@@ -500,6 +522,34 @@
 %     \end{tabular}
 %   \caption{Shortcuts for two-letter symbols}
 %   \label{tab:twoletsymb}
+% \end{table}
+%
+% \autoref{tab:preced} lists shortcuts for the first, second and third
+% precedence numbers, top and bottom. These shortcuts can be used in
+% auxiliary symbols in \cmd{\actsymb} or the commands of
+% \autoref*{tab:principal}.
+%
+% \begin{table}
+%   \centering
+%   \begin{tabular}{lll}
+%       \toprule
+%       Definition & Example & Output \\
+%       \midrule
+%       \cmd{\firsttop}\marg{item} & |\Ax{\firsttop{x}:\angln}|    & $\Ax{\firsttop{x}:\angln}$ \\[6pt]
+%       \cmd{\secondtop}\marg{item} & |\Ax{x\secondtop{y}}|    & $\Ax{x\secondtop{y}}$ \\[6pt]
+%       \cmd{\thirdtop}\marg{item} & |\Ax{xy\thirdtop{z}}|    & $\Ax{xy\thirdtop{z}}$ \\[6pt]
+%       \addlinespace[6pt]
+%       \cmd{\varfirsttop}\marg{item} & |\Ax{\varfirsttop{x}:\angln}|    & $\Ax{\varfirsttop{x}:\angln}$ \\[6pt]
+%       \cmd{\varsecondtop}\marg{item} & |\Ax{x\varsecondtop{y}}|    & $\Ax{x\varsecondtop{y}}$ \\[6pt]
+%       \cmd{\varthirdtop}\marg{item} & |\Ax{xy\varthirdtop{z}}|    & $\Ax{xy\varthirdtop{z}}$ \\[6pt]
+%       \addlinespace[6pt]
+%       \cmd{\firstbottom}\marg{item} & |\Ax{\secondtop{x}\firstbottom{y}}|    & $\Ax{\secondtop{x}\firstbottom{y}}$ \\[6pt]
+%       \cmd{\secondbottom}\marg{item} & |\Ax{x\secondbottom{y}z}|    & $\Ax{x\secondbottom{y}z}$ \\[6pt]
+%       \cmd{\thirdbottom}\marg{item} & |\Ax{xy\thirdbottom{z}}|    & $\Ax{x\secondbottom{y}\thirdbottom{z}}$ \\
+%       \bottomrule
+%     \end{tabular}
+%   \caption{Shortcuts for precedence numbers}
+%   \label{tab:preced}
 % \end{table}
 %
 %    \begin{macrocode}
@@ -630,13 +680,17 @@
 \setlength{\varnthtopskip}{7\p@}
 \newlength{\nthbottomskip}
 \setlength{\nthbottomskip}{2\p@}
+\newlength{\varnthbottomskip}
+\setlength{\varnthbottomskip}{9\p@}
 
 \DeclareRobustCommand{\nthtop}[3][\nthtopskip]{%
-  \mathpalette{\preced@ t{\z@}{#1}{#2}}{#3}}
+  \mathpalette{\preced@ t\z@{#1}{#2}}{#3}}
 \DeclareRobustCommand{\varnthtop}[3][\varnthtopskip]{%
-  \mathpalette{\preced@ t{#1}{\z@}{#2}}{#3}}
+  \mathpalette{\preced@ t{#1}\z@{#2}}{#3}}
 \DeclareRobustCommand{\nthbottom}[2]{%
   \mathpalette{\preced@ b\z@\nthbottomskip{#1}}{#2}}
+\DeclareRobustCommand{\varnthbottom}[2]{%
+  \mathpalette{\preced@ b\varnthbottomskip\z@{#1}}{#2}}
 
 % In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
 % multiplier for the baseline skip between the top and bottom symbols, #3 is a
@@ -672,8 +726,11 @@
 \DeclareRobustCommand{\thirdtop}[1]{\nthtop{3}{#1}}
 \DeclareRobustCommand{\varthirdtop}[1]{\varnthtop{3}{#1}}
 \DeclareRobustCommand{\firstbottom}[1]{\nthbottom{1}{#1}}
+\DeclareRobustCommand{\varfirstbottom}[1]{\varnthbottom{1}{#1}}
 \DeclareRobustCommand{\secondbottom}[1]{\nthbottom{2}{#1}}
+\DeclareRobustCommand{\varsecondbottom}[1]{\varnthbottom{2}{#1}}
 \DeclareRobustCommand{\thirdbottom}[1]{\nthbottom{3}{#1}}
+\DeclareRobustCommand{\varthirdbottom}[1]{\varnthbottom{3}{#1}}
 
 
 \newcommand{\pureend}[2]{\ensuremath\actsymb{A}{#1:\firsttop{\angl{#2}}}}
