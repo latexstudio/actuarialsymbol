@@ -274,44 +274,45 @@
 % \end{rem}
 %
 % \begin{DescribeMacro}{\twoletsymb}
-%   \begin{DescribeMacro}{\twoletskern}
-%     Writing two-letter core symbols like $\DA$ as |$(DA)$| results
-%     in letters that are too distant from one another: $(DA)$. To
-%     unify presentation, the package provides the command
-%     \begin{quote}
-%       \cmd{\twoletsymb}\oarg{length}\marg{symbol\_1}\marg{symbol\_2}
-%     \end{quote}
-%     to group \meta{symbol\_1} and \meta{symbol\_2} between
-%     parentheses with kerning\footnote{%
-%     Spacing adjustment between the characters}. %
-%     reduced by a length \cmd{\twoletkern}, by default
-%     \the\twoletkern. The latter value can be modified on a per
-%     document basis using \cmd{\setlength} as usual. One can also
-%     adjust spacing for a particular symbol using the optional
-%     argument \meta{length}.
+%   Writing two-letter core symbols like $\DA$ as |$(DA)$| results in
+%   letters that are too distant from one another: $(DA)$. To unify
+%   presentation, the package provides the command
+%   \begin{quote}
+%     \cmd{\twoletsymb}\oarg{length}\marg{symbol\_1}\marg{symbol\_2}
+%   \end{quote}
+%   to group \meta{symbol\_1} and \meta{symbol\_2} between parentheses
+%   with kerning\footnote{Spacing adjustment between the characters}
+%   reduced by length \cmd{\twoletkern} (see below). One can also
+%   reduce spacing by \meta{length} for a particular symbol.
 %
-%     We expect authors to only use \cmd{\twoletsymb} to define
-%     commands, not directly in equations. The package already defines
-%     a number of shortcuts for the main two-letter actuarial symbols;
-%     see \autoref{sec:shortcuts}.
-%     \begin{demo}
-%       \begin{texample}
-%         |\twoletsymb{\bar{D}}{\bar{A}}|
-%         \producing
-%         $\twoletsymb{\bar{D}}{\bar{A}}$
-%       \end{texample}
-%       \begin{texample}
-%         |\twoletsymb{I}{\ddot{a}}|
-%         \producing
-%         $\twoletsymb{I}{\ddot{a}}$
-%       \end{texample}
-%       \begin{texample}
-%         |\twoletsymb{I}{\ddot{a}}|
-%         \producing
-%         $\twoletsymb[0.8pt]{I}{\ddot{a}}$
-%       \end{texample}
-%     \end{demo}
-%   \end{DescribeMacro}
+%   We expect authors to only use \cmd{\twoletsymb} to define
+%   commands, not directly in equations. The package already defines a
+%   number of shortcuts for the main two-letter actuarial symbols; see
+%   \autoref{sec:shortcuts}.
+%   \begin{demo}
+%     \begin{texample}
+%       |\twoletsymb{\bar{D}}{\bar{A}}|
+%       \producing
+%       $\twoletsymb{\bar{D}}{\bar{A}}$
+%     \end{texample}
+%     \begin{texample}
+%       |\twoletsymb{I}{\ddot{a}}|
+%       \producing
+%       $\twoletsymb{I}{\ddot{a}}$
+%     \end{texample}
+%     \begin{texample}
+%       |\twoletsymb{I}{\ddot{a}}|
+%       \producing
+%       $\twoletsymb[0.8pt]{I}{\ddot{a}}$
+%     \end{texample}
+%   \end{demo}
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\twoletkern}
+%   The standard kerning between mathematical symbols defined with
+%   \cmd{\twoletsymb} is \emph{reduced} by the length
+%   \cmd{\twoletkern}, by default \the\twoletkern. This value can be
+%   changed using \cmd{\setlength} as usual.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthtop}
