@@ -312,23 +312,23 @@
 %   The standard kerning between mathematical symbols defined with
 %   \cmd{\twoletsymb} is \emph{reduced} by the length
 %   \cmd{\twoletkern}, by default \the\twoletkern. This value can be
-%   changed using \cmd{\setlength} as usual.
+%   changed as usual using \cmd{\setlength}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthtop}
 %   \begin{DescribeMacro}{\varnthtop}
 %     Commands
 %     \begin{quote}
-%       \cmd{\nthtop}\oarg{mult}\marg{number}\marg{item} \\
-%       \cmd{\varnthtop}\oarg{mult}\marg{number}\marg{item}
+%       \cmd{\nthtop}\oarg{length}\marg{number}\marg{item} \\
+%       \cmd{\varnthtop}\oarg{length}\marg{number}\marg{item}
 %     \end{quote}
 %     put a precedence \meta{number} above an \meta{item}, smashed so
 %     that the apparent height of the item is its normal height. This
 %     is normally used in the right subscript \fbox{III} of a symbol.
 %     With \cmd{\nthtop}, the spacing between the precedence number
-%     and the item is constant. This can result in precedence numbers
-%     placed at different heights if one item contains an horizontal
-%     rule.
+%     and the item is a constant \cmd{\nthtopskip} (see below). This
+%     can result in precedence numbers placed at different heights if
+%     one item contains an horizontal rule.
 %     \begin{demo}
 %       \begin{texample}[0.85]
 %         |\actsymb{A}{\nthtop{1}{x}:\angln}|
@@ -346,9 +346,9 @@
 %         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}$
 %       \end{texample}
 %     \end{demo}
-%     Conversely, \cmd{\varnthtop} always leaves enough space for
-%     intervening horizontal rules, resulting in vertically aligned
-%     precedence numbers.
+%     Conversely, \cmd{\varnthtop} always leaves enough space
+%     \cmd{\varnthtopskip} for intervening horizontal rules, resulting
+%     in vertically aligned precedence numbers.
 %     \begin{demo}
 %       \begin{texample}[0.85]
 %         |\actsymb{A}{\varnthtop{1}{x}:\angln}|
@@ -366,12 +366,9 @@
 %         \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}$
 %       \end{texample}
 %     \end{demo}
-%     The optional argument \meta{mult} of both commands is a
-%     multiplier governing the spacing between the number and the
-%     symbol, with default values are $2$ for \cmd{\nthtop} and $7$ for
-%     \cmd{\varnthtop}; see \autoref{sec:implementation} for details.
-%     The package also defines shortcuts for first, second and third
-%     top precedence; see \autoref{sec:shortcuts}.
+%     The optional argument \meta{length} changes the default spacing
+%     for one symbol. The package also defines shortcuts for first,
+%     second and third top precedence; see \autoref{sec:shortcuts}.
 %   \end{DescribeMacro}
 % \end{DescribeMacro}
 %
@@ -416,6 +413,23 @@
 %   This remark also applies to bottom precedence numbers in inline
 %   formulas.
 % \end{rem}
+%
+% \begin{DescribeMacro}{\nthtopskip}
+%   \begin{DescribeMacro}{\nthtopskip}
+%     \begin{DescribeMacro}{\nthbottomskip}
+%       The constant spacing between a top precedence number and the
+%       item underneath when using \cmd{\nthtop} is \cmd{\nthtopskip},
+%       by default \the\nthtopskip. The constant height of top
+%       precedence numbers when using \cmd{\varnthtop} is achieved by
+%       setting the baseline skip to \cmd{\varnthtopskip}, by default
+%       \the\varnthtopskip. The constant spacing between a bottom
+%       precedence number and the item above when using
+%       \cmd{\nthbottom} is \cmd{\nthbottomskip}, by default
+%       \the\nthbottomskip. These values can be changed as usual using
+%       \cmd{\setlength}.
+%     \end{DescribeMacro}
+%   \end{DescribeMacro}
+% \end{DescribeMacro}
 %
 % \section{Shortcuts}
 % \label{sec:shortcuts}
@@ -601,9 +615,19 @@
 % \newcommand{\Ds}{\ensuremath\twoletsymb{Ds}}
 % \newcommand{\Dsdd}{\ensuremath\twoletsymb{D\ddot{s}}}
 
-\DeclareRobustCommand{\nthtop}[3][2]{\mathpalette{\preced@ t0{#1}{#2}}{#3}}
-\DeclareRobustCommand{\varnthtop}[3][7]{\mathpalette{\preced@ t{#1}{0}{#2}}{#3}}
-\DeclareRobustCommand{\nthbottom}[2]{\mathpalette{\preced@ b02{#1}}{#2}}
+\newlength{\nthtopskip}
+\setlength{\nthtopskip}{2\p@}
+\newlength{\varnthtopskip}
+\setlength{\varnthtopskip}{7\p@}
+\newlength{\nthbottomskip}
+\setlength{\nthbottomskip}{2\p@}
+
+\DeclareRobustCommand{\nthtop}[3][\nthtopskip]{%
+  \mathpalette{\preced@ t{\z@}{#1}{#2}}{#3}}
+\DeclareRobustCommand{\varnthtop}[3][\varnthtopskip]{%
+  \mathpalette{\preced@ t{#1}{\z@}{#2}}{#3}}
+\DeclareRobustCommand{\nthbottom}[2]{%
+  \mathpalette{\preced@ b\z@\nthbottomskip{#1}}{#2}}
 
 % In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
 % multiplier for the baseline skip between the top and bottom symbols, #3 is a
@@ -623,8 +647,8 @@
     % \lineskip is set using AMSTeX's \ex@, if available, for a slight
     % refinement in the spacing if this macro is used in eightpoint
     % text. If \ex@ is not available, \p@ is used.
-    \baselineskip#2\p@
-    \lineskip#3\ifx\UNDEFINED\ex@\p@\else\ex@\fi\relax
+    \baselineskip=#2
+    \lineskip=#3\relax
     \lineskiplimit\lineskip
     \if b#1\relax\box\z@\else\vss\fi
     \hbox to\dimen@{\hss\unhbox\tw@\hss}%
