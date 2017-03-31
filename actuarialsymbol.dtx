@@ -155,7 +155,7 @@
 % ``accented'' with a bar ($\bar{A}$), double dots ($\ddot{a}$) or a
 % circle ($\mathring{e}$). When the core symbol consists of two
 % letters, they are grouped between parentheses, as in $\IA$ or
-% $\Dadd$. Most commonly, there is an auxiliary symbol (or collection
+% $\DA**$. Most commonly, there is an auxiliary symbol (or collection
 % of symbols) in the lower-right position \fbox{III}. Otherwise,
 % auxiliary symbols appear lower-left \fbox{I}, upper-left
 % \fbox{II} and upper-right \fbox{IV}, in that order of frequency.
@@ -274,29 +274,44 @@
 % \end{rem}
 %
 % \begin{DescribeMacro}{\twoletsymb}
-%   Writing two-letter core symbols like $\DA$ as |$(DA)$| results in
-%   letters that are too distant from one another: $(DA)$. To unify
-%   presentation, the package provides the command
-%   \begin{quote}
-%     \cmd{\twoletsymb}\marg{symbol}
-%   \end{quote}
-%   to create a two-letter \meta{symbol} surrounded by parentheses.
-%   The symbol is typeset using \cmd{\mathit} to ensure proper spacing
-%   between the letters. The package defines control structures for
-%   all the main two-letter actuarial symbols; see
-%   \autoref{sec:shortcuts}.
-%   \begin{demo}
-%     \begin{texample}
-%       |\twoletsymb{DA}|
-%       \producing
-%       $\twoletsymb{DA}$
-%     \end{texample}
-%     \begin{texample}
-%       |\twoletsymb{I\ddot{a}}|
-%       \producing
-%       $\twoletsymb{I\ddot{a}}$
-%     \end{texample}
-%   \end{demo}
+%   \begin{DescribeMacro}{\twoletskern}
+%     Writing two-letter core symbols like $\DA$ as |$(DA)$| results
+%     in letters that are too distant from one another: $(DA)$. To
+%     unify presentation, the package provides the command
+%     \begin{quote}
+%       \cmd{\twoletsymb}\oarg{length}\marg{symbol\_1}\marg{symbol\_2}
+%     \end{quote}
+%     to group \meta{symbol\_1} and \meta{symbol\_2} between
+%     parentheses with kerning\footnote{%
+%     Spacing adjustment between the characters}. %
+%     reduced by a length \cmd{\twoletkern}, by default
+%     \the\twoletkern. The latter value can be modified on a per
+%     document basis using \cmd{\setlength} as usual. One can also
+%     adjust spacing for a particular symbol using the optional
+%     argument \meta{length}.
+%
+%     We expect authors to only use \cmd{\twoletsymb} to define
+%     commands, not directly in equations. The package already defines
+%     a number of shortcuts for the main two-letter actuarial symbols;
+%     see \autoref{sec:shortcuts}.
+%     \begin{demo}
+%       \begin{texample}
+%         |\twoletsymb{\bar{D}}{\bar{A}}|
+%         \producing
+%         $\twoletsymb{\bar{D}}{\bar{A}}$
+%       \end{texample}
+%       \begin{texample}
+%         |\twoletsymb{I}{\ddot{a}}|
+%         \producing
+%         $\twoletsymb{I}{\ddot{a}}$
+%       \end{texample}
+%       \begin{texample}
+%         |\twoletsymb{I}{\ddot{a}}|
+%         \producing
+%         $\twoletsymb[0.8pt]{I}{\ddot{a}}$
+%       \end{texample}
+%     \end{demo}
+%   \end{DescribeMacro}
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthtop}
@@ -418,7 +433,7 @@
 %
 % \begin{table}
 %   \centering
-%   \begin{tabular*}{1.0\linewidth}{lll}
+%   \begin{tabular}{lll}
 %       \toprule
 %       Definition & Example & Output \\
 %       \midrule
@@ -440,19 +455,19 @@
 %       \cmd{\paidup}\marg{core}\marg{lr}   & |\paidup[k]{\bar{A}}{x}|    & $\paidup[k]{\bar{A}}{x}$ \\
 %       \cmd{\paidup*}\marg{core}\marg{lr}  & |\paidup*[k][h]{\bar{A}}{x}|  & $\paidup*[k][h]{\bar{A}}{x}$ \\
 %       \bottomrule
-%     \end{tabular*}
+%     \end{tabular}
 %   \caption{Shortcuts for life table, insurance and annuity
 %     principal symbols}
 %   \label{tab:principal}
 % \end{table}
 %
-% \autoref{tab:twoletsymb} lists shortcuts for common two letter
+% \autoref{tab:twoletsymb} lists shortcuts for common two-letter
 % symbols. These shortcuts can be used as core symbol in
 % \cmd{\actsymb} or the commands of \autoref*{tab:principal}.
 %
 % \begin{table}
 %   \centering
-%   \begin{tabular*}{1.0\linewidth}{ll}
+%   \begin{tabular}{ll}
 %       \toprule
 %       Definition & Output \\
 %       \midrule
@@ -460,8 +475,8 @@
 %       \cmd{\IA*}  & $\IA*$ \\
 %       \cmd{\IA**}  & $\IA**$ \\
 %       \bottomrule
-%     \end{tabular*}
-%   \caption{Shortcuts for two letter symbols}
+%     \end{tabular}
+%   \caption{Shortcuts for two-letter symbols}
 %   \label{tab:twoletsymb}
 % \end{table}
 %
@@ -561,29 +576,29 @@
 \DeclareRobustCommand{\paidup}{%
   \@ifstar{\ACTS@actprem{\bar{W}}}{\ACTS@actprem{W}}}
 
+\newlength{\twoletkern}
+\setlength{\twoletkern}{1.2pt}
+\DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{\ensuremath(#2\kern-#1#3)}
 
-\DeclareRobustCommand{\twoletsymb}[1]{(\mathit{#1})}
-
-\newcommand{\IA}{\ensuremath
+\newcommand{\IA}{%
   \@ifstar{%
-    \@ifstar{\twoletsymb{\bar{I}\bar{A}}}{%
-      \twoletsymb{I\bar{A}}}}{\twoletsymb{IA}}}
-\newcommand{\IAbar}{\ensuremath\twoletsymb{I\bar{A}}}
-\newcommand{\IbarAbar}{\ensuremath\twoletsymb{\bar{I}\bar{A}}}
-\newcommand{\DA}{\ensuremath\twoletsymb{DA}}
-\newcommand{\DAbar}{\ensuremath\twoletsymb{D\bar{A}}}
-\newcommand{\DbarAbar}{\ensuremath\twoletsymb{\bar{D}\bar{A}}}
+    \@ifstar{\twoletsymb{\bar{I}}{\bar{A}}}{%
+      \twoletsymb{I}{\bar{A}}}}{\twoletsymb{I}{A}}}
+\newcommand{\DA}{%
+  \@ifstar{%
+    \@ifstar{\twoletsymb{\bar{D}}{\bar{A}}}{%
+      \twoletsymb{D}{\bar{A}}}}{\twoletsymb{D}{A}}}
 
-\newcommand{\Ia}{\ensuremath\twoletsymb{Ia}}
-\newcommand{\Ibarabar}{\ensuremath\twoletsymb{\bar{I}\bar{a}}}
-\newcommand{\Iadd}{\ensuremath\twoletsymb{I\ddot{a}}}
-\newcommand{\Is}{\ensuremath\twoletsymb{Is}}
-\newcommand{\Isdd}{\ensuremath\twoletsymb{I\ddot{s}}}
-\newcommand{\Da}{\ensuremath\twoletsymb{Da}}
-\newcommand{\Dbarabar}{\ensuremath\twoletsymb{\bar{D}\bar{a}}}
-\newcommand{\Dadd}{\ensuremath\twoletsymb{D\ddot{a}}}
-\newcommand{\Ds}{\ensuremath\twoletsymb{Ds}}
-\newcommand{\Dsdd}{\ensuremath\twoletsymb{D\ddot{s}}}
+% \newcommand{\Ia}{\ensuremath\twoletsymb{Ia}}
+% \newcommand{\Ibarabar}{\ensuremath\twoletsymb{\bar{I}\bar{a}}}
+% \newcommand{\Iadd}{\ensuremath\twoletsymb{I\ddot{a}}}
+% \newcommand{\Is}{\ensuremath\twoletsymb{Is}}
+% \newcommand{\Isdd}{\ensuremath\twoletsymb{I\ddot{s}}}
+% \newcommand{\Da}{\ensuremath\twoletsymb{Da}}
+% \newcommand{\Dbarabar}{\ensuremath\twoletsymb{\bar{D}\bar{a}}}
+% \newcommand{\Dadd}{\ensuremath\twoletsymb{D\ddot{a}}}
+% \newcommand{\Ds}{\ensuremath\twoletsymb{Ds}}
+% \newcommand{\Dsdd}{\ensuremath\twoletsymb{D\ddot{s}}}
 
 \DeclareRobustCommand{\nthtop}[3][2]{\mathpalette{\preced@ t0{#1}{#2}}{#3}}
 \DeclareRobustCommand{\varnthtop}[3][7]{\mathpalette{\preced@ t{#1}{0}{#2}}{#3}}
