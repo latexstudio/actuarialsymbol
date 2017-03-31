@@ -489,6 +489,13 @@
 %       \cmd{\IA}   & $\IA$ \\
 %       \cmd{\IA*}  & $\IA*$ \\
 %       \cmd{\IA**}  & $\IA**$ \\
+%       \addlinespace[6pt]
+%       \cmd{\ImA}   & $\ImA$ \\
+%       \cmd{\ImA*}  & $\ImA*$ \\
+%       \addlinespace[6pt]
+%       \cmd{\DA}   & $\DA$ \\
+%       \cmd{\DA*}  & $\DA*$ \\
+%       \cmd{\DA**}  & $\DA**$ \\
 %       \bottomrule
 %     \end{tabular}
 %   \caption{Shortcuts for two-letter symbols}
@@ -599,6 +606,8 @@
   \@ifstar{%
     \@ifstar{\twoletsymb{\bar{I}}{\bar{A}}}{%
       \twoletsymb{I}{\bar{A}}}}{\twoletsymb{I}{A}}}
+\newcommand{\ImA}{%
+    \@ifstar{\twoletsymb{I^{(m)}}{\bar{A}}}{\twoletsymb{I^{(m)}}{A}}}
 \newcommand{\DA}{%
   \@ifstar{%
     \@ifstar{\twoletsymb{\bar{D}}{\bar{A}}}{%
