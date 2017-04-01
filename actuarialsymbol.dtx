@@ -386,16 +386,16 @@
 %     numbers are used and one of the items has a descender.
 %     \begin{demo}
 %       \begin{texample}[0.85]
-%         |\actsymb{A}{\nthtop{3}{x}%|\par
+%         |\actsymb{A}{w\nthtop{3}{x}%|\par
 %         |            \nthbottom{1}{y}\nthbottom{2}{z}}|
 %         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{3}{x}\nthbottom{1}{y}\nthbottom{2}{z}}$
+%         \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\nthbottom{1}{y}\nthbottom{2}{z}}$
 %       \end{texample}
 %       \begin{texample}[0.85]
-%         |\actsymb{A}{\varnthtop{3}{x}%|\par
+%         |\actsymb{A}{w\varnthtop{3}{x}%|\par
 %         |            \varnthbottom{1}{y}\varnthbottom{2}{z}}|
 %         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{3}{x}\varnthbottom{1}{y}\varnthbottom{2}{z}}$
+%         \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\varnthbottom{1}{y}\varnthbottom{2}{z}}$
 %       \end{texample}
 %     \end{demo}
 %     The package also defines shortcuts for first, second and third bottom
@@ -494,7 +494,8 @@
 %       \bottomrule
 %     \end{tabular}
 %   \caption{Shortcuts for life table, insurance and annuity
-%     principal symbols}
+%     principal symbols. All commands accept optional arguments like
+%     \cmd{\actsymb}.}
 %   \label{tab:principal}
 % \end{table}
 %
@@ -524,36 +525,36 @@
 %   \label{tab:twoletsymb}
 % \end{table}
 %
-% \autoref{tab:preced} lists shortcuts for the first, second and third
-% precedence numbers, top and bottom. These shortcuts can be used in
-% auxiliary symbols in \cmd{\actsymb} or the commands of
-% \autoref*{tab:principal}.
+% \autoref{tab:preced} lists shortcuts and aliases for the first,
+% second and third precedence numbers, top and bottom. These shortcuts
+% can be used in auxiliary symbols in \cmd{\actsymb} or the commands
+% of \autoref*{tab:principal}.
 %
 % \begin{table}
 %   \centering
 %   \begin{tabular}{lll}
 %       \toprule
-%       Definition & Example & Output \\
+%       Definition & Alias & Output \\
 %       \midrule
-%       \cmd{\firsttop}\marg{item} & |\Ax{\firsttop{x}:\angln}|    & $\Ax{\firsttop{x}:\angln}$ \\[6pt]
-%       \cmd{\secondtop}\marg{item} & |\Ax{x\secondtop{y}}|    & $\Ax{x\secondtop{y}}$ \\[6pt]
-%       \cmd{\thirdtop}\marg{item} & |\Ax{xy\thirdtop{z}}|    & $\Ax{xy\thirdtop{z}}$ \\[6pt]
+%       \cmd{\firsttop}\marg{item}  & \cmd{\itop}\marg{item}   & $\Ax{\itop{x}:\angln}$ \\[6pt]
+%       \cmd{\secondtop}\marg{item} & \cmd{\iitop}\marg{item}  & $\Ax{x\iitop{y}z}$ \\[6pt]
+%       \cmd{\thirdtop}\marg{item}  & \cmd{\iiitop}\marg{item} & $\Ax{xy\iiitop{z}}$ \\[6pt]
 %       \addlinespace[6pt]
-%       \cmd{\varfirsttop}\marg{item} & |\Ax{\varfirsttop{x}:\angln}|    & $\Ax{\varfirsttop{x}:\angln}$ \\[6pt]
-%       \cmd{\varsecondtop}\marg{item} & |\Ax{x\varsecondtop{y}}|    & $\Ax{x\varsecondtop{y}}$ \\[6pt]
-%       \cmd{\varthirdtop}\marg{item} & |\Ax{xy\varthirdtop{z}}|    & $\Ax{xy\varthirdtop{z}}$ \\[6pt]
+%       \cmd{\varfirsttop}\marg{item}  & \cmd{\varitop}\marg{item}   & $\Ax{\varitop{x}:\angln}$ \\[6pt]
+%       \cmd{\varsecondtop}\marg{item} & \cmd{\variitop}\marg{item}  & $\Ax{x\variitop{y}z}$ \\[6pt]
+%       \cmd{\varthirdtop}\marg{item}  & \cmd{\variiitop}\marg{item} & $\Ax{xy\variiitop{z}}$ \\[6pt]
 %       \addlinespace[6pt]
-%       \cmd{\firstbottom}\marg{item} & |\Ax{\secondtop{x}\firstbottom{y}}|    & $\Ax{\secondtop{x}\firstbottom{y}}$ \\[6pt]
-%       \cmd{\secondbottom}\marg{item} & |\Ax{x\secondbottom{y}z}|    & $\Ax{x\secondbottom{y}z}$ \\[6pt]
-%       \cmd{\thirdbottom}\marg{item} & |\Ax{xy\thirdbottom{z}}|    & $\Ax{x\secondbottom{y}\thirdbottom{z}}$ \\[6pt]
+%       \cmd{\firstbottom}\marg{item}  & \cmd{\ibottom}\marg{item}   & $\Ax{\iitop{x}\ibottom{y}z}$ \\[6pt]
+%       \cmd{\secondbottom}\marg{item} & \cmd{\iibottom}\marg{item}  & $\Ax{x\iibottom{y}z}$ \\[6pt]
+%       \cmd{\thirdbottom}\marg{item}  & \cmd{\iiibottom}\marg{item} & $\Ax{x\iibottom{y}\iiibottom{z}}$ \\[6pt]
 %       \addlinespace[6pt]
-%       \cmd{\varfirstbottom}\marg{item} & |\Ax{\secondtop{x}\varfirstbottom{y}}|    & $\Ax{\secondtop{x}\firstbottom{y}}$ \\[6pt]
-%       \cmd{\varsecondbottom}\marg{item} & |\Ax{x\varsecondbottom{y}z}|    & $\Ax{x\varsecondbottom{y}z}$ \\[6pt]
-%       \cmd{\varthirdbottom}\marg{item} & |\Ax{x\varsecondbottom{y}\varthirdbottom{z}}|    & $\Ax{x\varsecondbottom{y}\varthirdbottom{z}}$ \\[6pt]
+%       \cmd{\varfirstbottom}\marg{item}  & \cmd{\varibottom}\marg{item}   & $\Ax{\iitop{x}\varibottom{y}}$ \\[6pt]
+%       \cmd{\varsecondbottom}\marg{item} & \cmd{\variibottom}\marg{item}  & $\Ax{x\variibottom{y}z}$ \\[6pt]
+%       \cmd{\varthirdbottom}\marg{item}  & \cmd{\variiibottom}\marg{item} & $\Ax{x\variibottom{y}\variiibottom{z}}$ \\[6pt]
 %       \addlinespace[4pt]
 %       \bottomrule
 %     \end{tabular}
-%   \caption{Shortcuts for precedence numbers}
+%   \caption{Shortcuts and aliases for precedence numbers}
 %   \label{tab:preced}
 % \end{table}
 %
