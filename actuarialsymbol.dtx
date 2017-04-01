@@ -470,6 +470,10 @@
 %
 % \begin{table}
 %   \centering
+%   \caption{Shortcuts for life table, insurance and annuity
+%   principal symbols. All commands accept optional arguments like
+%   \cmd{\actsymb}.}
+%   \label{tab:principal}
 %   \begin{tabular}{lll}
 %       \toprule
 %       Definition & Example & Output \\
@@ -481,6 +485,7 @@
 %       \addlinespace[6pt]
 %       \cmd{\Ax}\marg{lr}   & |\Ax{x:\angln}|   & $\Ax{x:\angln}$ \\
 %       \cmd{\Ax*}\marg{lr}  & |\Ax*{x:\angln}|  & $\Ax*{x:\angln}$ \\
+%       \cmd{\Ex}\marg{lr}   & |\Ex[n]{x}|       & $\Ex[n]{x}$ \\
 %       \cmd{\ax}\marg{lr}   & |\ax{x:\angln}|   & $\ax{x:\angln}$ \\
 %       \cmd{\ax*}\marg{lr}  & |\ax*{x:\angln}|  & $\ax*{x:\angln}$ \\
 %       \cmd{\ax**}\marg{lr} & |\ax**{x:\angln}| & $\ax**{x:\angln}$ \\
@@ -492,11 +497,28 @@
 %       \cmd{\paidup}\marg{core}\marg{lr}   & |\paidup[k]{\bar{A}}{x}|    & $\paidup[k]{\bar{A}}{x}$ \\
 %       \cmd{\paidup*}\marg{core}\marg{lr}  & |\paidup*[k][h]{\bar{A}}{x}|  & $\paidup*[k][h]{\bar{A}}{x}$ \\
 %       \bottomrule
-%     \end{tabular}
-%   \caption{Shortcuts for life table, insurance and annuity
-%     principal symbols. All commands accept optional arguments like
-%     \cmd{\actsymb}.}
-%   \label{tab:principal}
+%   \end{tabular}
+% \end{table}
+%
+% \autoref{tab:aux} lists shortcuts for a few common auxiliary symbols
+% used in the lower right subscript \fbox{III}.
+%
+% \begin{table}
+%   \centering
+%   \caption{Shortcuts for auxiliary symbols}
+%   \label{tab:aux}
+%   \begin{tabular}{lll}
+%       \toprule
+%       Definition & Example & Output \\
+%       \midrule
+%       \cmd{\term}\marg{age}\marg{duration} & |\Ax{\term{x}{n}}|   & $\Ax{\term{x}{n}}$ \\[6pt]
+%       \cmd{\pureend}\marg{age}\marg{duration} & |\Ax{\pureend{x}{n}}|   & $\Ax{\pureend{x}{n}}$ \\[6pt]
+%       \cmd{\joint}\marg{ages}$^\dagger$ & |\Ax{\joint{xy}z}|   & $\Ax{\joint{xy}z}$ \\
+%       \bottomrule
+%   \end{tabular} \\
+%   \raggedright
+%   \hspace*{1em}{\footnotesize $^\dagger$ \cmd{\joint} is simply an alias
+%   for \cmd{\overline}}
 % \end{table}
 %
 % \autoref{tab:twoletsymb} lists shortcuts for common two-letter
@@ -505,6 +527,8 @@
 %
 % \begin{table}
 %   \centering
+%   \caption{Shortcuts for two-letter symbols}
+%   \label{tab:twoletsymb}
 %   \begin{tabular}{ll}
 %       \toprule
 %       Definition & Output \\
@@ -520,9 +544,7 @@
 %       \cmd{\DA*}  & $\DA*$ \\
 %       \cmd{\DA**}  & $\DA**$ \\
 %       \bottomrule
-%     \end{tabular}
-%   \caption{Shortcuts for two-letter symbols}
-%   \label{tab:twoletsymb}
+%   \end{tabular}
 % \end{table}
 %
 % \autoref{tab:preced} lists shortcuts and aliases for the first,
@@ -532,6 +554,8 @@
 %
 % \begin{table}
 %   \centering
+%   \caption{Shortcuts and aliases for precedence numbers}
+%   \label{tab:preced}
 %   \begin{tabular}{lll}
 %       \toprule
 %       Definition & Alias & Output \\
@@ -544,18 +568,16 @@
 %       \cmd{\varsecondtop}\marg{item} & \cmd{\variitop}\marg{item}  & $\Ax{x\variitop{y}z}$ \\[6pt]
 %       \cmd{\varthirdtop}\marg{item}  & \cmd{\variiitop}\marg{item} & $\Ax{xy\variiitop{z}}$ \\[6pt]
 %       \addlinespace[6pt]
-%       \cmd{\firstbottom}\marg{item}  & \cmd{\ibottom}\marg{item}   & $\Ax{\iitop{x}\ibottom{y}z}$ \\[6pt]
-%       \cmd{\secondbottom}\marg{item} & \cmd{\iibottom}\marg{item}  & $\Ax{x\iibottom{y}z}$ \\[6pt]
-%       \cmd{\thirdbottom}\marg{item}  & \cmd{\iiibottom}\marg{item} & $\Ax{x\iibottom{y}\iiibottom{z}}$ \\[6pt]
+%       \cmd{\firstbottom}\marg{item}  & \cmd{\ibottom}\marg{item}   & $\Ax{\ibottom{x}yz}$ \\[6pt]
+%       \cmd{\secondbottom}\marg{item} & \cmd{\iibottom}\marg{item}  & $\Ax{\iibottom{x}yz}$ \\[6pt]
+%       \cmd{\thirdbottom}\marg{item}  & \cmd{\iiibottom}\marg{item} & $\Ax{xy\iiibottom{z}}$ \\[6pt]
 %       \addlinespace[6pt]
-%       \cmd{\varfirstbottom}\marg{item}  & \cmd{\varibottom}\marg{item}   & $\Ax{\iitop{x}\varibottom{y}}$ \\[6pt]
-%       \cmd{\varsecondbottom}\marg{item} & \cmd{\variibottom}\marg{item}  & $\Ax{x\variibottom{y}z}$ \\[6pt]
-%       \cmd{\varthirdbottom}\marg{item}  & \cmd{\variiibottom}\marg{item} & $\Ax{x\variibottom{y}\variiibottom{z}}$ \\[6pt]
+%       \cmd{\varfirstbottom}\marg{item}  & \cmd{\varibottom}\marg{item}   & $\Ax{\varibottom{x}yz}$ \\[6pt]
+%       \cmd{\varsecondbottom}\marg{item} & \cmd{\variibottom}\marg{item}  & $\Ax{\variibottom{x}yz}$ \\[6pt]
+%       \cmd{\varthirdbottom}\marg{item}  & \cmd{\variiibottom}\marg{item} & $\Ax{xy\variiibottom{z}}$ \\[6pt]
 %       \addlinespace[4pt]
 %       \bottomrule
-%     \end{tabular}
-%   \caption{Shortcuts and aliases for precedence numbers}
-%   \label{tab:preced}
+%   \end{tabular}
 % \end{table}
 %
 %
@@ -672,6 +694,7 @@
 
 \DeclareRobustCommand{\Ax}{%
   \@ifstar{\ACTS@actsc{\bar{A}}}{\ACTS@actsc{A}}}
+\DeclareRobustCommand{\Ex}{\ACTS@actsc{E}}
 \DeclareRobustCommand{\ax}{%
   \@ifstar{%
     \@ifstar{\ACTS@actsc{\ddot{a}}}{\ACTS@actsc{\bar{a}}}}{\ACTS@actsc{a}}}
@@ -682,6 +705,10 @@
   \@ifstar{\ACTS@actprem{\bar{V}}}{\ACTS@actprem{V}}}
 \DeclareRobustCommand{\paidup}{%
   \@ifstar{\ACTS@actprem{\bar{W}}}{\ACTS@actprem{W}}}
+
+\DeclareRobustCommand{\term}[2]{\itop{#1}:\angl{#2}}
+\DeclareRobustCommand{\pureend}[2]{#1:\itop{\angl{#2}}}
+\let\joint\overline
 
 \newlength{\twoletkern}
 \setlength{\twoletkern}{1.2pt}
@@ -780,8 +807,6 @@
 \let\varibottom\varfirstbottom
 \let\variibottom\varsecondbottom
 \let\variiibottom\varthirdbottom
-
-\newcommand{\pureend}[2]{\ensuremath\actsymb{A}{#1:\firsttop{\angl{#2}}}}
 
 %\iffalse
 %</package>
