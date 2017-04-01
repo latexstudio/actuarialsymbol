@@ -545,12 +545,37 @@
 %       \addlinespace[6pt]
 %       \cmd{\firstbottom}\marg{item} & |\Ax{\secondtop{x}\firstbottom{y}}|    & $\Ax{\secondtop{x}\firstbottom{y}}$ \\[6pt]
 %       \cmd{\secondbottom}\marg{item} & |\Ax{x\secondbottom{y}z}|    & $\Ax{x\secondbottom{y}z}$ \\[6pt]
-%       \cmd{\thirdbottom}\marg{item} & |\Ax{xy\thirdbottom{z}}|    & $\Ax{x\secondbottom{y}\thirdbottom{z}}$ \\
+%       \cmd{\thirdbottom}\marg{item} & |\Ax{xy\thirdbottom{z}}|    & $\Ax{x\secondbottom{y}\thirdbottom{z}}$ \\[6pt]
+%       \addlinespace[6pt]
+%       \cmd{\varfirstbottom}\marg{item} & |\Ax{\secondtop{x}\varfirstbottom{y}}|    & $\Ax{\secondtop{x}\firstbottom{y}}$ \\[6pt]
+%       \cmd{\varsecondbottom}\marg{item} & |\Ax{x\varsecondbottom{y}z}|    & $\Ax{x\varsecondbottom{y}z}$ \\[6pt]
+%       \cmd{\varthirdbottom}\marg{item} & |\Ax{x\varsecondbottom{y}\varthirdbottom{z}}|    & $\Ax{x\varsecondbottom{y}\varthirdbottom{z}}$ \\[6pt]
+%       \addlinespace[4pt]
 %       \bottomrule
 %     \end{tabular}
 %   \caption{Shortcuts for precedence numbers}
 %   \label{tab:preced}
 % \end{table}
+%
+%
+% \section{Package options}
+% \label{sec:options}
+%
+% The package offers two options to control the placement of
+% precedence numbers:
+% \begin{description}
+% \item[\mdseries\ttfamily alignpreced] always align top and bottom
+%   precedence numbers; makes \cmd{\nthtop} and \cmd{\nthbottom}
+%   equivalent to \cmd{\varnthtop} and \cmd{\varnthbottom},
+%   respectively;
+% \item[\mdseries\ttfamily compactpreced] always put precedence
+%   numbers close to the corresponding item; makes \cmd{\varnthtop}
+%   and \cmd{\varnthbottom} equivalent to \cmd{\nthtop} and
+%   \cmd{\nthbottom}, respectively.
+% \end{description}
+% Option |compactpreced| is included as a complement to |alignpreced|,
+% but we do not recommended to use it as it basically renders
+% inoperative commands \cmd{\varnthtop} and \cmd{\varnthbottom}.
 %
 %    \begin{macrocode}
 %\iffalse
@@ -558,6 +583,15 @@
 %\fi
 \RequirePackage{amsmath}
 \RequirePackage{actuarialangle}
+
+%\newif\ifACTS@alignpreced \ACTS@alignprecedfalse
+
+\DeclareOption{alignpreced}{%
+  \let\nthtop\varnthtop
+  \let\nthbottom\varnthbottom}
+\DeclareOption{compactpreced}{%
+  \let\varnthtop\nthtop
+  \let\varnthbottom\nthbottom}
 
 \DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
 \newcommand\ACTS@actsymb{%
@@ -691,6 +725,7 @@
   \mathpalette{\preced@ b\z@\nthbottomskip{#1}}{#2}}
 \DeclareRobustCommand{\varnthbottom}[2]{%
   \mathpalette{\preced@ b\varnthbottomskip\z@{#1}}{#2}}
+\ProcessOptions
 
 % In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
 % multiplier for the baseline skip between the top and bottom symbols, #3 is a
@@ -720,18 +755,30 @@
 }% end \preced@
 
 \DeclareRobustCommand{\firsttop}[1]{\nthtop{1}{#1}}
-\DeclareRobustCommand{\varfirsttop}[1]{\varnthtop{1}{#1}}
 \DeclareRobustCommand{\secondtop}[1]{\nthtop{2}{#1}}
-\DeclareRobustCommand{\varsecondtop}[1]{\varnthtop{2}{#1}}
 \DeclareRobustCommand{\thirdtop}[1]{\nthtop{3}{#1}}
+\DeclareRobustCommand{\varfirsttop}[1]{\varnthtop{1}{#1}}
+\DeclareRobustCommand{\varsecondtop}[1]{\varnthtop{2}{#1}}
 \DeclareRobustCommand{\varthirdtop}[1]{\varnthtop{3}{#1}}
 \DeclareRobustCommand{\firstbottom}[1]{\nthbottom{1}{#1}}
-\DeclareRobustCommand{\varfirstbottom}[1]{\varnthbottom{1}{#1}}
 \DeclareRobustCommand{\secondbottom}[1]{\nthbottom{2}{#1}}
-\DeclareRobustCommand{\varsecondbottom}[1]{\varnthbottom{2}{#1}}
 \DeclareRobustCommand{\thirdbottom}[1]{\nthbottom{3}{#1}}
+\DeclareRobustCommand{\varfirstbottom}[1]{\varnthbottom{1}{#1}}
+\DeclareRobustCommand{\varsecondbottom}[1]{\varnthbottom{2}{#1}}
 \DeclareRobustCommand{\varthirdbottom}[1]{\varnthbottom{3}{#1}}
 
+\let\itop\firsttop
+\let\iitop\secondtop
+\let\iiitop\thirdtop
+\let\varitop\varfirsttop
+\let\variitop\varsecondtop
+\let\variiitop\varthirdtop
+\let\ibottom\firstbottom
+\let\iibottom\secondbottom
+\let\iiibottom\thirdbottom
+\let\varibottom\varfirstbottom
+\let\variibottom\varsecondbottom
+\let\variiibottom\varthirdbottom
 
 \newcommand{\pureend}[2]{\ensuremath\actsymb{A}{#1:\firsttop{\angl{#2}}}}
 
