@@ -737,7 +737,7 @@
 
 \newlength{\twoletkern}
 \setlength{\twoletkern}{1.2pt}
-\DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{\ensuremath(#2\kern-#1#3)}
+\DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{(#2\kern-#1#3)}
 
 \newcommand{\IA}{%
   \@ifstar{%
@@ -750,16 +750,16 @@
     \@ifstar{\twoletsymb{\bar{D}}{\bar{A}}}{%
       \twoletsymb{D}{\bar{A}}}}{\twoletsymb{D}{A}}}
 
-% \newcommand{\Ia}{\ensuremath\twoletsymb{Ia}}
-% \newcommand{\Ibarabar}{\ensuremath\twoletsymb{\bar{I}\bar{a}}}
-% \newcommand{\Iadd}{\ensuremath\twoletsymb{I\ddot{a}}}
-% \newcommand{\Is}{\ensuremath\twoletsymb{Is}}
-% \newcommand{\Isdd}{\ensuremath\twoletsymb{I\ddot{s}}}
-% \newcommand{\Da}{\ensuremath\twoletsymb{Da}}
-% \newcommand{\Dbarabar}{\ensuremath\twoletsymb{\bar{D}\bar{a}}}
-% \newcommand{\Dadd}{\ensuremath\twoletsymb{D\ddot{a}}}
-% \newcommand{\Ds}{\ensuremath\twoletsymb{Ds}}
-% \newcommand{\Dsdd}{\ensuremath\twoletsymb{D\ddot{s}}}
+% \newcommand{\Ia}{\twoletsymb{Ia}}
+% \newcommand{\Ibarabar}{\twoletsymb{\bar{I}\bar{a}}}
+% \newcommand{\Iadd}{\twoletsymb{I\ddot{a}}}
+% \newcommand{\Is}{\twoletsymb{Is}}
+% \newcommand{\Isdd}{\twoletsymb{I\ddot{s}}}
+% \newcommand{\Da}{\twoletsymb{Da}}
+% \newcommand{\Dbarabar}{\twoletsymb{\bar{D}\bar{a}}}
+% \newcommand{\Dadd}{\twoletsymb{D\ddot{a}}}
+% \newcommand{\Ds}{\twoletsymb{Ds}}
+% \newcommand{\Dsdd}{\twoletsymb{D\ddot{s}}}
 
 \newlength{\nthtopskip}
 \setlength{\nthtopskip}{2\p@}
