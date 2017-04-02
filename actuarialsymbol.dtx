@@ -27,7 +27,7 @@
 \ProvidesFile{actuarialsymbol.dtx}
 %</dtx>
 %<package>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
-%<package>\ProvidesPackage{actuarialsymbol}[2017/03/15 v0.1 Actuarial symbol]
+%<package>\ProvidesPackage{actuarialsymbol}[2017/03/15 v0.1 Actuarial symbols]
 %
 %<*driver>
 \documentclass[11pt,x11names,english]{ltxdoc}
@@ -109,7 +109,7 @@
 % \CheckSum{0}
 %
 % \GetFileInfo{actuarialsymbol.dtx}
-% \title{Composition of actuarial symbols}
+% \title{Composition of actuarial symbols of life contingencies}
 % \author{Vincent Goulet \\ École d'actuariat, Université
 %   Laval \and David Beauchemin}
 % \date{}
@@ -124,11 +124,11 @@
 %
 % Actuaries denote various quantities of life contingencies like
 % present values of life insurances and life annuities, annual
-% premiums, or reserves using a whole array of symbols. The resulting
-% highly descriptive yet compact notation was standardized in as far
-% back as 1898 \citep{Wolthuis:notation:2004}. \autoref{fig:mosaic}
-% shows a creative use of the notation by the graduating class
-% of 1972 in Actuarial Science at Université Laval.
+% premiums, or reserves using a whole array of symbols. The highly
+% descriptive, yet compact, notation was standardized in as far back as
+% 1898 \citep{Wolthuis:notation:2004}. \autoref{fig:mosaic} shows a
+% creative use of the notation by the graduating class of 1972 in
+% Actuarial Science at Université Laval.
 %
 % \begin{figure}[t]
 %   \centering
@@ -262,19 +262,42 @@
 %   \begin{displaymath}
 %     A_x \quad A_x^2.
 %   \end{displaymath}
-%   The package maintains this behaviour while also ensuring that the left
-%   and right subscripts, when both present, are at the same level:
-%   \begin{displaymath}
-%     \actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2].
-%   \end{displaymath}
-%   (This is something ad~hoc constructions like |{}_{t}A_x^2| do not
-%   provide.) If you would prefer a uniform subscript position
-%   \emph{throughout your document}, load package \pkg{subdepth}
-%   \citep{subdepth}.
+%   The package maintains this behaviour. Therefore, entering the
+%   above symbols using the standard operators |^| and |_| or with
+%   \cmd{\actsymb} yields the same result.
+%   \begin{demo}
+%     \begin{texample}[0.7]
+%       |A_x \quad A_x^2|
+%       \producing
+%       $\rule{1pt}{2ex}A_x \quad A_x^2$
+%     \end{texample}
+%     \begin{texample}[0.7]
+%       |\actsymb{A}{x} \quad \actsymb{A}{x}[2]|
+%       \producing
+%       $\rule{1pt}{2ex}\actsymb{A}{x} \quad \actsymb{A}{x}[2]$
+%     \end{texample}
+%   \end{demo}
+%   However, the package also ensures that the left and right
+%   subscripts, when both present, are at the same level, something
+%   ad~hoc constructions do not provide.
+%   \begin{demo}
+%     \begin{texample}[0.7]
+%       |{}_tA_x \quad {}_tA_x^2|
+%       \producing
+%       $\rule{1pt}{2ex}{}_tA_x \quad {}_tA_x^2$
+%     \end{texample}
+%     \begin{texample}[0.7]
+%       |\actsymb[t[{A}{x} \quad \actsymb[t]{A}{x}[2]|
+%       \producing
+%       $\rule{1pt}{2ex}\actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2]$
+%     \end{texample}
+%   \end{demo}
+%   Authors who would prefer a uniform subscript position \emph{throughout
+%   their document} can load package \pkg{subdepth} \citep{subdepth}.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\twoletsymb}
-%   Writing two-letter core symbols like $\DA$ as |$(DA)$| results in
+%   Entering two-letter core symbols like $\DA$ as |$(DA)$| results in
 %   letters that are too distant from one another: $(DA)$. To unify
 %   presentation, the package provides the command
 %   \begin{quote}
@@ -283,12 +306,7 @@
 %   to group \meta{symbol\_1} and \meta{symbol\_2} between parentheses
 %   with kerning\footnote{Spacing adjustment between the characters}
 %   reduced by length \cmd{\twoletkern} (see below). One can also
-%   reduce spacing by \meta{length} for a particular symbol.
-%
-%   We expect authors to only use \cmd{\twoletsymb} to define
-%   commands, not directly in equations. The package already defines a
-%   number of shortcuts for the main two-letter actuarial symbols; see
-%   \autoref{sec:shortcuts}.
+%   reduce spacing by \meta{length} for a specific symbol.
 %   \begin{demo}
 %     \begin{texample}
 %       |\twoletsymb{\bar{D}}{\bar{A}}|
@@ -301,11 +319,16 @@
 %       $\twoletsymb{I}{\ddot{a}}$
 %     \end{texample}
 %     \begin{texample}
-%       |\twoletsymb{I}{\ddot{a}}|
+%       |\twoletsymb[0.8pt]{I}{\ddot{a}}|
 %       \producing
 %       $\twoletsymb[0.8pt]{I}{\ddot{a}}$
 %     \end{texample}
 %   \end{demo}
+%
+%   We expect authors to only use \cmd{\twoletsymb} to define
+%   commands, not directly in equations. The package already defines a
+%   number of shortcuts for the main two-letter actuarial symbols; see
+%   \autoref{sec:shortcuts}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\twoletkern}
@@ -386,13 +409,13 @@
 %     numbers are used and one of the items has a descender.
 %     \begin{demo}
 %       \begin{texample}[0.85]
-%         |\actsymb{A}{w\nthtop{3}{x}%|\par
+%         |\actsymb{A}{w\nthtop{3}{x}%| \\
 %         |            \nthbottom{1}{y}\nthbottom{2}{z}}|
 %         \producing
 %         \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\nthbottom{1}{y}\nthbottom{2}{z}}$
 %       \end{texample}
 %       \begin{texample}[0.85]
-%         |\actsymb{A}{w\varnthtop{3}{x}%|\par
+%         |\actsymb{A}{w\nthtop{3}{x}%| \\
 %         |            \varnthbottom{1}{y}\varnthbottom{2}{z}}|
 %         \producing
 %         \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\varnthbottom{1}{y}\varnthbottom{2}{z}}$
@@ -414,12 +437,12 @@
 %     \end{texample}
 %   \end{demo}
 %   In such rare circumstances, one needs to insert a \emph{strut} (an
-%   invisible vertical rule) in the subscript to move it down as
+%   invisible vertical rule) in the subscript to push it downward as
 %   needed:
 %   \begin{demo}
 %     \begin{texample}[0.7]
-%       |\newcommand{\str}{\rule{0pt}{2.3ex}}| \\
-%       |\actsymb{A}{\str\nthtop{1}{x}:\angln}[(m)]|
+%       |\actsymb{A}{\rule{0pt}{2.3ex}%| \\
+%       |            \nthtop{1}{x}:\angln}[(m)]|
 %       \producing
 %       $\actsymb{A}{\rule{0pt}{2.3ex}\nthtop{1}{x}:\angln}[(m)]$
 %     \end{texample}
@@ -457,22 +480,22 @@
 % \label{sec:shortcuts}
 %
 % Composing actuarial symbols from scratch using \cmd{\actsymb} can
-% require get quite involved. For this reason, the package defines a
+% easily get quite involved. For this reason, the package defines a
 % large number of shorcuts to ease entry of the most common symbols.
-% We encourage authors to define their own shortcuts for symbols we
+% We encourage authors to define their own shortcuts for cases we
 % did not consider.
 %
 % \autoref{tab:principal} lists shortcuts to compose complete
-% principal symbols of life tables, insurance and annuities. Only the
-% mandatory arguments are given, but it should be noted that all
-% commands of \autoref*{tab:principal} accept the same optional
-% arguments as \cmd{\actsymb}.
+% principal symbols of life tables, insurance and annuities. For space
+% considerations only the mandatory arguments are given, but it should
+% be noted that all commands of \autoref*{tab:principal} accept the
+% same optional arguments as \cmd{\actsymb}.
 %
 % \begin{table}
 %   \centering
 %   \caption{Shortcuts for life table, insurance and annuity
-%   principal symbols. All commands accept optional arguments like
-%   \cmd{\actsymb}.}
+%   principal symbols. All commands also accept optional arguments
+%   like \cmd{\actsymb}.}
 %   \label{tab:principal}
 %   \begin{tabular*}{1.0\linewidth}{lll}
 %       \toprule
@@ -523,7 +546,7 @@
 %
 % \autoref{tab:twoletsymb} lists shortcuts for common two-letter
 % symbols. These shortcuts can be used as core symbol in
-% \cmd{\actsymb} or the commands of \autoref*{tab:principal}.
+% \cmd{\actsymb} or in the commands of \autoref*{tab:principal}.
 %
 % \begin{table}[t]
 %   \centering
@@ -549,8 +572,8 @@
 %
 % \autoref{tab:preced} lists shortcuts and aliases for the first,
 % second and third precedence numbers, top and bottom. These shortcuts
-% can be used in auxiliary symbols in \cmd{\actsymb} or the commands
-% of \autoref*{tab:principal}.
+% can be used in auxiliary symbols in \cmd{\actsymb} or in the
+% commands of \autoref*{tab:principal}.
 %
 % \begin{table}[t]
 %   \centering
@@ -596,9 +619,11 @@
 %   and \cmd{\varnthbottom} equivalent to \cmd{\nthtop} and
 %   \cmd{\nthbottom}, respectively.
 % \end{description}
-% Option |compactpreced| is included as a complement to |alignpreced|,
-% but we do not recommended to use it as it basically renders
-% inoperative commands \cmd{\varnthtop} and \cmd{\varnthbottom}.
+% Option |alignpreced| can be useful to simplify entry of precedence
+% numbers. On the other hand, option |compactpreced| is merely
+% included as a complement to |alignpreced|. We do not recommended ---
+% nor see a reason --- to use it as it basically renders inoperative
+% commands \cmd{\varnthtop} and \cmd{\varnthbottom}.
 %
 %    \begin{macrocode}
 %\iffalse
