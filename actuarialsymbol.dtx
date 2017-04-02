@@ -269,12 +269,12 @@
 %     \begin{texample}[0.7]
 %       |A_x \quad A_x^2|
 %       \producing
-%       $\rule{1pt}{2ex}A_x \quad A_x^2$
+%       $A_x \quad A_x^2$
 %     \end{texample}
 %     \begin{texample}[0.7]
 %       |\actsymb{A}{x} \quad \actsymb{A}{x}[2]|
 %       \producing
-%       $\rule{1pt}{2ex}\actsymb{A}{x} \quad \actsymb{A}{x}[2]$
+%       $\actsymb{A}{x} \quad \actsymb{A}{x}[2]$
 %     \end{texample}
 %   \end{demo}
 %   However, the package also ensures that the left and right
@@ -284,16 +284,16 @@
 %     \begin{texample}[0.7]
 %       |{}_tA_x \quad {}_tA_x^2|
 %       \producing
-%       $\rule{1pt}{2ex}{}_tA_x \quad {}_tA_x^2$
+%       ${}_tA_x \quad {}_tA_x^2$
 %     \end{texample}
 %     \begin{texample}[0.7]
 %       |\actsymb[t[{A}{x} \quad \actsymb[t]{A}{x}[2]|
 %       \producing
-%       $\rule{1pt}{2ex}\actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2]$
+%       $\actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2]$
 %     \end{texample}
 %   \end{demo}
 %   Authors who would prefer a uniform subscript position \emph{throughout
-%   their document} can load package \pkg{subdepth} \citep{subdepth}.
+%   their document} should load package \pkg{subdepth} \citep{subdepth}.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\twoletsymb}
@@ -678,7 +678,6 @@
   \@mathmeasure\tw@\scriptstyle{#2}
   \@mathmeasure\thr@@\scriptstyle{#5}
   \@mathmeasure4\scriptstyle{#6}
-  \mathop{}
   %% adjust width of *left* subscript and superscript (if there is a
   %% superscript)
   \ifdim \wd\tw@>\z@ \ifdim \wd\tw@>\wd\@ne
