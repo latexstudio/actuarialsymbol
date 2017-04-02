@@ -474,7 +474,7 @@
 %   principal symbols. All commands accept optional arguments like
 %   \cmd{\actsymb}.}
 %   \label{tab:principal}
-%   \begin{tabular}{lll}
+%   \begin{tabular*}{1.0\linewidth}{lll}
 %       \toprule
 %       Definition & Example & Output \\
 %       \midrule
@@ -497,7 +497,7 @@
 %       \cmd{\paidup}\marg{core}\marg{lr}   & |\paidup[k]{\bar{A}}{x}|    & $\paidup[k]{\bar{A}}{x}$ \\
 %       \cmd{\paidup*}\marg{core}\marg{lr}  & |\paidup*[k][h]{\bar{A}}{x}|  & $\paidup*[k][h]{\bar{A}}{x}$ \\
 %       \bottomrule
-%   \end{tabular}
+%   \end{tabular*}
 % \end{table}
 %
 % \autoref{tab:aux} lists shortcuts for a few common auxiliary symbols
@@ -507,25 +507,25 @@
 %   \centering
 %   \caption{Shortcuts for auxiliary symbols}
 %   \label{tab:aux}
-%   \begin{tabular}{lll}
+%   \begin{tabular*}{1.0\linewidth}{lll}
 %       \toprule
 %       Definition & Example & Output \\
 %       \midrule
-%       \cmd{\term}\marg{age}\marg{duration} & |\Ax{\term{x}{n}}|   & $\Ax{\term{x}{n}}$ \\[6pt]
-%       \cmd{\pureend}\marg{age}\marg{duration} & |\Ax{\pureend{x}{n}}|   & $\Ax{\pureend{x}{n}}$ \\[6pt]
+%       \cmd{\term}\marg{age}\marg{duration} & |\Ax{\term{x}{n}}|   & $\Ax{\term{x}{n}}$ \\
+%       \cmd{\pureendow}\marg{age}\marg{duration} & |\Ax{\pureendow{x}{n}}|   & $\Ax{\pureendow{x}{n}}$ \\
+%       \cmd{\endow}\marg{age}\marg{duration} & |\ax**{\endow{x}{n}}|   & $\ax**{\endow{x}{n}}$ \\
 %       \cmd{\joint}\marg{ages}$^\dagger$ & |\Ax{\joint{xy}z}|   & $\Ax{\joint{xy}z}$ \\
 %       \bottomrule
-%   \end{tabular} \\
+%   \end{tabular*} \\
 %   \raggedright
-%   \hspace*{1em}{\footnotesize $^\dagger$ \cmd{\joint} is simply an alias
-%   for \cmd{\overline}}
+%   \hspace*{1em}{\footnotesize $^\dagger$ alias for \cmd{\overline}}
 % \end{table}
 %
 % \autoref{tab:twoletsymb} lists shortcuts for common two-letter
 % symbols. These shortcuts can be used as core symbol in
 % \cmd{\actsymb} or the commands of \autoref*{tab:principal}.
 %
-% \begin{table}
+% \begin{table}[t]
 %   \centering
 %   \caption{Shortcuts for two-letter symbols}
 %   \label{tab:twoletsymb}
@@ -552,7 +552,7 @@
 % can be used in auxiliary symbols in \cmd{\actsymb} or the commands
 % of \autoref*{tab:principal}.
 %
-% \begin{table}
+% \begin{table}[t]
 %   \centering
 %   \caption{Shortcuts and aliases for precedence numbers}
 %   \label{tab:preced}
@@ -707,7 +707,8 @@
   \@ifstar{\ACTS@actprem{\bar{W}}}{\ACTS@actprem{W}}}
 
 \DeclareRobustCommand{\term}[2]{\itop{#1}:\angl{#2}}
-\DeclareRobustCommand{\pureend}[2]{#1:\itop{\angl{#2}}}
+\DeclareRobustCommand{\pureendow}[2]{#1:\itop{\angl{#2}}}
+\DeclareRobustCommand{\endow}[2]{#1:\angl{#2}}
 \let\joint\overline
 
 \newlength{\twoletkern}
