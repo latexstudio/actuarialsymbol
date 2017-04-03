@@ -24,7 +24,7 @@
 %
 % \iffalse
 %<*dtx>
-\ProvidesFile{actuarialsymbol.dtx}
+          \ProvidesFile{actuarialsymbol.dtx}
 %</dtx>
 %<package>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<package>\ProvidesPackage{actuarialsymbol}[2017/03/15 v0.1 Actuarial symbols]
@@ -36,34 +36,44 @@
   \usepackage{natbib}
   \usepackage{babel}
   \usepackage{microtype}
-  \usepackage[scaled=0.92]{helvet}
   \usepackage[scaled=1.02]{inconsolata}
   \usepackage[sc]{mathpazo}
   \usepackage{fontawesome}
   \usepackage{actuarialsymbol}
-  \usepackage{graphicx,xcolor,framed}
-  \usepackage{enumitem,longtable,booktabs,amsthm}
+  \usepackage{graphicx,framed}
+  \usepackage{longtable,booktabs}
   \DisableCrossrefs
   \CodelineNumbered
   \RecordChanges
-  \GlossaryPrologue{\section*{Historique des versions}%
-    \addcontentsline{toc}{section}{Historique des versions}}
+  \GlossaryPrologue{\section*{Version history}%
+    \addcontentsline{toc}{section}{Version history}}
 
+  %% colors
+  \usepackage{xcolor}
   \definecolor{link}{rgb}{0,0.4,0.6}   % ~dvips RoyalBlue
   \definecolor{url}{rgb}{0.6,0,0}      % dark red
   \definecolor{citation}{rgb}{0,0.5,0} % dark green
   \colorlet{shadecolor}{LightYellow1}
 
-  %% Left aligned description list
+  %% left aligned description list
+  \usepackage{enumitem}
   \setlist[description]{leftmargin=*,align=left}
 
-  \usepackage{hyperref}
-  \hypersetup{colorlinks, linktocpage,
-    urlcolor=url, linkcolor=link, citecolor=citation,
-    bookmarksopen, bookmarksnumbered, bookmarksdepth=subsubsection,
-    pdftitle={Manuel de référence de la classe ulthese},
-    pdfauthor={Faculté des études supérieures et postdoctorales}}
+  %% environment for remarks
+  \usepackage{amsthm}
+  \theoremstyle{definition}
+  \newtheorem*{rem}{Remark}
 
+  %% single entry for symbol and shortcut lists
+  %% http://tex.stackexchange.com/a/128441
+  \usepackage{xparse}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\showcase}{v} { \tl_rescan:nn { } { $#1$ } & \texttt{#1} }
+  \NewDocumentCommand{\rshowcase}{v} { \texttt{#1} & \tl_rescan:nn { } { $#1$ } }
+  \ExplSyntaxOff
+
+  %% environments for demo code; 'texample' mostly lifted from
+  %% documentation of amsmath
   \newenvironment{demo}{%
     \begin{trivlist}\item}{%
     \end{trivlist}}
@@ -86,26 +96,19 @@
     \par
   }
 
-  \theoremstyle{definition}
-  \newtheorem*{rem}{Remark}
-
-  \newcommand{\class}[1]{\textsf{#1}}
+  %% utility macros
   \newcommand{\pkg}[1]{\textbf{#1}}
-
-  \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
-  \newcommand{\doc}[3][documentation]{%
-    \link{#3}{#1}\marginpar{\hfill\faBookmark~\texttt{#2}}}
-
-  %% single entry for the symbol lists
-  %% http://tex.stackexchange.com/a/128441
-  \usepackage{xparse}
-  \ExplSyntaxOn
-  \NewDocumentCommand{\showcase}{v} { \tl_rescan:nn { } { $#1$ } & \texttt{#1} }
-  \NewDocumentCommand{\rshowcase}{v} { \texttt{#1} & \tl_rescan:nn { } { $#1$ } }
-  \ExplSyntaxOff
 
   %% increase row height in tables
   \renewcommand{\arraystretch}{1.2}
+
+  %% hyperlinks
+  \usepackage{hyperref}
+  \hypersetup{colorlinks, linktocpage,
+    urlcolor=url, linkcolor=link, citecolor=citation,
+    bookmarksopen, bookmarksnumbered, bookmarksdepth=subsection,
+    pdftitle={actuarialsymbol User Guide},
+    pdfauthor={David Beauchemin, Vincent Goulet}}
 
 \begin{document}
   \DocInput{actuarialsymbol.dtx}
@@ -114,17 +117,14 @@
 % \fi
 % \CheckSum{0}
 %
-% \GetFileInfo{actuarialsymbol.dtx}
-% \title{Composition of actuarial symbols of life
-%   contingencies\thanks{This document corresponds to
-%     \pkg{actuarialsymbol}~v\fileversion, dated~\filedate.}}
+% \GetFileInfo{actuarialsymbol.sty}
+%
+% \title{Composition of actuarial symbols%
+%   \thanks{This document corresponds to
+%   \pkg{actuarialsymbol}~\fileversion, dated~\filedate.}}
 % \author{Vincent Goulet \\ École d'actuariat, Université
 %   Laval \and David Beauchemin}
 % \maketitle
-%
-% \begin{abstract}
-%
-% \end{abstract}
 %
 % \section{Introduction}
 % \label{sec:introduction}
@@ -638,47 +638,8 @@
 % nor see a reason --- to use it as it basically renders inoperative
 % commands \cmd{\varnthtop} and \cmd{\varnthbottom}.
 %
-% \StopEventually{
-% \begin{thebibliography}{4}
-% \bibitem[Bowers et~al.(1997)Bowers, Gerber, Hickman, Jones, and
-%   Nesbitt]{Bowers:2e:1997}
-%   N.~L. Bowers, H.~U. Gerber, J.~C. Hickman, D.~A. Jones, and C.~J. Nesbitt.
-%   \newblock \emph{Actuarial Mathematics}.
-%   \newblock Society of Actuaries, Shaumburg, IL, second edition, 1997.
-%   \newblock ISBN 0-9389594-6-8.
-%
-% \bibitem[Goulet(2017)]{actuarialangle}
-%   Vincent Goulet.
-%   \newblock \emph{actuarialangle}, 2017.
-%   \newblock URL \url{http://www.ctan.org/pkg/actuarialangle/}.
-%
-% \bibitem[Pakin(2015)]{comprehensive}
-%   Scott Pakin.
-%   \newblock The comprehensive {\LaTeX} symbol list, 2015.
-%   \newblock URL \url{http://www.ctan.org/pkg/comprehensive/}.
-%
-% \bibitem[Robertson(2007)]{subdepth}
-%   Will Robertson.
-%   \newblock \emph{Unify subscript depths}, 2007.
-%   \newblock URL \url{http://www.ctan.org/pkg/subdepth/}.
-%
-% \bibitem[Trivedi(2004)]{Trivedi:lifecon:2004}
-%   Eddy Trivedi.
-%   \newblock \emph{Life Contingencies' Symbols}, 2004.
-%   \newblock \texttt{lifecon} 2.1 User Guide.
-%
-% \bibitem[Wolthuis(2004)]{Wolthuis:notation:2004}
-%   Henk Wolthuis.
-%   \newblock International actuarial notation.
-%   \newblock In Jozef Teugels and Bj{\o}rn Sundt, editors, \emph{Encyclopedia of
-%   Actuarial Science}. Wiley, 2004.
-%   \newblock ISBN 978-0-47001250-5.
-%   \newblock URL \url{http://onlinelibrary.wiley.com/book/10.1002/9780470012505}.
-%
-% \end{thebibliography}
-% }
-%
 % \appendix
+%
 % \section{Comprehensive life contingencies symbol list}
 % \label{sec:list}
 %
@@ -741,6 +702,46 @@
 %   \showcase{\newcommand{\aV}{\twoletsymb[0.6pt]{a}{V}} \aV(x)} \\
 %   \showcase{\newcommand{\aV}{\twoletsymb[0.6pt]{a}{V}} \aV_t} \\
 % \end{longtable}
+%
+% \StopEventually{
+% \begin{thebibliography}{4}
+% \bibitem[Bowers et~al.(1997)Bowers, Gerber, Hickman, Jones, and
+%   Nesbitt]{Bowers:2e:1997}
+%   N.~L. Bowers, H.~U. Gerber, J.~C. Hickman, D.~A. Jones, and C.~J. Nesbitt.
+%   \newblock \emph{Actuarial Mathematics}.
+%   \newblock Society of Actuaries, Shaumburg, IL, second edition, 1997.
+%   \newblock ISBN 0-9389594-6-8.
+%
+% \bibitem[Goulet(2017)]{actuarialangle}
+%   Vincent Goulet.
+%   \newblock \emph{actuarialangle}, 2017.
+%   \newblock URL \url{http://www.ctan.org/pkg/actuarialangle/}.
+%
+% \bibitem[Pakin(2015)]{comprehensive}
+%   Scott Pakin.
+%   \newblock The comprehensive {\LaTeX} symbol list, 2015.
+%   \newblock URL \url{http://www.ctan.org/pkg/comprehensive/}.
+%
+% \bibitem[Robertson(2007)]{subdepth}
+%   Will Robertson.
+%   \newblock \emph{Unify subscript depths}, 2007.
+%   \newblock URL \url{http://www.ctan.org/pkg/subdepth/}.
+%
+% \bibitem[Trivedi(2004)]{Trivedi:lifecon:2004}
+%   Eddy Trivedi.
+%   \newblock \emph{Life Contingencies' Symbols}, 2004.
+%   \newblock \texttt{lifecon} 2.1 User Guide.
+%
+% \bibitem[Wolthuis(2004)]{Wolthuis:notation:2004}
+%   Henk Wolthuis.
+%   \newblock International actuarial notation.
+%   \newblock In Jozef Teugels and Bj{\o}rn Sundt, editors, \emph{Encyclopedia of
+%   Actuarial Science}. Wiley, 2004.
+%   \newblock ISBN 978-0-47001250-5.
+%   \newblock URL \url{http://onlinelibrary.wiley.com/book/10.1002/9780470012505}.
+%
+% \end{thebibliography}
+% }
 %
 % \section{Implementation}
 % \label{sec:implementation}
@@ -968,3 +969,4 @@
 % ^^A mode: doctex
 % ^^A TeX-master: t
 % ^^A End:
+\endinput
