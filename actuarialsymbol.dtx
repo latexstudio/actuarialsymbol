@@ -42,19 +42,19 @@
   \usepackage{fontawesome}
   \usepackage{actuarialsymbol}
   \usepackage{graphicx,xcolor,framed}
-  \usepackage{enumitem,tabularx,booktabs,amsthm}
+  \usepackage{enumitem,longtable,booktabs,amsthm}
   \DisableCrossrefs
   \CodelineNumbered
   \RecordChanges
   \GlossaryPrologue{\section*{Historique des versions}%
     \addcontentsline{toc}{section}{Historique des versions}}
 
-  \definecolor{link}{rgb}{0,0.4,0.6}   % ~RoyalBlue de dvips
-  \definecolor{url}{rgb}{0.6,0,0}      % rouge foncé
-  \definecolor{citation}{rgb}{0,0.5,0} % vert foncé
-  \colorlet{shadecolor}{LightYellow1} % vert foncé
+  \definecolor{link}{rgb}{0,0.4,0.6}   % ~dvips RoyalBlue
+  \definecolor{url}{rgb}{0.6,0,0}      % dark red
+  \definecolor{citation}{rgb}{0,0.5,0} % dark green
+  \colorlet{shadecolor}{LightYellow1}
 
-  %% Liste description alignée à gauche
+  %% Left aligned description list
   \setlist[description]{leftmargin=*,align=left}
 
   \usepackage{hyperref}
@@ -63,11 +63,6 @@
     bookmarksopen, bookmarksnumbered, bookmarksdepth=subsubsection,
     pdftitle={Manuel de référence de la classe ulthese},
     pdfauthor={Faculté des études supérieures et postdoctorales}}
-  \addto\extrasfrench{%
-    \def\appendixautorefname{annexe}%
-    \def\tableautorefname{tableau}%
-    \def\subsectionautorefname{section}%
-  }
 
   \newenvironment{demo}{%
     \begin{trivlist}\item}{%
@@ -100,6 +95,14 @@
   \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
   \newcommand{\doc}[3][documentation]{%
     \link{#3}{#1}\marginpar{\hfill\faBookmark~\texttt{#2}}}
+
+  %% single entry for the symbol lists
+  %% http://tex.stackexchange.com/a/128441
+  \usepackage{xparse}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\showcase}{v} { \tl_rescan:nn { } { $#1$ } & \texttt{#1} }
+  \NewDocumentCommand{\rshowcase}{v} { \texttt{#1} & \tl_rescan:nn { } { $#1$ } }
+  \ExplSyntaxOff
 
 \begin{document}
   \DocInput{actuarialsymbol.dtx}
@@ -501,24 +504,24 @@
 %       \toprule
 %       Definition & Example & Output \\
 %       \midrule
-%       \cmd{\lx}\marg{age} & |\lx{x}|    & $\lx{x}$ \\
-%       \cmd{\dx}\marg{age} & |\dx[n]{x}| & $\dx[n]{x}$ \\
-%       \cmd{\px}\marg{age} & |\px[t]{x}| & $\px[t]{x}$ \\
-%       \cmd{\qx}\marg{age} & |\qx[t]{x}| & $\qx[t]{x}$ \\
+%       \cmd{\lx}\marg{age} & \rshowcase{\lx{x}} \\
+%       \cmd{\dx}\marg{age} & \rshowcase{\dx[n]{x}} \\
+%       \cmd{\px}\marg{age} & \rshowcase{\px[t]{x}} \\
+%       \cmd{\qx}\marg{age} & \rshowcase{\qx[t]{x}} \\
 %       \addlinespace[6pt]
-%       \cmd{\Ax}\marg{lr}   & |\Ax{x:\angln}|   & $\Ax{x:\angln}$ \\
-%       \cmd{\Ax*}\marg{lr}  & |\Ax*{x:\angln}|  & $\Ax*{x:\angln}$ \\
-%       \cmd{\Ex}\marg{lr}   & |\Ex[n]{x}|       & $\Ex[n]{x}$ \\
-%       \cmd{\ax}\marg{lr}   & |\ax{x:\angln}|   & $\ax{x:\angln}$ \\
-%       \cmd{\ax*}\marg{lr}  & |\ax*{x:\angln}|  & $\ax*{x:\angln}$ \\
-%       \cmd{\ax**}\marg{lr} & |\ax**{x:\angln}| & $\ax**{x:\angln}$ \\
+%       \cmd{\Ax}\marg{lr}   & \rshowcase{\Ax{x:\angln}} \\
+%       \cmd{\Ax*}\marg{lr}  & \rshowcase{\Ax*{x:\angln}} \\
+%       \cmd{\Ex}\marg{lr}   & \rshowcase{\Ex[n]{x}} \\
+%       \cmd{\ax}\marg{lr}   & \rshowcase{\ax{x:\angln}} \\
+%       \cmd{\ax*}\marg{lr}  & \rshowcase{\ax*{x:\angln}} \\
+%       \cmd{\ax**}\marg{lr} & \rshowcase{\ax**{x:\angln}} \\
 %       \addlinespace[6pt]
-%       \cmd{\premium}\marg{core}\marg{lr}  & |\premium[t]{\bar{A}}{x}|   & $\premium[t]{\bar{A}}{x}$ \\
-%       \cmd{\premium*}\marg{core}\marg{lr} & |\premium*[t]{\bar{A}}{x}|  & $\premium*[t]{\bar{A}}{x}$ \\
-%       \cmd{\reserve}\marg{core}\marg{lr}  & |\reserve[t]{\ddot{a}}{x}|  & $\reserve[t]{\ddot{a}}{x}$ \\
-%       \cmd{\reserve*}\marg{core}\marg{lr} & |\reserve*[t]{\ddot{a}}{x}| & $\reserve*[t]{\ddot{a}}{x}$ \\
-%       \cmd{\paidup}\marg{core}\marg{lr}   & |\paidup[k]{\bar{A}}{x}|    & $\paidup[k]{\bar{A}}{x}$ \\
-%       \cmd{\paidup*}\marg{core}\marg{lr}  & |\paidup*[k][h]{\bar{A}}{x}|  & $\paidup*[k][h]{\bar{A}}{x}$ \\
+%       \cmd{\premium}\marg{core}\marg{lr}  & \rshowcase{\premium[t]{\bar{A}}{x}} \\
+%       \cmd{\premium*}\marg{core}\marg{lr} & \rshowcase{\premium*[t]{\bar{A}}{x}} \\
+%       \cmd{\reserve}\marg{core}\marg{lr}  & \rshowcase{\reserve[t]{\ddot{a}}{x}} \\
+%       \cmd{\reserve*}\marg{core}\marg{lr} & \rshowcase{\reserve*[t]{\ddot{a}}{x}} \\
+%       \cmd{\paidup}\marg{core}\marg{lr}   & \rshowcase{\paidup[k]{\bar{A}}{x}} \\
+%       \cmd{\paidup*}\marg{core}\marg{lr}  & \rshowcase{\paidup*[k][h]{\bar{A}}{x}} \\
 %       \bottomrule
 %   \end{tabular*}
 % \end{table}
@@ -534,10 +537,12 @@
 %       \toprule
 %       Definition & Example & Output \\
 %       \midrule
-%       \cmd{\term}\marg{age}\marg{duration} & |\Ax{\term{x}{n}}|   & $\Ax{\term{x}{n}}$ \\
-%       \cmd{\pureendow}\marg{age}\marg{duration} & |\Ax{\pureendow{x}{n}}|   & $\Ax{\pureendow{x}{n}}$ \\
-%       \cmd{\endow}\marg{age}\marg{duration} & |\ax**{\endow{x}{n}}|   & $\ax**{\endow{x}{n}}$ \\
-%       \cmd{\joint}\marg{ages}$^\dagger$ & |\Ax{\joint{xy}z}|   & $\Ax{\joint{xy}z}$ \\
+%       \cmd{\term}\marg{age}\marg{duration}      & \rshowcase{\Ax{\term{x}{n}}} \\
+%       \cmd{\pureendow}\marg{age}\marg{duration} & \rshowcase{\Ax{\pureendow{x}{n}}} \\
+%       \cmd{\pureendowxn}                        & \rshowcase{\Ax{\pureendowxn}} \\
+%       \cmd{\endow}\marg{age}\marg{duration}     & \rshowcase{\ax**{\endow{x}{n}}} \\
+%       \cmd{\endowxn}                            & \rshowcase{\ax**{\endowxn}} \\
+%       \cmd{\joint}\marg{ages}$^\dagger$         & \rshowcase{\Ax{\joint{xy}z}} \\
 %       \bottomrule
 %   \end{tabular*} \\
 %   \raggedright
@@ -603,7 +608,6 @@
 %   \end{tabular}
 % \end{table}
 %
-%
 % \section{Package options}
 % \label{sec:options}
 %
@@ -624,6 +628,11 @@
 % included as a complement to |alignpreced|. We do not recommended ---
 % nor see a reason --- to use it as it basically renders inoperative
 % commands \cmd{\varnthtop} and \cmd{\varnthbottom}.
+%
+% \appendix
+%
+% \section{Implementation}
+% \label{sec:implementation}
 %
 %    \begin{macrocode}
 %\iffalse
@@ -732,7 +741,9 @@
 
 \DeclareRobustCommand{\term}[2]{\itop{#1}:\angl{#2}}
 \DeclareRobustCommand{\pureendow}[2]{#1:\itop{\angl{#2}}}
+\DeclareRobustCommand{\pureendowxn}{x:\itop{\angln}}
 \DeclareRobustCommand{\endow}[2]{#1:\angl{#2}}
+\DeclareRobustCommand{\endowxn}{x:\angln}
 \let\joint\overline
 
 \newlength{\twoletkern}
@@ -838,7 +849,67 @@
 %\fi
 %    \end{macrocode}
 %
-% Local Variables:
-% mode: doctex
-% TeX-master: t
-% End:
+% \section{Comprehensive life contingencies symbol list}
+% \label{sec:list}
+%
+% Inspired by \citet{Trivedi:lifecon:2004}, this appendix provides a
+% table of all the life contingencies symbols used in
+% \citet[Appendix~3]{Bowers:2e:2002} along with the code to compose
+% them with \pkg{actuarialsymbol} loaded. There are often times many
+% different ways to obtain a symbol; we tried to always present the
+% most compact and legible one. Not all symbols require features of
+% \pkg{actuarialsymbol}.
+%
+% \catcode`\|=12 ^^A disable | as verbatim delimiter to use in math
+% \begin{longtable}{ll}
+%   \toprule
+%   Symbol & Code to compose the symbol \\
+%   \midrule
+%   \showcase{a} \\
+%   \showcase{a(x)} \\
+%   \showcase{a_x} \\
+%   \showcase{\ax{\angl{K}}} \\
+%   \showcase{\ax*{\angln}} \\
+%   \showcase{\ax*{P_t}} \\
+%   \showcase{\ax*{\angl{T}}} \\
+%   \showcase{\ax*{x}} \\
+%   \showcase{\ax*{r}[h]} \\
+%   \showcase{\ax*{x + t}[i]} \\
+%   \showcase{\ax*{x + t}[r]} \\
+%   \showcase{\ax**{\angl{K + 1}}} \\
+%   \showcase{\ax**{x}[(m)]} \\
+%   \showcase{\actsymb{\mathring{a}}{x}[(m)]} \\
+%   \showcase{\ax**{x}[\{m\}]} \\
+%   \showcase{\ax**[j]{x}} \\
+%   \showcase{\ax**[*]{x}} \\
+%   \showcase{\ax{\endowxn}} \\
+%   \showcase{\ax*{\endowxn}} \\
+%   \showcase{\ax**{\endowxn}} \\
+%   \showcase{\ax**{\endowxn}[(m)]} \\
+%   \showcase{\actsymb{\mathring{a}}{\endowxn}[(m)]} \\
+%   \showcase{\ax**{\endowxn}[\{m\}]} \\
+%   \showcase{\ax*{\joint\endowxn}} \\
+%   \showcase{\ax*[][2]{\endowxn}} \\
+%   \showcase{\ax[n|]{x}} \\
+%   \showcase{\ax*[n|]{x}} \\
+%   \showcase{\ax**[n|]{x}} \\
+%   \showcase{\ax**[n|]{x}[(m)]} \\
+%   \showcase{\ax*{xy|z}[1]} \\
+%   \showcase{\ax**{xy}[(m)]} \\
+%   \showcase{\ax**{xy:\angln}} \\
+%   \showcase{\ax**[][2]{xy:\angln}} \\
+%   \showcase{\ax*{x|y}} \\
+%   \showcase{\ax*{\joint{x_1 x_2 x_3}}} \\
+%   \showcase{\twoletsymb{a}{A}(x)} \\
+%   \showcase{\twoletsymb{a}{A}_t} \\
+%   \showcase{\twoletsymb{a}{C}_t} \\
+%   \showcase{\twoletsymb{a}{F}_t} \\
+%   \showcase{\twoletsymb{a}{U}_t} \\
+%   \showcase{\twoletsymb{a}{V}(x)} \\
+%   \showcase{\twoletsymb{a}{V}_t} \\
+% \end{longtable}
+%
+% ^^A Local Variables:
+% ^^A mode: doctex
+% ^^A TeX-master: t
+% ^^A End:
