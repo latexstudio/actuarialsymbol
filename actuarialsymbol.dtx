@@ -154,9 +154,10 @@
 %
 % \citet[Appendix~4]{Bowers:2e:1997} offer an excellent overview of
 % the composition rules for symbols of actuarial functions. In a
-% nutshell, a principal symbol, say $S$, is combined with auxiliary symbols
-% positioned in subscript or in superscript, to the left or to the
-% right. Schematically, we thus have:
+% nutshell, a principal symbol denoting the type of benefit, say $S$,
+% is combined with auxiliary symbols positioned in subscript or in
+% superscript, to the left or to the right. Schematically, we thus
+% have:
 % \begin{equation}
 %   \label{schema1}
 %   \actsymb[\fbox{\scriptsize I}\!\;][\fbox{\scriptsize II}\!\;]%
@@ -164,14 +165,17 @@
 %      [\,\fbox{\scriptsize IV}]
 % \end{equation}
 %
-% The principal symbol is in general a single letter. The letter may be
-% ``accented'' with a bar ($\bar{A}$), double dots ($\ddot{a}$) or a
-% circle ($\mathring{e}$). When the principal symbol consists of two
+% The principal symbol is in general a single letter. The letter may
+% be ``accented'' with a bar ($\bar{A}$), double dots ($\ddot{a}$) or
+% a circle ($\mathring{e}$). When the principal symbol consists of two
 % letters, they are grouped between parentheses, as in $\IA$ or
-% $\DA**$. Most commonly, there is an auxiliary symbol (or collection
-% of symbols) in the lower-right position \fbox{\small III}. Otherwise,
+% $\DA**$. Most commonly, there are alphanumeric statuses in the
+% lower-right position \fbox{\small III}. Numerals can be placed above
+% or below the individual statuses to show the order of failure; we
+% will refer to these numerals as \emph{precedence numbers}. Otherwise,
 % auxiliary symbols appear lower-left \fbox{\small I}, upper-left
-% \fbox{\small II} and upper-right \fbox{\small IV}, in that order of frequency.
+% \fbox{\small II} and upper-right \fbox{\small IV}, in that order of
+% frequency.
 %
 % Principle symbols for benefit premiums, reserves and amount of
 % reduced paid-up insurance, $P$, $V$ and $W$ are combined with
@@ -192,17 +196,23 @@
 % load time by \pkg{actuarialsymbol}.
 %
 % Package \pkg{actuarialsymbol} provides a generic command to position
-% all subscripts and superscripts easily and consistently around an
-% actuarial symbol, and a few other commands to achieve some
-% specialized typesetting. The package also defines a number of
-% shortcuts to create the most common actuarial functions of financial
-% mathematics and life contingencies.
+% all subscripts and superscripts easily and consistently around a
+% principle symbol, a command to create two-letter symbols and four
+% commands to position precedence numbers above and below statuses.
+% Since entering actuarial symbols can get quite involved, the package
+% also defines a number of shortcuts to create the most common
+% actuarial functions of financial mathematics and life contingencies.
 %
 % \section{Package features}
 % \label{sec:features}
 %
-% We first describe the generic commands provided by
+% This section describes the generic commands provided by
 % \pkg{actuarialsymbol} to compose actuarial symbols.
+% \autoref{sec:shortcuts} lists a number of shortcuts to ease entry of
+% symbols.
+%
+% \subsection{Actuarial symbol}
+% \label{sec:features:actsymb}
 %
 % \begin{DescribeMacro}{\actsymb}
 %   The generic command \cmd{\actsymb} typesets a principal symbol with
@@ -309,6 +319,9 @@
 %   their document} should load package \pkg{subdepth} \citep{subdepth}.
 % \end{rem}
 %
+% \subsection{Two-letter principal symbols}
+% \label{sec:features:twoletsymb}
+%
 % \begin{DescribeMacro}{\twoletsymb}
 %   Entering two-letter principal symbols like $\DA$ as |$(DA)$| results in
 %   letters that are too distant from one another: $(DA)$. To unify
@@ -351,19 +364,23 @@
 %   changed as usual using \cmd{\setlength}.
 % \end{DescribeMacro}
 %
+% \subsection{Precedence numbers}
+% \label{sec:features:precedence}
+%
 % \begin{DescribeMacro}{\nthtop}
 % \begin{DescribeMacro}{\varnthtop}
-%   Commands
+%   Precedence numbers appear above or below individual statuses in
+%   the right subscript \fbox{\small III} of a symbol. Commands
 %   \begin{quote}
-%     \cmd{\nthtop}\oarg{length}\marg{number}\marg{item} \\
-%     \cmd{\varnthtop}\oarg{length}\marg{number}\marg{item}
+%     \cmd{\nthtop}\oarg{length}\marg{number}\marg{status} \\
+%     \cmd{\varnthtop}\oarg{length}\marg{number}\marg{status}
 %   \end{quote}
-%   put a precedence \meta{number} above an \meta{item}, smashed so
-%   that the apparent height of the item is its normal height. This is
+%   put a precedence \meta{number} above a \meta{status}, smashed so
+%   that the apparent height of the status is its normal height. This is
 %   normally used in the right subscript \fbox{\small III} of a symbol. With
 %   \cmd{\nthtop}, the spacing between the precedence number and the
-%   item is a constant \cmd{\nthtopskip} (see below). This can result
-%   in precedence numbers placed at different heights if one item
+%   status is a constant \cmd{\nthtopskip} (see below). This can result
+%   in precedence numbers placed at different heights if one status
 %   contains an horizontal rule.
 %   \begin{demo}
 %     \begin{texample}[0.85]
@@ -412,14 +429,14 @@
 % \begin{DescribeMacro}{\varnthbottom}
 %   Similar to the above two commands,
 %   \begin{quote}
-%     \cmd{\nthbottom}\marg{number}\marg{item}
-%     \cmd{\varnthbottom}\marg{number}\marg{item}
+%     \cmd{\nthbottom}\marg{number}\marg{status} \\
+%     \cmd{\varnthbottom}\marg{number}\marg{status}
 %   \end{quote}
-%   put a precedence \meta{number} below an \meta{item}. With
+%   put a precedence \meta{number} below a \meta{status}. With
 %   \cmd{\nthbottom} the spacing is constant, whereas with
 %   \cmd{\varnthbottom} precedence numbers are bottom aligned. The
-%   latter command is useful when more than one bottom precedence
-%   numbers are used and one of the items has a descender.
+%   latter command is most useful when there is more than one bottom
+%   precedence numbers and one of the statuses has a descender.
 %   \begin{demo}
 %     \begin{texample}[0.85]
 %       |\actsymb{A}{w\nthtop{3}{x}%| \\
@@ -468,7 +485,7 @@
 % \begin{DescribeMacro}{\varnthtopskip}
 % \begin{DescribeMacro}{\nthbottomskip}
 % \begin{DescribeMacro}{\varnthbottomskip}
-%   The constant spacing between a top precedence number and the item
+%   The constant spacing between a top precedence number and the status
 %   underneath when using \cmd{\nthtop} is \cmd{\nthtopskip}, by
 %   default \the\nthtopskip. The constant height of top precedence
 %   numbers when using \cmd{\varnthtop} is achieved by setting the
@@ -476,7 +493,7 @@
 %   \the\varnthtopskip.
 %
 %   Similarly, the constant spacing between a bottom precedence number
-%   and the item above when using \cmd{\nthbottom} is
+%   and the status above when using \cmd{\nthbottom} is
 %   \cmd{\nthbottomskip}, by default \the\nthbottomskip, and the
 %   constant height of bottom precedence numbers when using
 %   \cmd{\varnthbottom} is achieved by setting the baseline skip to
@@ -599,25 +616,25 @@
 %       \toprule
 %       Definition & Alias & Output \\
 %       \midrule
-%       \cmd{\firsttop}\marg{item}  & \cmd{\itop}\marg{item}   & $\Ax{\itop{x}:\angln}$ \\
-%       \cmd{\secondtop}\marg{item} & \cmd{\iitop}\marg{item}  & $\Ax{x\iitop{y}z}$ \\
-%       \cmd{\thirdtop}\marg{item}  & \cmd{\iiitop}\marg{item} & $\Ax{xy\iiitop{z}}$ \\
+%       \cmd{\firsttop}\marg{status}  & \cmd{\itop}\marg{status}   & $\Ax{\itop{x}:\angln}$ \\
+%       \cmd{\secondtop}\marg{status} & \cmd{\iitop}\marg{status}  & $\Ax{x\iitop{y}z}$ \\
+%       \cmd{\thirdtop}\marg{status}  & \cmd{\iiitop}\marg{status} & $\Ax{xy\iiitop{z}}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\varfirsttop}\marg{item}  & \cmd{\varitop}\marg{item}   & $\Ax{\varitop{x}:\angln}$ \\
-%       \cmd{\varsecondtop}\marg{item} & \cmd{\variitop}\marg{item}  & $\Ax{x\variitop{y}z}$ \\
-%       \cmd{\varthirdtop}\marg{item}  & \cmd{\variiitop}\marg{item} & $\Ax{xy\variiitop{z}}$ \\
+%       \cmd{\varfirsttop}\marg{status}  & \cmd{\varitop}\marg{status}   & $\Ax{\varitop{x}:\angln}$ \\
+%       \cmd{\varsecondtop}\marg{status} & \cmd{\variitop}\marg{status}  & $\Ax{x\variitop{y}z}$ \\
+%       \cmd{\varthirdtop}\marg{status}  & \cmd{\variiitop}\marg{status} & $\Ax{xy\variiitop{z}}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\firstbottom}\marg{item}  & \cmd{\ibottom}\marg{item}   & $\Ax{\ibottom{x}yz}$ \\
+%       \cmd{\firstbottom}\marg{status}  & \cmd{\ibottom}\marg{status}   & $\Ax{\ibottom{x}yz}$ \\
 %       \addlinespace[3pt]
-%       \cmd{\secondbottom}\marg{item} & \cmd{\iibottom}\marg{item}  & $\Ax{\iibottom{x}yz}$ \\
+%       \cmd{\secondbottom}\marg{status} & \cmd{\iibottom}\marg{status}  & $\Ax{\iibottom{x}yz}$ \\
 %       \addlinespace[3pt]
-%       \cmd{\thirdbottom}\marg{item}  & \cmd{\iiibottom}\marg{item} & $\Ax{xy\iiibottom{z}}$ \\
+%       \cmd{\thirdbottom}\marg{status}  & \cmd{\iiibottom}\marg{status} & $\Ax{xy\iiibottom{z}}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\varfirstbottom}\marg{item}  & \cmd{\varibottom}\marg{item}   & $\Ax{\varibottom{x}yz}$ \\
+%       \cmd{\varfirstbottom}\marg{status}  & \cmd{\varibottom}\marg{status}   & $\Ax{\varibottom{x}yz}$ \\
 %       \addlinespace[3pt]
-%       \cmd{\varsecondbottom}\marg{item} & \cmd{\variibottom}\marg{item}  & $\Ax{\variibottom{x}yz}$ \\
+%       \cmd{\varsecondbottom}\marg{status} & \cmd{\variibottom}\marg{status}  & $\Ax{\variibottom{x}yz}$ \\
 %       \addlinespace[3pt]
-%       \cmd{\varthirdbottom}\marg{item}  & \cmd{\variiibottom}\marg{item} & $\Ax{xy\variiibottom{z}}$ \\
+%       \cmd{\varthirdbottom}\marg{status}  & \cmd{\variiibottom}\marg{status} & $\Ax{xy\variiibottom{z}}$ \\
 %       \addlinespace[6pt]
 %       \bottomrule
 %   \end{tabular}
@@ -634,7 +651,7 @@
 %   equivalent to \cmd{\varnthtop} and \cmd{\varnthbottom},
 %   respectively;
 % \item[\mdseries\ttfamily compactpreced] always put precedence
-%   numbers close to the corresponding item; makes \cmd{\varnthtop}
+%   numbers close to the corresponding status; makes \cmd{\varnthtop}
 %   and \cmd{\varnthbottom} equivalent to \cmd{\nthtop} and
 %   \cmd{\nthbottom}, respectively.
 % \end{description}
