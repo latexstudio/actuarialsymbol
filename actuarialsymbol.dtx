@@ -126,6 +126,12 @@
 %   Laval \and David Beauchemin}
 % \maketitle
 %
+% \begin{abstract}
+%   Package \pkg{actuarialsymbol} provides helper commands to compose
+%   life contingencies symbols characterized by subscripts and
+%   superscripts on both sides of a principal symbol.
+% \end{abstract}
+%
 % \section{Introduction}
 % \label{sec:introduction}
 %
@@ -148,7 +154,7 @@
 %
 % \citet[Appendix~4]{Bowers:2e:1997} offer an excellent overview of
 % the composition rules for symbols of actuarial functions. In a
-% nutshell, a core symbol, say $S$, is combined with auxiliary symbols
+% nutshell, a principal symbol, say $S$, is combined with auxiliary symbols
 % positioned in subscript or in superscript, to the left or to the
 % right. Schematically, we thus have:
 % \begin{equation}
@@ -158,9 +164,9 @@
 %      [\,\fbox{\small IV}]
 % \end{equation}
 %
-% The core symbol is in general a single letter. The letter may be
+% The principal symbol is in general a single letter. The letter may be
 % ``accented'' with a bar ($\bar{A}$), double dots ($\ddot{a}$) or a
-% circle ($\mathring{e}$). When the core symbol consists of two
+% circle ($\mathring{e}$). When the principal symbol consists of two
 % letters, they are grouped between parentheses, as in $\IA$ or
 % $\DA**$. Most commonly, there is an auxiliary symbol (or collection
 % of symbols) in the lower-right position \fbox{III}. Otherwise,
@@ -199,19 +205,19 @@
 % \pkg{actuarialsymbol} to compose actuarial symbols.
 %
 % \begin{DescribeMacro}{\actsymb}
-%   The generic command \cmd{\actsymb} typesets a core symbol with
+%   The generic command \cmd{\actsymb} typesets a principal symbol with
 %   surrounding subscripts and superscripts. Its syntax is somewhat
 %   unusual for {\LaTeX}, but it serves well the natural order of the
 %   building blocks of a symbol and their relative prevalence:
 %   \begin{quote}
-%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{core}\marg{lr}\oarg{ur}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{principal}\marg{lr}\oarg{ur}
 %   \end{quote}
 %   Above, \meta{ll} identifies the auxiliary symbol in the lower
 %   left subscript position \fbox{I} (following the notation in the
 %   schematic representation \eqref{schema1}); \meta{ul} is the upper
-%   left superscript \fbox{II}; \meta{core} is the core symbol $S$;
+%   left superscript \fbox{II}; \meta{principal} is the principal symbol $S$;
 %   \meta{lr} is the lower right subscript \fbox{III}; \meta{ur} is
-%   the upper right superscript $\fbox{IV}$. The core symbol and the
+%   the upper right superscript $\fbox{IV}$. The principal symbol and the
 %   right subscript are required, the other arguments are optional.
 %   \begin{demo}
 %     \begin{texample}
@@ -240,7 +246,7 @@
 %   symbols for premiums, reserves and paid-up insurance. The extended
 %   command
 %   \begin{quote}
-%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\oarg{P}\marg{core}\marg{lr}\oarg{ur}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\oarg{P}\marg{principal}\marg{lr}\oarg{ur}
 %   \end{quote}
 %   puts symbol \meta{P} outside the parentheses in the schematic
 %   representation \eqref{schema2}.
@@ -304,7 +310,7 @@
 % \end{rem}
 %
 % \begin{DescribeMacro}{\twoletsymb}
-%   Entering two-letter core symbols like $\DA$ as |$(DA)$| results in
+%   Entering two-letter principal symbols like $\DA$ as |$(DA)$| results in
 %   letters that are too distant from one another: $(DA)$. To unify
 %   presentation, the package provides the command
 %   \begin{quote}
@@ -521,12 +527,12 @@
 %       \cmd{\aringx}\marg{lr} & \rshowcase{\aringx{x:\angln}} \\
 %       \cmd{\eringx}\marg{lr} & \rshowcase{\eringx{x:\angln}} \\
 %       \addlinespace[6pt]
-%       \cmd{\premium}\marg{core}\marg{lr}  & \rshowcase{\premium[t]{\bar{A}}{x}} \\
-%       \cmd{\premium*}\marg{core}\marg{lr} & \rshowcase{\premium*[t]{\bar{A}}{x}} \\
-%       \cmd{\reserve}\marg{core}\marg{lr}  & \rshowcase{\reserve[t]{\ddot{a}}{x}} \\
-%       \cmd{\reserve*}\marg{core}\marg{lr} & \rshowcase{\reserve*[t]{\ddot{a}}{x}} \\
-%       \cmd{\paidup}\marg{core}\marg{lr}   & \rshowcase{\paidup[k]{\bar{A}}{x}} \\
-%       \cmd{\paidup*}\marg{core}\marg{lr}  & \rshowcase{\paidup*[k][h]{\bar{A}}{x}} \\
+%       \cmd{\premium}\marg{principal}\marg{lr}  & \rshowcase{\premium[t]{\bar{A}}{x}} \\
+%       \cmd{\premium*}\marg{principal}\marg{lr} & \rshowcase{\premium*[t]{\bar{A}}{x}} \\
+%       \cmd{\reserve}\marg{principal}\marg{lr}  & \rshowcase{\reserve[t]{\ddot{a}}{x}} \\
+%       \cmd{\reserve*}\marg{principal}\marg{lr} & \rshowcase{\reserve*[t]{\ddot{a}}{x}} \\
+%       \cmd{\paidup}\marg{principal}\marg{lr}   & \rshowcase{\paidup[k]{\bar{A}}{x}} \\
+%       \cmd{\paidup*}\marg{principal}\marg{lr}  & \rshowcase{\paidup*[k][h]{\bar{A}}{x}} \\
 %       \bottomrule
 %   \end{tabular*}
 % \end{table}
@@ -555,7 +561,7 @@
 % \end{table}
 %
 % \autoref{tab:twoletsymb} lists shortcuts for common two-letter
-% symbols. These shortcuts can be used as core symbol in
+% symbols. These shortcuts can be used as principal symbol in
 % \cmd{\actsymb} or in the commands of \autoref*{tab:principal}.
 %
 % \begin{table}
