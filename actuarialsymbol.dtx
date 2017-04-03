@@ -104,6 +104,9 @@
   \NewDocumentCommand{\rshowcase}{v} { \texttt{#1} & \tl_rescan:nn { } { $#1$ } }
   \ExplSyntaxOff
 
+  %% increase row height in tables
+  \renewcommand{\arraystretch}{1.2}
+
 \begin{document}
   \DocInput{actuarialsymbol.dtx}
 \end{document}
@@ -515,6 +518,8 @@
 %       \cmd{\ax}\marg{lr}   & \rshowcase{\ax{x:\angln}} \\
 %       \cmd{\ax*}\marg{lr}  & \rshowcase{\ax*{x:\angln}} \\
 %       \cmd{\ax**}\marg{lr} & \rshowcase{\ax**{x:\angln}} \\
+%       \cmd{\aringx}\marg{lr} & \rshowcase{\aringx{x:\angln}} \\
+%       \cmd{\eringx}\marg{lr} & \rshowcase{\eringx{x:\angln}} \\
 %       \addlinespace[6pt]
 %       \cmd{\premium}\marg{core}\marg{lr}  & \rshowcase{\premium[t]{\bar{A}}{x}} \\
 %       \cmd{\premium*}\marg{core}\marg{lr} & \rshowcase{\premium*[t]{\bar{A}}{x}} \\
@@ -553,7 +558,7 @@
 % symbols. These shortcuts can be used as core symbol in
 % \cmd{\actsymb} or in the commands of \autoref*{tab:principal}.
 %
-% \begin{table}[t]
+% \begin{table}
 %   \centering
 %   \caption{Shortcuts for two-letter symbols}
 %   \label{tab:twoletsymb}
@@ -580,7 +585,7 @@
 % can be used in auxiliary symbols in \cmd{\actsymb} or in the
 % commands of \autoref*{tab:principal}.
 %
-% \begin{table}[t]
+% \begin{table}
 %   \centering
 %   \caption{Shortcuts and aliases for precedence numbers}
 %   \label{tab:preced}
@@ -588,22 +593,26 @@
 %       \toprule
 %       Definition & Alias & Output \\
 %       \midrule
-%       \cmd{\firsttop}\marg{item}  & \cmd{\itop}\marg{item}   & $\Ax{\itop{x}:\angln}$ \\[6pt]
-%       \cmd{\secondtop}\marg{item} & \cmd{\iitop}\marg{item}  & $\Ax{x\iitop{y}z}$ \\[6pt]
-%       \cmd{\thirdtop}\marg{item}  & \cmd{\iiitop}\marg{item} & $\Ax{xy\iiitop{z}}$ \\[6pt]
+%       \cmd{\firsttop}\marg{item}  & \cmd{\itop}\marg{item}   & $\Ax{\itop{x}:\angln}$ \\
+%       \cmd{\secondtop}\marg{item} & \cmd{\iitop}\marg{item}  & $\Ax{x\iitop{y}z}$ \\
+%       \cmd{\thirdtop}\marg{item}  & \cmd{\iiitop}\marg{item} & $\Ax{xy\iiitop{z}}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\varfirsttop}\marg{item}  & \cmd{\varitop}\marg{item}   & $\Ax{\varitop{x}:\angln}$ \\[6pt]
-%       \cmd{\varsecondtop}\marg{item} & \cmd{\variitop}\marg{item}  & $\Ax{x\variitop{y}z}$ \\[6pt]
-%       \cmd{\varthirdtop}\marg{item}  & \cmd{\variiitop}\marg{item} & $\Ax{xy\variiitop{z}}$ \\[6pt]
+%       \cmd{\varfirsttop}\marg{item}  & \cmd{\varitop}\marg{item}   & $\Ax{\varitop{x}:\angln}$ \\
+%       \cmd{\varsecondtop}\marg{item} & \cmd{\variitop}\marg{item}  & $\Ax{x\variitop{y}z}$ \\
+%       \cmd{\varthirdtop}\marg{item}  & \cmd{\variiitop}\marg{item} & $\Ax{xy\variiitop{z}}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\firstbottom}\marg{item}  & \cmd{\ibottom}\marg{item}   & $\Ax{\ibottom{x}yz}$ \\[6pt]
-%       \cmd{\secondbottom}\marg{item} & \cmd{\iibottom}\marg{item}  & $\Ax{\iibottom{x}yz}$ \\[6pt]
-%       \cmd{\thirdbottom}\marg{item}  & \cmd{\iiibottom}\marg{item} & $\Ax{xy\iiibottom{z}}$ \\[6pt]
+%       \cmd{\firstbottom}\marg{item}  & \cmd{\ibottom}\marg{item}   & $\Ax{\ibottom{x}yz}$ \\
+%       \addlinespace[3pt]
+%       \cmd{\secondbottom}\marg{item} & \cmd{\iibottom}\marg{item}  & $\Ax{\iibottom{x}yz}$ \\
+%       \addlinespace[3pt]
+%       \cmd{\thirdbottom}\marg{item}  & \cmd{\iiibottom}\marg{item} & $\Ax{xy\iiibottom{z}}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\varfirstbottom}\marg{item}  & \cmd{\varibottom}\marg{item}   & $\Ax{\varibottom{x}yz}$ \\[6pt]
-%       \cmd{\varsecondbottom}\marg{item} & \cmd{\variibottom}\marg{item}  & $\Ax{\variibottom{x}yz}$ \\[6pt]
-%       \cmd{\varthirdbottom}\marg{item}  & \cmd{\variiibottom}\marg{item} & $\Ax{xy\variiibottom{z}}$ \\[6pt]
-%       \addlinespace[4pt]
+%       \cmd{\varfirstbottom}\marg{item}  & \cmd{\varibottom}\marg{item}   & $\Ax{\varibottom{x}yz}$ \\
+%       \addlinespace[3pt]
+%       \cmd{\varsecondbottom}\marg{item} & \cmd{\variibottom}\marg{item}  & $\Ax{\variibottom{x}yz}$ \\
+%       \addlinespace[3pt]
+%       \cmd{\varthirdbottom}\marg{item}  & \cmd{\variiibottom}\marg{item} & $\Ax{xy\variiibottom{z}}$ \\
+%       \addlinespace[6pt]
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -673,15 +682,15 @@
 % \section{Comprehensive life contingencies symbol list}
 % \label{sec:list}
 %
-% This appendix was inspired by \citet{Trivedi:lifecon:2004} and its
+% This appendix was inspired by \citet{Trivedi:lifecon:2004}. The
 % title is a nod to the immensely useful \emph{The Comprehensive
-% {\LaTeX} Symbol List} \citep{comprehensive}.
+% {\LaTeX} Symbol List} of \citet{comprehensive}.
 %
 % We provide below a table of all the life contingencies symbols used
 % in \citet[Appendix~3]{Bowers:2e:1997} along with the code to compose
-% them with \pkg{actuarialsymbol} loaded. There are often times many
-% different ways to obtain a symbol; we tried to always present the
-% most compact and legible one. Not all symbols require features of
+% them with \pkg{actuarialsymbol} loaded. Often times there are
+% various ways to obtain a symbol; we tried to always present the most
+% compact and legible option. Not all symbols require features of
 % \pkg{actuarialsymbol}.
 %
 % \catcode`\|=12 ^^A to use | in math, disable as verbatim delimiter
@@ -833,6 +842,8 @@
 \DeclareRobustCommand{\ax}{%
   \@ifstar{%
     \@ifstar{\ACTS@actsc{\ddot{a}}}{\ACTS@actsc{\bar{a}}}}{\ACTS@actsc{a}}}
+\DeclareRobustCommand{\aringx}{\ACTS@actsc{\mathring{a}}}
+\DeclareRobustCommand{\eringx}{\ACTS@actsc{\mathring{e}}}
 
 \DeclareRobustCommand{\premium}{%
   \@ifstar{\ACTS@actprem{\bar{P}}}{\ACTS@actprem{P}}}
