@@ -788,10 +788,11 @@
 % \subsection{Package options}
 % \label{sec:implementation:options}
 %
-% Option |alignpreced| makes \cmd{\nthtop} and \cmd{\nthbottom}
-% equivalent to \cmd{\varnthtop} and \cmd{\varnthbottom},
-% respectively. Option |compactpreced| does the opposite. The options
-% are actually processed later, once the commands are defined.
+% The package defines two options. Option |alignpreced| makes
+% \cmd{\nthtop} and \cmd{\nthbottom} equivalent to \cmd{\varnthtop}
+% and \cmd{\varnthbottom}, respectively. Option |compactpreced| does
+% the opposite. The options are actually processed later, once the
+% commands are defined.
 %    \begin{macrocode}
 \DeclareOption{alignpreced}{%
   \let\nthtop\varnthtop
@@ -832,9 +833,9 @@
                {\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
 %    \end{macrocode}
 %
-% The principal symbol shortcut macros of \autoref{tab:principal} have
-% argument |#4| of the workhorse already set. Therefore, they need
-% specialized parsing macros.
+% The principal symbol shortcut macros have argument |#4| of the
+% workhorse (see below) already set. Therefore, they need specific
+% parsing macros.
 %    \begin{macrocode}
 \newcommand\ACTS@actsc[1]{%
   \@ifnextchar[{\ACTS@@actsc{#1}}%
@@ -849,7 +850,7 @@
                {\@actsymbol[#2][#3][]{#1}{#4}[]}}
 %    \end{macrocode}
 %
-% Similarly, we need specialized parsing macros to pass the correct
+% Similarly, we need specific parsing macros to pass the correct
 % symbol to argument |#3| of \cmd{\@actsymbol} when using shortcuts
 % \cmd{\premium}, \cmd{\reserve} and \cmd{\paidup}.
 %    \begin{macrocode}
@@ -857,37 +858,37 @@
   \@ifnextchar[{\ACTS@@actprem{#1}}{\ACTS@@actprem{#1}[]}}
 \newcommand\ACTS@@actprem{}
 \def\ACTS@@actprem#1[#2]{%
-  \@ifnextchar[{\ACTS@@@actprem{#1}[#2]}{\ACTS@@@actprem{#1}[#2][]}}
+  \@ifnextchar[{\ACTS@@@actprem{#1}[#2]}%
+               {\ACTS@@@actprem{#1}[#2][]}}
 \newcommand\ACTS@@@actprem{}
 \def\ACTS@@@actprem#1[#2][#3]#4#5{%
-  \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}{\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
+  \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}%
+               {\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
 %    \end{macrocode}
 %
 %
 % \subsubsection{Symbol composition}
 % \label{sec:implementation:symbol:composition}
 %
-% We now define the workhorse to compose an actuarial symbol of the
-% form \eqref{schema1} or \eqref{schema2}, thus allowing for
-% subscripts and superscripts, to the left and to the right of a
-% principal symbol. The definition below is heavily inspired by the
-% code of \cmd{\prescript} from package \pkg{mathtools}
-% \citep{mathtools} which, as reported by the author, is itself based
-% a posting to |comp.text.tex| by Michael J.~Downes. Some of the
-% comments below are still his.
+% We now define the workhorse to compose an actuarial symbol allowing
+% for auxiliary symbols on all four corners around a principal symbol.
+% The definition below is heavily inspired by the code of
+% \cmd{\prescript} from package \pkg{mathtools} \citep{mathtools}
+% which, as reported by the author, is itself based on a posting to
+% |comp.text.tex| by Michael J.~Downes. Some of the comments below are
+% still his.
 %
-% The arguments of the macro are as follows:
-% \begin{itemize}[nosep]
-% \item[\texttt{\#1}] lower left subscript \fbox{\small I}; may be empty;
-% \item[\texttt{\#2}] upper left superscript \fbox{\small II}; may be empty;
-% \item[\texttt{\#3}] principle symbol $P$ in representation
-%   \eqref{schema2}; when empty representation \eqref{schema1} is
-%   used;
-% \item[\texttt{\#4}] benefit symbol $S$; assumed present;
-% \item[\texttt{\#5}] lower right subscript \fbox{\small III}; assumed
-%   present;
-% \item[\texttt{\#6}] upper right superscript \fbox{\small IV}; may be empty.
-% \end{itemize}
+% Macro definition. The macro has the following six arguments, using
+% the notation from of the schematics representations \eqref{schema1}
+% and \eqref{schema2}:
+% \begin{enumerate}[nosep]
+% \item lower left subscript \fbox{\small I}; may be empty;
+% \item upper left superscript \fbox{\small II}; may be empty;
+% \item principle symbol $P$; when empty a standard symbol is typeset;
+% \item benefit symbol $S$; assumed present;
+% \item lower right subscript \fbox{\small III}; assumed present;
+% \item upper right superscript \fbox{\small IV}; may be empty.
+% \end{enumerate}
 %    \begin{macrocode}
 \def\@actsymbol[#1][#2][#3]#4#5[#6]{
 %    \end{macrocode}
@@ -925,9 +926,8 @@
       \vfil\hbox to\wd\@ne{\unhbox\@ne}}
   \fi
 %    \end{macrocode}
-% We now enter actual symbol construction. First the case where there
-% is at least one superscript (the nested conditionals emulate an OR
-% condition).
+% Actual symbol construction. First the case where there is at least
+% one superscript (the nested conditionals emulate an OR condition).
 %    \begin{macrocode}
   \ifnum\ifdim \wd\tw@>\z@ 1\else\ifdim \wd4>\z@ 1\else 0\fi\fi
     =1%
@@ -947,14 +947,15 @@
       \fi
     \fi
 %    \end{macrocode}
-% Left subscript and superscript. Use \cmd{\mathopen} to suppress
-% space between those and the principal symbol even when the latter
-% is not of type ord.
+% Typesetting of the left subscript and superscript. Use
+% \cmd{\mathopen} to suppress space between those and the principal
+% symbol even when the latter is not of type ord.
 %    \begin{macrocode}
     \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
 %    \end{macrocode}
-% Benefit symbol alone, or principle symbol and benefit symbol between
-% parentheses, and the right subscript and superscript.
+% Typesetting of the benefit symbol alone, or principle symbol and
+% benefit symbol between parentheses, and the right subscript and
+% superscript.
 %    \begin{macrocode}
     \ifdim\wd\z@=\z@
       #4^{\box4}\sb{\box\thr@@}%
@@ -1004,7 +1005,7 @@
   \@ifstar{\ACTS@actprem{\bar{V}}}%
           {\ACTS@actprem{V}}}
 \DeclareRobustCommand{\paidup}{%
-  \@ifstar{\ACTS@actprem{\bar{W}}}%
+  \@ifstar{\ACTS@actprem{\overline{W}}}%
           {\ACTS@actprem{W}}}
 %    \end{macrocode}
 % Then follow the shortcuts for common auxiliary symbols listed in
@@ -1019,25 +1020,31 @@
 \let\joint\overline
 %    \end{macrocode}
 %
-
+% \subsection{Two-letter symbols}
+% \label{sec:implementation:twoletsymb}
+%
+% The definition of the user level command \cmd{\twoletsymb} is pretty
+% straighforward.
 %    \begin{macrocode}
 \newlength{\twoletkern}
 \setlength{\twoletkern}{1.2pt}
 \DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{(#2\kern-#1#3)}
 %    \end{macrocode}
 %
-
+% The shortcut macros of \autoref{tab:twoletsymb} all directly use
+% \cmd{\twoletsymb}.
 %    \begin{macrocode}
 \newcommand{\IA}{%
-  \@ifstar{%
-    \@ifstar{\twoletsymb{\bar{I}}{\bar{A}}}{%
-      \twoletsymb{I}{\bar{A}}}}{\twoletsymb{I}{A}}}
+  \@ifstar{\@ifstar{\twoletsymb{\bar{I}}{\bar{A}}}%
+                   {\twoletsymb{I}{\bar{A}}}}%
+          {\twoletsymb{I}{A}}}
 \newcommand{\ImA}{%
-    \@ifstar{\twoletsymb{I^{(m)}}{\bar{A}}}{\twoletsymb{I^{(m)}}{A}}}
+    \@ifstar{\twoletsymb{I^{(m)}}{\bar{A}}}%
+            {\twoletsymb{I^{(m)}}{A}}}
 \newcommand{\DA}{%
-  \@ifstar{%
-    \@ifstar{\twoletsymb{\bar{D}}{\bar{A}}}{%
-      \twoletsymb{D}{\bar{A}}}}{\twoletsymb{D}{A}}}
+  \@ifstar{\@ifstar{\twoletsymb{\bar{D}}{\bar{A}}}%
+                   {\twoletsymb{D}{\bar{A}}}}%
+          {\twoletsymb{D}{A}}}
 %    \end{macrocode}
 %
 
