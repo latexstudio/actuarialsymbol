@@ -178,7 +178,7 @@
 % frequency.
 %
 % Principle symbols for benefit premiums, reserves and amount of
-% reduced paid-up insurance, $P$, $V$ and $W$ are combined with
+% reduced paid-up insurance, $P$, $V$ and $W$, are combined with
 % benefit symbols unless the benefit is a level unit insurance payable
 % at the end of the year of death. In such cases, we have the
 % following symbol structure (replace $P$ by $V$ or $W$ as needed):
@@ -220,15 +220,16 @@
 %   unusual for {\LaTeX}, but it serves well the natural order of the
 %   building blocks of a symbol and their relative prevalence:
 %   \begin{quote}
-%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{principal}\marg{lr}\oarg{ur}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{benefit}\marg{lr}\oarg{ur}
 %   \end{quote}
-%   Above, \meta{ll} identifies the auxiliary symbol in the lower
-%   left subscript position \fbox{\small I} (following the notation in the
+%   Above, \meta{ll} identifies the auxiliary symbol in the lower left
+%   subscript position \fbox{\small I} (following the notation in the
 %   schematic representation \eqref{schema1}); \meta{ul} is the upper
-%   left superscript \fbox{\small II}; \meta{principal} is the principal symbol $S$;
-%   \meta{lr} is the lower right subscript \fbox{\small III}; \meta{ur} is
-%   the upper right superscript $\fbox{\small IV}$. The principal symbol and the
-%   right subscript are required, the other arguments are optional.
+%   left superscript \fbox{\small II}; \meta{benefit} is the principal
+%   benefit symbol $S$; \meta{lr} is the lower right subscript
+%   \fbox{\small III}; \meta{ur} is the upper right superscript
+%   $\fbox{\small IV}$. The benefit symbol and the right subscript
+%   are required, the other arguments are optional.
 %   \begin{demo}
 %     \begin{texample}
 %       |\actsymb{A}{x}|
@@ -256,10 +257,10 @@
 %   symbols for premiums, reserves and paid-up insurance. The extended
 %   command
 %   \begin{quote}
-%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\oarg{P}\marg{principal}\marg{lr}\oarg{ur}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\oarg{principle}\marg{benefit}\marg{lr}\oarg{ur}
 %   \end{quote}
-%   puts symbol \meta{P} outside the parentheses in the schematic
-%   representation \eqref{schema2}.
+%   puts symbol \meta{principle} outside the parentheses in the
+%   schematic representation \eqref{schema2}.
 %   \begin{demo}
 %     \begin{texample}[0.7]
 %       |\actsymb[][][P]{\bar{A}}{x:\angln}|
@@ -510,15 +511,15 @@
 %
 % Composing actuarial symbols from scratch using \cmd{\actsymb} can
 % easily get quite involved. For this reason, the package defines a
-% large number of shorcuts to ease entry of the most common symbols.
-% We encourage authors to define their own shortcuts for cases we
-% did not consider.
+% large number of shortcut macros to ease entry of the most common
+% symbols. We encourage authors to define their own shortcuts for
+% cases we did not consider.
 %
-% \autoref{tab:principal} lists shortcuts to compose complete
-% principal symbols of life tables, insurance and annuities. For space
-% considerations only the mandatory arguments are given, but it should
-% be noted that all commands of \autoref*{tab:principal} accept the
-% same optional arguments as \cmd{\actsymb}.
+% \autoref{tab:principal} lists shortcuts to compose complete symbols
+% of life tables, insurance and annuities. For space considerations
+% only the mandatory arguments are given, but it should be noted that
+% all commands of \autoref*{tab:principal} accept the same optional
+% arguments as \cmd{\actsymb}.
 %
 % \begin{table}
 %   \centering
@@ -544,12 +545,12 @@
 %       \cmd{\aringx}\marg{lr} & \rshowcase{\aringx{x:\angln}} \\
 %       \cmd{\eringx}\marg{lr} & \rshowcase{\eringx{x:\angln}} \\
 %       \addlinespace[6pt]
-%       \cmd{\premium}\marg{principal}\marg{lr}  & \rshowcase{\premium[t]{\bar{A}}{x}} \\
-%       \cmd{\premium*}\marg{principal}\marg{lr} & \rshowcase{\premium*[t]{\bar{A}}{x}} \\
-%       \cmd{\reserve}\marg{principal}\marg{lr}  & \rshowcase{\reserve[t]{\ddot{a}}{x}} \\
-%       \cmd{\reserve*}\marg{principal}\marg{lr} & \rshowcase{\reserve*[t]{\ddot{a}}{x}} \\
-%       \cmd{\paidup}\marg{principal}\marg{lr}   & \rshowcase{\paidup[k]{\bar{A}}{x}} \\
-%       \cmd{\paidup*}\marg{principal}\marg{lr}  & \rshowcase{\paidup*[k][h]{\bar{A}}{x}} \\
+%       \cmd{\premium}\marg{benefit}\marg{lr}  & \rshowcase{\premium[t]{\bar{A}}{x}} \\
+%       \cmd{\premium*}\marg{benefit}\marg{lr} & \rshowcase{\premium*[t]{\bar{A}}{x}} \\
+%       \cmd{\reserve}\marg{benefit}\marg{lr}  & \rshowcase{\reserve[t]{\ddot{a}}{x}} \\
+%       \cmd{\reserve*}\marg{benefit}\marg{lr} & \rshowcase{\reserve*[t]{\ddot{a}}{x}} \\
+%       \cmd{\paidup}\marg{benefit}\marg{lr}   & \rshowcase{\paidup[k]{\bar{A}}{x}} \\
+%       \cmd{\paidup*}\marg{benefit}\marg{lr}  & \rshowcase{\paidup*[k][h]{\bar{A}}{x}} \\
 %       \bottomrule
 %   \end{tabular*}
 % \end{table}
