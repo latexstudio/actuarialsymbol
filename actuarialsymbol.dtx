@@ -823,6 +823,7 @@
   \@mathmeasure\tw@\scriptstyle{#2}
   \@mathmeasure\thr@@\scriptstyle{#5}
   \@mathmeasure4\scriptstyle{#6}
+  \mathord{}
   %% adjust width of *left* subscript and superscript (if there is a
   %% superscript)
   \ifdim \wd\tw@>\z@ \ifdim \wd\tw@>\wd\@ne
@@ -851,7 +852,7 @@
     \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
     \ifdim\wd\z@=\z@ #4^{\box4}\sb{\box\thr@@}\else #3^{\box4}(#4^{}\sb{\box\thr@@})\fi
   \else% expression without superscripts
-    \vphantom{#4}\sb{\box\@ne}%
+    \mathopen{\vphantom{#4}}\sb{\box\@ne}%
     \ifdim\wd\z@=\z@ #4\sb{\box\thr@@}\else #3(#4\sb{\box\thr@@})\fi
   \fi
 }
