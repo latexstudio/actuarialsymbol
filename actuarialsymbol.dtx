@@ -678,6 +678,7 @@
 % compact and legible option. Not all symbols require features of
 % \pkg{actuarialsymbol}.
 %
+% \begingroup
 % \catcode`\|=12 ^^A to use | in math, disable as verbatim delimiter
 % \begin{longtable}{ll}
 %   \toprule
@@ -726,6 +727,7 @@
 %   \showcase{\newcommand{\aV}{\twoletsymb[0.6pt]{a}{V}} \aV(x)} \\
 %   \showcase{\newcommand{\aV}{\twoletsymb[0.6pt]{a}{V}} \aV_t} \\
 % \end{longtable}
+% \endgroup
 %
 % \StopEventually{
 % \begin{thebibliography}{4}
@@ -770,44 +772,87 @@
 % \section{Implementation}
 % \label{sec:implementation}
 %
-%    \begin{macrocode}
 %\iffalse
 %<*package>
 %\fi
+%
+% \subsection{Required packages}
+% \label{sec:implementation:packages}
+%
+% The package depends on packages \pkg{amsmath} and \pkg{actuarialangle}.
+%    \begin{macrocode}
 \RequirePackage{amsmath}
 \RequirePackage{actuarialangle}
-
-%\newif\ifACTS@alignpreced \ACTS@alignprecedfalse
-
+%    \end{macrocode}
+%
+% \subsection{Package options}
+% \label{sec:implementation:options}
+%
+% Option |alignpreced| makes \cmd{\nthtop} and \cmd{\nthbottom}
+% equivalent to \cmd{\varnthtop} and \cmd{\varnthbottom},
+% respectively. Option |compactpreced| does the opposite. The options
+% are actually processed later, once the commands are defined.
+%    \begin{macrocode}
 \DeclareOption{alignpreced}{%
   \let\nthtop\varnthtop
   \let\nthbottom\varnthbottom}
 \DeclareOption{compactpreced}{%
   \let\varnthtop\nthtop
   \let\varnthbottom\nthbottom}
-
+%    \end{macrocode}
+%
+% \subsection{Actuarial symbol}
+% \label{sec:implementation:symbol}
+%
+% We first define the user level function.
+%    \begin{macrocode}
 \DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
+%    \end{macrocode}
+%
+% \subsubsection{Parsing macros}
+% \label{sec:implementation:symbol:parsing}
+%
+% With its unusual syntax, \cmd{\actsymb} requires four parsing macros
+% to pass the arguments to the actual workhorse \cmd{\@actsymbol}.
+%    \begin{macrocode}
 \newcommand\ACTS@actsymb{%
-  \@ifnextchar[{\ACTS@@actsymb}{\ACTS@@actsymb[]}}
+  \@ifnextchar[{\ACTS@@actsymb}%
+               {\ACTS@@actsymb[]}}
 \newcommand\ACTS@@actsymb{}
 \def\ACTS@@actsymb[#1]{%
-  \@ifnextchar[{\ACTS@@@actsymb[#1]}{\ACTS@@@actsymb[#1][]}}
+  \@ifnextchar[{\ACTS@@@actsymb[#1]}%
+               {\ACTS@@@actsymb[#1][]}}
 \newcommand\ACTS@@@actsymb{}
 \def\ACTS@@@actsymb[#1][#2]{%
-  \@ifnextchar[{\ACTS@@@@actsymb[#1][#2]}{\ACTS@@@@actsymb[#1][#2][]}}
+  \@ifnextchar[{\ACTS@@@@actsymb[#1][#2]}%
+               {\ACTS@@@@actsymb[#1][#2][]}}
 \newcommand\ACTS@@@@actsymb{}
 \def\ACTS@@@@actsymb[#1][#2][#3]#4#5{%
-  \@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}{\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
-
+  \@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}%
+               {\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
+%    \end{macrocode}
+%
+% The principal symbol shortcut macros of \autoref{tab:principal} have
+% argument |#4| of the workhorse already set. Therefore, they need
+% specialized parsing macros.
+%    \begin{macrocode}
 \newcommand\ACTS@actsc[1]{%
-  \@ifnextchar[{\ACTS@@actsc{#1}}{\ACTS@@actsc{#1}[]}}
+  \@ifnextchar[{\ACTS@@actsc{#1}}%
+               {\ACTS@@actsc{#1}[]}}
 \newcommand\ACTS@@actsc{}
 \def\ACTS@@actsc#1[#2]{%
-  \@ifnextchar[{\ACTS@@@actsc{#1}[#2]}{\ACTS@@@actsc{#1}[#2][]}}
+  \@ifnextchar[{\ACTS@@@actsc{#1}[#2]}%
+               {\ACTS@@@actsc{#1}[#2][]}}
 \newcommand\ACTS@@@actsc{}
 \def\ACTS@@@actsc#1[#2][#3]#4{%
-  \@ifnextchar[{\@actsymbol[#2][#3][]{#1}{#4}}{\@actsymbol[#2][#3][]{#1}{#4}[]}}
-
+  \@ifnextchar[{\@actsymbol[#2][#3][]{#1}{#4}}%
+               {\@actsymbol[#2][#3][]{#1}{#4}[]}}
+%    \end{macrocode}
+%
+% Similarly, we need specialized parsing macros to pass the correct
+% symbol to argument |#3| of \cmd{\@actsymbol} when using shortcuts
+% \cmd{\premium}, \cmd{\reserve} and \cmd{\paidup}.
+%    \begin{macrocode}
 \newcommand\ACTS@actprem[1]{%
   \@ifnextchar[{\ACTS@@actprem{#1}}{\ACTS@@actprem{#1}[]}}
 \newcommand\ACTS@@actprem{}
@@ -816,79 +861,173 @@
 \newcommand\ACTS@@@actprem{}
 \def\ACTS@@@actprem#1[#2][#3]#4#5{%
   \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}{\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
-
+%    \end{macrocode}
+%
+%
+% \subsubsection{Symbol composition}
+% \label{sec:implementation:symbol:composition}
+%
+% We now define the workhorse to compose an actuarial symbol of the
+% form \eqref{schema1} or \eqref{schema2}, thus allowing for
+% subscripts and superscripts, to the left and to the right of a
+% principal symbol. The definition below is heavily inspired by the
+% code of \cmd{\prescript} from package \pkg{mathtools}
+% \citep{mathtools} which, as reported by the author, is itself based
+% a posting to |comp.text.tex| by Michael J.~Downes. Some of the
+% comments below are still his.
+%
+% The arguments of the macro are as follows:
+% \begin{itemize}[nosep]
+% \item[\texttt{\#1}] lower left subscript \fbox{\small I}; may be empty;
+% \item[\texttt{\#2}] upper left superscript \fbox{\small II}; may be empty;
+% \item[\texttt{\#3}] principle symbol $P$ in representation
+%   \eqref{schema2}; when empty representation \eqref{schema1} is
+%   used;
+% \item[\texttt{\#4}] benefit symbol $S$; assumed present;
+% \item[\texttt{\#5}] lower right subscript \fbox{\small III}; assumed
+%   present;
+% \item[\texttt{\#6}] upper right superscript \fbox{\small IV}; may be empty.
+% \end{itemize}
+%    \begin{macrocode}
 \def\@actsymbol[#1][#2][#3]#4#5[#6]{
+%    \end{macrocode}
+% We put the principle symbol and all subscripts and superscript into
+% horizontal boxes using \cmd{\@mathmeasure} of package \pkg{amsmath}.
+%    \begin{macrocode}
   \@mathmeasure\z@\displaystyle{#3}
   \@mathmeasure\@ne\scriptstyle{#1}
   \@mathmeasure\tw@\scriptstyle{#2}
   \@mathmeasure\thr@@\scriptstyle{#5}
   \@mathmeasure4\scriptstyle{#6}
+%    \end{macrocode}
+% Do not let a preceding mathord symbol approach without any
+% intervening space.
+%    \begin{macrocode}
   \mathord{}
-  %% adjust width of *left* subscript and superscript (if there is a
-  %% superscript)
+%    \end{macrocode}
+% Right align the left subscript and superscript (if there is a
+% superscript) by adjusting their width.
+%    \begin{macrocode}
   \ifdim \wd\tw@>\z@ \ifdim \wd\tw@>\wd\@ne
     \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
   \else
     \setbox\tw@\hbox to\wd\@ne{\hfil\unhbox\tw@}
   \fi\fi
-  %% adjust height of left and right *subscripts*
+%    \end{macrocode}
+% Bottom align the left and right subscripts by putting them into
+% vertical boxes and adjusting their height.
+%    \begin{macrocode}
   \ifdim \ht\@ne>\ht\thr@@
-    \setbox\thr@@\vbox to \ht\@ne{\vfil\hbox to\wd\thr@@{\unhbox\thr@@}}
+    \setbox\thr@@\vbox to \ht\@ne{%
+      \vfil\hbox to\wd\thr@@{\unhbox\thr@@}}
   \else
-    \setbox\@ne\vbox to \ht\thr@@{\vfil\hbox to\wd\@ne{\unhbox\@ne}}
+    \setbox\@ne\vbox to \ht\thr@@{%
+      \vfil\hbox to\wd\@ne{\unhbox\@ne}}
   \fi
-  %% symbol construction
+%    \end{macrocode}
+% We now enter actual symbol construction. First the case where there
+% is at least one superscript (the nested conditionals emulate an OR
+% condition).
+%    \begin{macrocode}
   \ifnum\ifdim \wd\tw@>\z@ 1\else\ifdim \wd4>\z@ 1\else 0\fi\fi
-    =1%  with superscripts either left or right
-    %% adjust depths of left and right *supercripts* (if either is > 0)
+    =1%
+%    \end{macrocode}
+% To ensure equal spacing with the subscripts on both sides of the
+% principal symbol, adjust the depths of the left and right
+% supercripts (if either is positive) using struts.
+%    \begin{macrocode}
     \ifnum\ifdim \dp\tw@>\z@ 1\else\ifdim \dp4>\z@ 1\else 0\fi\fi
       =1%
       \ifdim \dp\tw@>\dp4
-        \setbox4\hbox to\wd4{\raisebox{\z@}[\ht4][\dp\tw@]{\unhbox4}}
+        \setbox4\hbox to\wd4{%
+          \raisebox{\z@}[\ht4][\dp\tw@]{\unhbox4}}
       \else
-        \setbox\tw@\hbox to\wd\tw@{\hfil\raisebox{\z@}[\ht\tw@][\dp4]{\unhbox\tw@}}
+        \setbox\tw@\hbox to\wd\tw@{%
+          \hfil\raisebox{\z@}[\ht\tw@][\dp4]{\unhbox\tw@}}
       \fi
     \fi
+%    \end{macrocode}
+% Left subscript and superscript. Use \cmd{\mathopen} to suppress
+% space between those and the principal symbol even when the latter
+% is not of type ord.
+%    \begin{macrocode}
     \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
-    \ifdim\wd\z@=\z@ #4^{\box4}\sb{\box\thr@@}\else #3^{\box4}(#4^{}\sb{\box\thr@@})\fi
+%    \end{macrocode}
+% Benefit symbol alone, or principle symbol and benefit symbol between
+% parentheses, and the right subscript and superscript.
+%    \begin{macrocode}
+    \ifdim\wd\z@=\z@
+      #4^{\box4}\sb{\box\thr@@}%
+    \else
+      #3^{\box4}(#4^{}\sb{\box\thr@@})%
+    \fi
   \else% expression without superscripts
+%    \end{macrocode}
+% Same ideas as above in the simpler case without superscripts. That
+% way, {\TeX}'s default placement of subscripts and superscripts is
+% maintained.
+%    \begin{macrocode}
     \mathopen{\vphantom{#4}}\sb{\box\@ne}%
-    \ifdim\wd\z@=\z@ #4\sb{\box\thr@@}\else #3(#4\sb{\box\thr@@})\fi
+    \ifdim\wd\z@=\z@
+      #4\sb{\box\thr@@}%
+    \else
+      #3(#4\sb{\box\thr@@})%
+    \fi
   \fi
 }
-
+%    \end{macrocode}
+%
+% \subsubsection{Shortcuts}
+% \label{sec:implementation:symbol:shortcuts}
+%
+% We define the shortcut macros of \autoref{tab:principal} for
+% principal symbols of life tables, insurance and annuities.
+%    \begin{macrocode}
 \DeclareRobustCommand{\lx}[1]{\ell\sb{#1}}
 \DeclareRobustCommand{\px}{\ACTS@actsc{p}}
 \DeclareRobustCommand{\qx}{\ACTS@actsc{q}}
 \DeclareRobustCommand{\dx}{\ACTS@actsc{d}}
-
 \DeclareRobustCommand{\Ax}{%
-  \@ifstar{\ACTS@actsc{\bar{A}}}{\ACTS@actsc{A}}}
+  \@ifstar{\ACTS@actsc{\bar{A}}}%
+          {\ACTS@actsc{A}}}
 \DeclareRobustCommand{\Ex}{\ACTS@actsc{E}}
 \DeclareRobustCommand{\ax}{%
-  \@ifstar{%
-    \@ifstar{\ACTS@actsc{\ddot{a}}}{\ACTS@actsc{\bar{a}}}}{\ACTS@actsc{a}}}
+  \@ifstar{\@ifstar{\ACTS@actsc{\ddot{a}}}%
+                   {\ACTS@actsc{\bar{a}}}}%
+          {\ACTS@actsc{a}}}
 \DeclareRobustCommand{\aringx}{\ACTS@actsc{\mathring{a}}}
 \DeclareRobustCommand{\eringx}{\ACTS@actsc{\mathring{e}}}
-
 \DeclareRobustCommand{\premium}{%
-  \@ifstar{\ACTS@actprem{\bar{P}}}{\ACTS@actprem{P}}}
+  \@ifstar{\ACTS@actprem{\bar{P}}}%
+          {\ACTS@actprem{P}}}
 \DeclareRobustCommand{\reserve}{%
-  \@ifstar{\ACTS@actprem{\bar{V}}}{\ACTS@actprem{V}}}
+  \@ifstar{\ACTS@actprem{\bar{V}}}%
+          {\ACTS@actprem{V}}}
 \DeclareRobustCommand{\paidup}{%
-  \@ifstar{\ACTS@actprem{\bar{W}}}{\ACTS@actprem{W}}}
-
+  \@ifstar{\ACTS@actprem{\bar{W}}}%
+          {\ACTS@actprem{W}}}
+%    \end{macrocode}
+% Then follow the shortcuts for common auxiliary symbols listed in
+% \autoref{tab:aux}. Command \cmd{\joint} is simply defined as an
+% alias of \cmd{\overline}.
+%    \begin{macrocode}
 \DeclareRobustCommand{\term}[2]{\itop{#1}:\angl{#2}}
 \DeclareRobustCommand{\pureendow}[2]{#1:\itop{\angl{#2}}}
 \DeclareRobustCommand{\pureendowxn}{x:\itop{\angln}}
 \DeclareRobustCommand{\endow}[2]{#1:\angl{#2}}
 \DeclareRobustCommand{\endowxn}{x:\angln}
 \let\joint\overline
+%    \end{macrocode}
+%
 
+%    \begin{macrocode}
 \newlength{\twoletkern}
 \setlength{\twoletkern}{1.2pt}
 \DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{(#2\kern-#1#3)}
+%    \end{macrocode}
+%
 
+%    \begin{macrocode}
 \newcommand{\IA}{%
   \@ifstar{%
     \@ifstar{\twoletsymb{\bar{I}}{\bar{A}}}{%
@@ -899,6 +1038,8 @@
   \@ifstar{%
     \@ifstar{\twoletsymb{\bar{D}}{\bar{A}}}{%
       \twoletsymb{D}{\bar{A}}}}{\twoletsymb{D}{A}}}
+%    \end{macrocode}
+%
 
 % \newcommand{\Ia}{\twoletsymb{Ia}}
 % \newcommand{\Ibarabar}{\twoletsymb{\bar{I}\bar{a}}}
@@ -910,6 +1051,34 @@
 % \newcommand{\Dadd}{\twoletsymb{D\ddot{a}}}
 % \newcommand{\Ds}{\twoletsymb{Ds}}
 % \newcommand{\Dsdd}{\twoletsymb{D\ddot{s}}}
+
+% ^^A In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
+% ^^A multiplier for the baseline skip between the top and bottom symbols, #3 is a
+% ^^A multiplier for the line skip between the top and bottom symbols, #4
+% ^^A is the first argument from the user, #5 is \displaystyle or
+% ^^A \textstyle or \scriptstyle or \scriptscriptstyle, from \mathpalette,
+% ^^A and #6 is the second argument given by the user. This peculiar
+% ^^A ordering of the arguments is done to work around the restriction of
+% ^^A \mathpalette that it only reads two arguments.
+
+%    \begin{macrocode}
+\def\preced@#1#2#3#4#5#6{%
+  % Measure the arguments:
+  \setbox\tw@\hbox{$\m@th#5#4$}%
+  \setbox\z@\hbox{$\m@th#5#6$}
+  \dimen@\wd\z@
+  \vbox to\ht\z@{%
+    % \lineskip is set using AMSTeX's \ex@, if available, for a slight
+    % refinement in the spacing if this macro is used in eightpoint
+    % text. If \ex@ is not available, \p@ is used.
+    \baselineskip=#2
+    \lineskip=#3\relax
+    \lineskiplimit\lineskip
+    \if b#1\relax\box\z@\else\vss\fi
+    \hbox to\dimen@{\hss\unhbox\tw@\hss}%
+    \if t#1\relax\box\z@\else\vss\fi
+  }% end \vbox
+}% end \preced@
 
 \newlength{\nthtopskip}
 \setlength{\nthtopskip}{2\p@}
@@ -929,33 +1098,6 @@
 \DeclareRobustCommand{\varnthbottom}[2]{%
   \mathpalette{\preced@ b\varnthbottomskip\z@{#1}}{#2}}
 \ProcessOptions
-
-% In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
-% multiplier for the baseline skip between the top and bottom symbols, #3 is a
-% multiplier for the line skip between the top and bottom symbols, #4
-% is the first argument from the user, #5 is \displaystyle or
-% \textstyle or \scriptstyle or \scriptscriptstyle, from \mathpalette,
-% and #6 is the second argument given by the user. This peculiar
-% ordering of the arguments is done to work around the restriction of
-% \mathpalette that it only reads two arguments.
-
-\def\preced@#1#2#3#4#5#6{%
-  % Measure the arguments:
-  \setbox\tw@\hbox{$\m@th#5#4$}%
-  \setbox\z@\hbox{$\m@th#5#6$}
-  \dimen@\wd\z@
-  \vbox to\ht\z@{%
-    % \lineskip is set using AMSTeX's \ex@, if available, for a slight
-    % refinement in the spacing if this macro is used in eightpoint
-    % text. If \ex@ is not available, \p@ is used.
-    \baselineskip=#2
-    \lineskip=#3\relax
-    \lineskiplimit\lineskip
-    \if b#1\relax\box\z@\else\vss\fi
-    \hbox to\dimen@{\hss\unhbox\tw@\hss}%
-    \if t#1\relax\box\z@\else\vss\fi
-  }% end \vbox
-}% end \preced@
 
 \DeclareRobustCommand{\firsttop}[1]{\nthtop{1}{#1}}
 \DeclareRobustCommand{\secondtop}[1]{\nthtop{2}{#1}}
