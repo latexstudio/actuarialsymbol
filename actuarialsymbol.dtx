@@ -147,8 +147,8 @@
 %   \centering
 %   \includegraphics[width=\linewidth]{mosaic}
 %   \caption{``Actuariat'' (French for Actuarial Science) written
-%   using actuarial symbols on the 1972 graduating class mosaic at
-%   Université Laval}
+%     using actuarial symbols on the 1972 graduating class mosaic at
+%     Université Laval}
 %   \label{fig:mosaic}
 % \end{figure}
 %
@@ -159,9 +159,9 @@
 % right. Schematically, we thus have:
 % \begin{equation}
 %   \label{schema1}
-%   \actsymb[\fbox{\small I}\!\;][\fbox{\small II}\!\;]%
-%      {\framebox[5ex]{\large $S$}}{\,\fbox{\small III}}%
-%      [\,\fbox{\small IV}]
+%   \actsymb[\fbox{\scriptsize I}\!\;][\fbox{\scriptsize II}\!\;]%
+%      {\framebox[5ex]{ $S$}}{\,\fbox{\scriptsize III}}%
+%      [\,\fbox{\scriptsize IV}]
 % \end{equation}
 %
 % The principal symbol is in general a single letter. The letter may be
@@ -169,9 +169,9 @@
 % circle ($\mathring{e}$). When the principal symbol consists of two
 % letters, they are grouped between parentheses, as in $\IA$ or
 % $\DA**$. Most commonly, there is an auxiliary symbol (or collection
-% of symbols) in the lower-right position \fbox{III}. Otherwise,
-% auxiliary symbols appear lower-left \fbox{I}, upper-left
-% \fbox{II} and upper-right \fbox{IV}, in that order of frequency.
+% of symbols) in the lower-right position \fbox{\small III}. Otherwise,
+% auxiliary symbols appear lower-left \fbox{\small I}, upper-left
+% \fbox{\small II} and upper-right \fbox{\small IV}, in that order of frequency.
 %
 % Principle symbols for benefit premiums, reserves and amount of
 % reduced paid-up insurance, $P$, $V$ and $W$ are combined with
@@ -180,9 +180,9 @@
 % following symbol structure (replace $P$ by $V$ or $W$ as needed):
 % \begin{equation}
 %   \label{schema2}
-%   \actsymb[\fbox{\small I}\!\;][\fbox{\small II}\!\;]%
-%      {\framebox[5ex]{\large $P$}}{}[\,\fbox{\small IV}]%
-%   \bigl(\actsymb{\framebox[5ex]{\large $S$}}{\,\fbox{\small III}}\bigr)%
+%   \actsymb[\fbox{\scriptsize I}\!\;][\fbox{\scriptsize II}\!\;]%
+%      {\framebox[5ex]{$P$}}{}[\,\fbox{\scriptsize IV}]%
+%   \bigl(\actsymb{\framebox[5ex]{\large $S$}}{\,\fbox{\scriptsize III}}\bigr)%
 % \end{equation}
 %
 % Perhaps the most commonly used auxiliary symbol not readily
@@ -213,11 +213,11 @@
 %     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{principal}\marg{lr}\oarg{ur}
 %   \end{quote}
 %   Above, \meta{ll} identifies the auxiliary symbol in the lower
-%   left subscript position \fbox{I} (following the notation in the
+%   left subscript position \fbox{\small I} (following the notation in the
 %   schematic representation \eqref{schema1}); \meta{ul} is the upper
-%   left superscript \fbox{II}; \meta{principal} is the principal symbol $S$;
-%   \meta{lr} is the lower right subscript \fbox{III}; \meta{ur} is
-%   the upper right superscript $\fbox{IV}$. The principal symbol and the
+%   left superscript \fbox{\small II}; \meta{principal} is the principal symbol $S$;
+%   \meta{lr} is the lower right subscript \fbox{\small III}; \meta{ur} is
+%   the upper right superscript $\fbox{\small IV}$. The principal symbol and the
 %   right subscript are required, the other arguments are optional.
 %   \begin{demo}
 %     \begin{texample}
@@ -360,7 +360,7 @@
 %   \end{quote}
 %   put a precedence \meta{number} above an \meta{item}, smashed so
 %   that the apparent height of the item is its normal height. This is
-%   normally used in the right subscript \fbox{III} of a symbol. With
+%   normally used in the right subscript \fbox{\small III} of a symbol. With
 %   \cmd{\nthtop}, the spacing between the precedence number and the
 %   item is a constant \cmd{\nthtopskip} (see below). This can result
 %   in precedence numbers placed at different heights if one item
@@ -441,7 +441,7 @@
 %
 % \begin{rem}
 %   The fact that top precedence numbers have zero height means they
-%   will clash with a right superscript \fbox{IV}:
+%   will clash with a right superscript \fbox{\small IV}:
 %   \begin{demo}
 %     \begin{texample}[0.7]
 %       |\actsymb{A}{\nthtop{1}{x}:\angln}[(m)]|
@@ -538,7 +538,7 @@
 % \end{table}
 %
 % \autoref{tab:aux} lists shortcuts for a few common auxiliary symbols
-% used in the lower right subscript \fbox{III}.
+% used in the lower right subscript \fbox{\small III}.
 %
 % \begin{table}
 %   \centering
