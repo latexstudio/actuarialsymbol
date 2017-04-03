@@ -346,91 +346,91 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthtop}
-%   \begin{DescribeMacro}{\varnthtop}
-%     Commands
-%     \begin{quote}
-%       \cmd{\nthtop}\oarg{length}\marg{number}\marg{item} \\
-%       \cmd{\varnthtop}\oarg{length}\marg{number}\marg{item}
-%     \end{quote}
-%     put a precedence \meta{number} above an \meta{item}, smashed so
-%     that the apparent height of the item is its normal height. This
-%     is normally used in the right subscript \fbox{III} of a symbol.
-%     With \cmd{\nthtop}, the spacing between the precedence number
-%     and the item is a constant \cmd{\nthtopskip} (see below). This
-%     can result in precedence numbers placed at different heights if
-%     one item contains an horizontal rule.
-%     \begin{demo}
-%       \begin{texample}[0.85]
-%         |\actsymb{A}{\nthtop{1}{x}:\angln}|
-%         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}:\angln}$
-%       \end{texample}
-%       \begin{texample}[0.85]
-%         |\actsymb{A}{x:\nthtop{1}{\angln}}|
-%         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{x:\nthtop{1}{\angln}}$
-%       \end{texample}
-%       \begin{texample}[0.85]
-%         |\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}|
-%         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}$
-%       \end{texample}
-%     \end{demo}
-%     Conversely, \cmd{\varnthtop} always leaves enough space
-%     \cmd{\varnthtopskip} for intervening horizontal rules, resulting
-%     in vertically aligned precedence numbers.
-%     \begin{demo}
-%       \begin{texample}[0.85]
-%         |\actsymb{A}{\varnthtop{1}{x}:\angln}|
-%         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}:\angln}$
-%       \end{texample}
-%       \begin{texample}[0.85]
-%         |\actsymb{A}{x:\varnthtop{1}{\angln}}|
-%         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{x:\varnthtop{1}{\angln}}$
-%       \end{texample}
-%       \begin{texample}[0.85]
-%         |\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}|
-%         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}$
-%       \end{texample}
-%     \end{demo}
-%     The optional argument \meta{length} changes the default spacing
-%     for one symbol. The package also defines shortcuts for first,
-%     second and third top precedence; see \autoref{sec:shortcuts}.
-%   \end{DescribeMacro}
+% \begin{DescribeMacro}{\varnthtop}
+%   Commands
+%   \begin{quote}
+%     \cmd{\nthtop}\oarg{length}\marg{number}\marg{item} \\
+%     \cmd{\varnthtop}\oarg{length}\marg{number}\marg{item}
+%   \end{quote}
+%   put a precedence \meta{number} above an \meta{item}, smashed so
+%   that the apparent height of the item is its normal height. This is
+%   normally used in the right subscript \fbox{III} of a symbol. With
+%   \cmd{\nthtop}, the spacing between the precedence number and the
+%   item is a constant \cmd{\nthtopskip} (see below). This can result
+%   in precedence numbers placed at different heights if one item
+%   contains an horizontal rule.
+%   \begin{demo}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{\nthtop{1}{x}:\angln}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}:\angln}$
+%     \end{texample}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{x:\nthtop{1}{\angln}}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{x:\nthtop{1}{\angln}}$
+%     \end{texample}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}$
+%     \end{texample}
+%   \end{demo}
+%   Conversely, \cmd{\varnthtop} always leaves enough space
+%   \cmd{\varnthtopskip} for intervening horizontal rules, resulting
+%   in vertically aligned precedence numbers.
+%   \begin{demo}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{\varnthtop{1}{x}:\angln}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}:\angln}$
+%     \end{texample}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{x:\varnthtop{1}{\angln}}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{x:\varnthtop{1}{\angln}}$
+%     \end{texample}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}$
+%     \end{texample}
+%   \end{demo}
+%   The optional argument \meta{length} changes the default spacing
+%   for one symbol. The package also defines shortcuts for first,
+%   second and third top precedence; see \autoref{sec:shortcuts}.
+% \end{DescribeMacro}
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthbottom}
-%   \begin{DescribeMacro}{\varnthbottom}
-%     Similar to the above two commands,
-%     \begin{quote}
-%       \cmd{\nthbottom}\marg{number}\marg{item}
-%       \cmd{\varnthbottom}\marg{number}\marg{item}
-%     \end{quote}
-%     put a precedence \meta{number} below an \meta{item}. With
-%     \cmd{\nthbottom} the spacing is constant, whereas with
-%     \cmd{\varnthbottom} precedence numbers are bottom aligned. The
-%     latter command is useful when more than one bottom precedence
-%     numbers are used and one of the items has a descender.
-%     \begin{demo}
-%       \begin{texample}[0.85]
-%         |\actsymb{A}{w\nthtop{3}{x}%| \\
-%         |            \nthbottom{1}{y}\nthbottom{2}{z}}|
-%         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\nthbottom{1}{y}\nthbottom{2}{z}}$
-%       \end{texample}
-%       \begin{texample}[0.85]
-%         |\actsymb{A}{w\nthtop{3}{x}%| \\
-%         |            \varnthbottom{1}{y}\varnthbottom{2}{z}}|
-%         \producing
-%         \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\varnthbottom{1}{y}\varnthbottom{2}{z}}$
-%       \end{texample}
-%     \end{demo}
-%     The package also defines shortcuts for first, second and third bottom
-%     precedence; see \autoref{sec:shortcuts}.
-%   \end{DescribeMacro}
+% \begin{DescribeMacro}{\varnthbottom}
+%   Similar to the above two commands,
+%   \begin{quote}
+%     \cmd{\nthbottom}\marg{number}\marg{item}
+%     \cmd{\varnthbottom}\marg{number}\marg{item}
+%   \end{quote}
+%   put a precedence \meta{number} below an \meta{item}. With
+%   \cmd{\nthbottom} the spacing is constant, whereas with
+%   \cmd{\varnthbottom} precedence numbers are bottom aligned. The
+%   latter command is useful when more than one bottom precedence
+%   numbers are used and one of the items has a descender.
+%   \begin{demo}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{w\nthtop{3}{x}%| \\
+%       |            \nthbottom{1}{y}\nthbottom{2}{z}}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\nthbottom{1}{y}\nthbottom{2}{z}}$
+%     \end{texample}
+%     \begin{texample}[0.85]
+%       |\actsymb{A}{w\nthtop{3}{x}%| \\
+%       |            \varnthbottom{1}{y}\varnthbottom{2}{z}}|
+%       \producing
+%       \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\varnthbottom{1}{y}\varnthbottom{2}{z}}$
+%     \end{texample}
+%   \end{demo}
+%   The package also defines shortcuts for first, second and third bottom
+%   precedence; see \autoref{sec:shortcuts}.
+% \end{DescribeMacro}
 % \end{DescribeMacro}
 %
 % \begin{rem}
@@ -459,28 +459,27 @@
 % \end{rem}
 %
 % \begin{DescribeMacro}{\nthtopskip}
-%   \begin{DescribeMacro}{\varnthtopskip}
-%     \begin{DescribeMacro}{\nthbottomskip}
-%       \begin{DescribeMacro}{\varnthbottomskip}
-%         The constant spacing between a top precedence number and the
-%         item underneath when using \cmd{\nthtop} is
-%         \cmd{\nthtopskip}, by default \the\nthtopskip. The constant
-%         height of top precedence numbers when using \cmd{\varnthtop}
-%         is achieved by setting the baseline skip to
-%         \cmd{\varnthtopskip}, by default \the\varnthtopskip.
+% \begin{DescribeMacro}{\varnthtopskip}
+% \begin{DescribeMacro}{\nthbottomskip}
+% \begin{DescribeMacro}{\varnthbottomskip}
+%   The constant spacing between a top precedence number and the item
+%   underneath when using \cmd{\nthtop} is \cmd{\nthtopskip}, by
+%   default \the\nthtopskip. The constant height of top precedence
+%   numbers when using \cmd{\varnthtop} is achieved by setting the
+%   baseline skip to \cmd{\varnthtopskip}, by default
+%   \the\varnthtopskip.
 %
-%         Similarly, the constant spacing between a bottom precedence
-%         number and the item above when using \cmd{\nthbottom} is
-%         \cmd{\nthbottomskip}, by default \the\nthbottomskip, and the
-%         constant height of bottom precedence numbers when using
-%         \cmd{\varnthbottom} is achieved by setting the baseline skip
-%         to \cmd{\varnthbottomskip}, by default
-%         \the\varnthbottomskip.
+%   Similarly, the constant spacing between a bottom precedence number
+%   and the item above when using \cmd{\nthbottom} is
+%   \cmd{\nthbottomskip}, by default \the\nthbottomskip, and the
+%   constant height of bottom precedence numbers when using
+%   \cmd{\varnthbottom} is achieved by setting the baseline skip to
+%   \cmd{\varnthbottomskip}, by default \the\varnthbottomskip.
 %
-%         These values can be changed as usual using \cmd{\setlength}.
-%       \end{DescribeMacro}
-%     \end{DescribeMacro}
-%   \end{DescribeMacro}
+%   These values can be changed as usual using \cmd{\setlength}.
+% \end{DescribeMacro}
+% \end{DescribeMacro}
+% \end{DescribeMacro}
 % \end{DescribeMacro}
 %
 % \section{Shortcuts}
