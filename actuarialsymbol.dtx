@@ -142,7 +142,7 @@
 %   \label{fig:mosaic}
 % \end{figure}
 %
-% \citet[Appendix~4]{Bowers:2e:2002} offer an excellent overview of
+% \citet[Appendix~4]{Bowers:2e:1997} offer an excellent overview of
 % the composition rules for symbols of actuarial functions. In a
 % nutshell, a core symbol, say $S$, is combined with auxiliary symbols
 % positioned in subscript or in superscript, to the left or to the
@@ -629,7 +629,109 @@
 % nor see a reason --- to use it as it basically renders inoperative
 % commands \cmd{\varnthtop} and \cmd{\varnthbottom}.
 %
+% \StopEventually{
+% \begin{thebibliography}{4}
+% \bibitem[Bowers et~al.(1997)Bowers, Gerber, Hickman, Jones, and
+%   Nesbitt]{Bowers:2e:1997}
+%   N.~L. Bowers, H.~U. Gerber, J.~C. Hickman, D.~A. Jones, and C.~J. Nesbitt.
+%   \newblock \emph{Actuarial Mathematics}.
+%   \newblock Society of Actuaries, Shaumburg, IL, second edition, 1997.
+%   \newblock ISBN 0-9389594-6-8.
+%
+% \bibitem[Goulet(2017)]{actuarialangle}
+%   Vincent Goulet.
+%   \newblock \emph{actuarialangle}, 2017.
+%   \newblock URL \url{http://www.ctan.org/pkg/actuarialangle/}.
+%
+% \bibitem[Pakin(2015)]{comprehensive}
+%   Scott Pakin.
+%   \newblock The comprehensive {\LaTeX} symbol list, 2015.
+%   \newblock URL \url{http://www.ctan.org/pkg/comprehensive/}.
+%
+% \bibitem[Robertson(2007)]{subdepth}
+%   Will Robertson.
+%   \newblock \emph{Unify subscript depths}, 2007.
+%   \newblock URL \url{http://www.ctan.org/pkg/subdepth/}.
+%
+% \bibitem[Trivedi(2004)]{Trivedi:lifecon:2004}
+%   Eddy Trivedi.
+%   \newblock \emph{Life Contingencies' Symbols}, 2004.
+%   \newblock \texttt{lifecon} 2.1 User Guide.
+%
+% \bibitem[Wolthuis(2004)]{Wolthuis:notation:2004}
+%   Henk Wolthuis.
+%   \newblock International actuarial notation.
+%   \newblock In Jozef Teugels and Bj{\o}rn Sundt, editors, \emph{Encyclopedia of
+%   Actuarial Science}. Wiley, 2004.
+%   \newblock ISBN 978-0-47001250-5.
+%   \newblock URL \url{http://onlinelibrary.wiley.com/book/10.1002/9780470012505}.
+%
+% \end{thebibliography}
+% }
+%
 % \appendix
+% \section{Comprehensive life contingencies symbol list}
+% \label{sec:list}
+%
+% This appendix was inspired by \citet{Trivedi:lifecon:2004} and its
+% title is a nod to the immensely useful \emph{The Comprehensive
+% {\LaTeX} Symbol List} \citep{comprehensive}.
+%
+% We provide below a table of all the life contingencies symbols used
+% in \citet[Appendix~3]{Bowers:2e:1997} along with the code to compose
+% them with \pkg{actuarialsymbol} loaded. There are often times many
+% different ways to obtain a symbol; we tried to always present the
+% most compact and legible one. Not all symbols require features of
+% \pkg{actuarialsymbol}.
+%
+% \catcode`\|=12 ^^A to use | in math, disable as verbatim delimiter
+% \begin{longtable}{ll}
+%   \toprule
+%   Symbol & Code to compose the symbol \\
+%   \midrule
+%   \showcase{a} \\
+%   \showcase{a(x)} \\
+%   \showcase{a_x} \\
+%   \showcase{\ax{\angl{K}}} \\
+%   \showcase{\ax*{\angln}} \\
+%   \showcase{\ax*{P_t}} \\
+%   \showcase{\ax*{\angl{T}}} \\
+%   \showcase{\ax*{x}} \\
+%   \showcase{\ax*{r}[h]} \\
+%   \showcase{\ax*{x + t}[i]} \\
+%   \showcase{\ax*{x + t}[r]} \\
+%   \showcase{\ax**{\angl{K + 1}}} \\
+%   \showcase{\ax**{x}[(m)]} \\
+%   \showcase{\actsymb{\mathring{a}}{x}[(m)]} \\
+%   \showcase{\ax**{x}[\{m\}]} \\
+%   \showcase{\ax**[j]{x}} \\
+%   \showcase{\ax**[*]{x}} \\
+%   \showcase{\ax{\endowxn}} \\
+%   \showcase{\ax*{\endowxn}} \\
+%   \showcase{\ax**{\endowxn}} \\
+%   \showcase{\ax**{\endowxn}[(m)]} \\
+%   \showcase{\actsymb{\mathring{a}}{\endowxn}[(m)]} \\
+%   \showcase{\ax**{\endowxn}[\{m\}]} \\
+%   \showcase{\ax*{\joint\endowxn}} \\
+%   \showcase{\ax*[][2]{\endowxn}} \\
+%   \showcase{\ax[n|]{x}} \\
+%   \showcase{\ax*[n|]{x}} \\
+%   \showcase{\ax**[n|]{x}} \\
+%   \showcase{\ax**[n|]{x}[(m)]} \\
+%   \showcase{\ax*{xy|z}[1]} \\
+%   \showcase{\ax**{xy}[(m)]} \\
+%   \showcase{\ax**{xy:\angln}} \\
+%   \showcase{\ax**[][2]{xy:\angln}} \\
+%   \showcase{\ax*{x|y}} \\
+%   \showcase{\ax*{\joint{x_1 x_2 x_3}}} \\
+%   \showcase{\twoletsymb{a}{A}(x)} \\
+%   \showcase{\twoletsymb{a}{A}_t} \\
+%   \showcase{\twoletsymb{a}{C}_t} \\
+%   \showcase{\twoletsymb{a}{F}_t} \\
+%   \showcase{\twoletsymb{a}{U}_t} \\
+%   \showcase{\twoletsymb{a}{V}(x)} \\
+%   \showcase{\twoletsymb{a}{V}_t} \\
+% \end{longtable}
 %
 % \section{Implementation}
 % \label{sec:implementation}
@@ -849,65 +951,7 @@
 %\fi
 %    \end{macrocode}
 %
-% \section{Comprehensive life contingencies symbol list}
-% \label{sec:list}
-%
-% Inspired by \citet{Trivedi:lifecon:2004}, this appendix provides a
-% table of all the life contingencies symbols used in
-% \citet[Appendix~3]{Bowers:2e:2002} along with the code to compose
-% them with \pkg{actuarialsymbol} loaded. There are often times many
-% different ways to obtain a symbol; we tried to always present the
-% most compact and legible one. Not all symbols require features of
-% \pkg{actuarialsymbol}.
-%
-% \catcode`\|=12 ^^A disable | as verbatim delimiter to use in math
-% \begin{longtable}{ll}
-%   \toprule
-%   Symbol & Code to compose the symbol \\
-%   \midrule
-%   \showcase{a} \\
-%   \showcase{a(x)} \\
-%   \showcase{a_x} \\
-%   \showcase{\ax{\angl{K}}} \\
-%   \showcase{\ax*{\angln}} \\
-%   \showcase{\ax*{P_t}} \\
-%   \showcase{\ax*{\angl{T}}} \\
-%   \showcase{\ax*{x}} \\
-%   \showcase{\ax*{r}[h]} \\
-%   \showcase{\ax*{x + t}[i]} \\
-%   \showcase{\ax*{x + t}[r]} \\
-%   \showcase{\ax**{\angl{K + 1}}} \\
-%   \showcase{\ax**{x}[(m)]} \\
-%   \showcase{\actsymb{\mathring{a}}{x}[(m)]} \\
-%   \showcase{\ax**{x}[\{m\}]} \\
-%   \showcase{\ax**[j]{x}} \\
-%   \showcase{\ax**[*]{x}} \\
-%   \showcase{\ax{\endowxn}} \\
-%   \showcase{\ax*{\endowxn}} \\
-%   \showcase{\ax**{\endowxn}} \\
-%   \showcase{\ax**{\endowxn}[(m)]} \\
-%   \showcase{\actsymb{\mathring{a}}{\endowxn}[(m)]} \\
-%   \showcase{\ax**{\endowxn}[\{m\}]} \\
-%   \showcase{\ax*{\joint\endowxn}} \\
-%   \showcase{\ax*[][2]{\endowxn}} \\
-%   \showcase{\ax[n|]{x}} \\
-%   \showcase{\ax*[n|]{x}} \\
-%   \showcase{\ax**[n|]{x}} \\
-%   \showcase{\ax**[n|]{x}[(m)]} \\
-%   \showcase{\ax*{xy|z}[1]} \\
-%   \showcase{\ax**{xy}[(m)]} \\
-%   \showcase{\ax**{xy:\angln}} \\
-%   \showcase{\ax**[][2]{xy:\angln}} \\
-%   \showcase{\ax*{x|y}} \\
-%   \showcase{\ax*{\joint{x_1 x_2 x_3}}} \\
-%   \showcase{\twoletsymb{a}{A}(x)} \\
-%   \showcase{\twoletsymb{a}{A}_t} \\
-%   \showcase{\twoletsymb{a}{C}_t} \\
-%   \showcase{\twoletsymb{a}{F}_t} \\
-%   \showcase{\twoletsymb{a}{U}_t} \\
-%   \showcase{\twoletsymb{a}{V}(x)} \\
-%   \showcase{\twoletsymb{a}{V}_t} \\
-% \end{longtable}
+% \Finale
 %
 % ^^A Local Variables:
 % ^^A mode: doctex
