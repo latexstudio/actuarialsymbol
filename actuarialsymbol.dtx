@@ -1046,8 +1046,11 @@
 % \subsubsection{Shortcuts}
 % \label{sec:implementation:actsymb:shortcuts}
 %
-% We define the shortcut macros of \autoref{tab:principal} for
-% principal symbols of life tables, insurance and annuities.
+% We first define the internal macros and parsing macros used to
+% define shorcuts for insurance benefits (\cmd{\@actinssc}), annuity
+% benefits (\cmd{\@actannsc}), simple symbols (\cmd{\@actothersc}),
+% and for premiums, reserves and paid-up insurance symbols
+% (\cmd{\@actpremres}).
 %    \begin{macrocode}
 \newcommand\@actinssc[1]{%
   \@ifstar{\ACTS@actsc{\bar{#1}}}%
@@ -1068,18 +1071,6 @@
 \def\ACTS@@@actsc#1[#2][#3]#4{%
   \@ifnextchar[{\@actsymbol[#2][#3][]{#1}{#4}}%
                {\@actsymbol[#2][#3][]{#1}{#4}[]}}
-\DeclareRobustCommand{\lx}[1]{\ell\sb{#1}}
-\DeclareRobustCommand{\dx}{\@actothersc d}
-\DeclareRobustCommand{\px}{\@actothersc p}
-\DeclareRobustCommand{\qx}{\@actothersc q}
-\DeclareRobustCommand{\Ax}{\@actinssc A}
-\DeclareRobustCommand{\Ex}{\@actinssc E}
-\DeclareRobustCommand{\ax}{\@actannsc a}
-\DeclareRobustCommand{\aringx}{\@actothersc{\mathring{a}}}
-\DeclareRobustCommand{\eringx}{\@actothersc{\mathring{e}}}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
 \newcommand\@actpremres[1]{%
   \@ifstar{\ACTS@actpremres{\bar{#1}}}%
           {\ACTS@actpremres{#1}}}
@@ -1094,11 +1085,27 @@
 \def\ACTS@@@actpremres#1[#2][#3]#4#5{%
   \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}%
                {\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
+%    \end{macrocode}
+% We can now define all the shortcuts of \autoref{tab:principal}.
+%    \begin{macrocode}
+\DeclareRobustCommand{\lx}[1]{\ell\sb{#1}}
+\DeclareRobustCommand{\dx}{\@actothersc d}
+\DeclareRobustCommand{\px}{\@actothersc p}
+\DeclareRobustCommand{\qx}{\@actothersc q}
+\DeclareRobustCommand{\Ax}{\@actinssc A}
+\DeclareRobustCommand{\Ex}{\@actinssc E}
+\DeclareRobustCommand{\ax}{\@actannsc a}
+\DeclareRobustCommand{\aringx}{\@actothersc{\mathring{a}}}
+\DeclareRobustCommand{\eringx}{\@actothersc{\mathring{e}}}
 \DeclareRobustCommand{\premium}{\@actpremres P}
 \DeclareRobustCommand{\reserve}{\@actpremres V}
 \DeclareRobustCommand{\paidup}{\@actpremres W}
 %    \end{macrocode}
-% Then follow the shortcuts for common auxiliary symbols listed in
+%
+% \subsection{Auxiliary symbols}
+% \label{sec:implementation:aux}
+%
+% Here we define the shortcuts for common auxiliary symbols listed in
 % \autoref{tab:aux}. Command \cmd{\joint} is simply defined as an
 % alias of \cmd{\overline}.
 %    \begin{macrocode}
@@ -1121,11 +1128,10 @@
 \DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{(#2\kern-#1#3)}
 %    \end{macrocode}
 %
-% ^^A FIXME
-% Although all very similar, we defined the shortcut macros of
-% \autoref{tab:twoletsymb} directly using \cmd{\twoletsymb}. Note that
-% we used a smaller negative kerning adjustment for symbols of
-% financial mathematics.
+% Using the same ideas as above, we define two internal macros used to
+% define shortcuts for two-letter insurance and annuity benefit
+% symbols. Note that we used a smaller negative kerning adjustment for
+% symbols annuity symbols.
 %    \begin{macrocode}
 \newcommand\@twoletinssc[3][\twoletkern]{%
   \@ifstar{\twoletsymb[#1]{#2}{\bar{#3}}}%
@@ -1134,6 +1140,9 @@
   \@ifstar{\@ifstar{\twoletsymb[#1]{#2}{\ddot{#3}}}%
                    {\twoletsymb[#1]{#2}{\bar{#3}}}}%
           {\twoletsymb[#1]{#2}{#3}}}
+%    \end{macrocode}
+% Follow the shortcuts of \autoref{tab:twoletsymb}.
+%    \begin{macrocode}
 \newcommand{\IA}{\@twoletinssc IA}
 \newcommand{\IbA}{\@twoletinssc{\bar{I}}A}
 \newcommand{\ImA}{\@twoletinssc{I^{(m)}}A}
