@@ -311,7 +311,7 @@
 %       ${}_tA_x \quad {}_tA_x^2$
 %     \end{texample}
 %     \begin{texample}[0.7]
-%       |\actsymb[t[{A}{x} \quad \actsymb[t]{A}{x}[2]|
+%       |\actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2]|
 %       \producing
 %       $\actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2]$
 %     \end{texample}
@@ -843,35 +843,10 @@
 % The principal symbol shortcut macros have argument |#4| of the
 % workhorse (see below) already set. Therefore, they need specific
 % parsing macros.
-%    \begin{macrocode}
-\newcommand\ACTS@actsc[1]{%
-  \@ifnextchar[{\ACTS@@actsc{#1}}%
-               {\ACTS@@actsc{#1}[]}}
-\newcommand\ACTS@@actsc{}
-\def\ACTS@@actsc#1[#2]{%
-  \@ifnextchar[{\ACTS@@@actsc{#1}[#2]}%
-               {\ACTS@@@actsc{#1}[#2][]}}
-\newcommand\ACTS@@@actsc{}
-\def\ACTS@@@actsc#1[#2][#3]#4{%
-  \@ifnextchar[{\@actsymbol[#2][#3][]{#1}{#4}}%
-               {\@actsymbol[#2][#3][]{#1}{#4}[]}}
-%    \end{macrocode}
 %
 % Similarly, we need specific parsing macros to pass the correct
 % symbol to argument |#3| of \cmd{\@actsymbol} when using shortcuts
 % \cmd{\premium}, \cmd{\reserve} and \cmd{\paidup}.
-%    \begin{macrocode}
-\newcommand\ACTS@actprem[1]{%
-  \@ifnextchar[{\ACTS@@actprem{#1}}{\ACTS@@actprem{#1}[]}}
-\newcommand\ACTS@@actprem{}
-\def\ACTS@@actprem#1[#2]{%
-  \@ifnextchar[{\ACTS@@@actprem{#1}[#2]}%
-               {\ACTS@@@actprem{#1}[#2][]}}
-\newcommand\ACTS@@@actprem{}
-\def\ACTS@@@actprem#1[#2][#3]#4#5{%
-  \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}%
-               {\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
-%    \end{macrocode}
 %
 %
 % \subsubsection{Symbol composition}
@@ -991,29 +966,54 @@
 % We define the shortcut macros of \autoref{tab:principal} for
 % principal symbols of life tables, insurance and annuities.
 %    \begin{macrocode}
+\newcommand\@actinssc[1]{%
+  \@ifstar{\ACTS@actsc{\bar{#1}}}%
+          {\ACTS@actsc{#1}}}
+\newcommand\@actannsc[1]{%
+  \@ifstar{\@ifstar{\ACTS@actsc{\ddot{#1}}}%
+                   {\ACTS@actsc{\bar{#1}}}}
+          {\ACTS@actsc{#1}}}
+\newcommand\ACTS@actsc[1]{%
+  \@ifnextchar[{\ACTS@@actsc{#1}}%
+               {\ACTS@@actsc{#1}[]}}
+\let\@actothersc\ACTS@actsc
+\newcommand\ACTS@@actsc{}
+\def\ACTS@@actsc#1[#2]{%
+  \@ifnextchar[{\ACTS@@@actsc{#1}[#2]}%
+               {\ACTS@@@actsc{#1}[#2][]}}
+\newcommand\ACTS@@@actsc{}
+\def\ACTS@@@actsc#1[#2][#3]#4{%
+  \@ifnextchar[{\@actsymbol[#2][#3][]{#1}{#4}}%
+               {\@actsymbol[#2][#3][]{#1}{#4}[]}}
 \DeclareRobustCommand{\lx}[1]{\ell\sb{#1}}
-\DeclareRobustCommand{\px}{\ACTS@actsc{p}}
-\DeclareRobustCommand{\qx}{\ACTS@actsc{q}}
-\DeclareRobustCommand{\dx}{\ACTS@actsc{d}}
-\DeclareRobustCommand{\Ax}{%
-  \@ifstar{\ACTS@actsc{\bar{A}}}%
-          {\ACTS@actsc{A}}}
-\DeclareRobustCommand{\Ex}{\ACTS@actsc{E}}
-\DeclareRobustCommand{\ax}{%
-  \@ifstar{\@ifstar{\ACTS@actsc{\ddot{a}}}%
-                   {\ACTS@actsc{\bar{a}}}}%
-          {\ACTS@actsc{a}}}
-\DeclareRobustCommand{\aringx}{\ACTS@actsc{\mathring{a}}}
-\DeclareRobustCommand{\eringx}{\ACTS@actsc{\mathring{e}}}
-\DeclareRobustCommand{\premium}{%
-  \@ifstar{\ACTS@actprem{\bar{P}}}%
-          {\ACTS@actprem{P}}}
-\DeclareRobustCommand{\reserve}{%
-  \@ifstar{\ACTS@actprem{\bar{V}}}%
-          {\ACTS@actprem{V}}}
-\DeclareRobustCommand{\paidup}{%
-  \@ifstar{\ACTS@actprem{\overline{W}}}%
-          {\ACTS@actprem{W}}}
+\DeclareRobustCommand{\dx}{\@actothersc d}
+\DeclareRobustCommand{\px}{\@actothersc p}
+\DeclareRobustCommand{\qx}{\@actothersc q}
+\DeclareRobustCommand{\Ax}{\@actinssc A}
+\DeclareRobustCommand{\Ex}{\@actinssc E}
+\DeclareRobustCommand{\ax}{\@actannsc a}
+\DeclareRobustCommand{\aringx}{\@actothersc{\mathring{a}}}
+\DeclareRobustCommand{\eringx}{\@actothersc{\mathring{e}}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newcommand\@actpremres[1]{%
+  \@ifstar{\ACTS@actpremres{\bar{#1}}}%
+          {\ACTS@actpremres{#1}}}
+\newcommand\ACTS@actpremres[1]{%
+  \@ifnextchar[{\ACTS@@actpremres{#1}}%
+               {\ACTS@@actpremres{#1}[]}}
+\newcommand\ACTS@@actpremres{}
+\def\ACTS@@actpremres#1[#2]{%
+  \@ifnextchar[{\ACTS@@@actpremres{#1}[#2]}%
+               {\ACTS@@@actpremres{#1}[#2][]}}
+\newcommand\ACTS@@@actpremres{}
+\def\ACTS@@@actpremres#1[#2][#3]#4#5{%
+  \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}%
+               {\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
+\DeclareRobustCommand{\premium}{\@actpremres P}
+\DeclareRobustCommand{\reserve}{\@actpremres V}
+\DeclareRobustCommand{\paidup}{\@actpremres W}
 %    \end{macrocode}
 % Then follow the shortcuts for common auxiliary symbols listed in
 % \autoref{tab:aux}. Command \cmd{\joint} is simply defined as an
@@ -1044,39 +1044,23 @@
 % we used a smaller negative kerning adjustment for symbols of
 % financial mathematics.
 %    \begin{macrocode}
-
-\def\@twoletsc{\@ifstar\ACTS@twoletscann\ACTS@twoletscins}
-\def\ACTS@twoletscins{%
-  \@ifnextchar[{\ACTS@@twoletscins}%
-               {\ACTS@@@twoletscins}}
-\def\ACTS@@twoletscins[#1]#2#3{%
+\newcommand\@twoletinssc[3][\twoletkern]{%
   \@ifstar{\twoletsymb[#1]{#2}{\bar{#3}}}%
           {\twoletsymb[#1]{#2}{#3}}}
-\def\ACTS@@@twoletscins#1#2{%
-  \@ifstar{\twoletsymb{#1}{\bar{#2}}}%
-          {\twoletsymb{#1}{#2}}}
-\def\ACTS@twoletscann{%
-  \@ifnextchar[{\ACTS@@twoletscann}%
-               {\ACTS@@@twoletscann}}
-\def\ACTS@@twoletscann[#1]#2#3{%
+\newcommand\@twoletannsc[3][\twoletkern]{%
   \@ifstar{\@ifstar{\twoletsymb[#1]{#2}{\ddot{#3}}}%
                    {\twoletsymb[#1]{#2}{\bar{#3}}}}%
           {\twoletsymb[#1]{#2}{#3}}}
-\def\ACTS@@@twoletscann#1#2{%
-  \@ifstar{\@ifstar{\twoletsymb{#1}{\ddot{#2}}}%
-                   {\twoletsymb{#1}{\bar{#2}}}}%
-          {\twoletsymb{#1}{#2}}}
-\newcommand{\IA}{\@twoletsc IA}
-\newcommand{\IbA}{\@twoletsc{\bar{I}}A}
-\newcommand{\ImA}{\@twoletsc{I^{(m)}}A}
-\newcommand{\DA}{\@twoletsc DA}
-\newcommand{\DbA}{\@twoletsc{\bar{D}}A}
-\newcommand{\DmA}{\@twoletsc{D^{(m)}}A}
-
-\newcommand{\Ia}{\@twoletsc*[0.5\twoletkern]Ia}
-\newcommand{\Is}{\@twoletsc*[0.5\twoletkern]Is}
-\newcommand{\Da}{\@twoletsc*[0.5\twoletkern]Da}
-\newcommand{\Ds}{\@twoletsc*[0.5\twoletkern]Ds}
+\newcommand{\IA}{\@twoletinssc IA}
+\newcommand{\IbA}{\@twoletinssc{\bar{I}}A}
+\newcommand{\ImA}{\@twoletinssc{I^{(m)}}A}
+\newcommand{\DA}{\@twoletinssc DA}
+\newcommand{\DbA}{\@twoletinssc{\bar{D}}A}
+\newcommand{\DmA}{\@twoletinssc{D^{(m)}}A}
+\newcommand{\Ia}{\@twoletannsc[0.5\twoletkern]Ia}
+\newcommand{\Is}{\@twoletannsc[0.5\twoletkern]Is}
+\newcommand{\Da}{\@twoletannsc[0.5\twoletkern]Da}
+\newcommand{\Ds}{\@twoletannsc[0.5\twoletkern]Ds}
 %    \end{macrocode}
 %
 
