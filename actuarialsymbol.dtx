@@ -366,18 +366,18 @@
 % \label{sec:features:precedence}
 %
 % \begin{DescribeMacro}{\nthtop}
-% \begin{DescribeMacro}{\varnthtop}
+% \begin{DescribeMacro}{\nthtop*}
 %   Precedence numbers appear above or below individual statuses in
 %   the right subscript \fbox{\small III} of a symbol. Commands
 %   \begin{quote}
 %     \cmd{\nthtop}\oarg{length}\marg{number}\marg{status} \\
-%     \cmd{\varnthtop}\oarg{length}\marg{number}\marg{status}
+%     \cmd{\nthtop*}\oarg{length}\marg{number}\marg{status}
 %   \end{quote}
 %   put a precedence \meta{number} above a \meta{status}, smashed so
 %   that the apparent height of the status is its normal height. This is
 %   normally used in the right subscript \fbox{\small III} of a symbol. With
 %   \cmd{\nthtop}, the spacing between the precedence number and the
-%   status is a constant \cmd{\nthtopskip} (see below). This can result
+%   status is a constant \cmd{\nthtopsep} (see below). This can result
 %   in precedence numbers placed at different heights if one status
 %   contains an horizontal rule.
 %   \begin{demo}
@@ -397,24 +397,24 @@
 %       \rule{0pt}{12pt}$\actsymb{A}{\nthtop{1}{x}y:\nthtop{2}{\angln}}$
 %     \end{texample}
 %   \end{demo}
-%   Conversely, \cmd{\varnthtop} always leaves enough space
-%   \cmd{\varnthtopskip} for intervening horizontal rules, resulting
+%   Conversely, \cmd{\nthtop*} always leaves enough space
+%   \cmd{\nthtopskip} for intervening horizontal rules, resulting
 %   in vertically aligned precedence numbers.
 %   \begin{demo}
 %     \begin{texample}[0.85]
-%       |\actsymb{A}{\varnthtop{1}{x}:\angln}|
+%       |\actsymb{A}{\nthtop*{1}{x}:\angln}|
 %       \producing
-%       \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}:\angln}$
+%       \rule{0pt}{12pt}$\actsymb{A}{\nthtop*{1}{x}:\angln}$
 %     \end{texample}
 %     \begin{texample}[0.85]
-%       |\actsymb{A}{x:\varnthtop{1}{\angln}}|
+%       |\actsymb{A}{x:\nthtop*{1}{\angln}}|
 %       \producing
-%       \rule{0pt}{12pt}$\actsymb{A}{x:\varnthtop{1}{\angln}}$
+%       \rule{0pt}{12pt}$\actsymb{A}{x:\nthtop*{1}{\angln}}$
 %     \end{texample}
 %     \begin{texample}[0.85]
-%       |\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}|
+%       |\actsymb{A}{\nthtop*{1}{x}y:\nthtop*{2}{\angln}}|
 %       \producing
-%       \rule{0pt}{12pt}$\actsymb{A}{\varnthtop{1}{x}y:\varnthtop{2}{\angln}}$
+%       \rule{0pt}{12pt}$\actsymb{A}{\nthtop*{1}{x}y:\nthtop*{2}{\angln}}$
 %     \end{texample}
 %   \end{demo}
 %   The optional argument \meta{length} changes the default spacing
@@ -424,17 +424,19 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\nthbottom}
-% \begin{DescribeMacro}{\varnthbottom}
-%   Similar to the above two commands,
+% \begin{DescribeMacro}{\nthbottom*}
+%   In the same vein as the above two commands,
 %   \begin{quote}
-%     \cmd{\nthbottom}\marg{number}\marg{status} \\
-%     \cmd{\varnthbottom}\marg{number}\marg{status}
+%     \cmd{\nthbottom}\oarg{length}\marg{number}\marg{status} \\
+%     \cmd{\nthbottom*}\oarg{length}\marg{number}\marg{status}
 %   \end{quote}
 %   put a precedence \meta{number} below a \meta{status}. With
-%   \cmd{\nthbottom} the spacing is constant, whereas with
-%   \cmd{\varnthbottom} precedence numbers are bottom aligned. The
-%   latter command is most useful when there is more than one bottom
-%   precedence numbers and one of the statuses has a descender.
+%   \cmd{\nthbottom} the spacing between the status and the number is
+%   a constant \cmd{\nthbottomsep}, whereas with \cmd{\nthbottom*}
+%   enough spacing \cmd{\nthbottomskip} is left to bottom align the
+%   precedence numbers. The |*| variant is most useful in cases
+%   involving more than one bottom precedence numbers and statuses
+%   with a descenders.
 %   \begin{demo}
 %     \begin{texample}[0.85]
 %       |\actsymb{A}{w\nthtop{3}{x}%| \\
@@ -444,13 +446,14 @@
 %     \end{texample}
 %     \begin{texample}[0.85]
 %       |\actsymb{A}{w\nthtop{3}{x}%| \\
-%       |            \varnthbottom{1}{y}\varnthbottom{2}{z}}|
+%       |            \nthbottom*{1}{y}\nthbottom*{2}{z}}|
 %       \producing
-%       \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\varnthbottom{1}{y}\varnthbottom{2}{z}}$
+%       \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\nthbottom*{1}{y}\nthbottom*{2}{z}}$
 %     \end{texample}
 %   \end{demo}
-%   The package also defines shortcuts for first, second and third bottom
-%   precedence; see \autoref{sec:shortcuts}.
+%   The optional argument \meta{length} changes the default spacing
+%   for one symbol. The package also defines shortcuts for first,
+%   second and third bottom precedence; see \autoref{sec:shortcuts}.
 % \end{DescribeMacro}
 % \end{DescribeMacro}
 %
@@ -479,23 +482,23 @@
 %   formulas.
 % \end{rem}
 %
+% \begin{DescribeMacro}{\nthtopsep}
 % \begin{DescribeMacro}{\nthtopskip}
-% \begin{DescribeMacro}{\varnthtopskip}
+% \begin{DescribeMacro}{\nthbottomsep}
 % \begin{DescribeMacro}{\nthbottomskip}
-% \begin{DescribeMacro}{\varnthbottomskip}
 %   The constant spacing between a top precedence number and the status
-%   underneath when using \cmd{\nthtop} is \cmd{\nthtopskip}, by
-%   default \the\nthtopskip. The constant height of top precedence
-%   numbers when using \cmd{\varnthtop} is achieved by setting the
-%   baseline skip to \cmd{\varnthtopskip}, by default
-%   \the\varnthtopskip.
+%   underneath when using \cmd{\nthtop} is \cmd{\nthtopsep}, by
+%   default \the\nthtopsep. The constant height of top precedence
+%   numbers when using \cmd{\nthtop*} is achieved by setting the
+%   baseline skip to \cmd{\nthtopskip}, by default
+%   \the\nthtopskip.
 %
 %   Similarly, the constant spacing between a bottom precedence number
 %   and the status above when using \cmd{\nthbottom} is
-%   \cmd{\nthbottomskip}, by default \the\nthbottomskip, and the
+%   \cmd{\nthbottomsep}, by default \the\nthbottomsep, and the
 %   constant height of bottom precedence numbers when using
-%   \cmd{\varnthbottom} is achieved by setting the baseline skip to
-%   \cmd{\varnthbottomskip}, by default \the\varnthbottomskip.
+%   \cmd{\nthbottom*} is achieved by setting the baseline skip to
+%   \cmd{\nthbottomskip}, by default \the\nthbottomskip.
 %
 %   These values can be changed as usual using \cmd{\setlength}.
 % \end{DescribeMacro}
@@ -721,9 +724,9 @@
 %       \cmd{\secondtop}\marg{status} & \cmd{\iitop}\marg{status}  & $\Ax{x\iitop{y}z}$ \\
 %       \cmd{\thirdtop}\marg{status}  & \cmd{\iiitop}\marg{status} & $\Ax{xy\iiitop{z}}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\varfirsttop}\marg{status}  & \cmd{\varitop}\marg{status}   & $\Ax{\varitop{x}:\angln}$ \\
-%       \cmd{\varsecondtop}\marg{status} & \cmd{\variitop}\marg{status}  & $\Ax{x\variitop{y}z}$ \\
-%       \cmd{\varthirdtop}\marg{status}  & \cmd{\variiitop}\marg{status} & $\Ax{xy\variiitop{z}}$ \\
+%       \cmd{\firsttop*}\marg{status}  & \cmd{\itop*}\marg{status}   & $\Ax{\itop*{x}:\angln}$ \\
+%       \cmd{\secondtop*}\marg{status} & \cmd{\iitop*}\marg{status}  & $\Ax{x\iitop*{y}z}$ \\
+%       \cmd{\thirdtop*}\marg{status}  & \cmd{\iiitop*}\marg{status} & $\Ax{xy\iiitop*{z}}$ \\
 %       \addlinespace[6pt]
 %       \cmd{\firstbottom}\marg{status}  & \cmd{\ibottom}\marg{status}   & $\Ax{\ibottom{x}yz}$ \\
 %       \addlinespace[3pt]
@@ -731,11 +734,11 @@
 %       \addlinespace[3pt]
 %       \cmd{\thirdbottom}\marg{status}  & \cmd{\iiibottom}\marg{status} & $\Ax{xy\iiibottom{z}}$ \\
 %       \addlinespace[6pt]
-%       \cmd{\varfirstbottom}\marg{status}  & \cmd{\varibottom}\marg{status}   & $\Ax{\varibottom{x}yz}$ \\
+%       \cmd{\firstbottom*}\marg{status}  & \cmd{\ibottom*}\marg{status}   & $\Ax{\ibottom*{x}yz}$ \\
 %       \addlinespace[3pt]
-%       \cmd{\varsecondbottom}\marg{status} & \cmd{\variibottom}\marg{status}  & $\Ax{\variibottom{x}yz}$ \\
+%       \cmd{\secondbottom*}\marg{status} & \cmd{\iibottom*}\marg{status}  & $\Ax{\iibottom*{x}yz}$ \\
 %       \addlinespace[3pt]
-%       \cmd{\varthirdbottom}\marg{status}  & \cmd{\variiibottom}\marg{status} & $\Ax{xy\variiibottom{z}}$ \\
+%       \cmd{\thirdbottom*}\marg{status}  & \cmd{\iiibottom*}\marg{status} & $\Ax{xy\iiibottom*{z}}$ \\
 %       \addlinespace[6pt]
 %       \bottomrule
 %   \end{tabular}
@@ -749,18 +752,18 @@
 % \begin{description}
 % \item[\mdseries\ttfamily alignpreced] always align top and bottom
 %   precedence numbers; makes \cmd{\nthtop} and \cmd{\nthbottom}
-%   equivalent to \cmd{\varnthtop} and \cmd{\varnthbottom},
+%   equivalent to \cmd{\nthtop*} and \cmd{\nthbottom*},
 %   respectively;
 % \item[\mdseries\ttfamily compactpreced] always put precedence
-%   numbers close to the corresponding status; makes \cmd{\varnthtop}
-%   and \cmd{\varnthbottom} equivalent to \cmd{\nthtop} and
+%   numbers close to the corresponding status; makes \cmd{\nthtop*}
+%   and \cmd{\nthbottom*} equivalent to \cmd{\nthtop} and
 %   \cmd{\nthbottom}, respectively.
 % \end{description}
 % Option |alignpreced| can be useful to simplify entry of precedence
 % numbers. On the other hand, option |compactpreced| is merely
 % included as a complement to |alignpreced|. We do not recommended ---
 % nor see a reason --- to use it as it basically renders inoperative
-% commands \cmd{\varnthtop} and \cmd{\varnthbottom}.
+% commands \cmd{\nthtop*} and \cmd{\nthbottom*}.
 %
 % \appendix
 %
@@ -889,17 +892,17 @@
 % \label{sec:implementation:options}
 %
 % The package defines two options. Option |alignpreced| makes
-% \cmd{\nthtop} and \cmd{\nthbottom} equivalent to \cmd{\varnthtop}
-% and \cmd{\varnthbottom}, respectively. Option |compactpreced| does
+% \cmd{\nthtop} and \cmd{\nthbottom} equivalent to \cmd{\nthtop*}
+% and \cmd{\nthbottom*}, respectively. Option |compactpreced| does
 % the opposite. The options are actually processed later, once the
 % commands are defined.
 %    \begin{macrocode}
 \DeclareOption{alignpreced}{%
-  \let\nthtop\varnthtop
-  \let\nthbottom\varnthbottom}
+  \let\@nthtop\@varnthtop
+  \let\@nthbottom\@varnthbottom}
 \DeclareOption{compactpreced}{%
-  \let\varnthtop\nthtop
-  \let\varnthbottom\nthbottom}
+  \let\@varnthtop\nthtop
+  \let\@varnthbottom\nthbottom}
 %    \end{macrocode}
 %
 % \subsection{Actuarial symbol}
@@ -1185,50 +1188,40 @@
   }% end \vbox
 }% end \preced@
 
+\newlength{\nthtopsep}
+\setlength{\nthtopsep}{2\p@}
 \newlength{\nthtopskip}
-\setlength{\nthtopskip}{2\p@}
-\newlength{\varnthtopskip}
-\setlength{\varnthtopskip}{7\p@}
+\setlength{\nthtopskip}{7\p@}
+\newlength{\nthbottomsep}
+\setlength{\nthbottomsep}{2\p@}
 \newlength{\nthbottomskip}
-\setlength{\nthbottomskip}{2\p@}
-\newlength{\varnthbottomskip}
-\setlength{\varnthbottomskip}{9\p@}
+\setlength{\nthbottomskip}{9\p@}
 
-\DeclareRobustCommand{\nthtop}[3][\nthtopskip]{%
+\DeclareRobustCommand{\nthtop}{\@ifstar\@varnthtop\@nthtop}
+\newcommand{\@nthtop}[3][\nthtopsep]{%
   \mathpalette{\preced@ t\z@{#1}{#2}}{#3}}
-\DeclareRobustCommand{\varnthtop}[3][\varnthtopskip]{%
+\newcommand{\@varnthtop}[3][\nthtopskip]{%
   \mathpalette{\preced@ t{#1}\z@{#2}}{#3}}
-\DeclareRobustCommand{\nthbottom}[2]{%
-  \mathpalette{\preced@ b\z@\nthbottomskip{#1}}{#2}}
-\DeclareRobustCommand{\varnthbottom}[2]{%
-  \mathpalette{\preced@ b\varnthbottomskip\z@{#1}}{#2}}
+\DeclareRobustCommand{\nthbottom}{\@ifstar\@varnthbottom\@nthbottom}
+\newcommand{\@nthbottom}[3][\nthbottomsep]{%
+  \mathpalette{\preced@ b\z@{#1}{#2}}{#3}}
+\newcommand{\@varnthbottom}[3][\nthbottomskip]{%
+  \mathpalette{\preced@ b{#1}\z@{#2}}{#3}}
 \ProcessOptions
 
-\DeclareRobustCommand{\firsttop}[1]{\nthtop{1}{#1}}
-\DeclareRobustCommand{\secondtop}[1]{\nthtop{2}{#1}}
-\DeclareRobustCommand{\thirdtop}[1]{\nthtop{3}{#1}}
-\DeclareRobustCommand{\varfirsttop}[1]{\varnthtop{1}{#1}}
-\DeclareRobustCommand{\varsecondtop}[1]{\varnthtop{2}{#1}}
-\DeclareRobustCommand{\varthirdtop}[1]{\varnthtop{3}{#1}}
-\DeclareRobustCommand{\firstbottom}[1]{\nthbottom{1}{#1}}
-\DeclareRobustCommand{\secondbottom}[1]{\nthbottom{2}{#1}}
-\DeclareRobustCommand{\thirdbottom}[1]{\nthbottom{3}{#1}}
-\DeclareRobustCommand{\varfirstbottom}[1]{\varnthbottom{1}{#1}}
-\DeclareRobustCommand{\varsecondbottom}[1]{\varnthbottom{2}{#1}}
-\DeclareRobustCommand{\varthirdbottom}[1]{\varnthbottom{3}{#1}}
+\DeclareRobustCommand{\firsttop}{\@ifstar{\@varnthtop{1}}{\@nthtop{1}}}
+\DeclareRobustCommand{\secondtop}{\@ifstar{\@varnthtop{2}}{\@nthtop{2}}}
+\DeclareRobustCommand{\thirdtop}{\@ifstar{\@varnthtop{3}}{\@nthtop{3}}}
+\DeclareRobustCommand{\firstbottom}{\@ifstar{\@varnthbottom{1}}{\@nthbottom{1}}}
+\DeclareRobustCommand{\secondbottom}{\@ifstar{\@varnthbottom{2}}{\@nthbottom{2}}}
+\DeclareRobustCommand{\thirdbottom}{\@ifstar{\@varnthbottom{3}}{\@nthbottom{3}}}
 
 \let\itop\firsttop
 \let\iitop\secondtop
 \let\iiitop\thirdtop
-\let\varitop\varfirsttop
-\let\variitop\varsecondtop
-\let\variiitop\varthirdtop
 \let\ibottom\firstbottom
 \let\iibottom\secondbottom
 \let\iiibottom\thirdbottom
-\let\varibottom\varfirstbottom
-\let\variibottom\varsecondbottom
-\let\variiibottom\varthirdbottom
 
 %\iffalse
 %</package>
