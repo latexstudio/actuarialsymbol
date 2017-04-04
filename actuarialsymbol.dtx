@@ -74,9 +74,7 @@
 
   %% environments for demo code; 'texample' mostly lifted from
   %% documentation of amsmath
-  \newenvironment{demo}{%
-    \begin{trivlist}\item}{%
-    \end{trivlist}}
+  \newenvironment{demo}{\begin{trivlist}\item}{\end{trivlist}}
   \newenvironment{texample}[1][0.5]{%
     \noindent\begin{minipage}{#1\linewidth}\begin{snugshade*}%
       \def\producing{\end{snugshade*}\end{minipage}\hfill\begin{minipage}{\dimexpr0.97\linewidth-#1\linewidth}%
@@ -154,10 +152,9 @@
 %
 % \citet[Appendix~4]{Bowers:2e:1997} offer an excellent overview of
 % the composition rules for symbols of actuarial functions. In a
-% nutshell, a principal symbol denoting the type of benefit, say $S$,
-% is combined with auxiliary symbols positioned in subscript or in
-% superscript, to the left or to the right. Schematically, we thus
-% have:
+% nutshell, a principal symbol, say $S$, is combined with auxiliary
+% symbols positioned in subscript or in superscript, to the left or to
+% the right. Schematically, we thus have:
 % \begin{equation}
 %   \label{schema1}
 %   \actsymb[\fbox{\scriptsize I}\!\;][\fbox{\scriptsize II}\!\;]%
@@ -220,16 +217,16 @@
 %   unusual for {\LaTeX}, but it serves well the natural order of the
 %   building blocks of a symbol and their relative prevalence:
 %   \begin{quote}
-%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{benefit}\marg{lr}\oarg{ur}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\marg{symbol}\marg{lr}\oarg{ur}
 %   \end{quote}
 %   Above, \meta{ll} identifies the auxiliary symbol in the lower left
 %   subscript position \fbox{\small I} (following the notation in the
 %   schematic representation \eqref{schema1}); \meta{ul} is the upper
-%   left superscript \fbox{\small II}; \meta{benefit} is the principal
-%   benefit symbol $S$; \meta{lr} is the lower right subscript
-%   \fbox{\small III}; \meta{ur} is the upper right superscript
-%   $\fbox{\small IV}$. The benefit symbol and the right subscript
-%   are required, the other arguments are optional.
+%   left superscript \fbox{\small II}; \meta{symbol} is the principal
+%   symbol $S$; \meta{lr} is the lower right subscript \fbox{\small
+%   III}; \meta{ur} is the upper right superscript $\fbox{\small IV}$.
+%   The principal symbol and the right subscript are required, the
+%   other arguments are optional.
 %   \begin{demo}
 %     \begin{texample}
 %       |\actsymb{A}{x}|
@@ -257,7 +254,7 @@
 %   symbols for premiums, reserves and paid-up insurance. The extended
 %   command
 %   \begin{quote}
-%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\oarg{principle}\marg{benefit}\marg{lr}\oarg{ur}
+%     \cmd{\actsymb}\oarg{ll}\oarg{ul}\oarg{principle}\marg{symbol}\marg{lr}\oarg{ur}
 %   \end{quote}
 %   puts symbol \meta{principle} outside the parentheses in the
 %   schematic representation \eqref{schema2}.
@@ -515,17 +512,20 @@
 % symbols. We encourage authors to define their own shortcuts for
 % cases we did not consider.
 %
+% \subsection{Symbols for life tables, insurance and annuities}
+% \label{sec:shortcuts:principal}
+%
 % \autoref{tab:principal} lists shortcuts to compose complete symbols
 % of life tables, insurance and annuities. For space considerations
 % only the mandatory arguments are given, but it should be noted that
-% all commands of \autoref*{tab:principal} accept the same optional
-% arguments as \cmd{\actsymb}.
+% all commands of \autoref*{tab:principal} accept the optional
+% arguments \meta{ll}, \meta{ul} and \meta{ur} of \cmd{\actsymb}.
 %
-% \begin{table}
+% \begin{table}[t]
 %   \centering
 %   \caption{Shortcuts for life table, insurance and annuity
-%   principal symbols. All commands also accept optional arguments
-%   like \cmd{\actsymb}.}
+%     symbols. All commands accept optional arguments like
+%     \cmd{\actsymb}.}
 %   \label{tab:principal}
 %   \begin{tabular*}{1.0\linewidth}{lll}
 %       \toprule
@@ -555,6 +555,78 @@
 %   \end{tabular*}
 % \end{table}
 %
+% \begin{DescribeMacro}{\@actinssc}
+% \begin{DescribeMacro}{\@actannsc}
+% \begin{DescribeMacro}{\@actothersc}
+% \begin{DescribeMacro}{\@actpremres}
+%   One may define additional shortcut macros similar to those of
+%   \autoref{tab:principal} using the internal commands
+%   \begin{quote}
+%     |\@actinssc|\marg{symbol} \\
+%     |\@actannsc|\marg{symbol} \\
+%     |\@actothersc|\marg{symbol} \\
+%     |\@actpremres|\marg{principle}
+%   \end{quote}
+%   Command |\@actinssc| provides shortcuts for insurance benefits
+%   payable at the end of the year of death (default) or at the time
+%   of death (|*| variant). Command |\@actannsc| provides shortcuts
+%   for annuity benefits payable at the end of the period (default),
+%   continuously (|*| variant) or at the beginning of the period (|**|
+%   variant). Command |\@actothersc| only provides a shortcut for
+%   \meta{symbol}. Finally, |\@actpremres| provides shortcuts for
+%   discrete (default) or continuous (|*| variant) premiums, reserves
+%   and paid-up insurance.
+%
+%   For example, the package defines the shortcut \cmd{\px} with the
+%   equivalent of %
+%   ^^A below we abuse the texample environment to avoid defining
+%   ^^A another environment just for this purpose
+%   \begin{demo}
+%     \begin{texample}[1]
+%       |\newcommand{\px}{\@actothersc{p}}| \producing
+%     \end{texample}
+%   \end{demo}
+%   the shortcuts \cmd{\Ax} and \cmd{\Ax*} with
+%   \begin{demo}
+%     \begin{texample}[1]
+%       |\newcommand{\Ax}{\@actinssc{A}}| \producing
+%     \end{texample}
+%   \end{demo}
+%   the shortcuts \cmd{\ax}, \cmd{\ax*} and \cmd{\ax**} with
+%   \begin{demo}
+%     \begin{texample}[1]
+%       |\newcommand{\ax}{\@actannsc{a}}| \producing
+%     \end{texample}
+%   \end{demo}
+%   and shortcuts \cmd{\premium} and \cmd{\premium*} with
+%   \begin{demo}
+%     \begin{texample}[1]
+%       |\newcommand{\premium}{\@actpremres{P}}| \producing
+%     \end{texample}
+%   \end{demo}
+% \end{DescribeMacro}
+% \end{DescribeMacro}
+% \end{DescribeMacro}
+% \end{DescribeMacro}
+%
+% \begin{rem}
+%   When used in the preamble of a document, the above commands need
+%   to be protected by a |\makeatletter| \dots\ |\makeatother| pair.
+%   Therefore, to define shortcuts, say, \cmd{\Bx} and \cmd{\Bx*} to
+%   the imaginary benefits $B$ and $\bar{B}$, one would write in the
+%   preamble
+%   \begin{demo}
+%     \begin{texample}[1]
+%       |\makatletter| \\
+%       |\newcommand{\Bx}{\@actinssc{B}}| \\
+%       |\makeatother| \producing
+%     \end{texample}
+%   \end{demo}
+% \end{rem}
+%
+% \subsection{Auxiliary symbols}
+% \label{sec:shortcuts:aux}
+%
 % \autoref{tab:aux} lists shortcuts for a few common auxiliary symbols
 % used in the lower right subscript \fbox{\small III}.
 %
@@ -578,14 +650,17 @@
 %   \hspace*{1em}{\footnotesize $^\dagger$ alias for \cmd{\overline}}
 % \end{table}
 %
-% \autoref{tab:twoletsymb} lists shortcuts for common two-letter
-% insurance and annuity symbols. These shortcuts can be used as
-% principal symbol in \cmd{\actsymb} or in the commands of
-% \autoref*{tab:principal}.
+% \subsection{Symbols for varying benefit insurance and annuities}
+% \label{sec:shortcuts:twoletsymb}
+%
+% \autoref{tab:twoletsymb} lists shortcuts to common two-letter
+% symbols for varying benefit insurance and annuities. These shortcuts
+% can be used as principal symbol in \cmd{\actsymb} or in the commands
+% of \autoref{tab:principal}.
 %
 % \begin{table}
 %   \centering
-%   \caption{Shortcuts for two-letter insurance and annuity symbols}
+%   \caption{Shortcuts for varying benefit insurance and annuities}
 %   \label{tab:twoletsymb}
 %   \begin{tabular}{ll@{\hspace{15mm}}ll}
 %       \toprule
@@ -611,10 +686,28 @@
 %   \end{tabular}
 % \end{table}
 %
+% \begin{DescribeMacro}{\@twoletinssc}
+% \begin{DescribeMacro}{\@twoletannsc}
+%   One may define additional shortcuts for two-letter insurance and
+%   annuity benefit symbols using the internal commands
+%   \begin{quote}
+%     |\@twoletinssc|\oarg{length}\marg{symbol\_1}\marg{symbol\_2} \\
+%     |\@twoletannsc|\oarg{length}\marg{symbol\_1}\marg{symbol\_2} \\
+%   \end{quote}
+%   These commands are similar to those introduced in
+%   \autoref{sec:shortcuts:principal}: |\@twoletinssc| provides two
+%   shortcuts (standard and |*| variant), whereas |\@twoletannsc|
+%   provides three (standard, |*| and |**| variants).
+% \end{DescribeMacro}
+% \end{DescribeMacro}
+%
+% \subsection{First, second and third precedence}
+% \label{sec:shortcuts:preced}
+%
 % \autoref{tab:preced} lists shortcuts and aliases for the first,
 % second and third precedence numbers, top and bottom. These shortcuts
 % can be used in auxiliary symbols in \cmd{\actsymb} or in the
-% commands of \autoref*{tab:principal}.
+% commands of \autoref{tab:principal}.
 %
 % \begin{table}
 %   \centering
@@ -810,15 +903,15 @@
 %    \end{macrocode}
 %
 % \subsection{Actuarial symbol}
-% \label{sec:implementation:symbol}
+% \label{sec:implementation:actsymb}
 %
 % We first define the user level function.
 %    \begin{macrocode}
 \DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
 %    \end{macrocode}
 %
-% \subsubsection{Parsing macros}
-% \label{sec:implementation:symbol:parsing}
+% \subsubsection{Parsing functions}
+% \label{sec:implementation:actsymb:parsing}
 %
 % With its unusual syntax, \cmd{\actsymb} requires four parsing macros
 % to pass the arguments to the actual workhorse \cmd{\@actsymbol}.
@@ -840,37 +933,27 @@
                {\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
 %    \end{macrocode}
 %
-% The principal symbol shortcut macros have argument |#4| of the
-% workhorse (see below) already set. Therefore, they need specific
-% parsing macros.
-%
-% Similarly, we need specific parsing macros to pass the correct
-% symbol to argument |#3| of \cmd{\@actsymbol} when using shortcuts
-% \cmd{\premium}, \cmd{\reserve} and \cmd{\paidup}.
-%
-%
-% \subsubsection{Symbol composition}
-% \label{sec:implementation:symbol:composition}
+% \subsubsection{Symbol construction}
+% \label{sec:implementation:actsymb:workhorse}
 %
 % We now define the workhorse to compose an actuarial symbol allowing
 % for auxiliary symbols on all four corners around a principal symbol.
-% The definition below is heavily inspired by the code of
-% \cmd{\prescript} from package \pkg{mathtools} \citep{mathtools}
-% which, as reported by the author, is itself based on a posting to
-% |comp.text.tex| by Michael J.~Downes. Some of the comments below are
-% still his.
-%
-% Macro definition. The macro has the following six arguments, using
+% The macro \cmd{\@actsymbol} has the following six arguments, using
 % the notation from of the schematics representations \eqref{schema1}
 % and \eqref{schema2}:
 % \begin{enumerate}[nosep]
 % \item lower left subscript \fbox{\small I}; may be empty;
 % \item upper left superscript \fbox{\small II}; may be empty;
 % \item principle symbol $P$; when empty a standard symbol is typeset;
-% \item benefit symbol $S$; assumed present;
+% \item principal symbol $S$; assumed present;
 % \item lower right subscript \fbox{\small III}; assumed present;
 % \item upper right superscript \fbox{\small IV}; may be empty.
 % \end{enumerate}
+% The definition below is heavily inspired by the code of
+% \cmd{\prescript} from package \pkg{mathtools} \citep{mathtools}
+% which, as reported by the author, is itself based on a posting to
+% |comp.text.tex| by Michael J.~Downes. Some of the comments below are
+% still his.
 %    \begin{macrocode}
 \def\@actsymbol[#1][#2][#3]#4#5[#6]{
 %    \end{macrocode}
@@ -889,7 +972,7 @@
   \mathord{}
 %    \end{macrocode}
 % Right align the left subscript and superscript (if there is a
-% superscript) by adjusting their width.
+% superscript) by adjusting the width of their horizontal boxes.
 %    \begin{macrocode}
   \ifdim \wd\tw@>\z@ \ifdim \wd\tw@>\wd\@ne
     \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
@@ -898,7 +981,7 @@
   \fi\fi
 %    \end{macrocode}
 % Bottom align the left and right subscripts by putting them into
-% vertical boxes and adjusting their height.
+% vertical boxes of the same height.
 %    \begin{macrocode}
   \ifdim \ht\@ne>\ht\thr@@
     \setbox\thr@@\vbox to \ht\@ne{%
@@ -935,9 +1018,9 @@
 %    \begin{macrocode}
     \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
 %    \end{macrocode}
-% Typesetting of the benefit symbol alone, or principle symbol and
-% benefit symbol between parentheses, and the right subscript and
-% superscript.
+% Typesetting of the principal symbol and the right subscript and
+% superscript. The principal symbol is either a principal symbol alone
+% or a principle symbol and a benefit symbol between parentheses.
 %    \begin{macrocode}
     \ifdim\wd\z@=\z@
       #4^{\box4}\sb{\box\thr@@}%
@@ -961,7 +1044,7 @@
 %    \end{macrocode}
 %
 % \subsubsection{Shortcuts}
-% \label{sec:implementation:symbol:shortcuts}
+% \label{sec:implementation:actsymb:shortcuts}
 %
 % We define the shortcut macros of \autoref{tab:principal} for
 % principal symbols of life tables, insurance and annuities.
