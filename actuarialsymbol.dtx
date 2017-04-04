@@ -1170,7 +1170,7 @@
 % ^^A \mathpalette that it only reads two arguments.
 
 %    \begin{macrocode}
-\def\preced@#1#2#3#4#5#6{%
+\def\ACTS@preced#1#2#3#4#5#6{%
   % Measure the arguments:
   \setbox\tw@\hbox{$\m@th#5#4$}%
   \setbox\z@\hbox{$\m@th#5#6$}
@@ -1186,7 +1186,7 @@
     \hbox to\dimen@{\hss\unhbox\tw@\hss}%
     \if t#1\relax\box\z@\else\vss\fi
   }% end \vbox
-}% end \preced@
+}% end \ACTS@preced
 
 \newlength{\nthtopsep}
 \setlength{\nthtopsep}{2\p@}
@@ -1199,14 +1199,14 @@
 
 \DeclareRobustCommand{\nthtop}{\@ifstar\@varnthtop\@nthtop}
 \newcommand{\@nthtop}[3][\nthtopsep]{%
-  \mathpalette{\preced@ t\z@{#1}{#2}}{#3}}
+  \mathpalette{\ACTS@preced t\z@{#1}{#2}}{#3}}
 \newcommand{\@varnthtop}[3][\nthtopskip]{%
-  \mathpalette{\preced@ t{#1}\z@{#2}}{#3}}
+  \mathpalette{\ACTS@preced t{#1}\z@{#2}}{#3}}
 \DeclareRobustCommand{\nthbottom}{\@ifstar\@varnthbottom\@nthbottom}
 \newcommand{\@nthbottom}[3][\nthbottomsep]{%
-  \mathpalette{\preced@ b\z@{#1}{#2}}{#3}}
+  \mathpalette{\ACTS@preced b\z@{#1}{#2}}{#3}}
 \newcommand{\@varnthbottom}[3][\nthbottomskip]{%
-  \mathpalette{\preced@ b{#1}\z@{#2}}{#3}}
+  \mathpalette{\ACTS@preced b{#1}\z@{#2}}{#3}}
 \ProcessOptions
 
 \DeclareRobustCommand{\firsttop}{\@ifstar{\@varnthtop{1}}{\@nthtop{1}}}
