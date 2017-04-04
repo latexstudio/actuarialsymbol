@@ -352,9 +352,9 @@
 %     \end{texample}
 %   \end{demo}
 %
-%   We expect authors to only use \cmd{\twoletsymb} to define
-%   commands, not directly in equations. The package already defines a
-%   number of shortcuts for the main two-letter actuarial symbols; see
+%   We expect authors to use \cmd{\twoletsymb} to define commands, not
+%   directly in equations. The package already defines a number of
+%   shortcuts for the main two-letter actuarial symbols; see
 %   \autoref{sec:shortcuts}.
 % \end{DescribeMacro}
 %
@@ -579,21 +579,26 @@
 % \end{table}
 %
 % \autoref{tab:twoletsymb} lists shortcuts for common two-letter
-% symbols of life insurance and financial mathematics. These shortcuts
-% can be used as principal symbol in \cmd{\actsymb} or in the commands
-% of \autoref*{tab:principal}.
+% insurance and annuity symbols. These shortcuts can be used as
+% principal symbol in \cmd{\actsymb} or in the commands of
+% \autoref*{tab:principal}.
 %
 % \begin{table}
 %   \centering
-%   \caption{Shortcuts for two-letter symbols}
+%   \caption{Shortcuts for two-letter insurance and annuity symbols}
 %   \label{tab:twoletsymb}
-%   \begin{tabular}{ll@{\qquad}ll}
+%   \begin{tabular}{ll@{\hspace{15mm}}ll}
 %       \toprule
 %       Definition & Output & Definition & Output \\
 %       \midrule
 %       \cmd{\IA}   & $\IA$   & \cmd{\DA}   & $\DA$ \\
 %       \cmd{\IA*}  & $\IA*$  & \cmd{\DA*}  & $\DA*$ \\
-%       \cmd{\IA**} & $\IA**$ & \cmd{\DA**} & $\DA**$ \\
+%       \addlinespace[6pt]
+%       \cmd{\IbA}   & $\IbA$   & \cmd{\DbA}   & $\DbA$ \\
+%       \cmd{\IbA*}  & $\IbA*$  & \cmd{\DbA*}  & $\DbA*$ \\
+%       \addlinespace[6pt]
+%       \cmd{\ImA}   & $\ImA$   & \cmd{\DmA}   & $\DmA$ \\
+%       \cmd{\ImA*}  & $\ImA*$  & \cmd{\DmA*}  & $\DmA*$ \\
 %       \addlinespace[6pt]
 %       \cmd{\Ia}   & $\Ia$   & \cmd{\Da}   & $\Da$ \\
 %       \cmd{\Ia*}  & $\Ia*$  & \cmd{\Da*}  & $\Da*$ \\
@@ -602,9 +607,6 @@
 %       \cmd{\Is}   & $\Is$   & \cmd{\Ds}   & $\Ds$ \\
 %       \cmd{\Is*}  & $\Is*$  & \cmd{\Ds*}  & $\Ds*$ \\
 %       \cmd{\Is**} & $\Is**$ & \cmd{\Ds**} & $\Ds**$ \\
-%       \addlinespace[6pt]
-%       \cmd{\ImA}   & $\ImA$ \\
-%       \cmd{\ImA*}  & $\ImA*$ \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -967,7 +969,7 @@
     \else
       #3^{\box4}(#4^{}\sb{\box\thr@@})%
     \fi
-  \else% expression without superscripts
+  \else
 %    \end{macrocode}
 % Same ideas as above in the simpler case without superscripts. That
 % way, {\TeX}'s default placement of subscripts and superscripts is
@@ -1036,28 +1038,45 @@
 \DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{(#2\kern-#1#3)}
 %    \end{macrocode}
 %
+% ^^A FIXME
 % Although all very similar, we defined the shortcut macros of
 % \autoref{tab:twoletsymb} directly using \cmd{\twoletsymb}. Note that
 % we used a smaller negative kerning adjustment for symbols of
 % financial mathematics.
 %    \begin{macrocode}
-\def\ACTS@twoletsymblc#1#2{%
-  \@ifstar{\@ifstar{\twoletsymb{\bar{#1}}{\bar{#2}}}%
+
+\def\@twoletsc{\@ifstar\ACTS@twoletscann\ACTS@twoletscins}
+\def\ACTS@twoletscins{%
+  \@ifnextchar[{\ACTS@@twoletscins}%
+               {\ACTS@@@twoletscins}}
+\def\ACTS@@twoletscins[#1]#2#3{%
+  \@ifstar{\twoletsymb[#1]{#2}{\bar{#3}}}%
+          {\twoletsymb[#1]{#2}{#3}}}
+\def\ACTS@@@twoletscins#1#2{%
+  \@ifstar{\twoletsymb{#1}{\bar{#2}}}%
+          {\twoletsymb{#1}{#2}}}
+\def\ACTS@twoletscann{%
+  \@ifnextchar[{\ACTS@@twoletscann}%
+               {\ACTS@@@twoletscann}}
+\def\ACTS@@twoletscann[#1]#2#3{%
+  \@ifstar{\@ifstar{\twoletsymb[#1]{#2}{\ddot{#3}}}%
+                   {\twoletsymb[#1]{#2}{\bar{#3}}}}%
+          {\twoletsymb[#1]{#2}{#3}}}
+\def\ACTS@@@twoletscann#1#2{%
+  \@ifstar{\@ifstar{\twoletsymb{#1}{\ddot{#2}}}%
                    {\twoletsymb{#1}{\bar{#2}}}}%
-          {\twoletsymb#1#2}}
-\newcommand{\IA}{\ACTS@twoletsymblc IA}
-\newcommand{\DA}{\ACTS@twoletsymblc DA}
-\def\ACTS@twoletsymbfm#1#2#3{%
-  \@ifstar{\@ifstar{\twoletsymb[#1]#2{\ddot{#3}}}%
-                   {\twoletsymb[#1]{\bar{#2}}{\bar{#3}}}}%
-          {\twoletsymb[#1]#2#3}}
-\newcommand{\Ia}{\ACTS@twoletsymbfm {0.5\twoletkern}Ia}
-\newcommand{\Is}{\ACTS@twoletsymbfm {0.5\twoletkern}Is}
-\newcommand{\Da}{\ACTS@twoletsymbfm {0.5\twoletkern}Da}
-\newcommand{\Ds}{\ACTS@twoletsymbfm {0.5\twoletkern}Ds}
-\newcommand{\ImA}{%
-    \@ifstar{\twoletsymb{I^{(m)}}{\bar{A}}}%
-            {\twoletsymb{I^{(m)}}{A}}}
+          {\twoletsymb{#1}{#2}}}
+\newcommand{\IA}{\@twoletsc IA}
+\newcommand{\IbA}{\@twoletsc{\bar{I}}A}
+\newcommand{\ImA}{\@twoletsc{I^{(m)}}A}
+\newcommand{\DA}{\@twoletsc DA}
+\newcommand{\DbA}{\@twoletsc{\bar{D}}A}
+\newcommand{\DmA}{\@twoletsc{D^{(m)}}A}
+
+\newcommand{\Ia}{\@twoletsc*[0.5\twoletkern]Ia}
+\newcommand{\Is}{\@twoletsc*[0.5\twoletkern]Is}
+\newcommand{\Da}{\@twoletsc*[0.5\twoletkern]Da}
+\newcommand{\Ds}{\@twoletsc*[0.5\twoletkern]Ds}
 %    \end{macrocode}
 %
 
