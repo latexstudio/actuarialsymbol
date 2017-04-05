@@ -117,7 +117,7 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{538}
+% \CheckSum{542}
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
@@ -659,6 +659,7 @@
 %       Definition & Example & Output \\
 %       \midrule
 %       \cmd{\term}\marg{age}\marg{duration}      & \rshowcase{\Ax{\term{x}{n}}} \\
+%       \cmd{\termxn}                             & \rshowcase{\Ax{\termxn}} \\
 %       \cmd{\pureendow}\marg{age}\marg{duration} & \rshowcase{\Ax{\pureendow{x}{n}}} \\
 %       \cmd{\pureendowxn}                        & \rshowcase{\Ax{\pureendowxn}} \\
 %       \cmd{\endow}\marg{age}\marg{duration}     & \rshowcase{\ax**{\endow{x}{n}}} \\
@@ -799,6 +800,9 @@
 % compact and legible option. Not all symbols require features of
 % \pkg{actuarialsymbol}.
 %
+% Entries marked with $\dagger$ would benefit a shortcut if used
+% repeatedly in a document.
+%
 % \begingroup
 % \catcode`\|=12 ^^A to use | in math, disable as verbatim delimiter
 % \begin{longtable}{ll}
@@ -840,13 +844,40 @@
 %   \showcase{\ax**[][2]{xy:\angln}} \\
 %   \showcase{\ax*{x|y}} \\
 %   \showcase{\ax*{\joint{x_1 x_2 x_3}}} \\
-%   \showcase{\newcommand{\aA}{\twoletsymb[0.6pt]{a}{A}} \aA(x)} \\
-%   \showcase{\newcommand{\aA}{\twoletsymb[0.6pt]{a}{A}} \aA_t} \\
-%   \showcase{\newcommand{\aC}{\twoletsymb[0.3pt]{a}{C}} \aC_t} \\
-%   \showcase{\newcommand{\aF}{\twoletsymb[0.6pt]{a}{F}} \aF_t} \\
-%   \showcase{\newcommand{\aU}{\twoletsymb[0.6pt]{a}{U}} \aU_t} \\
-%   \showcase{\newcommand{\aV}{\twoletsymb[0.6pt]{a}{V}} \aV(x)} \\
-%   \showcase{\newcommand{\aV}{\twoletsymb[0.6pt]{a}{V}} \aV_t} \\
+%   \showcase{\twoletsymb[0.6pt]{a}{A}(x)}$\;^\dagger$ \\
+%   \showcase{\twoletsymb[0.6pt]{a}{A}_t}$\;^\dagger$ \\
+%   \showcase{\twoletsymb[0.3pt]{a}{C}_t}$\;^\dagger$ \\
+%   \showcase{\twoletsymb[0.6pt]{a}{F}_t}$\;^\dagger$ \\
+%   \showcase{\twoletsymb[0.6pt]{a}{U}_t}$\;^\dagger$ \\
+%   \showcase{\twoletsymb[0.6pt]{a}{V}(x)}$\;^\dagger$ \\
+%   \showcase{\twoletsymb[0.6pt]{a}{V}_t}$\;^\dagger$ \\
+%   \showcase{A(h)} \\
+%   \showcase{A_t} \\
+%   \showcase{\Ax{x}} \\
+%   \showcase{\Ax*{x}} \\
+%   \showcase{\Ax{x}[(m)]} \\
+%   \showcase{\Ax*{x}[\text{PR}]} \\
+%   \showcase{\Ax{\termxn}} \\
+%   \showcase{\Ax{\endowxn}} \\
+%   \showcase{\Ax*{\endowxn}} \\
+%   \showcase{\Ax{\pureendowxn}} \\
+%   \showcase{\Ax[j]{x}} \\
+%   \showcase{\Ax[*]{x}} \\
+%   \showcase{\Ax*{\termxn}} \\
+%   \showcase{\actsymb{\tilde{A}}{\termxn}}$\;^\dagger$ \\
+%   \showcase{\Ax[][2]{\pureendowxn}} \\
+%   \showcase{\Ax[][2]{\termxn}} \\
+%   \showcase{\Ax*[m|]{x}} \\
+%   \showcase{\Ax*[m|n]{x}} \\
+%   \showcase{\Ax{xy}} \\
+%   \showcase{\Ax{\joint{xy}}} \\
+%   \showcase{\Ax{xy}[(m)]} \\
+%   \showcase{\Ax*{x\iitop{y}}} \\
+%   \showcase{\Ax*{\itop{x}y}} \\
+%   \showcase{\Ax{xy:\angln}} \\
+%   \showcase{\Ax*{\itop{\joint{xy}}:\angln}} \\
+%   \showcase{\Ax[][2]{xy:\angln}} \\
+%   \showcase{\Ax*{wx\iitop{y}}} \\
 % \end{longtable}
 % \endgroup
 %
@@ -1148,6 +1179,7 @@
 % alias of \cmd{\overline}.
 %    \begin{macrocode}
 \DeclareRobustCommand{\term}[2]{\itop{#1}:\angl{#2}}
+\DeclareRobustCommand{\termxn}{\itop{x}:\angln}
 \DeclareRobustCommand{\pureendow}[2]{#1:\itop{\angl{#2}}}
 \DeclareRobustCommand{\pureendowxn}{x:\itop{\angln}}
 \DeclareRobustCommand{\endow}[2]{#1:\angl{#2}}
