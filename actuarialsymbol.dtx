@@ -1067,7 +1067,7 @@
 % way, {\TeX}'s default placement of subscripts and superscripts is
 % maintained.
 %    \begin{macrocode}
-    \mathopen{\vphantom{#4}}\sb{\box\@ne}%
+    \vphantom{#4}\sb{\box\@ne}%
     \ifdim\wd\z@=\z@
       #4\sb{\box\thr@@}%
     \else
@@ -1218,13 +1218,13 @@
 \DeclareRobustCommand{\nthtop}{\@ifstar\@varnthtop\@nthtop}
 \DeclareRobustCommand{\nthbottom}{\@ifstar\@varnthbottom\@nthbottom}
 \newcommand{\@nthtop}[3][\nthtopsep]{%
-  \mathpalette{\@predecence t\z@{#1}{#2}}{#3}}
+  \mathpalette{\@precedence t\z@{#1}{#2}}{#3}}
 \newcommand{\@varnthtop}[3][\nthtopskip]{%
-  \mathpalette{\@predecence t{#1}\z@{#2}}{#3}}
+  \mathpalette{\@precedence t{#1}\z@{#2}}{#3}}
 \newcommand{\@nthbottom}[3][\nthbottomsep]{%
-  \mathpalette{\@predecence b\z@{#1}{#2}}{#3}}
+  \mathpalette{\@precedence b\z@{#1}{#2}}{#3}}
 \newcommand{\@varnthbottom}[3][\nthbottomskip]{%
-  \mathpalette{\ACTS@1preced b{#1}\z@{#2}}{#3}}
+  \mathpalette{\@precedence b{#1}\z@{#2}}{#3}}
 %    \end{macrocode}
 % With the internal commands defined we can now process the package
 % options.
@@ -1252,7 +1252,7 @@
 % This peculiar ordering of the arguments is done to work around the
 % restriction of \cmd{\mathpalette} that it only reads two arguments.
 %    \begin{macrocode}
-\def\@predecence#1#2#3#4#5#6{%
+\def\@precedence#1#2#3#4#5#6{%
   \setbox\tw@\hbox{$\m@th#5#4$}%
   \setbox\z@\hbox{$\m@th#5#6$}
   \dimen@\wd\z@
