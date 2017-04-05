@@ -1029,14 +1029,14 @@
 % one superscript (the nested conditionals emulate an OR condition).
 %    \begin{macrocode}
   \ifnum\ifdim \wd\tw@>\z@ 1\else\ifdim \wd4>\z@ 1\else 0\fi\fi
-    =1%
+    =1
 %    \end{macrocode}
 % To ensure equal spacing with the subscripts on both sides of the
 % principal symbol, adjust the depths of the left and right
 % supercripts (if either is positive) using struts.
 %    \begin{macrocode}
     \ifnum\ifdim \dp\tw@>\z@ 1\else\ifdim \dp4>\z@ 1\else 0\fi\fi
-      =1%
+      =1
       \ifdim \dp\tw@>\dp4
         \setbox4\hbox to\wd4{%
           \raisebox{\z@}[\ht4][\dp\tw@]{\unhbox4}}
@@ -1067,7 +1067,7 @@
 % way, {\TeX}'s default placement of subscripts and superscripts is
 % maintained.
 %    \begin{macrocode}
-    \vphantom{#4}\sb{\box\@ne}%
+    \mathopen{\vphantom{#4}}\sb{\box\@ne}%
     \ifdim\wd\z@=\z@
       #4\sb{\box\thr@@}%
     \else
