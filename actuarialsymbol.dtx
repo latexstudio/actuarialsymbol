@@ -27,7 +27,7 @@
           \ProvidesFile{actuarialsymbol.dtx}
 %</dtx>
 %<package>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
-%<package>\ProvidesPackage{actuarialsymbol}[2017/03/15 v0.1 Actuarial symbols]
+%<package>\ProvidesPackage{actuarialsymbol}[2017/004/04 v0.1 Actuarial symbols]
 %
 %<*driver>
 \documentclass[11pt,x11names,english]{ltxdoc}
@@ -117,17 +117,22 @@
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
-% \title{Composition of actuarial symbols%
+% \title{Actuarial symbols of life contingencies \\
+%   and financial mathematics%
 %   \thanks{This document corresponds to
 %   \pkg{actuarialsymbol}~\fileversion, dated~\filedate.}}
-% \author{Vincent Goulet \\ École d'actuariat, Université
-%   Laval \and David Beauchemin}
+% \author{David Beauchemin \\
+%   \url{david.beauchemin.5@ulaval.ca} \\[6pt]
+%   Vincent Goulet \\
+%   \url{vincent.goulet@act.ulaval.ca} \\[6pt]
+%   École d'actuariat, Université Laval}
 % \maketitle
 %
 % \begin{abstract}
 %   Package \pkg{actuarialsymbol} provides helper commands to compose
-%   life contingencies symbols characterized by subscripts and
-%   superscripts on both sides of a principal symbol.
+%   actuarial symbols of life contingencies and financial mathematics
+%   characterized by subscripts and superscripts on both sides of a
+%   principal symbol.
 % \end{abstract}
 %
 % \section{Introduction}
@@ -158,7 +163,7 @@
 % \begin{equation}
 %   \label{schema1}
 %   \actsymb[\fbox{\scriptsize I}\!\;][\fbox{\scriptsize II}\!\;]%
-%      {\framebox[5ex]{ $S$}}{\,\fbox{\scriptsize III}}%
+%      {\framebox[5ex]{$S$}}{\,\fbox{\scriptsize III}}%
 %      [\,\fbox{\scriptsize IV}]
 % \end{equation}
 %
@@ -183,7 +188,7 @@
 %   \label{schema2}
 %   \actsymb[\fbox{\scriptsize I}\!\;][\fbox{\scriptsize II}\!\;]%
 %      {\framebox[5ex]{$P$}}{}[\,\fbox{\scriptsize IV}]%
-%   \bigl(\actsymb{\framebox[5ex]{\large $S$}}{\,\fbox{\scriptsize III}}\bigr)%
+%   \bigl(\actsymb{\framebox[5ex]{$S$}}{\,\fbox{\scriptsize III}}\bigr)%
 % \end{equation}
 %
 % Perhaps the most commonly used auxiliary symbol not readily
@@ -833,7 +838,12 @@
 % \endgroup
 %
 % \StopEventually{
-% \begin{thebibliography}{4}
+% \begin{thebibliography}{8}
+% \bibitem[{A}merican~{M}athematical {S}ociety(2002)]{amsmath}
+%   {A}merican~{M}athematical {S}ociety.
+%   \newblock \emph{User’s Guide for the amsmath Package}, 2002.
+%   \newblock URL \url{http://www.ctan.org/pkg/amsmath/}.
+%
 % \bibitem[Bowers et~al.(1997)Bowers, Gerber, Hickman, Jones, and
 %   Nesbitt]{Bowers:2e:1997}
 %   N.~L. Bowers, H.~U. Gerber, J.~C. Hickman, D.~A. Jones, and C.~J. Nesbitt.
@@ -842,33 +852,37 @@
 %   \newblock ISBN 0-9389594-6-8.
 %
 % \bibitem[Goulet(2017)]{actuarialangle}
-%   Vincent Goulet.
+%   V. Goulet.
 %   \newblock \emph{actuarialangle}, 2017.
 %   \newblock URL \url{http://www.ctan.org/pkg/actuarialangle/}.
 %
+% \bibitem[Høgholm and Madsen(2015)]{mathtools}
+%   M. Høgholm and L. Madsen.
+%   \newblock \emph{The mathtools package}, 2015.
+%   \newblock URL \url{http://www.ctan.org/pkg/mathtools/}.
+%
 % \bibitem[Pakin(2015)]{comprehensive}
-%   Scott Pakin.
-%   \newblock The comprehensive {\LaTeX} symbol list, 2015.
+%   S. Pakin.
+%   \newblock \emph{The Comprehensive {\LaTeX} Symbol List}, 2015.
 %   \newblock URL \url{http://www.ctan.org/pkg/comprehensive/}.
 %
 % \bibitem[Robertson(2007)]{subdepth}
-%   Will Robertson.
+%   W. Robertson.
 %   \newblock \emph{Unify subscript depths}, 2007.
 %   \newblock URL \url{http://www.ctan.org/pkg/subdepth/}.
 %
 % \bibitem[Trivedi(2004)]{Trivedi:lifecon:2004}
-%   Eddy Trivedi.
+%   E. Trivedi.
 %   \newblock \emph{Life Contingencies' Symbols}, 2004.
 %   \newblock \texttt{lifecon} 2.1 User Guide.
 %
 % \bibitem[Wolthuis(2004)]{Wolthuis:notation:2004}
-%   Henk Wolthuis.
+%   H. Wolthuis.
 %   \newblock International actuarial notation.
 %   \newblock In Jozef Teugels and Bj{\o}rn Sundt, editors, \emph{Encyclopedia of
 %   Actuarial Science}. Wiley, 2004.
 %   \newblock ISBN 978-0-47001250-5.
 %   \newblock URL \url{http://onlinelibrary.wiley.com/book/10.1002/9780470012505}.
-%
 % \end{thebibliography}
 % }
 %
@@ -882,7 +896,8 @@
 % \subsection{Required packages}
 % \label{sec:implementation:packages}
 %
-% The package depends on packages \pkg{amsmath} and \pkg{actuarialangle}.
+% The package depends on packages \pkg{amsmath} \citep{amsmath} and
+% \pkg{actuarialangle} \citep{actuarialangle}.
 %    \begin{macrocode}
 \RequirePackage{amsmath}
 \RequirePackage{actuarialangle}
@@ -891,11 +906,12 @@
 % \subsection{Package options}
 % \label{sec:implementation:options}
 %
-% The package defines two options. Option |alignpreced| makes
-% \cmd{\nthtop} and \cmd{\nthbottom} equivalent to \cmd{\nthtop*}
-% and \cmd{\nthbottom*}, respectively. Option |compactpreced| does
-% the opposite. The options are actually processed later, once the
-% commands are defined.
+% The package defines two options. Option |alignpreced| makes the
+% internal macros \cmd{\@nthtop} and \cmd{\@nthbottom} equivalent to
+% \cmd{\@varnthtop} and \cmd{\@varnthbottom}, respectively. Option
+% |compactpreced| does the opposite. The options are actually
+% processed later, once the commands are defined (see
+% \autoref{sec:implementation:preced:user}).
 %    \begin{macrocode}
 \DeclareOption{alignpreced}{%
   \let\@nthtop\@varnthtop
@@ -908,14 +924,19 @@
 % \subsection{Actuarial symbol}
 % \label{sec:implementation:actsymb}
 %
-% We first define the user level function.
+% We face three main challenges when trying to compose actuarial
+% symbols: position a subscript and a superscipt to the left of a main
+% symbol; ensure that the left and right subscripts and superscripts
+% are vertically aligned; maintain consistency with the placement of
+% subscripts and superscripts elsewhere in the document.
+%
+% \subsubsection{User level and parsing commands}
+% \label{sec:implementation:actsymb:user}
+%
+% We first define the user level command.
 %    \begin{macrocode}
 \DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
 %    \end{macrocode}
-%
-% \subsubsection{Parsing functions}
-% \label{sec:implementation:actsymb:parsing}
-%
 % With its unusual syntax, \cmd{\actsymb} requires four parsing macros
 % to pass the arguments to the actual workhorse \cmd{\@actsymbol}.
 %    \begin{macrocode}
@@ -1131,10 +1152,9 @@
 \DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{(#2\kern-#1#3)}
 %    \end{macrocode}
 %
-% Using the same ideas as above, we define two internal macros used to
-% define shortcuts for two-letter insurance and annuity benefit
-% symbols. Note that we used a smaller negative kerning adjustment for
-% symbols annuity symbols.
+% Following the same lines as above, we define two internal macros to
+% create shortcuts for two-letter insurance and annuity benefit
+% symbols.
 %    \begin{macrocode}
 \newcommand\@twoletinssc[3][\twoletkern]{%
   \@ifstar{\twoletsymb[#1]{#2}{\bar{#3}}}%
@@ -1144,7 +1164,8 @@
                    {\twoletsymb[#1]{#2}{\bar{#3}}}}%
           {\twoletsymb[#1]{#2}{#3}}}
 %    \end{macrocode}
-% Follow the shortcuts of \autoref{tab:twoletsymb}.
+% Follow the shortcuts of \autoref{tab:twoletsymb}. Note that we used
+% a smaller negative kerning adjustment for symbols annuity symbols.
 %    \begin{macrocode}
 \newcommand{\IA}{\@twoletinssc IA}
 \newcommand{\IbA}{\@twoletinssc{\bar{I}}A}
@@ -1158,36 +1179,20 @@
 \newcommand{\Ds}{\@twoletannsc[0.5\twoletkern]Ds}
 %    \end{macrocode}
 %
-
-
-% ^^A In \preced@, #1 is `t' for top or `b' for bottom, #2 is a
-% ^^A multiplier for the baseline skip between the top and bottom symbols, #3 is a
-% ^^A multiplier for the line skip between the top and bottom symbols, #4
-% ^^A is the first argument from the user, #5 is \displaystyle or
-% ^^A \textstyle or \scriptstyle or \scriptscriptstyle, from \mathpalette,
-% ^^A and #6 is the second argument given by the user. This peculiar
-% ^^A ordering of the arguments is done to work around the restriction of
-% ^^A \mathpalette that it only reads two arguments.
-
+% \subsection{Precedence numbers}
+% \label{sec:implementation:preced}
+%
+% The system of precedence numbers builds on a backbone that used to
+% be part of package \pkg{actuarialangle}. The author of the code is
+% unknown. Some of the comments on \cmd{\@precendence}, below, are his
+% or hers.
+%
+% \subsubsection{User level lengths and commands}
+% \label{sec:implementation:preced:user}
+%
+% Let us start by defining the lengths needed to position the
+% precedence numbers above or below the statuses.
 %    \begin{macrocode}
-\def\ACTS@preced#1#2#3#4#5#6{%
-  % Measure the arguments:
-  \setbox\tw@\hbox{$\m@th#5#4$}%
-  \setbox\z@\hbox{$\m@th#5#6$}
-  \dimen@\wd\z@
-  \vbox to\ht\z@{%
-    % \lineskip is set using AMSTeX's \ex@, if available, for a slight
-    % refinement in the spacing if this macro is used in eightpoint
-    % text. If \ex@ is not available, \p@ is used.
-    \baselineskip=#2
-    \lineskip=#3\relax
-    \lineskiplimit\lineskip
-    \if b#1\relax\box\z@\else\vss\fi
-    \hbox to\dimen@{\hss\unhbox\tw@\hss}%
-    \if t#1\relax\box\z@\else\vss\fi
-  }% end \vbox
-}% end \ACTS@preced
-
 \newlength{\nthtopsep}
 \setlength{\nthtopsep}{2\p@}
 \newlength{\nthtopskip}
@@ -1196,37 +1201,90 @@
 \setlength{\nthbottomsep}{2\p@}
 \newlength{\nthbottomskip}
 \setlength{\nthbottomskip}{9\p@}
-
+%    \end{macrocode}
+% Next are the two user level commands and the internal commands that
+% call the workhorse \cmd{\@precedence}.
+%    \begin{macrocode}
 \DeclareRobustCommand{\nthtop}{\@ifstar\@varnthtop\@nthtop}
-\newcommand{\@nthtop}[3][\nthtopsep]{%
-  \mathpalette{\ACTS@preced t\z@{#1}{#2}}{#3}}
-\newcommand{\@varnthtop}[3][\nthtopskip]{%
-  \mathpalette{\ACTS@preced t{#1}\z@{#2}}{#3}}
 \DeclareRobustCommand{\nthbottom}{\@ifstar\@varnthbottom\@nthbottom}
+\newcommand{\@nthtop}[3][\nthtopsep]{%
+  \mathpalette{\@predecence t\z@{#1}{#2}}{#3}}
+\newcommand{\@varnthtop}[3][\nthtopskip]{%
+  \mathpalette{\@predecence t{#1}\z@{#2}}{#3}}
 \newcommand{\@nthbottom}[3][\nthbottomsep]{%
-  \mathpalette{\ACTS@preced b\z@{#1}{#2}}{#3}}
+  \mathpalette{\@predecence b\z@{#1}{#2}}{#3}}
 \newcommand{\@varnthbottom}[3][\nthbottomskip]{%
-  \mathpalette{\ACTS@preced b{#1}\z@{#2}}{#3}}
+  \mathpalette{\ACTS@1preced b{#1}\z@{#2}}{#3}}
+%    \end{macrocode}
+% With the internal commands defined we can now process the package
+% options.
+%    \begin{macrocode}
 \ProcessOptions
-
-\DeclareRobustCommand{\firsttop}{\@ifstar{\@varnthtop{1}}{\@nthtop{1}}}
-\DeclareRobustCommand{\secondtop}{\@ifstar{\@varnthtop{2}}{\@nthtop{2}}}
-\DeclareRobustCommand{\thirdtop}{\@ifstar{\@varnthtop{3}}{\@nthtop{3}}}
-\DeclareRobustCommand{\firstbottom}{\@ifstar{\@varnthbottom{1}}{\@nthbottom{1}}}
-\DeclareRobustCommand{\secondbottom}{\@ifstar{\@varnthbottom{2}}{\@nthbottom{2}}}
-\DeclareRobustCommand{\thirdbottom}{\@ifstar{\@varnthbottom{3}}{\@nthbottom{3}}}
-
+%    \end{macrocode}
+%
+% \subsubsection{Number and status positioning}
+% \label{sec:implementation:preced:workhorse}
+%
+% We now define the workhorse to position precedence numbers above or
+% below statuses, smashed so that the height of the auxiliary symbol
+% containing the call remains unaffected. The macro \cmd{\@precedence}
+% has the following six arguments:
+% \begin{enumerate}[nosep]
+% \item |t| for top or |b| for bottom;
+% \item baseline skip between the top and bottom symbols;
+% \item spacing between the top and bottom symbols;
+% \item first argument from the user;
+% \item either one of \cmd{\displaystyle}, \cmd{\textstyle},
+%   \cmd{\scriptstyle} or \cmd{\scriptscriptstyle} from
+%   \cmd{\mathpalette};
+% \item second argument given by the user.
+% \end{enumerate}
+% This peculiar ordering of the arguments is done to work around the
+% restriction of \cmd{\mathpalette} that it only reads two arguments.
+%    \begin{macrocode}
+\def\@predecence#1#2#3#4#5#6{%
+  \setbox\tw@\hbox{$\m@th#5#4$}%
+  \setbox\z@\hbox{$\m@th#5#6$}
+  \dimen@\wd\z@
+  \vbox to\ht\z@{%
+    \baselineskip=#2
+    \lineskip=#3
+    \lineskiplimit\lineskip
+    \if b#1\relax\box\z@\else\vss\fi
+    \hbox to\dimen@{\hss\unhbox\tw@\hss}%
+    \if t#1\relax\box\z@\else\vss\fi
+  }
+}
+%    \end{macrocode}
+%
+% \subsubsection{Shortcuts and aliases}
+% \label{sec:implementation:preced:shortcuts}
+%
+% We finish off by defining the shortcuts and aliases of
+% \autoref{tab:preced}.
+%    \begin{macrocode}
+\DeclareRobustCommand{\firsttop}{%
+  \@ifstar{\@varnthtop{1}}{\@nthtop{1}}}
+\DeclareRobustCommand{\secondtop}{%
+  \@ifstar{\@varnthtop{2}}{\@nthtop{2}}}
+\DeclareRobustCommand{\thirdtop}{%
+  \@ifstar{\@varnthtop{3}}{\@nthtop{3}}}
+\DeclareRobustCommand{\firstbottom}{%
+  \@ifstar{\@varnthbottom{1}}{\@nthbottom{1}}}
+\DeclareRobustCommand{\secondbottom}{%
+  \@ifstar{\@varnthbottom{2}}{\@nthbottom{2}}}
+\DeclareRobustCommand{\thirdbottom}{%
+  \@ifstar{\@varnthbottom{3}}{\@nthbottom{3}}}
 \let\itop\firsttop
 \let\iitop\secondtop
 \let\iiitop\thirdtop
 \let\ibottom\firstbottom
 \let\iibottom\secondbottom
 \let\iiibottom\thirdbottom
-
+%    \end{macrocode}
 %\iffalse
 %</package>
 %\fi
-%    \end{macrocode}
 %
 % \Finale
 %
