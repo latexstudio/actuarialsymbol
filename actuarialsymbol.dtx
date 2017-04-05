@@ -30,11 +30,10 @@
 %<package>\ProvidesPackage{actuarialsymbol}[2017/004/04 v0.1 Actuarial symbols]
 %
 %<*driver>
-\documentclass[11pt,x11names,english]{ltxdoc}
+\documentclass[11pt,x11names]{ltxdoc}
   \usepackage[utf8]{inputenc}
   \usepackage[T1]{fontenc}
   \usepackage{natbib}
-  \usepackage{babel}
   \usepackage{microtype}
   \usepackage[scaled=0.88]{helvet}
   \usepackage[scaled=1.02]{inconsolata}
@@ -95,7 +94,7 @@
     \par
   }
 
-  %% utility macros
+  %% utility macro
   \newcommand{\pkg}[1]{\textsf{#1}}
 
   %% increase row height in tables
@@ -109,12 +108,16 @@
     pdftitle={actuarialsymbol User Guide},
     pdfauthor={David Beauchemin, Vincent Goulet}}
 
+  %% autoref labels
+  \let\subsectionautorefname\sectionautorefname
+  \let\subsubsectionautorefname\sectionautorefname
+
 \begin{document}
   \DocInput{actuarialsymbol.dtx}
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{0}
+% \CheckSum{538}
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
@@ -142,8 +145,8 @@
 % Actuaries denote various quantities of life contingencies like
 % present values of life insurances and life annuities, annual
 % premiums, or reserves using a whole array of symbols. The highly
-% descriptive, yet compact, notation was standardized in as far back as
-% 1898 \citep{Wolthuis:notation:2004}. \autoref{fig:mosaic} shows a
+% descriptive, yet compact, notation was standardized as far back as
+% in 1898 \citep{Wolthuis:notation:2004}. \autoref{fig:mosaic} shows a
 % creative use of the notation by the graduating class of 1972 in
 % Actuarial Science at Université Laval.
 %
@@ -172,7 +175,7 @@
 % be ``accented'' with a bar ($\bar{A}$), double dots ($\ddot{a}$) or
 % a circle ($\mathring{e}$). When the principal symbol consists of two
 % letters, they are grouped between parentheses, as in $\IA$ or
-% $\DA**$. Most commonly, there are alphanumeric statuses in the
+% $\DA*$. Most commonly, there are alphanumeric statuses in the
 % lower-right position \fbox{\small III}. Numerals can be placed above
 % or below the individual statuses to show the order of failure; we
 % will refer to these numerals as \emph{precedence numbers}. Otherwise,
@@ -200,7 +203,7 @@
 %
 % Package \pkg{actuarialsymbol} provides a generic command to position
 % all subscripts and superscripts easily and consistently around a
-% principle symbol, a command to create two-letter symbols and four
+% principal symbol, a command to create two-letter symbols and two
 % commands to position precedence numbers above and below statuses.
 % Since entering actuarial symbols can get quite involved, the package
 % also defines a number of shortcuts to create the most common
@@ -211,17 +214,16 @@
 %
 % We provide in \autoref{sec:comprehensive} a comprehensive list of
 % symbols of life contingencies along with the {\LaTeX} code to
-% compose them with \pkg{actuarialsymbol} loaded. This may be
-% sufficient to start quickly, but in our highly biased view it is
-% still worth reading the fine documentation below.
+% compose them with \pkg{actuarialsymbol} loaded. This may be all the
+% hurried reader needs. In our highly biased view, it remains worth
+% going through the fine documentation below.
 %
 % \section{Package features}
 % \label{sec:features}
 %
-% This section describes the generic commands provided by
-% \pkg{actuarialsymbol} to compose actuarial symbols.
-% \autoref{sec:shortcuts} lists a number of shortcuts to ease entry of
-% symbols.
+% This section describes the generic commands provided by the package
+% to compose actuarial symbols. On a daily basis, one should use the
+% shortcuts of \autoref{sec:shortcuts} to ease entry of symbols.
 %
 % \subsection{Actuarial symbol}
 % \label{sec:features:actsymb}
@@ -265,7 +267,7 @@
 %     \end{texample}
 %   \end{demo}
 %
-%   The command actually admits another optional argument to compose
+%   The command actually admits one more optional argument to compose
 %   symbols for premiums, reserves and paid-up insurance. The extended
 %   command
 %   \begin{quote}
@@ -299,7 +301,7 @@
 %     A_x \quad A_x^2.
 %   \end{displaymath}
 %   The package maintains this behaviour. Therefore, entering the
-%   above symbols using the standard operators |^| and |_| or with
+%   symbols above using the standard operators |^| and |_| or with
 %   \cmd{\actsymb} yields the same result.
 %   \begin{demo}
 %     \begin{texample}[0.7]
@@ -315,7 +317,7 @@
 %   \end{demo}
 %   However, the package also ensures that the left and right
 %   subscripts, when both present, are at the same level, something
-%   ad~hoc constructions do not provide.
+%   popular ad~hoc constructions do not provide.
 %   \begin{demo}
 %     \begin{texample}[0.7]
 %       |{}_tA_x \quad {}_tA_x^2|
@@ -451,7 +453,7 @@
 %   enough spacing \cmd{\nthbottomskip} is left to bottom align the
 %   precedence numbers. The |*| variant is most useful in cases
 %   involving more than one bottom precedence numbers and statuses
-%   with a descenders.
+%   with descenders.
 %   \begin{demo}
 %     \begin{texample}[0.85]
 %       |\actsymb{A}{w\nthtop{3}{x}%| \\
@@ -494,7 +496,7 @@
 %     \end{texample}
 %   \end{demo}
 %   This remark also applies to bottom precedence numbers in inline
-%   formulas.
+%   formulas or multiline equations.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\nthtopsep}
@@ -616,7 +618,7 @@
 %       |\newcommand{\ax}{\@actannsc{a}}| \producing
 %     \end{texample}
 %   \end{demo}
-%   and shortcuts \cmd{\premium} and \cmd{\premium*} with
+%   and the shortcuts \cmd{\premium} and \cmd{\premium*} with
 %   \begin{demo}
 %     \begin{texample}[1]
 %       |\newcommand{\premium}{\@actpremres{P}}| \producing
@@ -671,8 +673,8 @@
 % \subsection{Symbols for varying benefit insurance and annuities}
 % \label{sec:shortcuts:twoletsymb}
 %
-% \autoref{tab:twoletsymb} lists shortcuts to common two-letter
-% symbols for varying benefit insurance and annuities. These shortcuts
+% \autoref{tab:twoletsymb} lists shortcuts for common two-letter
+% symbols of varying benefit insurance and annuities. These shortcuts
 % can be used as principal symbol in \cmd{\actsymb} or in the commands
 % of \autoref{tab:principal}.
 %
@@ -710,9 +712,9 @@
 %   annuity benefit symbols using the internal commands
 %   \begin{quote}
 %     |\@twoletinssc|\oarg{length}\marg{symbol\_1}\marg{symbol\_2} \\
-%     |\@twoletannsc|\oarg{length}\marg{symbol\_1}\marg{symbol\_2} \\
+%     |\@twoletannsc|\oarg{length}\marg{symbol\_1}\marg{symbol\_2}
 %   \end{quote}
-%   These commands are similar to those introduced in
+%   These commands are similar to those of
 %   \autoref{sec:shortcuts:principal}: |\@twoletinssc| provides two
 %   shortcuts (standard and |*| variant), whereas |\@twoletannsc|
 %   provides three (standard, |*| and |**| variants).
@@ -774,11 +776,12 @@
 %   and \cmd{\nthbottom*} equivalent to \cmd{\nthtop} and
 %   \cmd{\nthbottom}, respectively.
 % \end{description}
-% Option |alignpreced| can be useful to simplify entry of precedence
-% numbers. On the other hand, option |compactpreced| is merely
-% included as a complement to |alignpreced|. We do not recommended ---
-% nor see a reason --- to use it as it basically renders inoperative
-% commands \cmd{\nthtop*} and \cmd{\nthbottom*}.
+% Option |alignpreced| can be useful to simplify entry of uniformly
+% positioned precedence numbers. On the other hand, option
+% |compactpreced| is merely included as a complement to |alignpreced|.
+% We do not recommended --- nor see a reason --- to use it as it
+% basically renders inoperative commands \cmd{\nthtop*} and
+% \cmd{\nthbottom*}.
 %
 % \appendix
 %
@@ -786,7 +789,7 @@
 % \label{sec:comprehensive}
 %
 % This appendix was inspired by \citet{Trivedi:lifecon:2004}. The
-% title is a nod to the immensely useful \emph{The Comprehensive
+% title is a nod to the immensely useful \emph{Comprehensive
 % {\LaTeX} Symbol List} of \citet{comprehensive}.
 %
 % We provide below a table of all the life contingencies symbols used
@@ -838,7 +841,7 @@
 %   \showcase{\ax*{x|y}} \\
 %   \showcase{\ax*{\joint{x_1 x_2 x_3}}} \\
 %   \showcase{\newcommand{\aA}{\twoletsymb[0.6pt]{a}{A}} \aA(x)} \\
-%   \showcase{\newcommand{\aA}{\twoletsymb[0.6pt]{a}{A}} \aA_t} \\
+%   \showcase{\newcommand{\aA}{\twoletsymb[0.6pt]{a}{A}} \aA_t} \\
 %   \showcase{\newcommand{\aC}{\twoletsymb[0.3pt]{a}{C}} \aC_t} \\
 %   \showcase{\newcommand{\aF}{\twoletsymb[0.6pt]{a}{F}} \aF_t} \\
 %   \showcase{\newcommand{\aU}{\twoletsymb[0.6pt]{a}{U}} \aU_t} \\
@@ -899,6 +902,7 @@
 % \section{Implementation}
 % \label{sec:implementation}
 %
+% This appendix documents the source code of the package.
 %\iffalse
 %<*package>
 %\fi
@@ -1244,8 +1248,8 @@
 % \item baseline skip between the top and bottom symbols;
 % \item spacing between the top and bottom symbols;
 % \item first argument from the user;
-% \item either one of \cmd{\displaystyle}, \cmd{\textstyle},
-%   \cmd{\scriptstyle} or \cmd{\scriptscriptstyle} from
+% \item one of math style selecting commands (\cmd{\displaystyle}, \cmd{\textstyle},
+%   \cmd{\scriptstyle}, \cmd{\scriptscriptstyle}) from
 %   \cmd{\mathpalette};
 % \item second argument given by the user.
 % \end{enumerate}
