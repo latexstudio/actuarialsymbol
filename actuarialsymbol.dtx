@@ -35,7 +35,7 @@
   \usepackage[T1]{fontenc}
   \usepackage{natbib}
   \usepackage{microtype}
-  \usepackage[scaled=0.88]{helvet}
+  \usepackage[scaled=0.90]{helvet}
   \usepackage[scaled=1.02]{inconsolata}
   \usepackage[sc]{mathpazo}
   \usepackage{fontawesome}
@@ -136,7 +136,10 @@
 %   Package \pkg{actuarialsymbol} provides helper commands to compose
 %   actuarial symbols of life contingencies and financial mathematics
 %   characterized by subscripts and superscripts on both sides of a
-%   principal symbol.
+%   principal symbol. The package also defines a number of shortcut
+%   macros to ease entry of the most common symbols.
+%   \autoref{sec:comprehensive} lists the commands to typeset a large
+%   number of symbols of life contingencies.
 % \end{abstract}
 %
 % \section{Introduction}
@@ -730,7 +733,7 @@
 % can be used in auxiliary symbols in \cmd{\actsymb} or in the
 % commands of \autoref{tab:principal}.
 %
-% \begin{table}
+% \begin{table}[t]
 %   \centering
 %   \caption{Shortcuts and aliases for precedence numbers}
 %   \label{tab:preced}
@@ -786,6 +789,7 @@
 %
 % \appendix
 %
+% \newpage
 % \section{Comprehensive life contingencies symbol list}
 % \label{sec:comprehensive}
 %
@@ -800,7 +804,7 @@
 % compact and legible option. Not all symbols require features of
 % \pkg{actuarialsymbol}.
 %
-% Entries marked with $\dagger$ would benefit a shortcut if used
+% Entries marked with $\dagger$ would benefit a shortcut when used
 % repeatedly in a document.
 %
 % \begingroup
@@ -809,6 +813,15 @@
 %   \toprule
 %   Symbol & Code to compose the symbol \\
 %   \midrule
+%   \endfirsthead
+%   \toprule
+%   Symbol & Code to compose the symbol \\
+%   \midrule
+%   \endhead
+%   \midrule
+%   \endfoot
+%   \bottomrule
+%   \endlastfoot
 %   \showcase{a} \\
 %   \showcase{a(x)} \\
 %   \showcase{a_x} \\
@@ -882,6 +895,7 @@
 % \endgroup
 %
 % \StopEventually{
+% \newpage
 % \begin{thebibliography}{8}
 % \bibitem[{A}merican~{M}athematical {S}ociety(2002)]{amsmath}
 %   {A}merican~{M}athematical {S}ociety.
@@ -930,10 +944,12 @@
 % \end{thebibliography}
 % }
 %
+% \newpage
 % \section{Implementation}
 % \label{sec:implementation}
 %
-% This appendix documents the source code of the package.
+% This appendix contains the annotated source code of the package.
+% Most readers can stop reading here.
 %\iffalse
 %<*package>
 %\fi
