@@ -1050,7 +1050,7 @@
 % \cmd{\mathopen} to suppress space between those and the principal
 % symbol even when the latter is not of type ord.
 %    \begin{macrocode}
-    \mathopen{\vphantom{#4}}^{\box\tw@}\sb{\box\@ne}%
+    \mathopen{\vphantom{#4}^{\box\tw@}\sb{\box\@ne}}%
 %    \end{macrocode}
 % Typesetting of the principal symbol and the right subscript and
 % superscript. The principal symbol is either a principal symbol alone
@@ -1067,7 +1067,7 @@
 % way, {\TeX}'s default placement of subscripts and superscripts is
 % maintained.
 %    \begin{macrocode}
-    \mathopen{\vphantom{#4}}\sb{\box\@ne}%
+    \mathopen{\vphantom{#4}\sb{\box\@ne}}%
     \ifdim\wd\z@=\z@
       #4\sb{\box\thr@@}%
     \else
