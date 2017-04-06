@@ -117,7 +117,7 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{542}
+% \CheckSum{499}
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
@@ -133,13 +133,17 @@
 % \maketitle
 %
 % \begin{abstract}
-%   Package \pkg{actuarialsymbol} provides helper commands to compose
+%   Package \pkg{actuarialsymbol} provides commands to compose
 %   actuarial symbols of life contingencies and financial mathematics
 %   characterized by subscripts and superscripts on both sides of a
-%   principal symbol. The package also defines a number of shortcut
-%   macros to ease entry of the most common symbols.
-%   \autoref{sec:comprehensive} lists the commands to typeset a large
-%   number of symbols of life contingencies.
+%   principal symbol. The package also features commands to easily and
+%   consistently position precedence numbers above or below statuses
+%   in symbols for multiple lives contracts.
+%
+%   Since the actuarial notation can get quite involved. the package
+%   defines a number of shortcut macros to ease entry of the most
+%   common elements. \autoref{sec:comprehensive} lists the commands to
+%   typeset a large selection of symbols of life contingencies.
 % \end{abstract}
 %
 % \section{Introduction}
@@ -533,7 +537,8 @@
 % easily get quite involved. For this reason, the package defines a
 % large number of shortcut macros to ease entry of the most common
 % symbols. We encourage authors to define their own shortcuts for
-% cases we did not consider.
+% cases we did not consider. The package provides facilities to define
+% powerful shortcuts.
 %
 % \subsection{Symbols for life tables, insurance and annuities}
 % \label{sec:shortcuts:principal}
@@ -804,8 +809,8 @@
 % compact and legible option. Not all symbols require features of
 % \pkg{actuarialsymbol}.
 %
-% Entries marked with $\dagger$ would benefit a shortcut when used
-% repeatedly in a document.
+% We recommend to define shortcuts for entries marked with $\dagger$ if
+% the symbols are to be used repeatedly in a document.
 %
 % \begingroup
 % \catcode`\|=12 ^^A to use | in math, disable as verbatim delimiter
