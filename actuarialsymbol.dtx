@@ -38,7 +38,7 @@
   \usepackage[scaled=0.90]{helvet}
   \usepackage[scaled=1.02]{inconsolata}
   \usepackage[sc]{mathpazo}
-  \usepackage{fontawesome}
+  \usepackage{rsfso}
   \usepackage{actuarialsymbol}
   \usepackage{graphicx,framed}
   \usepackage{longtable,booktabs}
@@ -117,7 +117,7 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{499}
+% \CheckSum{507}
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
@@ -552,7 +552,8 @@
 % \begin{table}[t]
 %   \centering
 %   \caption{Shortcuts for life table, insurance and annuity
-%     symbols. All commands accept optional arguments like
+%     symbols. All commands accept arguments the optional arguments
+%     \meta{ll}, \meta{ul} and \meta{ur} of \cmd{\actsymb} of
 %     \cmd{\actsymb}.}
 %   \label{tab:principal}
 %   \begin{tabular*}{1.0\linewidth}{lll}
@@ -560,7 +561,9 @@
 %       Definition & Example & Output \\
 %       \midrule
 %       \cmd{\lx}\marg{age} & \rshowcase{\lx{x}} \\
+%       \cmd{\Lx}\marg{age} & \rshowcase{\Lx{x}}$^\dagger$ \\
 %       \cmd{\dx}\marg{age} & \rshowcase{\dx[n]{x}} \\
+%       \cmd{\Dx}\marg{age} & \rshowcase{\Dx[n]{x}}$^\dagger$ \\
 %       \cmd{\px}\marg{age} & \rshowcase{\px[t]{x}} \\
 %       \cmd{\qx}\marg{age} & \rshowcase{\qx[t]{x}} \\
 %       \addlinespace[6pt]
@@ -581,6 +584,12 @@
 %       \cmd{\paidup*}\marg{benefit}\marg{lr}  & \rshowcase{\paidup*[k][h]{\bar{A}}{x}} \\
 %       \bottomrule
 %   \end{tabular*}
+%     %   \raggedright
+%     %   \hspace*{1em}{\footnotesize $^\dagger$ Calligraphic letters
+%     obtained using \cmd{\mathcal}. These specific versions of
+%     $\mathcal{L}$ and $\mathcal{D}$ require package \pkg{rsfso}.
+%     Standard versions are $\text{\usefont{OMS}{zplm}{m}{n} L}$
+%     and $\text{\usefont{OMS}{zplm}{m}{n} D}$.}
 % \end{table}
 %
 % \begin{DescribeMacro}{\@actinssc}
@@ -809,9 +818,18 @@
 % compact and legible option. Not all symbols require features of
 % \pkg{actuarialsymbol}.
 %
+% Calligraphic letters are obtained using \cmd{\mathcal}. The specific
+% versions of $\mathcal{L}$ and $\mathcal{D}$ that appear in this
+% table require package \pkg{rsfso} \citep{rsfso}, which is
+% \texttt{not} loaded by \pkg{actuarialsymbol}. Standard versions of
+% the calligraphic letters are $\text{\usefont{OMS}{zplm}{m}{n} L}$
+% and $\text{\usefont{OMS}{zplm}{m}{n} D}$. See also Table~299 of
+% \citet{comprehensive}.
+%
 % We recommend to define shortcuts for entries marked with $\dagger$ if
 % the symbols are to be used repeatedly in a document.
 %
+% %
 % \begingroup
 % \catcode`\|=12 ^^A to use | in math, disable as verbatim delimiter
 % \begin{longtable}{ll}
@@ -931,12 +949,15 @@
 %   \showcase{\actsymb[k + 1]{D}{}} \\
 %   \showcase{\DA_{\termxn}} \\
 %   \showcase{\DA*_{\termxn}} \\
+%   \showcase{\Dx[n]{x}} \\
+%   \showcase{\Dx[n]{x}[(j)]} \\
+%   \showcase{\Dx[n]{x}[(\tau)]} \\
 % \end{longtable}
 % \endgroup
 %
 % \StopEventually{
 % \newpage
-% \begin{thebibliography}{8}
+% \begin{thebibliography}{9}
 % \bibitem[{A}merican~{M}athematical {S}ociety(2002)]{amsmath}
 %   {A}merican~{M}athematical {S}ociety.
 %   \newblock \emph{User’s Guide for the amsmath Package}, 2002.
@@ -968,6 +989,11 @@
 %   W. Robertson.
 %   \newblock \emph{Unify subscript depths}, 2007.
 %   \newblock URL \url{http://www.ctan.org/pkg/subdepth/}.
+%
+% \bibitem[Sharpe(2015)]{rsfso}
+%   M. Sharpe.
+%   \newblock \emph{An acute script font based on {rsfs}}, 2015.
+%   \newblock URL \url{http://www.ctan.org/pkg/rsfso/}.
 %
 % \bibitem[Trivedi(2004)]{Trivedi:lifecon:2004}
 %   E. Trivedi.
@@ -1199,7 +1225,9 @@
 % We can now define all the shortcuts of \autoref{tab:principal}.
 %    \begin{macrocode}
 \DeclareRobustCommand{\lx}[1]{\ell\sb{#1}}
+\DeclareRobustCommand{\Lx}[1]{\mathcal{L}\sb{#1}}
 \DeclareRobustCommand{\dx}{\@actothersc d}
+\DeclareRobustCommand{\Dx}{\@actothersc{\mathcal{D}}}
 \DeclareRobustCommand{\px}{\@actothersc p}
 \DeclareRobustCommand{\qx}{\@actothersc q}
 \DeclareRobustCommand{\Ax}{\@actinssc A}
