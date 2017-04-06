@@ -1083,19 +1083,10 @@
     =1
 %    \end{macrocode}
 % To ensure equal spacing with the subscripts on both sides of the
-% principal symbol, adjust the depths of the left and right
-% supercripts (if either is positive) using struts.
+% principal symbol, make the depths of the left and right
+% supercripts equal.
 %    \begin{macrocode}
-    \ifnum\ifdim \dp\tw@>\z@ 1\else\ifdim \dp4>\z@ 1\else 0\fi\fi
-      =1
-      \ifdim \dp\tw@>\dp4
-        \setbox4\hbox to\wd4{%
-          \raisebox{\z@}[\ht4][\dp\tw@]{\unhbox4}}
-      \else
-        \setbox\tw@\hbox to\wd\tw@{%
-          \hfil\raisebox{\z@}[\ht\tw@][\dp4]{\unhbox\tw@}}
-      \fi
-    \fi
+    \ifdim \dp\tw@>\dp4 \dp4=\dp\tw@ \else \dp\tw@=\dp4 \fi
 %    \end{macrocode}
 % Typesetting of the left subscript and superscript. Use
 % \cmd{\mathopen} to suppress space between those and the principal
