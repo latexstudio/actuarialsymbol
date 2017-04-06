@@ -1065,16 +1065,10 @@
     \setbox\tw@\hbox to\wd\@ne{\hfil\unhbox\tw@}
   \fi\fi
 %    \end{macrocode}
-% Bottom align the left and right subscripts by putting them into
-% vertical boxes of the same height.
+% Bottom align the left and right subscripts by making their heights
+% equal.
 %    \begin{macrocode}
-  \ifdim \ht\@ne>\ht\thr@@
-    \setbox\thr@@\vbox to \ht\@ne{%
-      \vfil\hbox to\wd\thr@@{\unhbox\thr@@}}
-  \else
-    \setbox\@ne\vbox to \ht\thr@@{%
-      \vfil\hbox to\wd\@ne{\unhbox\@ne}}
-  \fi
+  \ifdim \ht\@ne>\ht\thr@@ \ht\thr@@=\ht\@ne\else \ht\@ne=\ht\thr@@\fi
 %    \end{macrocode}
 % Actual symbol construction. First the case where there is at least
 % one superscript (the nested conditionals emulate an OR condition).
@@ -1086,7 +1080,7 @@
 % principal symbol, make the depths of the left and right
 % supercripts equal.
 %    \begin{macrocode}
-    \ifdim \dp\tw@>\dp4 \dp4=\dp\tw@ \else \dp\tw@=\dp4 \fi
+    \ifdim \dp\tw@>\dp4 \dp4=\dp\tw@\else \dp\tw@=\dp4\fi
 %    \end{macrocode}
 % Typesetting of the left subscript and superscript. Use
 % \cmd{\mathopen} to suppress space between those and the principal
