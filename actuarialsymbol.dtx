@@ -1062,24 +1062,24 @@
 %
 % We first define the user level command.
 %    \begin{macrocode}
-\DeclareRobustCommand{\actsymb}{\ACTS@actsymb}
+\DeclareRobustCommand{\actsymb}{\acts@actsymb}
 %    \end{macrocode}
 % With its unusual syntax, \cmd{\actsymb} requires four parsing macros
 % to pass the arguments to the actual workhorse \cmd{\@actsymbol}.
 %    \begin{macrocode}
-\newcommand\ACTS@actsymb{%
-  \@ifnextchar[{\ACTS@@actsymb}%
-               {\ACTS@@actsymb[]}}
-\newcommand\ACTS@@actsymb{}
-\def\ACTS@@actsymb[#1]{%
-  \@ifnextchar[{\ACTS@@@actsymb[#1]}%
-               {\ACTS@@@actsymb[#1][]}}
-\newcommand\ACTS@@@actsymb{}
-\def\ACTS@@@actsymb[#1][#2]{%
-  \@ifnextchar[{\ACTS@@@@actsymb[#1][#2]}%
-               {\ACTS@@@@actsymb[#1][#2][]}}
-\newcommand\ACTS@@@@actsymb{}
-\def\ACTS@@@@actsymb[#1][#2][#3]#4#5{%
+\newcommand\acts@actsymb{%
+  \@ifnextchar[{\acts@@actsymb}%
+               {\acts@@actsymb[]}}
+\newcommand\acts@@actsymb{}
+\def\acts@@actsymb[#1]{%
+  \@ifnextchar[{\acts@@@actsymb[#1]}%
+               {\acts@@@actsymb[#1][]}}
+\newcommand\acts@@@actsymb{}
+\def\acts@@@actsymb[#1][#2]{%
+  \@ifnextchar[{\acts@@@@actsymb[#1][#2]}%
+               {\acts@@@@actsymb[#1][#2][]}}
+\newcommand\acts@@@@actsymb{}
+\def\acts@@@@actsymb[#1][#2][#3]#4#5{%
   \@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}%
                {\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
 %    \end{macrocode}
@@ -1189,36 +1189,36 @@
 % (\cmd{\@actpremres}).
 %    \begin{macrocode}
 \newcommand\@actinssc[1]{%
-  \@ifstar{\ACTS@actsc{\bar{#1}}}%
-          {\ACTS@actsc{#1}}}
+  \@ifstar{\acts@actsc{\bar{#1}}}%
+          {\acts@actsc{#1}}}
 \newcommand\@actannsc[1]{%
-  \@ifstar{\@ifstar{\ACTS@actsc{\ddot{#1}}}%
-                   {\ACTS@actsc{\bar{#1}}}}
-          {\ACTS@actsc{#1}}}
-\newcommand\ACTS@actsc[1]{%
-  \@ifnextchar[{\ACTS@@actsc{#1}}%
-               {\ACTS@@actsc{#1}[]}}
-\let\@actothersc\ACTS@actsc
-\newcommand\ACTS@@actsc{}
-\def\ACTS@@actsc#1[#2]{%
-  \@ifnextchar[{\ACTS@@@actsc{#1}[#2]}%
-               {\ACTS@@@actsc{#1}[#2][]}}
-\newcommand\ACTS@@@actsc{}
-\def\ACTS@@@actsc#1[#2][#3]#4{%
+  \@ifstar{\@ifstar{\acts@actsc{\ddot{#1}}}%
+                   {\acts@actsc{\bar{#1}}}}
+          {\acts@actsc{#1}}}
+\newcommand\acts@actsc[1]{%
+  \@ifnextchar[{\acts@@actsc{#1}}%
+               {\acts@@actsc{#1}[]}}
+\let\@actothersc\acts@actsc
+\newcommand\acts@@actsc{}
+\def\acts@@actsc#1[#2]{%
+  \@ifnextchar[{\acts@@@actsc{#1}[#2]}%
+               {\acts@@@actsc{#1}[#2][]}}
+\newcommand\acts@@@actsc{}
+\def\acts@@@actsc#1[#2][#3]#4{%
   \@ifnextchar[{\@actsymbol[#2][#3][]{#1}{#4}}%
                {\@actsymbol[#2][#3][]{#1}{#4}[]}}
 \newcommand\@actpremres[1]{%
-  \@ifstar{\ACTS@actpremres{\bar{#1}}}%
-          {\ACTS@actpremres{#1}}}
-\newcommand\ACTS@actpremres[1]{%
-  \@ifnextchar[{\ACTS@@actpremres{#1}}%
-               {\ACTS@@actpremres{#1}[]}}
-\newcommand\ACTS@@actpremres{}
-\def\ACTS@@actpremres#1[#2]{%
-  \@ifnextchar[{\ACTS@@@actpremres{#1}[#2]}%
-               {\ACTS@@@actpremres{#1}[#2][]}}
-\newcommand\ACTS@@@actpremres{}
-\def\ACTS@@@actpremres#1[#2][#3]#4#5{%
+  \@ifstar{\acts@actpremres{\bar{#1}}}%
+          {\acts@actpremres{#1}}}
+\newcommand\acts@actpremres[1]{%
+  \@ifnextchar[{\acts@@actpremres{#1}}%
+               {\acts@@actpremres{#1}[]}}
+\newcommand\acts@@actpremres{}
+\def\acts@@actpremres#1[#2]{%
+  \@ifnextchar[{\acts@@@actpremres{#1}[#2]}%
+               {\acts@@@actpremres{#1}[#2][]}}
+\newcommand\acts@@@actpremres{}
+\def\acts@@@actpremres#1[#2][#3]#4#5{%
   \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}%
                {\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
 %    \end{macrocode}
