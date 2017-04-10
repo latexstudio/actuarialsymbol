@@ -149,7 +149,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{522}
+% \CheckSum{531}
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
@@ -573,14 +573,15 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % cases we did not consider. The package provides facilities to define
 % powerful shortcuts.
 %
-% \subsection{Symbols for life tables, insurance and annuities}
+% \subsection{Basic symbols of life tables, insurance and annuities}
 % \label{sec:shortcuts:principal}
 %
 % \autoref{tab:principal} lists shortcuts to compose complete symbols
-% of life tables, insurance and annuities. For space considerations
-% only the mandatory arguments are given, but it should be noted that
-% all commands of \autoref*{tab:principal} accept the optional
-% arguments \meta{ll}, \meta{ul} and \meta{ur} of \cmd{\actsymb}.
+% of life tables and benefits of insurance and annuities. For space
+% considerations only the mandatory arguments are given, but it should
+% be noted that all commands of \autoref*{tab:principal} accept the
+% optional arguments \meta{ll}, \meta{ul} and \meta{ur} of
+% \cmd{\actsymb}.
 %
 % \begin{table}[t!]
 %   \centering
@@ -589,7 +590,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %     \meta{ll}, \meta{ul} and \meta{ur} of \cmd{\actsymb} of
 %     \cmd{\actsymb}.}
 %   \label{tab:principal}
-%   \begin{tabular*}{1.0\linewidth}{lll}
+%   \begin{tabular}{lll}
 %       \toprule
 %       Definition & Example & Output \\
 %       \midrule
@@ -599,10 +600,12 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       \cmd{\Dx}\marg{age} & \rshowcase{\Dx[n]{x}}$^\dagger$ \\
 %       \cmd{\px}\marg{age} & \rshowcase{\px[t]{x}} \\
 %       \cmd{\qx}\marg{age} & \rshowcase{\qx[t]{x}} \\
-%       \addlinespace[6pt]
+%       \cmd{\eringx}\marg{lr} & \rshowcase{\eringx{x:\angln}} \\
+%       \addlinespace
 %       \cmd{\Ax}\marg{lr}   & \rshowcase{\Ax{x:\angln}} \\
 %       \cmd{\Ax*}\marg{lr}  & \rshowcase{\Ax*{x:\angln}} \\
 %       \cmd{\Ex}\marg{lr}   & \rshowcase{\Ex[n]{x}} \\
+%       \addlinespace
 %       \cmd{\ax}\marg{lr}   & \rshowcase{\ax{x:\angln}} \\
 %       \cmd{\ax*}\marg{lr}  & \rshowcase{\ax*{x:\angln}} \\
 %       \cmd{\ax**}\marg{lr} & \rshowcase{\ax**{x:\angln}} \\
@@ -610,45 +613,39 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       \cmd{\sx*}\marg{lr}  & \rshowcase{\sx*{x:\angln}} \\
 %       \cmd{\sx**}\marg{lr} & \rshowcase{\sx**{x:\angln}} \\
 %       \cmd{\aringx}\marg{lr} & \rshowcase{\aringx{x:\angln}} \\
-%       \cmd{\eringx}\marg{lr} & \rshowcase{\eringx{x:\angln}} \\
-%       \addlinespace[6pt]
-%       \cmd{\premium}\marg{benefit}\marg{lr}  & \rshowcase{\premium[t]{\bar{A}}{x}} \\
-%       \cmd{\premium*}\marg{benefit}\marg{lr} & \rshowcase{\premium*[t]{\bar{A}}{x}} \\
-%       \cmd{\reserve}\marg{benefit}\marg{lr}  & \rshowcase{\reserve[t]{\ddot{a}}{x}} \\
-%       \cmd{\reserve*}\marg{benefit}\marg{lr} & \rshowcase{\reserve*[t]{\ddot{a}}{x}} \\
-%       \cmd{\paidup}\marg{benefit}\marg{lr}   & \rshowcase{\paidup[k]{\bar{A}}{x}} \\
-%       \cmd{\paidup*}\marg{benefit}\marg{lr}  & \rshowcase{\paidup*[k][h]{\bar{A}}{x}} \\
 %       \bottomrule
-%   \end{tabular*}
-%     %   \raggedright
-%     %   \hspace*{1em}{\footnotesize $^\dagger$ Calligraphic letters
+%   \end{tabular} \\
+%     \raggedright
+%     \hspace*{1em}{\footnotesize $^\dagger$ Calligraphic letters
 %     obtained using \cmd{\mathcal}. These specific versions of
-%     $\mathcal{L}$ and $\mathcal{D}$ require package \pkg{rsfso}.
-%     Standard versions are $\text{\usefont{OMS}{zplm}{m}{n} L}$
-%     and $\text{\usefont{OMS}{zplm}{m}{n} D}$.}
+%     $\mathcal{L}$ and $\mathcal{D}$ require package \pkg{rsfso}
+%     \citep{rsfso}. Standard versions are
+%     $\text{\usefont{OMS}{zplm}{m}{n} L}$ and
+%     $\text{\usefont{OMS}{zplm}{m}{n} D}$.}
 % \end{table}
+%
+% One will note that shortcuts for insurance benefits come in two
+% variants: one for the benefit payable at the end of the year of
+% death (standard shortcut) and one for the benefit payable at the
+% time of death (|*| variant). Shortcuts for annuity benefits have
+% three variants: payable at the end of the period (standard),
+% continuously (|*| variant) and at the beginning of the period (|**|
+% variant).
 %
 % \begin{DescribeMacro}{\@actinssc}
 % \begin{DescribeMacro}{\@actannsc}
 % \begin{DescribeMacro}{\@actothersc}
-% \begin{DescribeMacro}{\@actpremres}
 %   One may define additional shortcut macros similar to those of
 %   \autoref{tab:principal} using the internal commands
 %   \begin{quote}
 %     |\@actinssc|\marg{symbol} \\
 %     |\@actannsc|\marg{symbol} \\
 %     |\@actothersc|\marg{symbol} \\
-%     |\@actpremres|\marg{principle}
 %   \end{quote}
-%   Command |\@actinssc| provides shortcuts for insurance benefits
-%   payable at the end of the year of death (default) or at the time
-%   of death (|*| variant). Command |\@actannsc| provides shortcuts
-%   for annuity benefits payable at the end of the period (default),
-%   continuously (|*| variant) or at the beginning of the period (|**|
-%   variant). Command |\@actothersc| only provides a shortcut for
-%   \meta{symbol}. Finally, |\@actpremres| provides shortcuts for
-%   discrete (default) or continuous (|*| variant) premiums, reserves
-%   and paid-up insurance.
+%   Command |\@actinssc| automatically provides the two shortcuts for
+%   insurance benefits, command |\@actannsc| provides the three
+%   shortcuts for annuity benefits and command |\@actothersc|
+%   provides a single shortcut for \meta{symbol}.
 %
 %   For example, the package defines the shortcut \cmd{\px} with the
 %   equivalent of %
@@ -665,19 +662,12 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       |\newcommand{\Ax}{\@actinssc{A}}| \producing
 %     \end{texample}
 %   \end{demo}
-%   the shortcuts \cmd{\ax}, \cmd{\ax*} and \cmd{\ax**} with
+%   and shortcuts \cmd{\ax}, \cmd{\ax*} and \cmd{\ax**} with
 %   \begin{demo}
 %     \begin{texample}[1]
 %       |\newcommand{\ax}{\@actannsc{a}}| \producing
 %     \end{texample}
 %   \end{demo}
-%   and the shortcuts \cmd{\premium} and \cmd{\premium*} with
-%   \begin{demo}
-%     \begin{texample}[1]
-%       |\newcommand{\premium}{\@actpremres{P}}| \producing
-%     \end{texample}
-%   \end{demo}
-% \end{DescribeMacro}
 % \end{DescribeMacro}
 % \end{DescribeMacro}
 % \end{DescribeMacro}
@@ -696,6 +686,68 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %     \end{texample}
 %   \end{demo}
 % \end{rem}
+%
+% \subsection{Symbols for premiums, reserves and paid-up insurance}
+% \label{sec:shortcuts:premres}
+%
+% Symbols for premiums, reserves and paid-up insurance come in two
+% main variants: without an explicit benefit between parentheses for
+% insurances payable at the end of the year of death, and with the
+% type of benefit specified for all other insurances and annuities.
+%
+% \autoref{tab:premres} lists two sets of shortcuts to compose symbols
+% for premiums, reserves and paid-up insurance. Shortcut from the
+% first set take in mandatory argument the content of the \meta{lr}
+% subscript of actuarial symbols. Those from the second set require a
+% complete benefit symbol in argument. One may use the shortcuts of
+% \autoref{tab:principal} to this effect. Again, only the mandatory
+% arguments are given in the table, but all commands accept the
+% optional arguments \meta{ll}, \meta{ul} and \meta{ur} of
+% \cmd{\actsymb}.
+%
+% \begin{table}[t]
+%   \centering
+%   \caption{Shortcuts premiums, reserves and paid-up insurance. All
+%     commands accept arguments the optional arguments \meta{ll},
+%     \meta{ul} and \meta{ur} of \cmd{\actsymb}.}
+%   \label{tab:premres}
+%   \begin{tabular*}{1.0\linewidth}{lll}
+%       \toprule
+%       Definition & Example & Output \\
+%       \midrule
+%       \cmd{\Px}\marg{lr}   & \rshowcase{\Px[h]{x}} \\
+%       \cmd{\Vx}\marg{lr}   & \rshowcase{\Vx[k]{x}} \\
+%       \cmd{\Wx}\marg{lr}   & \rshowcase{\Wx[k]{x}} \\
+%       \addlinespace
+%       \cmd{\premium}\marg{benefit}  & \rshowcase{\premium[t]{\Ax{x}}} \\
+%       \cmd{\premium*}\marg{benefit} & \rshowcase{\premium*[t]{\Ax*{x:\angln}}} \\
+%       \cmd{\reserve}\marg{benefit}  & \rshowcase{\reserve[t]{\ax**{x}}} \\
+%       \cmd{\reserve*}\marg{benefit} & \rshowcase{\reserve*[t]{\ax*{x}}} \\
+%       \cmd{\paidup}\marg{benefit}   & \rshowcase{\paidup[k]{\Ax*{x}}} \\
+%       \cmd{\paidup*}\marg{benefit}  & \rshowcase{\paidup*[k][h]{\Ax*{x}}} \\
+%       \bottomrule
+%   \end{tabular*}
+% \end{table}
+%
+% \begin{DescribeMacro}{\@actpremres}
+%   The package eases definition of additional shortcut macros similar
+%   to the second set of \autoref{tab:premres} using the internal
+%   command
+%   \begin{quote}
+%     |\@actpremres|\marg{principle}
+%   \end{quote}
+%   It defines shortcuts for discrete (default) or continuous (|*|
+%   variant) premiums, reserves and paid-up insurance. For example,
+%   the package defines the shortcut the shortcuts \cmd{\premium} and
+%   \cmd{\premium*} with
+%   \begin{demo}
+%     \begin{texample}[1]
+%       |\newcommand{\premium}{\@actpremres{P}}| \producing
+%     \end{texample}
+%   \end{demo}
+%   The remark at the end of \autoref{sec:shortcuts:principal} also
+%   applies here.
+% \end{DescribeMacro}
 %
 % \subsection{Auxiliary symbols}
 % \label{sec:shortcuts:aux}
@@ -1322,17 +1374,16 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsubsection{Shortcuts}
-% \label{sec:implementation:actsymb:shortcuts}
+% \subsubsection{Shortcuts for basic symbols of life tables, insurance and annuities}
+% \label{sec:implementation:actsymb:principalsc}
 %
 % \begin{macro}{\@actinssc}
 % \begin{macro}{\@actannsc}
-% \begin{macro}{\@actpremres}
+% \begin{macro}{\@actothersc}
 %   We first define the internal macros and parsing macros used to
 %   define shortcuts for insurance benefits (\cmd{\@actinssc}),
-%   annuity benefits (\cmd{\@actannsc}), simple symbols
-%   (\cmd{\@actothersc}), and for premiums, reserves and paid-up
-%   insurance symbols (\cmd{\@actpremres}).
+%   annuity benefits (\cmd{\@actannsc}) and simple symbols
+%   (\cmd{\@actothersc}).
 %    \begin{macrocode}
 \newcommand\@actinssc[1]{%
   \@ifstar{\acts@actsc{\bar{#1}}}%
@@ -1353,20 +1404,6 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \def\acts@@@actsc#1[#2][#3]#4{%
   \@ifnextchar[{\@actsymbol[#2][#3][]{#1}{#4}}%
                {\@actsymbol[#2][#3][]{#1}{#4}[]}}
-\newcommand\@actpremres[1]{%
-  \@ifstar{\acts@actpremres{\bar{#1}}}%
-          {\acts@actpremres{#1}}}
-\newcommand\acts@actpremres[1]{%
-  \@ifnextchar[{\acts@@actpremres{#1}}%
-               {\acts@@actpremres{#1}[]}}
-\newcommand\acts@@actpremres{}
-\def\acts@@actpremres#1[#2]{%
-  \@ifnextchar[{\acts@@@actpremres{#1}[#2]}%
-               {\acts@@@actpremres{#1}[#2][]}}
-\newcommand\acts@@@actpremres{}
-\def\acts@@@actpremres#1[#2][#3]#4#5{%
-  \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}%
-               {\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1386,14 +1423,47 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \DeclareRobustCommand{\sx}{\@actannsc s}
 \DeclareRobustCommand{\aringx}{\@actothersc{\mathring{a}}}
 \DeclareRobustCommand{\eringx}{\@actothersc{\mathring{e}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{Shortcuts for premiums, reserves and paid-up insurance}
+% \label{sec:implementation:actsymb:premressc}
+%
+% \begin{macro}{\@actpremres}
+%   Not unlike above, we first define the internal and parsing macros
+%   used to create shortcut for premiums, reserves and paid-up insurance
+%   symbols.
+%    \begin{macrocode}
+\newcommand\@actpremres[1]{%
+  \@ifstar{\acts@actpremres{\bar{#1}}}%
+          {\acts@actpremres{#1}}}
+\newcommand\acts@actpremres[1]{%
+  \@ifnextchar[{\acts@@actpremres{#1}}%
+               {\acts@@actpremres{#1}[]}}
+\newcommand\acts@@actpremres{}
+\def\acts@@actpremres#1[#2]{%
+  \@ifnextchar[{\acts@@@actpremres{#1}[#2]}%
+               {\acts@@@actpremres{#1}[#2][]}}
+\newcommand\acts@@@actpremres{}
+\def\acts@@@actpremres#1[#2][#3]#4{%
+  \@ifnextchar[{\@actsymbol[#2][#3][#1]{{#4}}{}}%
+               {\@actsymbol[#2][#3][#1]{{#4}}{}[]}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\DeclareRobustCommand}
+%   Then we can define the shortcuts of \autoref{tab:premres}.
+%    \begin{macrocode}
+\DeclareRobustCommand{\Px}{\@actothersc P}
+\DeclareRobustCommand{\Vx}{\@actothersc V}
+\DeclareRobustCommand{\Wx}{\@actothersc W}
 \DeclareRobustCommand{\premium}{\@actpremres P}
 \DeclareRobustCommand{\reserve}{\@actpremres V}
 \DeclareRobustCommand{\paidup}{\@actpremres W}
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Auxiliary symbols}
-% \label{sec:implementation:aux}
+% \subsubsection{Shortcuts for auxiliary symbols}
+% \label{sec:implementation:actsymb:auxsc}
 %
 % \begin{macro}{\DeclareRobustCommand}
 %   Here we define the shortcuts for common auxiliary symbols listed in
