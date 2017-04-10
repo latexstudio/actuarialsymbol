@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2017 Vincent Goulet, David Beauchemin
+% Copyright (C) 2017 David Beauchemin, Vincent Goulet
 %
 % This file may be distributed and/or modified under the conditions
 % of the LaTeX Project Public License, either version 1.3c of this
@@ -17,9 +17,8 @@
 % The Current Maintainer of this work is Vincent Goulet
 % <vincent.goulet@act.ulaval.ca>.
 %
-% This work consists of the files actuarialsymbol.dtx and
-% actuarialsymbol.ins and the derived files listed in the README.md
-% file.
+% This work consists of the files actuarialsymbol.dtx and the derived
+% files.
 %
 % \fi
 %
@@ -29,7 +28,39 @@
 %</dtx>
 %<package>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<package>\ProvidesPackage{actuarialsymbol}[2017/04/10 v0.1 Actuarial symbols]
-%
+%<*batchfile>
+\begingroup
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+
+\preamble
+
+This is a generated file.
+
+Copyright (C) 2017 David Beauchemin, Vincent Goulet
+
+This file may be distributed and/or modified under the conditions
+of the LaTeX Project Public License, either version 1.3c of this
+license or (at your option) any later version. The latest version
+of this license is in:
+
+   http://www.latex-project.org/lppl.txt
+
+and version 1.3c or later is part of all distributions of LaTeX
+version 2006/05/20 or later.
+
+This work has the LPPL maintenance status `maintained'.
+
+The Current Maintainer of this work is Vincent Goulet
+<vincent.goulet@act.ulaval.ca>.
+
+This work consists of actuarialsymbol.dtx and the derived files.
+
+\endpreamble
+\generate{\file{actuarialsymbol.sty}{\from{actuarialsymbol.dtx}{package}}}
+\endgroup
+%</batchfile>
 %<*driver>
 \documentclass[11pt,x11names]{ltxdoc}
   \usepackage[utf8]{inputenc}
@@ -127,10 +158,11 @@
 %   \thanks{This document corresponds to
 %   \pkg{actuarialsymbol}~\fileversion, dated~\filedate.}}
 % \author{David Beauchemin \\
-%   \url{david.beauchemin.5@ulaval.ca} \\[6pt]
-%   Vincent Goulet \\
-%   \url{vincent.goulet@act.ulaval.ca} \\[6pt]
-%   École d'actuariat, Université Laval}
+%   \url{david.beauchemin.5@ulaval.ca}
+%   \and
+%   Vincent Goulet\thanks{%
+%     École d'actuariat, Université Laval} \\
+%   \url{vincent.goulet@act.ulaval.ca}}
 % \maketitle
 %
 % \begin{abstract}
@@ -1490,6 +1522,20 @@
 %\fi
 %
 % \Finale
+% \obeyspaces
+% \typeout{*************************************************************}
+% \typeout{*                                                           *}
+% \typeout{* To finish the installation you have to move the following *}
+% \typeout{* file into a directory searched by TeX:                    *}
+% \typeout{*                                                           *}
+% \typeout{*  actuarialsymbol.sty                                      *}
+% \typeout{*                                                           *}
+% \typeout{* To produce the documentation, run actuarialsymbol.dtx     *}
+% \typeout{* through LaTeX.                                            *}
+% \typeout{*                                                           *}
+% \typeout{* Happy actuarial TeXing!                                   *}
+% \typeout{*                                                           *}
+% \typeout{*************************************************************}
 %
 % ^^A Local Variables:
 % ^^A mode: doctex
