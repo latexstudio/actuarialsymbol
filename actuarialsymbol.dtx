@@ -149,7 +149,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{507}
+% \CheckSum{519}
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
@@ -1155,20 +1155,22 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \subsection{Package options}
 % \label{sec:implementation:options}
 %
-% \begin{macro}{DeclareOption}
-%   The package defines two options. Option |alignpreced| makes the
-%   internal macros \cmd{\@nthtop} and \cmd{\@nthbottom} equivalent to
-%   \cmd{\@varnthtop} and \cmd{\@varnthbottom}, respectively. Option
-%   |compactpreced| does the opposite. The options are processed
-%   later, once the commands are defined (see
-%   \autoref{sec:implementation:preced:user}).
+% \begin{macro}{\ifacts@alignpreced}
+% \begin{macro}{\ifacts@acompactpreced}
+%   We define two flags to keep track of the type of alignment for
+%   precedence numbers. Both are false by default.
 %    \begin{macrocode}
-\DeclareOption{alignpreced}{%
-  \let\@nthtop\@varnthtop
-  \let\@nthbottom\@varnthbottom}
-\DeclareOption{compactpreced}{%
-  \let\@varnthtop\nthtop
-  \let\@varnthbottom\nthbottom}
+\newif\ifacts@alignpreced   \acts@alignprecedfalse
+\newif\ifacts@compactpreced \acts@compactprecedfalse
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\DeclareOption}
+%   Declaration of the package options and processing.
+%    \begin{macrocode}
+\DeclareOption{alignpreced}{\acts@alignprecedtrue}
+\DeclareOption{compactpreced}{\acts@compactprecedtrue}
+\ProcessOptions
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1190,12 +1192,13 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \DeclareRobustCommand{\actsymb}{\acts@actsymb}
 %    \end{macrocode}
 % \end{macro}
-% With its unusual syntax, \cmd{\actsymb} requires four parsing macros
-% to pass the arguments to the actual workhorse \cmd{\@actsymbol}.
 % \begin{macro}{\acts@actsymb}
 % \begin{macro}{\acts@@actsymb}
 % \begin{macro}{\acts@@@actsymb}
 % \begin{macro}{\acts@@@@actsymb}
+%   With its unusual syntax, \cmd{\actsymb} requires four parsing
+%   macros to pass the arguments to the actual workhorse
+%   \cmd{\@actsymbol}.
 %    \begin{macrocode}
 \newcommand\acts@actsymb{%
   \@ifnextchar[{\acts@@actsymb}%
@@ -1482,10 +1485,10 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \end{macro}
 % \end{macro}
 % \end{macro}
-% Next up are the two user level commands and the internal commands that
-% call the workhorse \cmd{\@precedence}.
 % \begin{macro}{\nthtop}
 % \begin{macro}{\nthbottom}
+%   Next up are the two user level commands and the internal commands
+%   that call the workhorse \cmd{\@precedence}.
 %    \begin{macrocode}
 \DeclareRobustCommand{\nthtop}{\@ifstar\@varnthtop\@nthtop}
 \DeclareRobustCommand{\nthbottom}{\@ifstar\@varnthbottom\@nthbottom}
@@ -1500,11 +1503,32 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
-% With the internal commands defined we can now process the package
-% options.
+%
+% \begin{macro}{\@nthtop}
+% \begin{macro}{\@nthbottom}
+%   With the internal commands defined we can now process the package
+%   options. Option |alignpreced| makes the internal macros
+%   \cmd{\@nthtop} and \cmd{\@nthbottom} equivalent to
+%   \cmd{\@varnthtop} and \cmd{\@varnthbottom}, respectively.
 %    \begin{macrocode}
-\ProcessOptions
+\ifacts@alignpreced
+  \let\@nthtop\@varnthtop
+  \let\@nthbottom\@varnthbottom
+\fi
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\@varnthtop}
+% \begin{macro}{\@varnthbottom}
+%   Option |compactpreced| does the opposite.
+%    \begin{macrocode}
+\ifacts@compactpreced
+  \let\@varnthtop\nthtop
+  \let\@varnthbottom\nthbottom
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
 % \subsubsection{Number and status positioning}
 % \label{sec:implementation:preced:workhorse}
