@@ -149,7 +149,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{519}
+% \CheckSum{522}
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
@@ -606,6 +606,9 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       \cmd{\ax}\marg{lr}   & \rshowcase{\ax{x:\angln}} \\
 %       \cmd{\ax*}\marg{lr}  & \rshowcase{\ax*{x:\angln}} \\
 %       \cmd{\ax**}\marg{lr} & \rshowcase{\ax**{x:\angln}} \\
+%       \cmd{\sx}\marg{lr}   & \rshowcase{\sx{x:\angln}} \\
+%       \cmd{\sx*}\marg{lr}  & \rshowcase{\sx*{x:\angln}} \\
+%       \cmd{\sx**}\marg{lr} & \rshowcase{\sx**{x:\angln}} \\
 %       \cmd{\aringx}\marg{lr} & \rshowcase{\aringx{x:\angln}} \\
 %       \cmd{\eringx}\marg{lr} & \rshowcase{\eringx{x:\angln}} \\
 %       \addlinespace[6pt]
@@ -1001,10 +1004,10 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{R(x, h, y)} \\
 %   \addlinespace
 %   \showcase{s(x)} \\
-%   \showcase{\actsymb{\ddot{s}}{\angl{n}}} \\
+%   \showcase{\sx**{\angln}} \\
 %   \showcase{s(x,u)} \\
-%   \showcase{\actsymb{\bar{s}}{\endowxn}} \\
-%   \showcase{\actsymb{\ddot{s}}{\endowxn}} \\
+%   \showcase{\sx*{\endowxn}} \\
+%   \showcase{\sx**{\endowxn}} \\
 %   \showcase{S} \\
 %   \showcase{\actsymb{S}{}(t)} \\
 %   \showcase{\actsymb{S}{y}} \\
@@ -1380,6 +1383,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \DeclareRobustCommand{\Ax}{\@actinssc A}
 \DeclareRobustCommand{\Ex}{\@actinssc E}
 \DeclareRobustCommand{\ax}{\@actannsc a}
+\DeclareRobustCommand{\sx}{\@actannsc s}
 \DeclareRobustCommand{\aringx}{\@actothersc{\mathring{a}}}
 \DeclareRobustCommand{\eringx}{\@actothersc{\mathring{e}}}
 \DeclareRobustCommand{\premium}{\@actpremres P}
