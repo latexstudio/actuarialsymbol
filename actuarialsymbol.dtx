@@ -1143,22 +1143,25 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \subsection{Required packages}
 % \label{sec:implementation:packages}
 %
-% The package depends on packages \pkg{amsmath} \citep{amsmath} and
-% \pkg{actuarialangle} \citep{actuarialangle}.
+% \begin{macro}{RequirePackage}
+%   The package depends on packages \pkg{amsmath} \citep{amsmath} and
+%   \pkg{actuarialangle} \citep{actuarialangle}.
 %    \begin{macrocode}
 \RequirePackage{amsmath}
 \RequirePackage{actuarialangle}
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Package options}
 % \label{sec:implementation:options}
 %
-% The package defines two options. Option |alignpreced| makes the
-% internal macros \cmd{\@nthtop} and \cmd{\@nthbottom} equivalent to
-% \cmd{\@varnthtop} and \cmd{\@varnthbottom}, respectively. Option
-% |compactpreced| does the opposite. The options are processed later,
-% once the commands are defined (see
-% \autoref{sec:implementation:preced:user}).
+% \begin{macro}{DeclareOption}
+%   The package defines two options. Option |alignpreced| makes the
+%   internal macros \cmd{\@nthtop} and \cmd{\@nthbottom} equivalent to
+%   \cmd{\@varnthtop} and \cmd{\@varnthbottom}, respectively. Option
+%   |compactpreced| does the opposite. The options are processed
+%   later, once the commands are defined (see
+%   \autoref{sec:implementation:preced:user}).
 %    \begin{macrocode}
 \DeclareOption{alignpreced}{%
   \let\@nthtop\@varnthtop
@@ -1167,6 +1170,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
   \let\@varnthtop\nthtop
   \let\@varnthbottom\nthbottom}
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Actuarial symbol}
 % \label{sec:implementation:actsymb}
@@ -1180,12 +1184,18 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \subsubsection{User level and parsing commands}
 % \label{sec:implementation:actsymb:user}
 %
-% We first define the user level command.
+% \begin{macro}{actsymb}
+%   We first define the user level command.
 %    \begin{macrocode}
 \DeclareRobustCommand{\actsymb}{\acts@actsymb}
 %    \end{macrocode}
+% \end{macro}
 % With its unusual syntax, \cmd{\actsymb} requires four parsing macros
 % to pass the arguments to the actual workhorse \cmd{\@actsymbol}.
+% \begin{macro}{\acts@actsymb}
+% \begin{macro}{\acts@@actsymb}
+% \begin{macro}{\acts@@@actsymb}
+% \begin{macro}{\acts@@@@actsymb}
 %    \begin{macrocode}
 \newcommand\acts@actsymb{%
   \@ifnextchar[{\acts@@actsymb}%
@@ -1203,33 +1213,39 @@ This work consists of actuarialsymbol.dtx and the derived files.
   \@ifnextchar[{\@actsymbol[#1][#2][#3]{#4}{#5}}%
                {\@actsymbol[#1][#2][#3]{#4}{#5}[]}}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
 % \subsubsection{Symbol construction}
 % \label{sec:implementation:actsymb:workhorse}
 %
-% We now define the workhorse to compose an actuarial symbol allowing
-% for auxiliary symbols on all four corners around a principal symbol.
-% The macro \cmd{\@actsymbol} has the following six arguments, using
-% the notation from of the schematics representations \eqref{schema1}
-% and \eqref{schema2}:
-% \begin{enumerate}[nosep]
-% \item lower left subscript \fbox{\small I}; may be empty;
-% \item upper left superscript \fbox{\small II}; may be empty;
-% \item principle symbol $P$; when empty a standard symbol is typeset;
-% \item principal symbol $S$; assumed present;
-% \item lower right subscript \fbox{\small III}; assumed present;
-% \item upper right superscript \fbox{\small IV}; may be empty.
-% \end{enumerate}
-% The definition below is heavily inspired by the code of
-% \cmd{\prescript} from package \pkg{mathtools} \citep{mathtools}
-% which, as reported by the author, is itself based on a posting to
-% |comp.text.tex| by Michael J.~Downes. Some of the comments below are
-% still his.
+% \begin{macro}{\@actsymbol}
+%   We now define the workhorse to compose an actuarial symbol
+%   allowing for auxiliary symbols on all four corners around a
+%   principal symbol. The macro \cmd{\@actsymbol} has the following
+%   six arguments, using the notation from of the schematics
+%   representations \eqref{schema1} and \eqref{schema2}:
+%   \begin{enumerate}[nosep]
+%   \item lower left subscript \fbox{\small I}; may be empty;
+%   \item upper left superscript \fbox{\small II}; may be empty;
+%   \item principle symbol $P$; when empty a standard symbol is
+%     typeset;
+%   \item principal symbol $S$; assumed present;
+%   \item lower right subscript \fbox{\small III}; assumed present;
+%   \item upper right superscript \fbox{\small IV}; may be empty.
+%   \end{enumerate}
+%   The definition below is heavily inspired by the code of
+%   \cmd{\prescript} from package \pkg{mathtools} \citep{mathtools}
+%   which, as reported by the author, is itself based on a posting to
+%   |comp.text.tex| by Michael J.~Downes. Some of the comments below
+%   are still his.
 %    \begin{macrocode}
 \def\@actsymbol[#1][#2][#3]#4#5[#6]{
 %    \end{macrocode}
-% We put the principle symbol and all subscripts and superscript into
-% horizontal boxes using \cmd{\@mathmeasure} of package \pkg{amsmath}.
+%   We put the principle symbol and all subscripts and superscript into
+%   horizontal boxes using \cmd{\@mathmeasure} of package \pkg{amsmath}.
 %    \begin{macrocode}
   \@mathmeasure\z@\displaystyle{#3}
   \@mathmeasure\@ne\scriptstyle{#1}
@@ -1237,13 +1253,13 @@ This work consists of actuarialsymbol.dtx and the derived files.
   \@mathmeasure\thr@@\scriptstyle{#5}
   \@mathmeasure4\scriptstyle{#6}
 %    \end{macrocode}
-% Do not let a preceding mathord symbol approach without any
-% intervening space.
+%   Do not let a preceding mathord symbol approach without any
+%   intervening space.
 %    \begin{macrocode}
   \mathord{}
 %    \end{macrocode}
-% Right align the left subscript and superscript (if there is a
-% superscript) by adjusting the width of their horizontal boxes.
+%   Right align the left subscript and superscript (if there is a
+%   superscript) by adjusting the width of their horizontal boxes.
 %    \begin{macrocode}
   \ifdim \wd\tw@>\z@ \ifdim \wd\tw@>\wd\@ne
     \setbox\@ne\hbox to\wd\tw@{\hfil\unhbox\@ne}
@@ -1251,32 +1267,32 @@ This work consists of actuarialsymbol.dtx and the derived files.
     \setbox\tw@\hbox to\wd\@ne{\hfil\unhbox\tw@}
   \fi\fi
 %    \end{macrocode}
-% Bottom align the left and right subscripts by making their heights
-% equal.
+%   Bottom align the left and right subscripts by making their heights
+%   equal.
 %    \begin{macrocode}
   \ifdim \ht\@ne>\ht\thr@@ \ht\thr@@=\ht\@ne\else \ht\@ne=\ht\thr@@\fi
 %    \end{macrocode}
-% Actual symbol construction. First the case where there is at least
-% one superscript (the nested conditionals emulate an OR condition).
+%   Actual symbol construction. First the case where there is at least
+%   one superscript (the nested conditionals emulate an OR condition).
 %    \begin{macrocode}
   \ifnum\ifdim \wd\tw@>\z@ 1\else\ifdim \wd4>\z@ 1\else 0\fi\fi
     =1
 %    \end{macrocode}
-% To ensure equal spacing with the subscripts on both sides of the
-% principal symbol, make the depths of the left and right
-% supercripts equal.
+%   To ensure equal spacing with the subscripts on both sides of the
+%   principal symbol, make the depths of the left and right
+%   supercripts equal.
 %    \begin{macrocode}
     \ifdim \dp\tw@>\dp4 \dp4=\dp\tw@\else \dp\tw@=\dp4\fi
 %    \end{macrocode}
-% Typesetting of the left subscript and superscript. Use
-% \cmd{\mathopen} to suppress space between those and the principal
-% symbol even when the latter is not of type ord.
+%   Typesetting of the left subscript and superscript. Use
+%   \cmd{\mathopen} to suppress space between those and the principal
+%   symbol even when the latter is not of type ord.
 %    \begin{macrocode}
     \mathopen{\vphantom{#4}^{\box\tw@}\sb{\box\@ne}}%
 %    \end{macrocode}
-% Typesetting of the principal symbol and the right subscript and
-% superscript. The principal symbol is either a principal symbol alone
-% or a principle symbol and a benefit symbol between parentheses.
+%   Typesetting of the principal symbol and the right subscript and
+%   superscript. The principal symbol is either a principal symbol alone
+%   or a principle symbol and a benefit symbol between parentheses.
 %    \begin{macrocode}
     \ifdim\wd\z@=\z@
       #4^{\box4}\sb{\box\thr@@}%
@@ -1285,9 +1301,9 @@ This work consists of actuarialsymbol.dtx and the derived files.
     \fi
   \else
 %    \end{macrocode}
-% Same ideas as above in the simpler case without superscripts. That
-% way, {\TeX}'s default placement of subscripts and superscripts is
-% maintained.
+%   Same ideas as above in the simpler case without superscripts. That
+%   way, {\TeX}'s default placement of subscripts and superscripts is
+%   maintained.
 %    \begin{macrocode}
     \mathopen{\vphantom{#4}\sb{\box\@ne}}%
     \ifdim\wd\z@=\z@
@@ -1298,15 +1314,19 @@ This work consists of actuarialsymbol.dtx and the derived files.
   \fi
 }
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsubsection{Shortcuts}
 % \label{sec:implementation:actsymb:shortcuts}
 %
-% We first define the internal macros and parsing macros used to
-% define shortcuts for insurance benefits (\cmd{\@actinssc}), annuity
-% benefits (\cmd{\@actannsc}), simple symbols (\cmd{\@actothersc}),
-% and for premiums, reserves and paid-up insurance symbols
-% (\cmd{\@actpremres}).
+% \begin{macro}{\@actinssc}
+% \begin{macro}{\@actannsc}
+% \begin{macro}{\@actpremres}
+%   We first define the internal macros and parsing macros used to
+%   define shortcuts for insurance benefits (\cmd{\@actinssc}),
+%   annuity benefits (\cmd{\@actannsc}), simple symbols
+%   (\cmd{\@actothersc}), and for premiums, reserves and paid-up
+%   insurance symbols (\cmd{\@actpremres}).
 %    \begin{macrocode}
 \newcommand\@actinssc[1]{%
   \@ifstar{\acts@actsc{\bar{#1}}}%
@@ -1342,7 +1362,11 @@ This work consists of actuarialsymbol.dtx and the derived files.
   \@ifnextchar[{\@actsymbol[#2][#3][#1]{#4}{#5}}%
                {\@actsymbol[#2][#3][#1]{#4}{#5}[]}}
 %    \end{macrocode}
-% We can now define all the shortcuts of \autoref{tab:principal}.
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\DeclareRobustCommand}
+%   We can now define all the shortcuts of \autoref{tab:principal}.
 %    \begin{macrocode}
 \DeclareRobustCommand{\lx}[1]{\ell\sb{#1}}
 \DeclareRobustCommand{\Lx}[1]{\mathcal{L}\sb{#1}}
@@ -1359,13 +1383,15 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \DeclareRobustCommand{\reserve}{\@actpremres V}
 \DeclareRobustCommand{\paidup}{\@actpremres W}
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Auxiliary symbols}
 % \label{sec:implementation:aux}
 %
-% Here we define the shortcuts for common auxiliary symbols listed in
-% \autoref{tab:aux}. Command \cmd{\joint} is simply defined as an
-% alias of \cmd{\overline}.
+% \begin{macro}{\DeclareRobustCommand}
+%   Here we define the shortcuts for common auxiliary symbols listed in
+%   \autoref{tab:aux}. Command \cmd{\joint} is simply defined as an
+%   alias of \cmd{\overline}.
 %    \begin{macrocode}
 \DeclareRobustCommand{\term}[2]{\itop{#1}:\angl{#2}}
 \DeclareRobustCommand{\termxn}{\itop{x}:\angln}
@@ -1375,21 +1401,27 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \DeclareRobustCommand{\endowxn}{x:\angln}
 \let\joint\overline
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Two-letter symbols}
 % \label{sec:implementation:twoletsymb}
 %
-% The definition of the user level command \cmd{\twoletsymb} is pretty
-% straighforward.
+% \begin{macro}{\twoletkern}
+% \begin{macro}{\twoletsymb}
+%   The definition of the user level command \cmd{\twoletsymb} is
+%   pretty straighforward.
 %    \begin{macrocode}
 \newlength{\twoletkern}
 \setlength{\twoletkern}{1.2pt}
 \DeclareRobustCommand{\twoletsymb}[3][\twoletkern]{(#2\kern-#1#3)}
 %    \end{macrocode}
-%
-% Following the same lines as above, we define two internal macros to
-% create shortcuts for two-letter insurance and annuity benefit
-% symbols.
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\@twoletinssc}
+% \begin{macro}{\@twoletannsc}
+%   Following the same lines as above, we define two internal macros
+%   to create shortcuts for two-letter insurance and annuity benefit
+%   symbols.
 %    \begin{macrocode}
 \newcommand\@twoletinssc[3][\twoletkern]{%
   \@ifstar{\twoletsymb[#1]{#2}{\bar{#3}}}%
@@ -1399,8 +1431,12 @@ This work consists of actuarialsymbol.dtx and the derived files.
                    {\twoletsymb[#1]{#2}{\bar{#3}}}}%
           {\twoletsymb[#1]{#2}{#3}}}
 %    \end{macrocode}
-% Follow the shortcuts of \autoref{tab:twoletsymb}. Note that we used
-% a smaller negative kerning adjustment for symbols annuity symbols.
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\newcommand}
+%   Follow the shortcuts of \autoref{tab:twoletsymb}. Note that we
+%   used a smaller negative kerning adjustment for symbols annuity
+%   symbols.
 %    \begin{macrocode}
 \newcommand{\IA}{\@twoletinssc IA}
 \newcommand{\IbA}{\@twoletinssc{\bar{I}}A}
@@ -1413,6 +1449,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \newcommand{\Da}{\@twoletannsc[0.5\twoletkern]Da}
 \newcommand{\Ds}{\@twoletannsc[0.5\twoletkern]Ds}
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Precedence numbers}
 % \label{sec:implementation:preced}
@@ -1425,8 +1462,12 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \subsubsection{User level lengths and commands}
 % \label{sec:implementation:preced:user}
 %
-% Let us start by defining the lengths needed to position the
-% precedence numbers above or below the statuses.
+% \begin{macro}{\nthtopsep}
+% \begin{macro}{\nthtopskip}
+% \begin{macro}{\nthbottomsep}
+% \begin{macro}{\nthbottomskip}
+%   Let us start by defining the lengths needed to position the
+%   precedence numbers above or below the statuses.
 %    \begin{macrocode}
 \newlength{\nthtopsep}
 \setlength{\nthtopsep}{2\p@}
@@ -1437,8 +1478,14 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \newlength{\nthbottomskip}
 \setlength{\nthbottomskip}{9\p@}
 %    \end{macrocode}
-% Next are the two user level commands and the internal commands that
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% Next up are the two user level commands and the internal commands that
 % call the workhorse \cmd{\@precedence}.
+% \begin{macro}{\nthtop}
+% \begin{macro}{\nthbottom}
 %    \begin{macrocode}
 \DeclareRobustCommand{\nthtop}{\@ifstar\@varnthtop\@nthtop}
 \DeclareRobustCommand{\nthbottom}{\@ifstar\@varnthbottom\@nthbottom}
@@ -1451,6 +1498,8 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \newcommand{\@varnthbottom}[3][\nthbottomskip]{%
   \mathpalette{\@precedence b{#1}\z@{#2}}{#3}}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 % With the internal commands defined we can now process the package
 % options.
 %    \begin{macrocode}
@@ -1460,22 +1509,24 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \subsubsection{Number and status positioning}
 % \label{sec:implementation:preced:workhorse}
 %
-% We now define the workhorse to position precedence numbers above or
-% below statuses, smashed so that the height of the auxiliary symbol
-% containing the call remains unaffected. The macro \cmd{\@precedence}
-% has the following six arguments:
-% \begin{enumerate}[nosep]
-% \item |t| for top or |b| for bottom;
-% \item baseline skip between the top and bottom symbols;
-% \item spacing between the top and bottom symbols;
-% \item first argument from the user;
-% \item one of math style selecting commands (\cmd{\displaystyle}, \cmd{\textstyle},
-%   \cmd{\scriptstyle}, \cmd{\scriptscriptstyle}) from
-%   \cmd{\mathpalette};
-% \item second argument given by the user.
-% \end{enumerate}
-% This peculiar ordering of the arguments is done to work around the
-% restriction of \cmd{\mathpalette} that it only reads two arguments.
+% \begin{macro}{\@precedence}
+%   We now define the workhorse to position precedence numbers above
+%   or below statuses, smashed so that the height of the auxiliary
+%   symbol containing the call remains unaffected. The macro
+%   \cmd{\@precedence} has the following six arguments:
+%   \begin{enumerate}[nosep]
+%   \item |t| for top or |b| for bottom;
+%   \item baseline skip between the top and bottom symbols;
+%   \item spacing between the top and bottom symbols;
+%   \item first argument from the user;
+%   \item one of math style selecting commands (\cmd{\displaystyle},
+%     \cmd{\textstyle}, \cmd{\scriptstyle}, \cmd{\scriptscriptstyle})
+%     from \cmd{\mathpalette};
+%   \item second argument given by the user.
+%   \end{enumerate}
+%   This peculiar ordering of the arguments is done to work around the
+%   restriction of \cmd{\mathpalette} that it only reads two
+%   arguments.
 %    \begin{macrocode}
 \def\@precedence#1#2#3#4#5#6{%
   \setbox\tw@\hbox{$\m@th#5#4$}%
@@ -1491,12 +1542,14 @@ This work consists of actuarialsymbol.dtx and the derived files.
   }
 }
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsubsection{Shortcuts and aliases}
 % \label{sec:implementation:preced:shortcuts}
 %
-% We finish off by defining the shortcuts and aliases of
-% \autoref{tab:preced}.
+% \begin{macro}{\DeclareRobustCommand}
+%   We finish off by defining the shortcuts and aliases of
+%   \autoref{tab:preced}.
 %    \begin{macrocode}
 \DeclareRobustCommand{\firsttop}{%
   \@ifstar{\@varnthtop{1}}{\@nthtop{1}}}
@@ -1517,7 +1570,8 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \let\iibottom\secondbottom
 \let\iiibottom\thirdbottom
 %    \end{macrocode}
-%\iffalse
+% \end{macro}
+% \iffalse
 %</package>
 %\fi
 %
