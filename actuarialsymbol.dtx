@@ -242,9 +242,10 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % available in {\LaTeX} is the ``angle'' denoting a duration $n$, as
 % in $\angln$. Package \pkg{actuarialangle} \citep{actuarialangle}
 % provides commands to create this symbol, as well as an overhead
-% angle bracket (or ``roof'') used to emphasize joint status when
-% ambiguity is possible: $\group{xy}$. This package is imported at
-% load time by \pkg{actuarialsymbol}.
+% angle bracket\footnote{Starting with version 2.0 dated 2017/04/12.}
+% (or ``roof'') used to emphasize joint status when ambiguity is
+% possible: $\group{xy}$. This package is imported at load time by
+% \pkg{actuarialsymbol}.
 %
 % Package \pkg{actuarialsymbol} provides a generic command to position
 % all subscripts and superscripts easily and consistently around a
@@ -257,12 +258,12 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \section{For the impatient}
 % \label{sec:actuarialsymbol:quickstart}
 %
-% We provide in \autoref{sec:comprehensive} a comprehensive list of
-% symbols of life contingencies along with the {\LaTeX} code to
-% compose them with \pkg{actuarialsymbol} loaded. This may be
-% everything the hurried reader needs to get going. In our highly
-% biased view, it remains worth reading along the fine documentation
-% below.
+% The hurried reader may jump to \autoref{sec:shortcuts} for the
+% shortcut macros defined by the package, and to
+% \autoref{sec:comprehensive} for a comprehensive list of symbols of
+% life contingencies along with the {\LaTeX} code to compose them with
+% \pkg{actuarialsymbol} loaded. That said, in our highly biased view,
+% it remains worth reading along the fine documentation below.
 %
 % \section{Package features}
 % \label{sec:features}
@@ -361,7 +362,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       $\actsymb{A}{x} \quad \actsymb{A}{x}[2]$
 %     \end{texample}
 %   \end{demo}
-%   However, the package also ensures that the left and right
+%   Furthermore, the package also ensures that the left and right
 %   subscripts, when both present, are at the same level, something
 %   popular ad~hoc constructions do not provide.
 %   \begin{demo}
@@ -505,16 +506,16 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   with descenders.
 %   \begin{demo}
 %     \begin{texample}[0.85]
-%       |\actsymb{A}{w\nthtop{3}{x}%| \\
+%       |\actsymb{A}{\nthtop{3}{x}%| \\
 %       |            \nthbottom{1}{y}\nthbottom{2}{z}}|
 %       \producing
-%       \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\nthbottom{1}{y}\nthbottom{2}{z}}$
+%       \rule{0pt}{12pt}$\actsymb{A}{\nthtop{3}{x}\nthbottom{1}{y}\nthbottom{2}{z}}$
 %     \end{texample}
 %     \begin{texample}[0.85]
-%       |\actsymb{A}{w\nthtop{3}{x}%| \\
+%       |\actsymb{A}{\nthtop{3}{x}%| \\
 %       |            \nthbottom*{1}{y}\nthbottom*{2}{z}}|
 %       \producing
-%       \rule{0pt}{12pt}$\actsymb{A}{w\nthtop{3}{x}\nthbottom*{1}{y}\nthbottom*{2}{z}}$
+%       \rule{0pt}{12pt}$\actsymb{A}{\nthtop{3}{x}\nthbottom*{1}{y}\nthbottom*{2}{z}}$
 %     \end{texample}
 %   \end{demo}
 %   The optional argument \meta{length} changes the default spacing
@@ -579,8 +580,8 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % easily get quite involved. For this reason, the package defines a
 % large number of shortcut macros to ease entry of the most common
 % symbols. We encourage authors to define their own shortcuts for
-% cases we did not consider. The package provides facilities to define
-% powerful shortcuts.
+% cases we did not consider. The package provides powerful facilities
+% to define shortcuts.
 %
 % \subsection{Basic symbols of life tables, insurance and annuities}
 % \label{sec:shortcuts:principal}
@@ -595,9 +596,8 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \begin{table}[t!]
 %   \centering
 %   \caption{Shortcuts for life table, insurance and annuity
-%     symbols. All commands accept arguments the optional arguments
-%     \meta{ll}, \meta{ul} and \meta{ur} of \cmd{\actsymb} of
-%     \cmd{\actsymb}.}
+%     symbols. All commands accept the optional arguments
+%     \meta{ll}, \meta{ul} and \meta{ur} of \cmd{\actsymb}.}
 %   \label{tab:principal}
 %   \begin{tabular}{lll}
 %       \toprule
@@ -665,7 +665,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       |\newcommand{\px}{\@actothersc{p}}| \producing
 %     \end{texample}
 %   \end{demo}
-%   the shortcuts \cmd{\Ax} and \cmd{\Ax*} with
+%   shortcuts \cmd{\Ax} and \cmd{\Ax*} with
 %   \begin{demo}
 %     \begin{texample}[1]
 %       |\newcommand{\Ax}{\@actinssc{A}}| \producing
@@ -683,10 +683,10 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %
 % \begin{rem}
 %   When used in the preamble of a document, the above commands need
-%   to be protected by a |\makeatletter| \dots\ |\makeatother| pair.
-%   Therefore, to define shortcuts, say, \cmd{\Bx} and \cmd{\Bx*} to
-%   the imaginary benefits $B$ and $\bar{B}$, one would write in the
-%   preamble
+%   to be protected by a |\makeatletter| \dots\ |\makeatother| pair
+%   since they make use of the reserved character |@|. Therefore, to
+%   define shortcuts, say, \cmd{\Bx} and \cmd{\Bx*} to the imaginary
+%   benefits $B$ and $\bar{B}$, one would write in the preamble
 %   \begin{demo}
 %     \begin{texample}[1]
 %       |\makatletter| \\
@@ -705,7 +705,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % type of benefit specified for all other insurances and annuities.
 %
 % \autoref{tab:premres} lists two sets of shortcuts to compose symbols
-% for premiums, reserves and paid-up insurance. Shortcut from the
+% for premiums, reserves and paid-up insurance. Shortcuts from the
 % first set take in mandatory argument the content of the \meta{lr}
 % subscript of actuarial symbols. Those from the second set require a
 % complete benefit symbol in argument. One may use the shortcuts of
@@ -716,8 +716,8 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %
 % \begin{table}[t]
 %   \centering
-%   \caption{Shortcuts premiums, reserves and paid-up insurance. All
-%     commands accept arguments the optional arguments \meta{ll},
+%   \caption{Shortcuts for premiums, reserves and paid-up insurance. All
+%     commands accept the optional arguments \meta{ll},
 %     \meta{ul} and \meta{ur} of \cmd{\actsymb}.}
 %   \label{tab:premres}
 %   \begin{tabular*}{1.0\linewidth}{lll}
@@ -747,8 +747,8 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \end{quote}
 %   It defines shortcuts for discrete (default) or continuous (|*|
 %   variant) premiums, reserves and paid-up insurance. For example,
-%   the package defines the shortcut the shortcuts \cmd{\premium} and
-%   \cmd{\premium*} with
+%   the package defines shortcuts \cmd{\premium} and \cmd{\premium*}
+%   with
 %   \begin{demo}
 %     \begin{texample}[1]
 %       |\newcommand{\premium}{\@actpremres{P}}| \producing
@@ -778,7 +778,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       \cmd{\pureendowxn}                        & \rshowcase{\Ax{\pureendowxn}} \\
 %       \cmd{\endow}\marg{age}\marg{duration}     & \rshowcase{\ax**{\endow{x}{n}}} \\
 %       \cmd{\endowxn}                            & \rshowcase{\ax**{\endowxn}} \\
-%       \cmd{\joint}\marg{ages}$^\dagger$         & \rshowcase{\Ax{\joint{xy}z}} \\
+%       \cmd{\joint}\marg{ages}$^\dagger$         & \rshowcase{\Ax*{\joint{xy}z}} \\
 %       \bottomrule
 %   \end{tabular*} \\
 %   \raggedright
@@ -908,20 +908,21 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % title is a nod to the immensely useful \emph{Comprehensive
 % {\LaTeX} Symbol List} of \citet{comprehensive}.
 %
-% We provide below a table of all the life contingencies symbols used
-% in \citet[Appendix~3]{Bowers:2e:1997} along with the code to compose
-% them with \pkg{actuarialsymbol} loaded. Often times there are
-% various ways to obtain a symbol; we tried to always present the most
-% compact and legible option. Not all symbols require features of
+% The table below contains all the life contingencies symbols listed
+% in Appendix~3 of \citet{Bowers:2e:1997} along with the code to
+% compose them with \pkg{actuarialsymbol} (and therefore
+% \pkg{actuarialangle}) loaded. Often times there are various ways to
+% obtain a symbol; we tried to always present the most compact and
+% legible option. Not all symbols require features of
 % \pkg{actuarialsymbol}.
 %
-% Calligraphic letters are obtained using \cmd{\mathcal}. The specific
+% Calligraphic letters are typeset using \cmd{\mathcal}. The specific
 % versions of $\mathcal{L}$ and $\mathcal{D}$ that appear in this
-% table require package \pkg{rsfso} \citep{rsfso}, which is
-% \emph{not} loaded by \pkg{actuarialsymbol}. Standard versions of
-% the calligraphic letters are $\text{\usefont{OMS}{zplm}{m}{n} L}$
-% and $\text{\usefont{OMS}{zplm}{m}{n} D}$. See also Table~299 of
-% \citet{comprehensive}.
+% table require package \pkg{rsfso} \citep{rsfso}, which is \emph{not}
+% loaded by \pkg{actuarialsymbol}. Standard versions of the
+% calligraphic letters are $\text{\usefont{OMS}{zplm}{m}{n} L}$ and
+% $\text{\usefont{OMS}{zplm}{m}{n} D}$. See Table~299 of
+% \citet{comprehensive} for other options.
 %
 % %
 % \begingroup
@@ -1011,7 +1012,6 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\Ax*{\joint{x_1 x_2 x_3}}} \\
 %   \showcase{\actsymb[k]{\mathit{AS}}{}} \\
 %   \showcase{\actsymb[k]{\widehat{\mathit{AS}}}{}} \\
-%   \showcase{\actsymb[k]{\widehat{AS}}{}} \\
 %   \showcase{\twoletsymb[0pt]{A}{S}_{x + h}} \\
 %   \showcase{(\mathit{AAI})} \\
 %   \addlinespace
@@ -1154,13 +1154,12 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\actsymb[][T]{P}{t}} \\
 %   \showcase{P^a} \\
 %   \showcase{P_x} \\
-%   \showcase{\actsymb[j]{P}{x}} \\
-%   \showcase{\actsymb[*]{P}{x}} \\
+%   \showcase{\Px[j]{x}} \\
+%   \showcase{\Px[*]{x}} \\
 %   \showcase{\Px{\endowxn}[A]} \\
 %   \showcase{\Px{\endowxn}} \\
 %   \showcase{\Px{\joint{xy}}} \\
-%   \showcase{\Px{\termxn}} \\
-%   \showcase{P_{\termxn}} \\
+%   \showcase{\Px{\:\termxn}} \\
 %   \showcase{\Px{\pureendowxn}} \\
 %   \showcase{P^{*n}(x)} \\
 %   \showcase{\Px[h]{x}} \\
@@ -1187,7 +1186,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\premium{\Ax*{\joint{xy}\iitop{\joint{z}}}}} \\
 %   \showcase{\premium{\Ax*{\ibottom{x}\iitop{y}z}}} \\
 %   \addlinespace[3pt]
-%   \showcase{\tilde{P}_\termxn} \\
+%   \showcase{\tilde{P}_{\:\termxn}} \\
 %   \addlinespace
 %   \showcase{\qx{[x] + r}} \\
 %   \showcase{\qx{x}[(d)]} \\
@@ -1247,7 +1246,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{V_t} \\
 %   \showcase{\Vx[k]{x}} \\
 %   \showcase{\Vx[k]{\endowxn}} \\
-%   \showcase{\Vx[k]{\termxn}} \\
+%   \showcase{\Vx[k]{\:\termxn}} \\
 %   \showcase{\Vx[k]{\pureendowxn}} \\
 %   \showcase{\Vx[k]{x}[\text{FPT}]} \\
 %   \showcase{\Vx[t]{\itop{\group{xy}}:\angln}} \\
@@ -1357,6 +1356,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \StopEventually{
 % \newpage
 % \begin{thebibliography}{9}
+%   \addcontentsline{toc}{section}{References}
 %   \bibitem[{A}merican~{M}athematical {S}ociety(2002)]{amsmath}
 %     {A}merican~{M}athematical {S}ociety.
 %     \newblock \emph{User’s Guide for the amsmath Package}, 2002.
