@@ -715,9 +715,12 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       \toprule
 %       Definition & Example & Output \\
 %       \midrule
-%       \cmd{\Px}\marg{lr}   & \rshowcase{\Px[h]{x}} \\
-%       \cmd{\Vx}\marg{lr}   & \rshowcase{\Vx[k]{x}} \\
-%       \cmd{\Wx}\marg{lr}   & \rshowcase{\Wx[k]{x}} \\
+%       \cmd{\Px}\marg{lr}  & \rshowcase{\Px[h]{x}} \\
+%       \cmd{\Px*}\marg{lr} & \rshowcase{\Px*[h]{x}} \\
+%       \cmd{\Vx}\marg{lr}  & \rshowcase{\Vx[k]{x}} \\
+%       \cmd{\Vx*}\marg{lr} & \rshowcase{\Vx*[k]{x}} \\
+%       \cmd{\Wx}\marg{lr}  & \rshowcase{\Wx[k]{x}} \\
+%       \cmd{\Wx*}\marg{lr} & \rshowcase{\Wx*[k]{x}} \\
 %       \addlinespace
 %       \cmd{\premium}\marg{benefit}  & \rshowcase{\premium[t]{\Ax{x}}} \\
 %       \cmd{\premium*}\marg{benefit} & \rshowcase{\premium*[t]{\Ax*{x:\angln}}} \\
@@ -1216,28 +1219,28 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\sx*{\endowxn}} \\
 %   \showcase{\sx**{\endowxn}} \\
 %   \showcase{S} \\
-%   \showcase{\actsymb{S}{}(t)} \\
-%   \showcase{\actsymb{S}{y}} \\
-%   \showcase{\actsymb[k]{SC}{}} \\
+%   \showcase{S(t)} \\
+%   \showcase{S_y} \\
+%   \showcase{\actsymb[k]{\mathit{SC}}{}} \\
 %   \addlinespace
 %   \showcase{T} \\
 %   \showcase{\tilde{T}} \\
-%   \showcase{\actsymb{T}{x}} \\
-%   \showcase{\actsymb{T}{xy}} \\
-%   \showcase{\actsymb{T}{\joint{xy}}} \\
+%   \showcase{T_x} \\
+%   \showcase{T_{xy}} \\
+%   \showcase{T_{\joint{xy}}} \\
 %   \addlinespace
-%   \showcase{\actsymb{U}{}(t)} \\
-%   \showcase{\actsymb{U}{t}} \\
-%   \showcase{\actsymb{\hat{U}}{t}} \\
+%   \showcase{U(t)} \\
+%   \showcase{U_t} \\
+%   \showcase{\hat{U}{t}} \\
 %   \addlinespace
-%   \showcase{\actsymb{\tilde{V}}{t}} \\
-%   \showcase{\actsymb{V}{t}} \\
-%   \showcase{\actsymb[k]{V}{t}} \\
-%   \showcase{\actsymb[k]{V}{\endowxn}} \\
-%   \showcase{\actsymb[k]{V}{\termxn}} \\
-%   \showcase{\actsymb[k]{V}{\pureendowxn}} \\
-%   \showcase{\actsymb[k]{V}{x}[FPT]} \\
-%   \showcase{\actsymb{\bar{V}}{t}} \\
+%   \showcase{\tilde{V}_t} \\
+%   \showcase{\Vx{t}} \\
+%   \showcase{\Vx[k]{t}} \\
+%   \showcase{\Vx[k]{\endowxn}} \\
+%   \showcase{\Vx[k]{\termxn}} \\
+%   \showcase{\Vx[k]{\pureendowxn}} \\
+%   \showcase{\Vx[k]{x}[\text{FPT}]} \\
+%   \showcase{\Vx*{t}} \\
 %   \showcase{\actsymb[k]{\bar{V}}{t}} \\
 %   \showcase{\actsymb[k]{\bar{V}}{\endowxn}} \\
 %   \showcase{\actsymb[k]{\bar{V}}{\termxn}} \\
@@ -1608,9 +1611,9 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \begin{macro}{\DeclareRobustCommand}
 %   Then we can define the shortcuts of \autoref{tab:premres}.
 %    \begin{macrocode}
-\DeclareRobustCommand{\Px}{\@actothersc P}
-\DeclareRobustCommand{\Vx}{\@actothersc V}
-\DeclareRobustCommand{\Wx}{\@actothersc W}
+\DeclareRobustCommand{\Px}{\@actinssc P}
+\DeclareRobustCommand{\Vx}{\@actinssc V}
+\DeclareRobustCommand{\Wx}{\@actinssc W}
 \DeclareRobustCommand{\premium}{\@actpremres P}
 \DeclareRobustCommand{\reserve}{\@actpremres V}
 \DeclareRobustCommand{\paidup}{\@actpremres W}
