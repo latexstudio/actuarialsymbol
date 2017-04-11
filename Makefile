@@ -17,7 +17,7 @@ PACKAGENAME = actuarialsymbol
 
 ## Contents of the package (except README.md that is created by 'make
 ## zip')
-FILES = actuarialsymbol.dtx actuarialsymbol.pdf mosaic.jpg
+FILES = ${PACKAGENAME}.dtx ${PACKAGENAME}.pdf mosaic.jpg
 
 ## Version number and release date extracted from dtx file. The result
 ## is a string of the form 'x.y (YYYY-MM-DD)'.
