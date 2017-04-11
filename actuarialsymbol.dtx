@@ -149,7 +149,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{531}
+% \CheckSum{535}
 %
 % \GetFileInfo{actuarialsymbol.sty}
 %
@@ -178,7 +178,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   common elements. \autoref{sec:comprehensive} lists the commands to
 %   typeset a large selection of symbols of life contingencies.
 % \end{abstract}
-%
+% \tableofcontents
 % \section{Introduction}
 % \label{sec:introduction}
 %
@@ -238,7 +238,9 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % Perhaps the most commonly used auxiliary symbol not readily
 % available in {\LaTeX} is the ``angle'' denoting a duration $n$, as
 % in $\angln$. Package \pkg{actuarialangle} \citep{actuarialangle}
-% provides commands to create this symbol. This package is imported at
+% provides commands to create this symbol, as well as an overhead
+% angle bracket (or ``roof'') used to emphasize joint status when
+% ambiguity is possible: $\group{xy}$. This package is imported at
 % load time by \pkg{actuarialsymbol}.
 %
 % Package \pkg{actuarialsymbol} provides a generic command to position
@@ -254,9 +256,10 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %
 % We provide in \autoref{sec:comprehensive} a comprehensive list of
 % symbols of life contingencies along with the {\LaTeX} code to
-% compose them with \pkg{actuarialsymbol} loaded. This may be all the
-% hurried reader needs. In our highly biased view, it remains worth
-% going through the fine documentation below.
+% compose them with \pkg{actuarialsymbol} loaded. This may be
+% everything the hurried reader needs to get going. In our highly
+% biased view, it remains worth reading along the fine documentation
+% below.
 %
 % \section{Package features}
 % \label{sec:features}
@@ -372,10 +375,9 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \end{demo}
 %   In symbols for premiums, reserves and paid-up insurance,
 %   subscripts and superscripts are aligned only around the principle
-%   symbol.
-%
-%   Authors who would prefer a uniform subscript position \emph{throughout
-%   their document} should load package \pkg{subdepth} \citep{subdepth}.
+%   symbol. Authors who would prefer a uniform subscript position
+%   \emph{throughout their document} should load package
+%   \pkg{subdepth} \citep{subdepth}.
 % \end{rem}
 %
 % \subsection{Two-letter principal symbols}
@@ -644,7 +646,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \begin{quote}
 %     |\@actinssc|\marg{symbol} \\
 %     |\@actannsc|\marg{symbol} \\
-%     |\@actothersc|\marg{symbol} \\
+%     |\@actothersc|\marg{symbol}
 %   \end{quote}
 %   Command |\@actinssc| automatically provides the two shortcuts for
 %   insurance benefits, command |\@actannsc| provides the three
@@ -1548,7 +1550,11 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   Bottom align the left and right subscripts by making their heights
 %   equal.
 %    \begin{macrocode}
-  \ifdim \ht\@ne>\ht\thr@@ \ht\thr@@=\ht\@ne\else \ht\@ne=\ht\thr@@\fi
+  \ifdim \ht\@ne>\ht\thr@@
+    \ht\thr@@=\ht\@ne
+  \else
+    \ht\@ne=\ht\thr@@
+  \fi
 %    \end{macrocode}
 %   Actual symbol construction. First the case where there is at least
 %   one superscript (the nested conditionals emulate an OR condition).
