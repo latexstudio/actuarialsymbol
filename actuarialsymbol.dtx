@@ -716,11 +716,8 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       Definition & Example & Output \\
 %       \midrule
 %       \cmd{\Px}\marg{lr}  & \rshowcase{\Px[h]{x}} \\
-%       \cmd{\Px*}\marg{lr} & \rshowcase{\Px*[h]{x}} \\
 %       \cmd{\Vx}\marg{lr}  & \rshowcase{\Vx[k]{x}} \\
-%       \cmd{\Vx*}\marg{lr} & \rshowcase{\Vx*[k]{x}} \\
 %       \cmd{\Wx}\marg{lr}  & \rshowcase{\Wx[k]{x}} \\
-%       \cmd{\Wx*}\marg{lr} & \rshowcase{\Wx*[k]{x}} \\
 %       \addlinespace
 %       \cmd{\premium}\marg{benefit}  & \rshowcase{\premium[t]{\Ax{x}}} \\
 %       \cmd{\premium*}\marg{benefit} & \rshowcase{\premium*[t]{\Ax*{x:\angln}}} \\
@@ -1611,9 +1608,9 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \begin{macro}{\DeclareRobustCommand}
 %   Then we can define the shortcuts of \autoref{tab:premres}.
 %    \begin{macrocode}
-\DeclareRobustCommand{\Px}{\@actinssc P}
-\DeclareRobustCommand{\Vx}{\@actinssc V}
-\DeclareRobustCommand{\Wx}{\@actinssc W}
+\DeclareRobustCommand{\Px}{\@actothersc P}
+\DeclareRobustCommand{\Vx}{\@actothersc V}
+\DeclareRobustCommand{\Wx}{\@actothersc W}
 \DeclareRobustCommand{\premium}{\@actpremres P}
 \DeclareRobustCommand{\reserve}{\@actpremres V}
 \DeclareRobustCommand{\paidup}{\@actpremres W}
