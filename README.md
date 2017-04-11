@@ -30,6 +30,11 @@ later version.
 David Beauchemin <david.beauchemin.5@ulaval.ca>, Vincent Goulet
 <vincent.goulet@act.ulaval.ca>
 
+## Dependency
+
+This package requires `actuarialangle` (version v2.0 dated 2017/04/10
+or above is needed to typeset the documentation).
+
 ## Installation
 
 The package is part of TeX Live and MiKTeX. If it is not already
