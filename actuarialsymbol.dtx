@@ -1044,6 +1044,55 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\Dx[n]{x}[(j)]} \\
 %   \showcase{\Dx[n]{x}[(\tau)]} \\
 %   \addlinespace
+%   \showcase{e} \\
+%   \showcase{e_{h - 1}} \\
+%   \showcase{e_x} \\
+%   \showcase{\eringx{x}} \\
+%   \showcase{\hat{e}_k} \\
+%   \showcase{\eringx{\endowxn}} \\
+%   \showcase{e_{xy}} \\
+%   \showcase{e_{\joint{xy}}} \\
+%   \showcase{\mathrm{E}} \\
+%   \showcase{E} \\
+%   \showcase{E_0} \\
+%   \showcase{\Ex[n]{x}} \\
+%   \showcase{\twoletsymb[0.6pt]{E}{S}_{x + h + t}}$\;^\dagger$ \\
+%   \showcase{\mathit{ELRA}}$\;^\dagger$ \\
+%   \addlinespace
+%   \showcase{f} \\
+%   \showcase{f(u, t)} \\
+%   \showcase{f_S(s)} \\
+%   \showcase{F_X(x)} \\
+%   \showcase{F_t} \\
+%   \showcase{F^{(k)}} \\
+%   \showcase{F_S(s)} \\
+%   \showcase{\actsymb[k]{F}{}} \\
+%   \addlinespace
+%   \showcase{G} \\
+%   \showcase{\hat{G}} \\
+%   \showcase{G(b)} \\
+%   \showcase{G(b)} \\
+%   \showcase{G(x; \alpha, \beta)} \\
+%   \addlinespace
+%   \showcase{h(x)} \\
+%   \showcase{H(r)} \\
+%   \showcase{H(x; \alpha, \beta, x_0)} \\
+%   \showcase{\actsymb[u]{\twoletsymb[0.6pt]{h}{p}}{x + t}[(\tau)]}$\;^\dagger$ \\
+%   \showcase{\actsymb{\twoletsymb[0.6pt]{h}{\mu}}{x + t}[(j)](u)}$\;^\dagger$ \\
+%   \addlinespace
+%   \showcase{i'_{k + 1}} \\
+%   \showcase{\hat{\imath}_{k + 1}} \\
+%   \showcase{i(s, s + t)} \\
+%   \showcase{I_k} \\
+%   \showcase{I_d} \\
+%   \showcase{I_d(x)} \\
+%   \showcase{\actsymb[j]{i}{k}} \\
+%   \showcase{\IA_x} \\
+%   \showcase{\IA*_x} \\
+%   \showcase{\IbA*_x} \\
+%   \showcase{\ImA*_x} \\
+%   \showcase{\IA_{\termxn}} \\
+%   \addlinespace
 %   \showcase{\qx[\infty]{\ibottom{x}\iibottom{y}\iiitop{z} }} \\
 %   \addlinespace
 %   \showcase{r} \\
@@ -1473,11 +1522,11 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   alias of \cmd{\overline}.
 %    \begin{macrocode}
 \DeclareRobustCommand{\term}[2]{\itop{#1}:\angl{#2}}
-\DeclareRobustCommand{\termxn}{\itop{x}:\angln}
+\DeclareRobustCommand{\termxn}{{\itop{x}:\angln}}
 \DeclareRobustCommand{\pureendow}[2]{#1:\itop{\angl{#2}}}
-\DeclareRobustCommand{\pureendowxn}{x:\itop{\angln}}
+\DeclareRobustCommand{\pureendowxn}{{x:\itop{\angln}}}
 \DeclareRobustCommand{\endow}[2]{#1:\angl{#2}}
-\DeclareRobustCommand{\endowxn}{x:\angln}
+\DeclareRobustCommand{\endowxn}{{x:\angln}}
 \let\joint\overline
 %    \end{macrocode}
 % \end{macro}
