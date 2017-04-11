@@ -2,7 +2,7 @@
 ##
 ## Copyright (C) 2017 Vincent Goulet
 ##
-## 'make package' extracts the package file from the dtx file;
+## 'make pkg' extracts the package file from the dtx file;
 ## 'make doc' compiles the documentation and glossary;
 ## 'make zip' creates an archive compliant with CTAN requirements;
 ## 'make all' does all of the above.
@@ -17,7 +17,7 @@ PACKAGENAME = actuarialsymbol
 
 ## Contents of the package (except README.md that is created by 'make
 ## zip')
-FILES = actuarialsymbol.dtx actuarialsymbol.pdf
+FILES = actuarialsymbol.dtx actuarialsymbol.pdf mosaic.jpg
 
 ## Version number and release date extracted from dtx file. The result
 ## is a string of the form 'x.y (YYYY-MM-DD)'.
@@ -33,13 +33,13 @@ RM = rm -r
 
 all : pkg doc zip
 
-pkg : actuarialsymbol.dtx
+pkg : ${PACKAGENAME}.dtx
 	${LATEX} $<
 
-doc : actuarialsymbol.dtx actuarialsymbol.gls
-	${LATEX} actuarialsymbol.dtx
-	${MAKEINDEX} -s gglo.ist -o actuarialsymbol.gls actuarialsymbol.glo
-	${LATEX} actuarialsymbol.dtx
+doc : ${PACKAGENAME}.dtx ${PACKAGENAME}.gls
+	${LATEX} ${PACKAGENAME}.dtx
+	${MAKEINDEX} -s gglo.ist -o ${PACKAGENAME}.gls ${PACKAGENAME}.glo
+	${LATEX} ${PACKAGENAME}.dtx
 
 zip : ${FILES}
 	if [ -d ${PACKAGENAME} ]; then ${RM} ${PACKAGENAME}; fi
@@ -49,5 +49,5 @@ zip : ${FILES}
 	       /^## Author/ { printf("## Version\n\n%s\n\n", "${VERSION}") } \
 	       state' README.md >> ${PACKAGENAME}/README.md
 	cp ${FILES} ${PACKAGENAME}
-	zip --filesync -r ${PACKAGENAME}.zip ${PACKAGENAME}
-	rm -r ${PACKAGENAME}
+	# zip --filesync -r ${PACKAGENAME}.zip ${PACKAGENAME}
+	# rm -r ${PACKAGENAME}
