@@ -1093,6 +1093,31 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\ImA*_x} \\
 %   \showcase{\IA_{\termxn}} \\
 %   \addlinespace
+%   \showcase{J} \\
+%   \showcase{j(s, s + t, s + u} \\
+%   \addlinespace
+%   \showcase{\actsymb[t]{\bar{k}}{x}} \\
+%   \showcase{K} \\
+%   \showcase{K(x)} \\
+%   \showcase{K(xy)} \\
+%   \showcase{K(\joint{xy})} \\
+%   \addlinespace
+%   \showcase{\lx{x}} \\
+%   \showcase{\lx{[x] + k}} \\
+%   \showcase{\lx{x}[(\tau)]} \\
+%   \showcase{l(x, u)} \\
+%   \showcase{l_f(x, u)} \\
+%   \showcase{L} \\
+%   \showcase{L_1} \\
+%   \showcase{L_x} \\
+%   \showcase{L(h)} \\
+%   \showcase{\actsymb[t]{L}{}} \\
+%   \showcase{\actsymb[t]{L}{}[\underline{2}]} \\
+%   \showcase{\actsymb[t]{L}{e}} \\
+%   \showcase{\actsymb[t]{L}{e}[\underline{2}]} \\
+%   \showcase{\mathcal{L}(x)} \\
+%   \showcase{\Lx{x}[(\tau)]} \\
+%   \addlinespace
 %   \showcase{\qx[\infty]{\ibottom{x}\iibottom{y}\iiitop{z} }} \\
 %   \addlinespace
 %   \showcase{r} \\
@@ -1462,8 +1487,8 @@ This work consists of actuarialsymbol.dtx and the derived files.
 % \begin{macro}{\DeclareRobustCommand}
 %   We can now define all the shortcuts of \autoref{tab:principal}.
 %    \begin{macrocode}
-\DeclareRobustCommand{\lx}[1]{\ell\sb{#1}}
-\DeclareRobustCommand{\Lx}[1]{\mathcal{L}\sb{#1}}
+\DeclareRobustCommand{\lx}{\@actothersc {\ell}}
+\DeclareRobustCommand{\Lx}{\@actothersc {\mathcal{L}}}
 \DeclareRobustCommand{\dx}{\@actothersc d}
 \DeclareRobustCommand{\Dx}{\@actothersc{\mathcal{D}}}
 \DeclareRobustCommand{\px}{\@actothersc p}
