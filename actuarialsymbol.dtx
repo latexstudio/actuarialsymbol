@@ -370,6 +370,10 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       $\actsymb[t]{A}{x} \quad \actsymb[t]{A}{x}[2]$
 %     \end{texample}
 %   \end{demo}
+%   In symbols for premiums, reserves and paid-up insurance,
+%   subscripts and superscripts are aligned only around the principle
+%   symbol.
+%
 %   Authors who would prefer a uniform subscript position \emph{throughout
 %   their document} should load package \pkg{subdepth} \citep{subdepth}.
 % \end{rem}
@@ -719,7 +723,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %       \cmd{\Vx}\marg{lr}  & \rshowcase{\Vx[k]{x}} \\
 %       \cmd{\Wx}\marg{lr}  & \rshowcase{\Wx[k]{x}} \\
 %       \addlinespace
-%       \cmd{\premium}\marg{benefit}  & \rshowcase{\premium[t]{\Ax{x}}} \\
+%       \cmd{\premium}\marg{benefit}  & \rshowcase{\premium[t]{\Ax*{x}}} \\
 %       \cmd{\premium*}\marg{benefit} & \rshowcase{\premium*[t]{\Ax*{x:\angln}}} \\
 %       \cmd{\reserve}\marg{benefit}  & \rshowcase{\reserve[t]{\ax**{x}}} \\
 %       \cmd{\reserve*}\marg{benefit} & \rshowcase{\reserve*[t]{\ax*{x}}} \\
@@ -1091,7 +1095,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\IA_{\termxn}} \\
 %   \addlinespace
 %   \showcase{J} \\
-%   \showcase{j(s, s + t, s + u} \\
+%   \showcase{j(s, s + t, s + u)} \\
 %   \addlinespace
 %   \showcase{\actsymb[t]{\bar{k}}{x}} \\
 %   \showcase{K} \\
@@ -1151,6 +1155,7 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\Px{\endowxn}} \\
 %   \showcase{\Px{\joint{xy}}} \\
 %   \showcase{\Px{\termxn}} \\
+%   \showcase{P_{\termxn}} \\
 %   \showcase{\Px{\pureendowxn}} \\
 %   \showcase{P^{*n}(x)} \\
 %   \showcase{\Px[h]{x}} \\
@@ -1173,8 +1178,10 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\premium[h]{\Ax*{x}}[(m)]} \\
 %   \showcase{\premium[h]{\Ax*{\endowxn}}[(m)]} \\
 %   \showcase{\premium[h]{\Ax*{\endowxn}}[\{m\}]} \\
+%   \addlinespace[3pt]
 %   \showcase{\premium{\Ax*{\joint{xy}\iitop{\joint{z}}}}} \\
 %   \showcase{\premium{\Ax*{\ibottom{x}\iitop{y}z}}} \\
+%   \addlinespace[3pt]
 %   \showcase{\tilde{P}_\termxn} \\
 %   \addlinespace
 %   \showcase{\qx{[x] + r}} \\
@@ -1193,7 +1200,9 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{\qx[n]{\itop{x}y}} \\
 %   \showcase{\qx[n]{x\iitop{y}}} \\
 %   \showcase{\qx[k|]{xy}} \\
+%   \addlinespace[3pt]
 %   \showcase{\qx[n]{\ibottom{x}\iitop{y}z}} \\
+%   \addlinespace[3pt]
 %   \showcase{\qx[\infty]{\ibottom*{x}\iibottom*{y}\iiitop{z}}} \\
 %   \addlinespace
 %   \showcase{r} \\
@@ -1271,7 +1280,9 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \showcase{(x)} \\
 %   \showcase{(x_1 x_2 \dotsm x_m)} \\
 %   \showcase{(\joint{x_1 x_2 \dotsm x_m})} \\
+%   \addlinespace[9pt]
 %   \showcase{\joint{x_1x_2 \dotsm}\nthtop{k}{\joint{x_m}}} \\
+%   \addlinespace[9pt]
 %   \showcase{\joint{x_1x_2 \dotsm}\nthtop{[k]}{\joint{x_m}}} \\
 %   \showcase{X_i} \\
 %   \showcase{X(\theta)} \\
@@ -1309,14 +1320,14 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %   \addlinespace
 %   \showcase{\mu(x)} \\
 %   \showcase{\mu_x(t)} \\
-%   \showcase{\mu_x[(d)]}\\
-%   \showcase{\mu_x[(i)]}\\
-%   \showcase{\mu_x[(w)]}\\
-%   \showcase{\mu_x[(j)](t)}\\
-%   \showcase{\mu_x[(\tau)](t)}\\
+%   \showcase{\mu_x^{(d)}}\\
+%   \showcase{\mu_x^{(i)}}\\
+%   \showcase{\mu_x^{(w)}}\\
+%   \showcase{\mu_x^{(j)}(t)}\\
+%   \showcase{\mu_x^{(\tau)}(t)}\\
 %   \showcase{\mu_{xy}(t)}\\
 %   \showcase{\mu_{\joint{xy}}(t)} \\
-%   \showcase{\mu(x, u))} \\
+%   \showcase{\mu(x, u)} \\
 %   \addlinespace
 %   \showcase{\pi_h} \\
 %   \showcase{\pi_t} \\
@@ -1559,12 +1570,14 @@ This work consists of actuarialsymbol.dtx and the derived files.
 %    \end{macrocode}
 %   Typesetting of the principal symbol and the right subscript and
 %   superscript. The principal symbol is either a principal symbol alone
-%   or a principle symbol and a benefit symbol between parentheses.
+%   or a principle symbol and a benefit symbol between parentheses. In
+%   the latter case, we make sure to align the subscripts and
+%   superscripts only around de principle symbol.
 %    \begin{macrocode}
     \ifdim\wd\z@=\z@
       #4^{\box4}\sb{\box\thr@@}%
     \else
-      #3^{\box4}(#4^{}\sb{\box\thr@@})%
+      #3^{\box4}\sb{\vphantom{\copy\thr@@}}(#4\sb{\box\thr@@})%
     \fi
   \else
 %    \end{macrocode}
