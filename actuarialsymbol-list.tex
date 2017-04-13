@@ -1,0 +1,113 @@
+\documentclass[11pt]{ltxdoc}
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{natbib}
+  \usepackage{microtype}
+  \usepackage[scaled=0.90]{helvet}
+  \usepackage[scaled=1.02]{inconsolata}
+  \usepackage[sc]{mathpazo}
+  \usepackage{rsfso}
+  \usepackage{actuarialsymbol}[2017/04/10]
+  \usepackage{longtable,booktabs}
+
+  %% colors
+  \usepackage{xcolor}
+  \definecolor{url}{rgb}{0.6,0,0}      % dark red
+  \definecolor{citation}{rgb}{0,0.5,0} % dark green
+
+  %% single entry for symbol and shortcut lists
+  %% http://tex.stackexchange.com/a/128441
+  \usepackage{xparse}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\showcase}{v} { \tl_rescan:nn { } { $#1$ } & \texttt{#1} }
+  \NewDocumentCommand{\rshowcase}{v} { \texttt{#1} & \tl_rescan:nn { } { $#1$ } }
+  \ExplSyntaxOff
+
+  %% utility macro
+  \newcommand{\pkg}[1]{\textsf{#1}}
+
+  %% increase row height in tables
+  \renewcommand{\arraystretch}{1.2}
+
+  %% hyperlinks
+  \usepackage{hyperref}
+  \hypersetup{colorlinks, linktocpage,
+    urlcolor=url, citecolor=citation,
+    bookmarksopen, bookmarksnumbered, bookmarksdepth=subsection,
+    pdftitle={actuarialsymbol User Guide},
+    pdfauthor={David Beauchemin, Vincent Goulet}}
+
+  \title{Comprehensive life contingencies symbol list%
+    \thanks{This document is an excerpt from the documentation of the
+      {\LaTeX} package \pkg{actuarialsymbol} \citep{actuarialsymbol}.}}
+  \author{David Beauchemin \\
+    \url{david.beauchemin.5@ulaval.ca}
+    \and
+    Vincent Goulet\thanks{%
+      École d'actuariat, Université Laval} \\
+    \url{vincent.goulet@act.ulaval.ca}}
+  \date{}
+
+\begin{document}
+
+\maketitle
+
+This document is inspired by \citet{Trivedi:lifecon:2004}. The title
+is a nod to the immensely useful \emph{Comprehensive {\LaTeX} Symbol
+  List} of \citet{comprehensive}.
+
+The table below contains all the life contingencies symbols listed in
+Appendix~3 of \citet{Bowers:2e:1997} along with the code to compose
+them with package \pkg{actuarialsymbol} (and therefore
+\pkg{actuarialangle}) loaded. Often times there are various ways to
+obtain a symbol; we tried to always present the most compact and
+legible option. Not all symbols require features of
+\pkg{actuarialsymbol}.
+
+Calligraphic letters are typeset using \cmd{\mathcal}. The specific
+versions of $\mathcal{L}$ and $\mathcal{D}$ that appear in this
+table require package \pkg{rsfso} \citep{rsfso}, which is \emph{not}
+loaded by \pkg{actuarialsymbol}. Standard versions of the
+calligraphic letters are $\text{\usefont{OMS}{zplm}{m}{n} L}$ and
+$\text{\usefont{OMS}{zplm}{m}{n} D}$. See Table~299 of
+\citet{comprehensive} for other options.
+
+\input{list}
+
+\begin{thebibliography}{5}
+  \addcontentsline{toc}{section}{References}
+\bibitem[Beauchemin and Goulet(2017)]{actuarialsymbol}
+  D.~Beauchemin and V.~Goulet.
+  \newblock \emph{Actuarial symbols of life contingencies and financial
+    mathematics}, 2017.
+  \newblock URL \url{http://www.ctan.org/pkg/actuarialsymbol/}.
+
+\bibitem[Bowers et~al.(1997)Bowers, Gerber, Hickman, Jones, and
+  Nesbitt]{Bowers:2e:1997}
+  N.~L. Bowers, H.~U. Gerber, J.~C. Hickman, D.~A. Jones, and C.~J. Nesbitt.
+  \newblock \emph{Actuarial Mathematics}.
+  \newblock Society of Actuaries, Shaumburg, IL, second edition, 1997.
+  \newblock ISBN 0-9389594-6-8.
+
+\bibitem[Pakin(2015)]{comprehensive}
+  S. Pakin.
+  \newblock \emph{The Comprehensive {\LaTeX} Symbol List}, 2015.
+  \newblock URL \url{http://www.ctan.org/pkg/comprehensive/}.
+
+\bibitem[Sharpe(2015)]{rsfso}
+  M. Sharpe.
+  \newblock \emph{An acute script font based on {rsfs}}, 2015.
+  \newblock URL \url{http://www.ctan.org/pkg/rsfso/}.
+
+\bibitem[Trivedi(2004)]{Trivedi:lifecon:2004}
+  E. Trivedi.
+  \newblock \emph{Life Contingencies' Symbols}, 2004.
+  \newblock \texttt{lifecon} 2.1 User Guide.
+\end{thebibliography}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
