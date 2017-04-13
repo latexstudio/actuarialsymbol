@@ -15,10 +15,10 @@ principal symbol. The package also features commands to easily and
 consistently position precedence numbers above or below statuses
 in symbols for multiple lives contracts.
 
-Since the actuarial notation can get quite involved, the package
-defines a number of shortcut macros to ease entry of the most common
-elements. Appendix A of the package documentation lists the commands
-to typeset a large selection of symbols of life contingencies.
+Since actuarial notation can get quite involved, the package defines a
+number of shortcut macros to ease entry of the most common elements.
+Appendix A of the package documentation lists the commands to typeset
+a large selection of symbols of life contingencies.
 
 ## Licence
 
